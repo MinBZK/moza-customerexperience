@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sander Bakker — Zelfstandige (ZZP)</title>
+  <link rel="stylesheet" href="vendor/nldd/css/settings.css">
+  <link rel="stylesheet" href="vendor/nldd/css/global.css">
+  <link rel="stylesheet" href="vendor/nldd/css/rich-text.css">
+  <script type="module" src="vendor/nldd/design-system.js"></script>
+  <style>
+    :root { color-scheme: light; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: var(--primitives-font-family-body, RijksSans, system-ui, sans-serif);
+    }
+
+    /* tiles on the index */
+    .tile {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      border-radius: var(--primitives-border-radius-large, 16px);
+      transition: transform .12s ease, box-shadow .12s ease;
+      outline-offset: 4px;
+    }
+    .tile:hover {
+      transform: translateY(-4px);
+    }
+    .tile:hover nldd-card {
+      box-shadow: 0 12px 28px rgba(0,0,0,.14);
+    }
+    .tile:focus-visible {
+      outline: 3px solid var(--primitives-color-hemelblauw-500, #007bc7);
+      border-radius: 16px;
+    }
+    .tile nldd-image { pointer-events: none; }
+
+    .avatar {
+      border: 4px solid var(--primitives-color-neutral-0, #fff);
+      box-shadow: 0 2px 8px rgba(0,0,0,.10);
+    }
+
+    .profile-head {
+      display: flex;
+      gap: var(--primitives-space-24, 24px);
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .profile-head .titles { flex: 1 1 260px; min-width: 240px; }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--primitives-space-8, 8px);
+      margin-top: var(--primitives-space-12, 12px);
+    }
+
+    .sec-head {
+      display: flex;
+      align-items: center;
+      gap: var(--primitives-space-8, 8px);
+    }
+    .sec-head h2 {
+      margin: 0;
+      font-size: var(--primitives-font-size-16, 1rem);
+      font-weight: 700;
+      font-family: "RijksSans", system-ui, sans-serif;
+    }
+
+    .fact { }
+    .fact .fact-label {
+      display: flex; align-items: center; gap: 8px;
+      font-size: .78rem; letter-spacing: .04em; text-transform: uppercase;
+      font-weight: 700;
+      color: light-dark(var(--primitives-color-neutral-600, #4a5a6a), var(--primitives-color-neutral-300, #ccc));
+    }
+    .fact .fact-value {
+      margin-top: 6px;
+      font-family: "RijksSans", system-ui, sans-serif;
+      color: light-dark(var(--primitives-color-neutral-900, #1a1a1a), var(--primitives-color-neutral-100, #f5f5f5));
+    }
+
+    .rt ul { margin: 0; padding-left: 1.15em; }
+    .rt li { margin: 4px 0; }
+
+    /* context-items in de persona-kaart: kleiner, secundair aan de hoofdsecties */
+    .ctx .sec-head { gap: 6px; }
+    .ctx .sec-head h2 { font-size: .8rem; letter-spacing: .01em; }
+    .ctx .sec-head nldd-icon {
+      color: light-dark(var(--primitives-color-neutral-600, #4a5a6a), var(--primitives-color-neutral-300, #ccc));
+    }
+    .ctx .rt p {
+      margin: 0;
+      font-size: .82rem;
+      line-height: 1.35;
+      color: light-dark(var(--primitives-color-neutral-600, #4a5a6a), var(--primitives-color-neutral-300, #ccc));
+    }
+
+    .tile-name h2 { margin: 0; text-align: center; }
+
+    /* sticky terug-balk op detailpagina's */
+    .sticky-bar {
+      display: flex;
+      align-items: center;
+      font-family: var(--primitives-font-family-body, RijksSans, system-ui, sans-serif);
+      font-size: 1rem;
+      padding: 14px 20px;
+      background: light-dark(
+        var(--primitives-color-neutral-50, #f3f5f7),
+        var(--primitives-color-neutral-800, #23272b)
+      );
+      border-bottom: 1px solid transparent;
+      transition: padding .15s ease, font-size .15s ease,
+                  box-shadow .15s ease, border-color .15s ease;
+    }
+    .sticky-bar.scrolled {
+      padding: 7px 20px;
+      font-size: .82rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,.10);
+      border-bottom-color: light-dark(
+        var(--primitives-color-neutral-200, #d8dee3),
+        var(--primitives-color-neutral-700, #3a4046)
+      );
+    }
+    .sticky-bar-inner {
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+<nldd-app-view background="tinted">
+  <nldd-page background="tinted" sticky-header>
+    <div slot="header" class="sticky-bar" id="backbar">
+      <div class="sticky-bar-inner">
+        <nldd-link href="index.html" start-icon="arrow-left" size="inherit">Terug naar overzicht</nldd-link>
+      </div>
+    </div>
+    <nldd-simple-section width="1000px">
+      <div id="main">
+      <nldd-card>
+        <nldd-container padding="20" layout="stack" gap="16">
+          <div class="profile-head">
+            <nldd-image class="avatar" src="images/avatar-sander.png" alt="Avatar van Sander Bakker" width="88" shape="circle" aspect-ratio="1/1" loading="eager"></nldd-image>
+            <div class="titles">
+              <nldd-title size="3">
+                <span slot="overline">Persona 1 · ZZP&#x27;er</span>
+                <h1>Sander Bakker</h1>
+                <p slot="subtitle">Zelfstandige zonder personeel — burger én ondernemer met een eenmanszaak</p>
+              </nldd-title>
+              <div class="tag-row"><nldd-tag color="hemelblauw" text="ZZP"></nldd-tag><nldd-tag color="hemelblauw" text="DigiD"></nldd-tag><nldd-tag color="hemelblauw" text="zelf regelen"></nldd-tag></div>
+            </div>
+          </div>
+          <nldd-divider></nldd-divider>
+          <nldd-container layout="grid" column-count="3" sm-column-count="1" gap="16">
+          <div class="ctx">
+            <div class="sec-head">
+              <nldd-icon name="apartment-building" size="16"></nldd-icon>
+              <h2>Organisatie &amp; context</h2>
+            </div>
+            <nldd-rich-text class="rt"><p>eenmanszaak · 1 persoon · geen werknemers</p></nldd-rich-text>
+          </div>
+          <div class="ctx">
+            <div class="sec-head">
+              <nldd-icon name="star" size="16"></nldd-icon>
+              <h2>Ervaring &amp; vaardigheid</h2>
+            </div>
+            <nldd-rich-text class="rt"><p>digitaal redzaam · beperkte administratieve kennis</p></nldd-rich-text>
+          </div>
+          <div class="ctx">
+            <div class="sec-head">
+              <nldd-icon name="clock" size="16"></nldd-icon>
+              <h2>Frequentie van gebruik</h2>
+            </div>
+            <nldd-rich-text class="rt"><p>incidenteel (per kwartaal / per jaar)</p></nldd-rich-text>
+          </div>
+          </nldd-container>
+        </nldd-container>
+      </nldd-card>
+
+      <nldd-spacer size="24"></nldd-spacer>
+
+      <nldd-container layout="grid" column-count="2" sm-column-count="1" gap="16">
+      <nldd-card>
+        <nldd-container padding="24" layout="stack" gap="12">
+          <div class="sec-head">
+            <nldd-icon name="flag" size="20"></nldd-icon>
+            <h2>Doelen</h2>
+          </div>
+          <nldd-rich-text class="rt"><ul><li>Diensten voor de eigen onderneming snel en zelf regelen</li><li>Overzicht houden over eigen verplichtingen (KVK, Belastingdienst)</li><li>Overheidszaken snel en zonder gedoe regelen, zodat hij zich op zijn onderneming kan richten</li><li>Wil proactief op de hoogte gehouden worden als er iets te halen valt, zoals regelingen, subsidies of voordelen</li></ul></nldd-rich-text>
+        </nldd-container>
+      </nldd-card>
+      <nldd-card>
+        <nldd-container padding="24" layout="stack" gap="12">
+          <div class="sec-head">
+            <nldd-icon name="check-list" size="20"></nldd-icon>
+            <h2>Taken &amp; verantwoordelijkheden</h2>
+          </div>
+          <nldd-rich-text class="rt"><ul><li>Btw-aangifte, KVK-inschrijving, vergunningen aanvragen</li><li>Blijft eindverantwoordelijk, maar delegeert diensten aan zijn intermediair, zoals boekhouding en aangiftes</li></ul></nldd-rich-text>
+        </nldd-container>
+      </nldd-card>
+      <nldd-card>
+        <nldd-container padding="24" layout="stack" gap="12">
+          <div class="sec-head">
+            <nldd-icon name="key" size="20"></nldd-icon>
+            <h2>Benodigde rechten &amp; autorisatie</h2>
+          </div>
+          <nldd-rich-text class="rt"><ul><li>Toegang tot de eigen ondernemingsgegevens</li><li>Enige bevoegde; machtigt zijn intermediair voor specifieke diensten (zoals aangiftes)</li></ul></nldd-rich-text>
+        </nldd-container>
+      </nldd-card>
+      <nldd-card>
+        <nldd-container padding="24" layout="stack" gap="12">
+          <div class="sec-head">
+            <nldd-icon name="handshake" size="20"></nldd-icon>
+            <h2>Machtigingen &amp; mandaten</h2>
+          </div>
+          <nldd-rich-text class="rt"><ul><li>Handelt namens zichzelf / de eigen eenmanszaak</li><li>Mandateert zijn eigen intermediair voor de administratie</li></ul></nldd-rich-text>
+        </nldd-container>
+      </nldd-card>
+      <nldd-card>
+        <nldd-container padding="24" layout="stack" gap="12">
+          <div class="sec-head">
+            <nldd-icon name="face-frowning" size="20"></nldd-icon>
+            <h2>Frustraties &amp; pijnpunten</h2>
+          </div>
+          <nldd-rich-text class="rt"><ul><li>Onderscheid tussen burger- en ondernemerszaken is onduidelijk</li><li>Inlogmiddelen verschillen per dienst en voelen omslachtig</li><li>Mist het overzicht om in beperkte tijd de juiste taken en kansen bij de overheid op te pakken</li></ul></nldd-rich-text>
+        </nldd-container>
+      </nldd-card>
+      <nldd-card>
+        <nldd-container padding="24" layout="stack" gap="12">
+          <div class="sec-head">
+            <nldd-icon name="shield-check-mark" size="20"></nldd-icon>
+            <h2>Authenticatie-context</h2>
+          </div>
+          <nldd-rich-text class="rt"><ul><li>DigiD als burger; eHerkenning soms vereist en als duur ervaren</li><li>Wil één herkenbaar, betrouwbaar inlogmiddel met een fijne gebruikerservaring: in zo min mogelijk stappen naar het doel</li><li>Wil dat duidelijk is wanneer hij als burger en wanneer als ondernemer inlogt</li></ul></nldd-rich-text>
+        </nldd-container>
+      </nldd-card>
+      </nldd-container>
+      </div>
+
+      <nldd-spacer size="32"></nldd-spacer>
+    </nldd-simple-section>
+  </nldd-page>
+</nldd-app-view>
+<script type="module">
+  await customElements.whenDefined('nldd-page');
+  const page = document.querySelector('nldd-page');
+  const bar = document.getElementById('backbar');
+  // scroll-container: interne .page__scroll (sticky-header) met fallbacks
+  const scroller =
+    page?.shadowRoot?.querySelector('.page__scroll') ??
+    page?.shadowRoot?.querySelector('[class*="scroll"]') ??
+    page;
+  const onScroll = () => {
+    const top = Math.max(
+      scroller?.scrollTop || 0,
+      window.scrollY || 0,
+      document.documentElement.scrollTop || 0
+    );
+    bar.classList.toggle('scrolled', top > 24);
+  };
+  scroller?.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+</script>
+
+</body>
+</html>
