@@ -103,17 +103,30 @@
      (net als de ketenweergave in casus-*.html). */
 
   .journey {
+    position: relative;
     background: var(--white);
     border: 1px solid var(--border);
     border-radius: var(--primitives-corner-radius-md, 8px);
     box-shadow: var(--shadow);
-    overflow-x: auto;
   }
+
+  /* Canvas kan zeer breed worden (veel stappen naast elkaar); geen scrollbar
+     per cel meer — één gedeelde pannable viewport, met een minimap (rechts-
+     onder, geïnspireerd op jointjs.com/demos/collapsible-minimap) als
+     overzicht + snelnavigatie. Native scroll (trackpad/toetsenbord) blijft
+     gewoon werken, alleen de scrollbar zelf is verborgen. */
+  .journey-viewport {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .journey-viewport::-webkit-scrollbar { display: none; }
 
   .journey-grid {
     display: grid;
-    grid-template-columns: 240px repeat(3, minmax(280px, 1fr));
-    min-width: 1080px;
+    grid-template-columns: 240px repeat(3, minmax(280px, max-content));
+    width: max-content;
   }
 
   /* ── Fasekoppen (Oriënteren / Uitvoeren / Opvolgen) ── */
@@ -162,7 +175,6 @@
     padding: 20px 16px;
     border-top: 1px solid var(--border);
     border-left: 1px solid var(--border);
-    overflow-x: auto;
   }
 
   .step-row {
@@ -229,6 +241,48 @@
   .legend-dot--sherida { background: var(--sherida); }
   .legend-dot--placeholder { border: 1.5px dashed var(--ink-mute); }
 
+  /* ── Minimap ── */
+  .minimap {
+    position: absolute;
+    right: 12px; bottom: 12px;
+    z-index: 5;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    padding: 4px;
+  }
+  .minimap-toggle {
+    position: absolute; top: -12px; right: -12px; z-index: 2;
+    width: 24px; height: 24px;
+    border: 1px solid var(--border); border-radius: 999px;
+    background: var(--white); color: var(--ink-mute);
+    font-family: 'IBM Plex Mono', monospace; font-size: 14px; line-height: 1;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+  }
+  .minimap-toggle:hover { background: var(--paper); color: var(--ink); }
+  .minimap[data-collapsed="true"] .minimap-body { display: none; }
+  .minimap[data-collapsed="true"] { padding: 6px 8px; }
+  .minimap-body {
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+  }
+  .minimap-content {
+    position: absolute; top: 0; left: 0;
+    transform-origin: top left;
+    pointer-events: none;
+  }
+  .minimap-rect {
+    position: absolute; top: 0;
+    border: 2px solid var(--accent);
+    background: rgba(26,75,191,0.12);
+    border-radius: 3px;
+    cursor: grab;
+  }
+  .minimap-body:active .minimap-rect { cursor: grabbing; }
+
 </style>
 </head>
 <body>
@@ -253,10 +307,11 @@
     <span class="legend-item">→ stappen lopen links naar rechts · ↓ verdieping bij een individuele stap</span>
   </div>
 
-  <section class="journey" role="region" aria-label="Klantreis-overzicht, scroll om alles te zien" aria-labelledby="journey-heading">
+  <section class="journey" aria-labelledby="journey-heading">
     <h2 id="journey-heading" class="eyebrow" style="position:absolute; left:-9999px;">Klantreis-grid: fasen × persona's</h2>
 
-    <div class="journey-grid">
+    <div class="journey-viewport" id="journeyViewport" tabindex="0" role="region" aria-label="Klantreis-canvas — sleep, scroll of gebruik de minimap rechtsonder">
+    <div class="journey-grid" id="journeyGrid">
 
       <!-- Rij 1: fasekoppen -->
       <div class="phase-head phase-head--corner" aria-hidden="true"></div>
@@ -357,7 +412,94 @@
       </div>
 
     </div>
+    </div>
+
+    <div class="minimap" id="minimap" aria-hidden="true">
+      <button type="button" class="minimap-toggle" id="minimapToggle" aria-label="Minimap in-/uitklappen" aria-expanded="true">−</button>
+      <div class="minimap-body" id="minimapBody">
+        <div class="minimap-content" id="minimapContent"></div>
+        <div class="minimap-rect" id="minimapRect"></div>
+      </div>
+    </div>
   </section>
+
+  <script>
+    (function () {
+      var viewport = document.getElementById('journeyViewport');
+      var grid = document.getElementById('journeyGrid');
+      var minimap = document.getElementById('minimap');
+      var minimapBody = document.getElementById('minimapBody');
+      var minimapContent = document.getElementById('minimapContent');
+      var minimapRect = document.getElementById('minimapRect');
+      var toggleBtn = document.getElementById('minimapToggle');
+
+      var MAP_WIDTH = 200; // beeldbudget voor de minimap-breedte in px
+      var scale = 1;
+
+      function buildClone() {
+        minimapContent.innerHTML = '';
+        var clone = grid.cloneNode(true);
+        clone.removeAttribute('id');
+        minimapContent.appendChild(clone);
+      }
+
+      function layout() {
+        var fullW = grid.scrollWidth;
+        var fullH = grid.scrollHeight;
+        if (!fullW || !fullH) return;
+        scale = Math.min(1, MAP_WIDTH / fullW);
+        minimapBody.style.width = (fullW * scale) + 'px';
+        minimapBody.style.height = (fullH * scale) + 'px';
+        minimapContent.style.width = fullW + 'px';
+        minimapContent.style.height = fullH + 'px';
+        minimapContent.style.transform = 'scale(' + scale + ')';
+        updateRect();
+      }
+
+      function updateRect() {
+        minimapRect.style.width = Math.min(viewport.clientWidth * scale, grid.scrollWidth * scale) + 'px';
+        minimapRect.style.height = minimapBody.style.height;
+        minimapRect.style.left = (viewport.scrollLeft * scale) + 'px';
+      }
+
+      function panTo(clientX) {
+        var box = minimapBody.getBoundingClientRect();
+        var mapX = clientX - box.left;
+        var targetLeft = (mapX / scale) - (viewport.clientWidth / 2);
+        var maxScroll = Math.max(0, grid.scrollWidth - viewport.clientWidth);
+        viewport.scrollLeft = Math.max(0, Math.min(maxScroll, targetLeft));
+      }
+
+      var dragging = false;
+      minimapBody.addEventListener('pointerdown', function (e) {
+        dragging = true;
+        minimapBody.setPointerCapture(e.pointerId);
+        panTo(e.clientX);
+      });
+      minimapBody.addEventListener('pointermove', function (e) {
+        if (dragging) panTo(e.clientX);
+      });
+      minimapBody.addEventListener('pointerup', function () { dragging = false; });
+      minimapBody.addEventListener('pointercancel', function () { dragging = false; });
+
+      viewport.addEventListener('scroll', updateRect);
+      window.addEventListener('resize', layout);
+
+      toggleBtn.addEventListener('click', function () {
+        var collapsed = minimap.getAttribute('data-collapsed') === 'true';
+        minimap.setAttribute('data-collapsed', collapsed ? 'false' : 'true');
+        toggleBtn.textContent = collapsed ? '−' : '+';
+        toggleBtn.setAttribute('aria-expanded', String(collapsed));
+      });
+
+      buildClone();
+      if (window.ResizeObserver) {
+        new ResizeObserver(layout).observe(grid);
+      }
+      window.addEventListener('load', layout);
+      layout();
+    })();
+  </script>
 
   <nldd-banner variant="neutral" heading-level="2" text="Volgende stap" style="display:block; margin-top:32px;">
     <nldd-rich-text><p>De stap-kaarten met stippellijn zijn placeholders. Vervang <code>step--placeholder</code> door <code>step</code> voor een stap, en <code>step-verdieping--placeholder</code> door <code>step-verdieping</code> voor een detail dat onder één stap hangt. Stappen binnen een fase lopen altijd links → rechts; een verdieping hangt verticaal onder de stap waar hij bij hoort.</p></nldd-rich-text>
