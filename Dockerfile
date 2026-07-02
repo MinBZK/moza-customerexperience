@@ -9,10 +9,13 @@
 # MIME-type weigert.
 FROM ghcr.io/static-web-server/static-web-server:2
 
-# Losse COPY buiten /public: config.toml is server-configuratie, geen
-# site-inhoud, en moet dus niet als publiek bestand mee-geserveerd worden.
-# Zet de standaard cache-control (dagenlang) om naar 60s voor .html, zodat
-# een gemerged fix niet pas na een harde refresh zichtbaar wordt.
+# Zet de standaard cache-control van static-web-server (dagenlang) om naar
+# 60s voor .html, zodat een gemerged fix niet pas na een harde refresh
+# zichtbaar wordt. Losse COPY naar /config.toml zodat SERVER_CONFIG_FILE
+# hierheen kan wijzen; config.toml mag NIET in .dockerignore staan, anders
+# is het voor geen enkele COPY-instructie beschikbaar (zie fix-commit).
+# static-web-server heeft geen shell om 'm na COPY . /public weer te
+# verwijderen — hij komt dus ook mee als (onschuldig) statisch bestand.
 COPY config.toml /config.toml
 COPY . /public
 
