@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Klantreis MOZa — Yassin &amp; Sherida</title>
+<title>Subsidieaanvraag — Klantreis MOZa</title>
 <!-- MinBZK/storybook design tokens + web components (de echte, gepubliceerde @nldd/design-system) -->
 <link rel="stylesheet" href="https://esm.sh/@nldd/design-system@0.8.59/dist/css/settings.css">
 <script type="module" src="https://esm.sh/@nldd/design-system@0.8.59"></script>
@@ -31,6 +31,10 @@
     --yassin-tint: #dde8ff;
     --sherida: #5c2d91;
     --sherida-tint: #f0e8ff;
+    --karin: #0f766e;
+    --karin-tint: #d7f0ec;
+    --bilal: #9d174d;
+    --bilal-tint: #fbdce8;
 
     /* alternatieve-route kleur (verdieping onder een stap), los van de
        persona-kleuren zodat 'm meteen als iets anders herkenbaar is */
@@ -171,6 +175,8 @@
   }
   .lane--yassin .lane-avatar { background: var(--yassin); }
   .lane--sherida .lane-avatar { background: var(--sherida); }
+  .lane--karin .lane-avatar { background: var(--karin); }
+  .lane--bilal .lane-avatar { background: var(--bilal); }
   .lane-name { font-size: 16px; font-weight: 600; color: var(--ink); }
   .lane-role { font-size: 13px; color: var(--ink-soft); line-height: 1.4; }
   .lane-link {
@@ -208,6 +214,16 @@
   }
   .lane--yassin .step { background: var(--yassin-tint); color: var(--yassin); }
   .lane--sherida .step { background: var(--sherida-tint); color: var(--sherida); }
+  .lane--karin .step { background: var(--karin-tint); color: var(--karin); }
+  .lane--bilal .step { background: var(--bilal-tint); color: var(--bilal); }
+
+  /* extra zwembanen (gezamenlijke aanvraag met andere onderneming) —
+     standaard verborgen, tonen via de toggle hierboven de journey-grid */
+  .lane-extra { display: none; }
+  body.show-extra-lanes .lane-label.lane-extra { display: flex; }
+  body.show-extra-lanes .phase-cell.lane-extra { display: block; }
+  .legend-extra { display: none; }
+  body.show-extra-lanes .legend-extra { display: flex; }
 
   /* horizontale connector tussen opeenvolgende stappen — hoogte wordt via JS
      gelijkgezet aan de laagste stap-box in de rij, zodat de pijl altijd op
@@ -289,9 +305,45 @@
   .legend-dot { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
   .legend-dot--yassin { background: var(--yassin); }
   .legend-dot--sherida { background: var(--sherida); }
+  .legend-dot--karin { background: var(--karin); }
+  .legend-dot--bilal { background: var(--bilal); }
   .legend-dot--placeholder { border: 1.5px dashed var(--ink-mute); }
   .legend-dot--alt { background: var(--alt); }
   .legend-dot--auth { background: var(--auth); }
+
+  /* ── Toggle: gezamenlijke aanvraag ── */
+  .toggle-row {
+    display: inline-flex; align-items: center; gap: 10px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    font-size: 14px; font-weight: 600; color: var(--ink);
+  }
+  .toggle-input {
+    position: absolute;
+    width: 1px; height: 1px;
+    opacity: 0;
+    margin: -1px;
+  }
+  .toggle-track {
+    position: relative;
+    width: 40px; height: 22px; flex-shrink: 0;
+    background: var(--border);
+    border-radius: 999px;
+    transition: background .15s ease;
+  }
+  .toggle-thumb {
+    position: absolute; top: 2px; left: 2px;
+    width: 18px; height: 18px;
+    background: var(--white);
+    border-radius: 999px;
+    box-shadow: 0 1px 2px rgba(0,0,0,.25);
+    transition: transform .15s ease;
+  }
+  .toggle-input:checked + .toggle-track { background: var(--accent); }
+  .toggle-input:checked + .toggle-track .toggle-thumb { transform: translateX(18px); }
+  .toggle-input:focus-visible + .toggle-track {
+    outline: 3px solid var(--focus); outline-offset: 2px;
+  }
 
   /* ── Minimap ── */
   .minimap {
@@ -349,12 +401,20 @@
   </a>
 
   <p class="eyebrow">Klantreis · MOZa</p>
-  <h1>Klantreis MOZa — Yassin &amp; Sherida</h1>
+  <h1>Subsidieaanvraag</h1>
   <p class="subtitle">Twee persona's doorlopen dezelfde drie fasen van hun klantreis binnen MOZa: oriënteren, uitvoeren en opvolgen. Rode kaders markeren autorisatie- en authenticatiemomenten — bewust uitgelicht, want dit zijn de momenten om met stakeholders over in gesprek te gaan.</p>
+
+  <label class="toggle-row">
+    <input type="checkbox" id="extraLanesToggle" class="toggle-input">
+    <span class="toggle-track" aria-hidden="true"><span class="toggle-thumb"></span></span>
+    Gezamenlijke subsidieaanvraag met een andere onderneming
+  </label>
 
   <div class="legend" aria-hidden="true">
     <span class="legend-item"><span class="legend-dot legend-dot--yassin"></span> Yassin Amrani — zelfstandig ondernemer (zzp)</span>
     <span class="legend-item"><span class="legend-dot legend-dot--sherida"></span> Sherida Pinas — boekhouder / intermediair</span>
+    <span class="legend-item legend-extra"><span class="legend-dot legend-dot--karin"></span> Karin Jansen — eigenaar-directeur MKB (andere onderneming)</span>
+    <span class="legend-item legend-extra"><span class="legend-dot legend-dot--bilal"></span> Bilal Yılmaz — administratief medewerker MKB (andere onderneming)</span>
     <span class="legend-item"><span class="legend-dot legend-dot--placeholder"></span> Stap volgt nog</span>
     <span class="legend-item"><span class="legend-dot legend-dot--alt"></span> Alternatieve route of toekomstscenario bij een stap (stippellijn)</span>
     <span class="legend-item"><span class="legend-dot legend-dot--auth"></span> Autorisatie- of authenticatiemoment</span>
@@ -541,6 +601,67 @@
         </div>
       </div>
 
+      <!-- Rij 4-5: gezamenlijke subsidieaanvraag met een andere onderneming
+           (Karin en Bilal) — standaard verborgen achter de toggle hierboven,
+           inhoud nog placeholder. -->
+      <div class="lane-label lane--karin lane-extra">
+        <span class="lane-avatar" aria-hidden="true">KJ</span>
+        <span class="lane-name">Karin Jansen</span>
+        <span class="lane-role">Eigenaar-directeur MKB (andere onderneming)</span>
+        <a class="lane-link" href="../../personas/persona-karin.html" target="_blank" rel="noopener">Bekijk persona ↗</a>
+      </div>
+
+      <div class="phase-cell lane--karin lane-extra" aria-label="Karin — Oriënteren">
+        <div class="step-row">
+          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
+          <div class="step-connector" aria-hidden="true">→</div>
+          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
+        </div>
+      </div>
+      <div class="phase-cell lane--karin lane-extra" aria-label="Karin — Uitvoeren">
+        <div class="step-row">
+          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
+          <div class="step-connector" aria-hidden="true">→</div>
+          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
+        </div>
+      </div>
+      <div class="phase-cell lane--karin lane-extra" aria-label="Karin — Opvolgen">
+        <div class="step-row">
+          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
+          <div class="step-connector" aria-hidden="true">→</div>
+          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
+        </div>
+      </div>
+
+      <div class="lane-label lane--bilal lane-extra">
+        <span class="lane-avatar" aria-hidden="true">BY</span>
+        <span class="lane-name">Bilal Yılmaz</span>
+        <span class="lane-role">Administratief medewerker MKB (andere onderneming)</span>
+        <a class="lane-link" href="../../personas/persona-bilal.html" target="_blank" rel="noopener">Bekijk persona ↗</a>
+      </div>
+
+      <div class="phase-cell lane--bilal lane-extra" aria-label="Bilal — Oriënteren">
+        <div class="step-row">
+          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
+          <div class="step-connector" aria-hidden="true">→</div>
+          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
+        </div>
+      </div>
+      <div class="phase-cell lane--bilal lane-extra" aria-label="Bilal — Uitvoeren">
+        <div class="step-row">
+          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
+          <div class="step-connector" aria-hidden="true">→</div>
+          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
+        </div>
+      </div>
+      <div class="phase-cell lane--bilal lane-extra" aria-label="Bilal — Opvolgen">
+        <div class="step-row">
+          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
+          <div class="step-connector" aria-hidden="true">→</div>
+          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
+        </div>
+      </div>
+
     </div>
     </div>
 
@@ -666,6 +787,15 @@
         minimap.setAttribute('data-collapsed', collapsed ? 'false' : 'true');
         toggleBtn.textContent = collapsed ? '−' : '+';
         toggleBtn.setAttribute('aria-expanded', String(collapsed));
+      });
+
+      // Toont/verbergt de extra zwembanen (gezamenlijke aanvraag met een
+      // andere onderneming) en ververst canvas + minimap mee.
+      var extraLanesToggle = document.getElementById('extraLanesToggle');
+      extraLanesToggle.addEventListener('change', function () {
+        document.body.classList.toggle('show-extra-lanes', extraLanesToggle.checked);
+        layout();
+        buildClone();
       });
 
       layout();
