@@ -196,9 +196,12 @@
   .lane--yassin .step { background: var(--yassin-tint); color: var(--yassin); }
   .lane--sherida .step { background: var(--sherida-tint); color: var(--sherida); }
 
-  /* horizontale connector tussen opeenvolgende stappen */
+  /* horizontale connector tussen opeenvolgende stappen — hoogte wordt via JS
+     gelijkgezet aan de laagste stap-box in de rij, zodat de pijl altijd op
+     het midden van die laagste box uitkomt (niet op het midden van de rij). */
   .step-connector {
-    align-self: center;
+    align-self: flex-start;
+    display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
     color: var(--ink-mute);
     font-size: 16px; line-height: 1;
@@ -442,7 +445,23 @@
         minimapContent.appendChild(clone);
       }
 
+      // Pijl-hoogte = hoogte van de laagste stap-box in die rij, zodat de pijl
+      // op het midden van díe box uitkomt in plaats van op het midden van de
+      // (mogelijk hogere) rij.
+      function syncConnectors() {
+        document.querySelectorAll('.step-row').forEach(function (row) {
+          var boxes = row.querySelectorAll(':scope > .step-wrap > .step');
+          if (!boxes.length) return;
+          var minH = Infinity;
+          boxes.forEach(function (b) { minH = Math.min(minH, b.offsetHeight); });
+          row.querySelectorAll(':scope > .step-connector').forEach(function (c) {
+            c.style.height = minH + 'px';
+          });
+        });
+      }
+
       function layout() {
+        syncConnectors();
         var fullW = grid.scrollWidth;
         var fullH = grid.scrollHeight;
         if (!fullW || !fullH) return;
@@ -491,12 +510,12 @@
         toggleBtn.setAttribute('aria-expanded', String(collapsed));
       });
 
+      layout();
       buildClone();
       if (window.ResizeObserver) {
         new ResizeObserver(layout).observe(grid);
       }
-      window.addEventListener('load', layout);
-      layout();
+      window.addEventListener('load', function () { layout(); buildClone(); });
     })();
   </script>
 
