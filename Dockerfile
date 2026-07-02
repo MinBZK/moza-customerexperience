@@ -9,10 +9,16 @@
 # MIME-type weigert.
 FROM ghcr.io/static-web-server/static-web-server:2
 
+# Losse COPY buiten /public: config.toml is server-configuratie, geen
+# site-inhoud, en moet dus niet als publiek bestand mee-geserveerd worden.
+# Zet de standaard cache-control (dagenlang) om naar 60s voor .html, zodat
+# een gemerged fix niet pas na een harde refresh zichtbaar wordt.
+COPY config.toml /config.toml
 COPY . /public
 
 ENV SERVER_ROOT=/public \
     SERVER_HOST=0.0.0.0 \
-    SERVER_PORT=8080
+    SERVER_PORT=8080 \
+    SERVER_CONFIG_FILE=/config.toml
 
 EXPOSE 8080
