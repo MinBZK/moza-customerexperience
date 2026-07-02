@@ -125,8 +125,10 @@
     overflow-y: hidden;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    cursor: grab;
   }
   .journey-viewport::-webkit-scrollbar { display: none; }
+  .journey-viewport.is-panning { cursor: grabbing; user-select: none; }
 
   .journey-grid {
     display: grid;
@@ -509,6 +511,36 @@
       });
       minimapBody.addEventListener('pointerup', function () { dragging = false; });
       minimapBody.addEventListener('pointercancel', function () { dragging = false; });
+
+      // Sleep-to-pan op het canvas zelf (net als de minimap) — alleen voor
+      // muis, zodat native touch-scroll/trackpad ongemoeid blijft.
+      var panning = false, panStartX = 0, panStartScroll = 0, panMoved = false;
+      viewport.addEventListener('pointerdown', function (e) {
+        if (e.pointerType !== 'mouse') return;
+        panning = true;
+        panMoved = false;
+        panStartX = e.clientX;
+        panStartScroll = viewport.scrollLeft;
+        viewport.setPointerCapture(e.pointerId);
+        viewport.classList.add('is-panning');
+      });
+      viewport.addEventListener('pointermove', function (e) {
+        if (!panning) return;
+        var dx = e.clientX - panStartX;
+        if (Math.abs(dx) > 3) panMoved = true;
+        viewport.scrollLeft = panStartScroll - dx;
+      });
+      function endPan() {
+        panning = false;
+        viewport.classList.remove('is-panning');
+      }
+      viewport.addEventListener('pointerup', endPan);
+      viewport.addEventListener('pointercancel', endPan);
+      // Onderdruk de click (bv. op "Bekijk persona") als het pointerdown
+      // eigenlijk een sleepbeweging was.
+      viewport.addEventListener('click', function (e) {
+        if (panMoved) { e.preventDefault(); e.stopPropagation(); }
+      }, true);
 
       viewport.addEventListener('scroll', updateRect);
       window.addEventListener('resize', layout);
