@@ -754,6 +754,12 @@
       var panning = false, panStartX = 0, panStartScroll = 0, panMoved = false;
       viewport.addEventListener('pointerdown', function (e) {
         if (e.pointerType !== 'mouse') return;
+        // Pointer capture stuurt ook de resulterende click naar het
+        // canvas i.p.v. naar het element zelf — dus geen pan starten (en
+        // geen capture zetten) als er op een interactief element wordt
+        // geklikt, anders werken "Vraagstuk", "Bekijk persona" en de
+        // gezamenlijke-aanvraag-toggle nooit meer.
+        if (e.target.closest('summary, a, button, input, label')) return;
         panning = true;
         panMoved = false;
         panStartX = e.clientX;
