@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Subsidieaanvraag — Klantreis MOZa</title>
+<title>Subsidieaanvraag - Klantreis MOZa</title>
 <!-- MinBZK/storybook design tokens + web components (de echte, gepubliceerde @nldd/design-system) -->
 <link rel="stylesheet" href="https://esm.sh/@nldd/design-system@0.8.59/dist/css/settings.css">
 <script type="module" src="https://esm.sh/@nldd/design-system@0.8.59"></script>
@@ -113,7 +113,7 @@
   }
 
   /* ════════ Klantreis-grid ════════ */
-  /* Zwembanen-opzet: eigen laag boven op de NLDD-tokens — geen storybook-
+  /* Zwembanen-opzet: eigen laag boven op de NLDD-tokens - geen storybook-
      equivalent voor een service-blueprint/swimlane-grid, dus custom CSS
      (net als de ketenweergave in casus-*.html). */
 
@@ -126,7 +126,7 @@
   }
 
   /* Canvas kan zeer breed worden (veel stappen naast elkaar); geen scrollbar
-     per cel meer — één gedeelde pannable viewport, met een minimap (rechts-
+     per cel meer - één gedeelde pannable viewport, met een minimap (rechts-
      onder, geïnspireerd op jointjs.com/demos/collapsible-minimap) als
      overzicht + snelnavigatie. Native scroll (trackpad/toetsenbord) blijft
      gewoon werken, alleen de scrollbar zelf is verborgen. */
@@ -217,7 +217,7 @@
   .lane--karin .step { background: var(--karin-tint); color: var(--karin); }
   .lane--bilal .step { background: var(--bilal-tint); color: var(--bilal); }
 
-  /* extra zwembanen (gezamenlijke aanvraag met andere onderneming) —
+  /* extra zwembanen (gezamenlijke aanvraag met andere onderneming) -
      standaard verborgen, tonen via de toggle hierboven de journey-grid */
   .lane-extra { display: none; }
   body.show-extra-lanes .lane-label.lane-extra { display: flex; }
@@ -225,7 +225,7 @@
   .legend-extra { display: none; }
   body.show-extra-lanes .legend-extra { display: flex; }
 
-  /* horizontale connector tussen opeenvolgende stappen — hoogte wordt via JS
+  /* horizontale connector tussen opeenvolgende stappen - hoogte wordt via JS
      gelijkgezet aan de laagste stap-box in de rij, zodat de pijl altijd op
      het midden van die laagste box uitkomt (niet op het midden van de rij). */
   .step-connector {
@@ -236,7 +236,7 @@
     font-size: 16px; line-height: 1;
   }
 
-  /* verticale connector + kaartje voor de verdieping van 1 stap — een klein
+  /* verticale connector + kaartje voor de verdieping van 1 stap - een klein
      stippellijntje (geen pijl), naar een alternatief-kaartje in een eigen
      kleur (niet de persona-kleur, zodat het duidelijk als "ander pad" leest) */
   .step-verdieping-connector {
@@ -402,7 +402,7 @@
 
   <p class="eyebrow">Klantreis · MOZa</p>
   <h1>Subsidieaanvraag</h1>
-  <p class="subtitle">Twee persona's doorlopen dezelfde drie fasen van hun klantreis binnen MOZa: oriënteren, uitvoeren en opvolgen. Rode kaders markeren autorisatie- en authenticatiemomenten — bewust uitgelicht, want dit zijn de momenten om met stakeholders over in gesprek te gaan.</p>
+  <p class="subtitle">Twee persona's doorlopen dezelfde drie fasen van hun klantreis binnen MOZa: oriënteren, uitvoeren en opvolgen. Rode kaders markeren autorisatie- en authenticatiemomenten - bewust uitgelicht, want dit zijn de momenten om met stakeholders over in gesprek te gaan.</p>
 
   <label class="toggle-row">
     <input type="checkbox" id="extraLanesToggle" class="toggle-input">
@@ -411,10 +411,10 @@
   </label>
 
   <div class="legend" aria-hidden="true">
-    <span class="legend-item"><span class="legend-dot legend-dot--yassin"></span> Yassin Amrani — zelfstandig ondernemer (zzp)</span>
-    <span class="legend-item"><span class="legend-dot legend-dot--sherida"></span> Sherida Pinas — boekhouder / intermediair</span>
-    <span class="legend-item legend-extra"><span class="legend-dot legend-dot--karin"></span> Karin Jansen — eigenaar-directeur MKB (andere onderneming)</span>
-    <span class="legend-item legend-extra"><span class="legend-dot legend-dot--bilal"></span> Bilal Yılmaz — administratief medewerker MKB (andere onderneming)</span>
+    <span class="legend-item"><span class="legend-dot legend-dot--yassin"></span> Yassin Amrani - zelfstandig ondernemer (zzp)</span>
+    <span class="legend-item"><span class="legend-dot legend-dot--sherida"></span> Sherida Pinas - boekhouder / intermediair</span>
+    <span class="legend-item legend-extra"><span class="legend-dot legend-dot--karin"></span> Karin Jansen - eigenaar-directeur MKB (andere onderneming)</span>
+    <span class="legend-item legend-extra"><span class="legend-dot legend-dot--bilal"></span> Bilal Yılmaz - administratief medewerker MKB (andere onderneming)</span>
     <span class="legend-item"><span class="legend-dot legend-dot--placeholder"></span> Stap volgt nog</span>
     <span class="legend-item"><span class="legend-dot legend-dot--alt"></span> Alternatieve route of toekomstscenario bij een stap (stippellijn)</span>
     <span class="legend-item"><span class="legend-dot legend-dot--auth"></span> Autorisatie- of authenticatiemoment</span>
@@ -424,7 +424,7 @@
   <section class="journey" aria-labelledby="journey-heading">
     <h2 id="journey-heading" class="eyebrow" style="position:absolute; left:-9999px;">Klantreis-grid: fasen × persona's</h2>
 
-    <div class="journey-viewport" id="journeyViewport" tabindex="0" role="region" aria-label="Klantreis-canvas — sleep, scroll of gebruik de minimap rechtsonder">
+    <div class="journey-viewport" id="journeyViewport" tabindex="0" role="region" aria-label="Klantreis-canvas - sleep, scroll of gebruik de minimap rechtsonder">
     <div class="journey-grid" id="journeyGrid">
 
       <!-- Rij 1: fasekoppen -->
@@ -441,7 +441,7 @@
         <a class="lane-link" href="../../personas/persona-yassin.html" target="_blank" rel="noopener">Bekijk persona ↗</a>
       </div>
 
-      <div class="phase-cell lane--yassin" aria-label="Yassin — Oriënteren">
+      <div class="phase-cell lane--yassin" aria-label="Yassin - Oriënteren">
         <div class="step-row">
           <div class="step-wrap">
             <div class="step">Vraagt ChatGPT naar een mogelijke subsidie voor verduurzaming van zijn koelkast voor zijn onderneming</div>
@@ -452,7 +452,7 @@
           <div class="step-wrap">
             <div class="step">ChatGPT geeft antwoord met een referentie naar Ondernemersplein en een aanvraaglink</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Toekomst: EU Business Wallet — ChatGPT vraagt bedrijfsgegevens te delen, bevestigt toekenning en verwijst alsnog naar MOZa</div>
+            <div class="step-verdieping">Toekomst: EU Business Wallet - ChatGPT vraagt bedrijfsgegevens te delen, bevestigt toekenning en verwijst alsnog naar MOZa</div>
           </div>
           <div class="step-connector" aria-hidden="true">→</div>
           <div class="step-wrap">
@@ -469,7 +469,7 @@
           </div>
         </div>
       </div>
-      <div class="phase-cell lane--yassin" aria-label="Yassin — Uitvoeren">
+      <div class="phase-cell lane--yassin" aria-label="Yassin - Uitvoeren">
         <div class="step-row">
           <div class="step-wrap">
             <div class="step step--auth">
@@ -481,7 +481,7 @@
               <div class="step-vraagstuk-body">Is het huidige patroon van Logius ook de toekomst hiervoor?</div>
             </details>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Toekomst: EU Business Wallet — gegevens worden geprefilled m.b.v. Digitale Assistent</div>
+            <div class="step-verdieping">Toekomst: EU Business Wallet - gegevens worden geprefilled m.b.v. Digitale Assistent</div>
             <details class="step-vraagstuk">
               <summary><svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.3" stroke="currentColor" stroke-width="1.3"/><path d="M6.2 6.3a1.8 1.8 0 1 1 2.6 1.6c-.6.35-.8.7-.8 1.3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="8" cy="11.2" r=".2" fill="currentColor"/></svg>Vraagstuk</summary>
               <div class="step-vraagstuk-body">Welke techniek wordt hiervoor gebruikt? Kan de oplossing van Mijn Betaaloverzicht gebruikt worden, met certificaten uitgeven via App Manager?</div>
@@ -502,11 +502,11 @@
               <div class="step-vraagstuk-body">Te bepalen hoe: Digipoort, Federatief of App Manager?</div>
             </details>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Toekomst: Start Zaak — na indienen wordt een zaak aangemaakt met track &amp; trace</div>
+            <div class="step-verdieping">Toekomst: Start Zaak - na indienen wordt een zaak aangemaakt met track &amp; trace</div>
           </div>
         </div>
       </div>
-      <div class="phase-cell lane--yassin" aria-label="Yassin — Opvolgen">
+      <div class="phase-cell lane--yassin" aria-label="Yassin - Opvolgen">
         <div class="step-row">
           <div class="step-wrap">
             <div class="step">Ontvangt bevestiging per mail</div>
@@ -541,11 +541,11 @@
         <a class="lane-link" href="../../personas/persona-sherida.html" target="_blank" rel="noopener">Bekijk persona ↗</a>
       </div>
 
-      <div class="phase-cell lane--sherida" aria-label="Sherida — Oriënteren">
+      <div class="phase-cell lane--sherida" aria-label="Sherida - Oriënteren">
         <!-- Bewust leeg: Sherida komt als intermediair pas in beeld zodra
              de klant haar inschakelt, bij de fase Uitvoeren. -->
       </div>
-      <div class="phase-cell lane--sherida" aria-label="Sherida — Uitvoeren">
+      <div class="phase-cell lane--sherida" aria-label="Sherida - Uitvoeren">
         <div class="step-row">
           <div class="step-wrap">
             <div class="step step--auth">
@@ -574,7 +574,7 @@
           </div>
         </div>
       </div>
-      <div class="phase-cell lane--sherida" aria-label="Sherida — Opvolgen">
+      <div class="phase-cell lane--sherida" aria-label="Sherida - Opvolgen">
         <div class="step-row">
           <div class="step-wrap">
             <div class="step">Stuurt bevestiging door aan klant</div>
@@ -602,7 +602,7 @@
       </div>
 
       <!-- Rij 4-5: gezamenlijke subsidieaanvraag met een andere onderneming
-           (Karin en Bilal) — standaard verborgen achter de toggle hierboven,
+           (Karin en Bilal) - standaard verborgen achter de toggle hierboven,
            inhoud nog placeholder. -->
       <div class="lane-label lane--karin lane-extra">
         <span class="lane-avatar" aria-hidden="true">KJ</span>
@@ -611,21 +611,21 @@
         <a class="lane-link" href="../../personas/persona-karin.html" target="_blank" rel="noopener">Bekijk persona ↗</a>
       </div>
 
-      <div class="phase-cell lane--karin lane-extra" aria-label="Karin — Oriënteren">
+      <div class="phase-cell lane--karin lane-extra" aria-label="Karin - Oriënteren">
         <div class="step-row">
           <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
           <div class="step-connector" aria-hidden="true">→</div>
           <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
         </div>
       </div>
-      <div class="phase-cell lane--karin lane-extra" aria-label="Karin — Uitvoeren">
+      <div class="phase-cell lane--karin lane-extra" aria-label="Karin - Uitvoeren">
         <div class="step-row">
           <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
           <div class="step-connector" aria-hidden="true">→</div>
           <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
         </div>
       </div>
-      <div class="phase-cell lane--karin lane-extra" aria-label="Karin — Opvolgen">
+      <div class="phase-cell lane--karin lane-extra" aria-label="Karin - Opvolgen">
         <div class="step-row">
           <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
           <div class="step-connector" aria-hidden="true">→</div>
@@ -640,21 +640,21 @@
         <a class="lane-link" href="../../personas/persona-bilal.html" target="_blank" rel="noopener">Bekijk persona ↗</a>
       </div>
 
-      <div class="phase-cell lane--bilal lane-extra" aria-label="Bilal — Oriënteren">
+      <div class="phase-cell lane--bilal lane-extra" aria-label="Bilal - Oriënteren">
         <div class="step-row">
           <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
           <div class="step-connector" aria-hidden="true">→</div>
           <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
         </div>
       </div>
-      <div class="phase-cell lane--bilal lane-extra" aria-label="Bilal — Uitvoeren">
+      <div class="phase-cell lane--bilal lane-extra" aria-label="Bilal - Uitvoeren">
         <div class="step-row">
           <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
           <div class="step-connector" aria-hidden="true">→</div>
           <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
         </div>
       </div>
-      <div class="phase-cell lane--bilal lane-extra" aria-label="Bilal — Opvolgen">
+      <div class="phase-cell lane--bilal lane-extra" aria-label="Bilal - Opvolgen">
         <div class="step-row">
           <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
           <div class="step-connector" aria-hidden="true">→</div>
@@ -749,13 +749,13 @@
       minimapBody.addEventListener('pointerup', function () { dragging = false; });
       minimapBody.addEventListener('pointercancel', function () { dragging = false; });
 
-      // Sleep-to-pan op het canvas zelf (net als de minimap) — alleen voor
+      // Sleep-to-pan op het canvas zelf (net als de minimap) - alleen voor
       // muis, zodat native touch-scroll/trackpad ongemoeid blijft.
       var panning = false, panStartX = 0, panStartScroll = 0, panMoved = false;
       viewport.addEventListener('pointerdown', function (e) {
         if (e.pointerType !== 'mouse') return;
         // Pointer capture stuurt ook de resulterende click naar het
-        // canvas i.p.v. naar het element zelf — dus geen pan starten (en
+        // canvas i.p.v. naar het element zelf - dus geen pan starten (en
         // geen capture zetten) als er op een interactief element wordt
         // geklikt, anders werken "Vraagstuk", "Bekijk persona" en de
         // gezamenlijke-aanvraag-toggle nooit meer.
@@ -814,7 +814,7 @@
   </script>
 
   <nldd-banner variant="neutral" heading-level="2" text="Volgende stap" style="display:block; margin-top:32px;">
-    <nldd-rich-text><p>De stappen voor Yassin en Sherida zijn ingevuld, inclusief autorisatie- en authenticatiemomenten (rood kader) en een aantal toekomstscenario's rond de EU Business Wallet, Personal Wallet en Start Zaak (stippellijn, amber). Sherida's fase Oriënteren is bewust leeg: als intermediair komt zij pas in beeld bij Uitvoeren. Een paar kaartjes hebben een klikbaar "Vraagstuk" — een open punt om met collega's te bespreken, bijvoorbeeld welke techniek een toekomstscenario precies zou gebruiken.</p></nldd-rich-text>
+    <nldd-rich-text><p>De stappen voor Yassin en Sherida zijn ingevuld, inclusief autorisatie- en authenticatiemomenten (rood kader) en een aantal toekomstscenario's rond de EU Business Wallet, Personal Wallet en Start Zaak (stippellijn, amber). Sherida's fase Oriënteren is bewust leeg: als intermediair komt zij pas in beeld bij Uitvoeren. Een paar kaartjes hebben een klikbaar "Vraagstuk" - een open punt om met collega's te bespreken, bijvoorbeeld welke techniek een toekomstscenario precies zou gebruiken.</p></nldd-rich-text>
   </nldd-banner>
 
 </main>
