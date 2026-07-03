@@ -752,6 +752,10 @@
       // muis, zodat native touch-scroll/trackpad ongemoeid blijft.
       var panning = false, panStartX = 0, panStartScroll = 0, panMoved = false;
       viewport.addEventListener('pointerdown', function (e) {
+        // Reset dit altijd, óók als de klik hieronder wordt overgeslagen -
+        // anders blijft panMoved van een eerdere sleepbeweging op true
+        // staan en onderdrukt de click-handler alle latere link-klikken.
+        panMoved = false;
         if (e.pointerType !== 'mouse') return;
         // Pointer capture stuurt ook de resulterende click naar het
         // canvas i.p.v. naar het element zelf - dus geen pan starten (en
@@ -760,7 +764,6 @@
         // gezamenlijke-aanvraag-toggle nooit meer.
         if (e.target.closest('summary, a, button, input, label')) return;
         panning = true;
-        panMoved = false;
         panStartX = e.clientX;
         panStartScroll = viewport.scrollLeft;
         viewport.setPointerCapture(e.pointerId);
