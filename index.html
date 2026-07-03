@@ -11,41 +11,59 @@
     html, body { margin: 0; padding: 0; }
     body {
       font-family: var(--primitives-font-family-body, RijksSans, system-ui, sans-serif);
-      background: light-dark(var(--primitives-color-neutral-50, #f7f7f2), #1a1a2e);
-      min-height: 100vh;
-      padding: 48px 24px 80px;
     }
-    .page { max-width: 760px; margin: 0 auto; }
-    h1 { font-size: 1.6rem; font-weight: 700; margin-bottom: 8px; }
-    p.intro { color: var(--primitives-color-neutral-600, #4a5a6a); margin-bottom: 32px; max-width: 560px; }
-    .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+
     .tile {
-      display: block; text-decoration: none; color: inherit;
-      border: 1px solid var(--primitives-color-neutral-200, #c8c8dc);
+      display: block;
+      text-decoration: none;
+      color: inherit;
       border-radius: var(--primitives-border-radius-large, 16px);
-      padding: 24px; background: var(--primitives-color-neutral-0, #fff);
       transition: transform .12s ease, box-shadow .12s ease;
+      outline-offset: 4px;
     }
-    .tile:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,0,0,.10); }
-    .tile:focus-visible { outline: 3px solid var(--primitives-color-hemelblauw-500, #007bc7); outline-offset: 4px; }
-    .tile h2 { font-size: 1.05rem; margin-bottom: 6px; }
-    .tile p { font-size: .9rem; color: var(--primitives-color-neutral-600, #4a5a6a); margin: 0; }
+    .tile:hover {
+      transform: translateY(-4px);
+    }
+    .tile:hover nldd-card {
+      box-shadow: 0 12px 28px rgba(0,0,0,.14);
+    }
+    .tile:focus-visible {
+      outline: 3px solid var(--primitives-color-hemelblauw-500, #007bc7);
+      border-radius: 16px;
+    }
   </style>
 </head>
 <body>
-  <main class="page">
-    <h1>MOZa customer experience</h1>
-    <p class="intro">Persona's en klantreizen voor MijnOverheid Zakelijk.</p>
-    <div class="tiles">
-      <a class="tile" href="personas/index.html">
-        <h2>Persona's</h2>
-        <p>Yassin, Sherida, Karin en Bilal - wie zijn de gebruikers van MOZa?</p>
-      </a>
-      <a class="tile" href="klantreizen/subsidieaanvraag/index.html">
-        <h2>Klantreizen - Subsidieaanvraag</h2>
-        <p>Oriënteren, uitvoeren en opvolgen: de klantreis per persona.</p>
-      </a>
-    </div>
-  </main>
+<nldd-app-view background="tinted">
+  <nldd-page background="tinted">
+    <nldd-simple-section width="900px">
+      <nldd-title slot="header" size="4">
+        <h1>MOZa customer experience</h1>
+        <p slot="subtitle">Persona's en klantreizen voor MijnOverheid Zakelijk.</p>
+      </nldd-title>
+
+      <nldd-collection layout="grid" item-width="380px">
+        <a class="tile" href="personas/index.html">
+          <nldd-card accessible-label="Persona's - wie zijn de gebruikers van MOZa?">
+            <nldd-container padding="24" layout="stack" gap="12">
+              <nldd-title size="4"><h2>Persona's</h2></nldd-title>
+              <nldd-rich-text><p>Yassin, Sherida, Karin en Bilal - wie zijn de gebruikers van MOZa?</p></nldd-rich-text>
+            </nldd-container>
+          </nldd-card>
+        </a>
+        <a class="tile" href="klantreizen/subsidieaanvraag/index.html">
+          <nldd-card accessible-label="Klantreizen - Subsidieaanvraag">
+            <nldd-container padding="24" layout="stack" gap="12">
+              <nldd-title size="4"><h2>Klantreizen - Subsidieaanvraag</h2></nldd-title>
+              <nldd-rich-text><p>Oriënteren, uitvoeren en opvolgen: de klantreis per persona.</p></nldd-rich-text>
+            </nldd-container>
+          </nldd-card>
+        </a>
+      </nldd-collection>
+
+      <nldd-spacer size="32"></nldd-spacer>
+    </nldd-simple-section>
+  </nldd-page>
+</nldd-app-view>
 </body>
 </html>
