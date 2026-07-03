@@ -112,7 +112,7 @@
     line-height: 1.6; margin-bottom: var(--primitives-space-40, 40px); 
   }
 
-  /* ════════ Klantreis-grid ════════ */
+  /* Klantreis-grid */
   /* Zwembanen-opzet: eigen laag boven op de NLDD-tokens - geen storybook-
      equivalent voor een service-blueprint/swimlane-grid, dus custom CSS
      (net als de ketenweergave in casus-*.html). */
@@ -146,7 +146,7 @@
     width: max-content;
   }
 
-  /* ── Fasekoppen (Oriënteren / Uitvoeren / Opvolgen) ── */
+  /* Fasekoppen (Oriënteren / Uitvoeren / Opvolgen) */
   .phase-head {
     position: sticky; top: 0; z-index: 2;
     background: var(--ink);
@@ -160,7 +160,7 @@
   .phase-head--corner { background: var(--ink); }
   .phase-head + .phase-head { border-left: 1px solid rgba(255,255,255,.15); }
 
-  /* ── Zwembaanlabel (persona) ── */
+  /* Zwembaanlabel (persona) */
   .lane-label {
     padding: 24px 20px;
     border-top: 1px solid var(--border);
@@ -187,9 +187,9 @@
   }
   .lane-link:hover, .lane-link:focus-visible { text-decoration: underline; }
 
-  /* ── Fase-cel: stappen stromen ALTIJD links → rechts binnen 1 zwembaan × fase.
+  /* Fase-cel: stappen stromen ALTIJD links → rechts binnen 1 zwembaan × fase.
      Een stap kan een "verdieping" hebben: een onderliggend detail-kaartje dat
-     onder die ene stap hangt, niet in de horizontale hoofdlijn meetelt. ── */
+     onder die ene stap hangt, niet in de horizontale hoofdlijn meetelt. */
   .phase-cell {
     padding: 20px 16px;
     border-top: 1px solid var(--border);
@@ -261,7 +261,7 @@
     text-align: center;
   }
 
-  /* ── Autorisatie- en authenticatiemomenten ──
+  /* Autorisatie- en authenticatiemomenten.
      Hier wil de opdrachtgever nadrukkelijk met stakeholders over in
      gesprek, dus sterk visueel uitgelicht bovenop de gewone stap-stijl. */
   .step--auth {
@@ -278,9 +278,8 @@
   }
   .step-tag svg { flex-shrink: 0; }
 
-  /* ── Vraagstuk ──
-     Open vraag bij een stap, voor bespreking met collega's. Klapt open
-     i.p.v. altijd zichtbaar, zodat de kaart zelf compact blijft. */
+  /* Vraagstuk: open vraag bij een stap, voor bespreking met collega's.
+     Klapt open i.p.v. altijd zichtbaar, zodat de kaart zelf compact blijft. */
   .step-vraagstuk { margin-top: 8px; }
   .step-vraagstuk summary {
     cursor: pointer; list-style: none;
@@ -295,7 +294,7 @@
     border-radius: 6px; padding: 7px 9px;
   }
 
-  /* ── Legenda ── */
+  /* Legenda */
   .legend {
     display: flex; flex-wrap: wrap; gap: 20px;
     margin-top: 16px; margin-bottom: 40px;
@@ -311,7 +310,7 @@
   .legend-dot--alt { background: var(--alt); }
   .legend-dot--auth { background: var(--auth); }
 
-  /* ── Toggle: gezamenlijke aanvraag ── */
+  /* Toggle: gezamenlijke aanvraag */
   .toggle-row {
     display: inline-flex; align-items: center; gap: 10px;
     margin-bottom: 20px;
@@ -345,7 +344,7 @@
     outline: 3px solid var(--focus); outline-offset: 2px;
   }
 
-  /* ── Minimap ── */
+  /* Minimap */
   .minimap {
     position: absolute;
     right: 12px; bottom: 12px;
