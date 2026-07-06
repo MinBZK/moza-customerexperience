@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MOZa customer experience</title>
+  <title>Klantreizen - MOZa</title>
   <link rel="stylesheet" href="https://esm.sh/@nldd/design-system@0.8.59/dist/css/global.css">
   <script type="module" src="https://esm.sh/@nldd/design-system@0.8.59"></script>
   <style>
@@ -37,29 +37,30 @@
 <nldd-app-view background="tinted">
   <nldd-page background="tinted">
     <nldd-simple-section width="900px">
+      <nldd-link slot="header" href="../index.html" start-icon="arrow-left" size="sm">Terug naar overzicht</nldd-link>
       <nldd-title slot="header" size="4">
-        <h1>MOZa customer experience</h1>
-        <p slot="subtitle">Persona's en klantreizen voor MijnOverheid Zakelijk.</p>
+        <h1>Klantreizen</h1>
+        <p slot="subtitle">De klantreizen binnen MijnOverheid Zakelijk, per fase en per persona.</p>
       </nldd-title>
 
       <nldd-collection layout="grid" item-width="380px">
-        <a class="tile" href="personas/index.html">
-          <nldd-card accessible-label="Persona's - wie zijn de gebruikers van MOZa?">
+        <a class="tile" href="subsidieaanvraag/index.html">
+          <nldd-card accessible-label="Subsidieaanvraag">
             <nldd-container padding="24" layout="stack" gap="12" horizontal-alignment="center">
-              <nldd-icon name="person-2" size="32"></nldd-icon>
-              <nldd-title size="4"><h2>Persona's</h2></nldd-title>
-              <nldd-rich-text><p>Yassin, Sherida, Karin en Bilal - wie zijn de gebruikers van MOZa?</p></nldd-rich-text>
-              <nldd-tag color="hemelblauw" text="4 persona's"></nldd-tag>
+              <nldd-icon name="check-list" size="32"></nldd-icon>
+              <nldd-title size="4"><h2>Subsidieaanvraag</h2></nldd-title>
+              <nldd-rich-text><p>Oriënteren, uitvoeren en opvolgen: de klantreis per persona.</p></nldd-rich-text>
+              <nldd-tag color="donkergroen" text="3 fasen"></nldd-tag>
             </nldd-container>
           </nldd-card>
         </a>
-        <a class="tile" href="klantreizen/index.html">
-          <nldd-card accessible-label="Klantreizen">
+        <a class="tile" href="gezamenlijke-subsidieaanvraag/index.html">
+          <nldd-card accessible-label="Gezamenlijke subsidieaanvraag">
             <nldd-container padding="24" layout="stack" gap="12" horizontal-alignment="center">
-              <nldd-icon name="check-list" size="32"></nldd-icon>
-              <nldd-title size="4"><h2>Klantreizen</h2></nldd-title>
-              <nldd-rich-text><p>Oriënteren, uitvoeren en opvolgen: de klantreis per persona.</p></nldd-rich-text>
-              <nldd-tag color="donkergroen" text="2 klantreizen"></nldd-tag>
+              <nldd-icon name="person-2" size="32"></nldd-icon>
+              <nldd-title size="4"><h2>Gezamenlijke subsidieaanvraag</h2></nldd-title>
+              <nldd-rich-text><p>Een subsidieaanvraag samen met een andere onderneming.</p></nldd-rich-text>
+              <nldd-tag color="hemelblauw" text="3 fasen"></nldd-tag>
             </nldd-container>
           </nldd-card>
         </a>
