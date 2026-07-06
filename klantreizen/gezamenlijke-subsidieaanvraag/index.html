@@ -26,15 +26,15 @@
     --shadow: 0 2px 12px rgba(26,26,46,0.10);
     --focus: #ffbf00;
 
-    /* een accentkleur per persona-zwembaan */
-    --yassin: #1a4bbf;
-    --yassin-tint: #dde8ff;
-    --sherida: #5c2d91;
-    --sherida-tint: #f0e8ff;
-    --karin: #0f766e;
-    --karin-tint: #d7f0ec;
-    --bilal: #9d174d;
-    --bilal-tint: #fbdce8;
+    /* een accentkleur per persona-zwembaan (collectief van 3 ondernemers + 1 intermediair) */
+    --sander: #15803d;
+    --sander-tint: #dcfce7;
+    --wei: #1d4ed8;
+    --wei-tint: #dbeafe;
+    --ahmed: #4338ca;
+    --ahmed-tint: #e0e7ff;
+    --lotte: #7e22ce;
+    --lotte-tint: #f3e8ff;
 
     /* alternatieve-route kleur (verdieping onder een stap), los van de
        persona-kleuren zodat 'm meteen als iets anders herkenbaar is */
@@ -197,10 +197,10 @@
     background: var(--paper);
     box-shadow: 0 0 0 2px var(--white), 0 0 0 4px currentColor;
   }
-  .lane--yassin .lane-avatar { color: var(--yassin); }
-  .lane--sherida .lane-avatar { color: var(--sherida); }
-  .lane--karin .lane-avatar { color: var(--karin); }
-  .lane--bilal .lane-avatar { color: var(--bilal); }
+  .lane--sander .lane-avatar { color: var(--sander); }
+  .lane--wei .lane-avatar { color: var(--wei); }
+  .lane--ahmed .lane-avatar { color: var(--ahmed); }
+  .lane--lotte .lane-avatar { color: var(--lotte); }
   .lane-name { font-size: 16px; font-weight: 600; color: var(--ink); }
   .lane-role { font-size: 13px; color: var(--ink-soft); line-height: 1.4; }
   .lane-link {
@@ -236,10 +236,10 @@
     font-size: 13px; font-weight: 500; line-height: 1.35;
     color: var(--ink);
   }
-  .lane--yassin .step { background: var(--yassin-tint); color: var(--yassin); }
-  .lane--sherida .step { background: var(--sherida-tint); color: var(--sherida); }
-  .lane--karin .step { background: var(--karin-tint); color: var(--karin); }
-  .lane--bilal .step { background: var(--bilal-tint); color: var(--bilal); }
+  .lane--sander .step { background: var(--sander-tint); color: var(--sander); }
+  .lane--wei .step { background: var(--wei-tint); color: var(--wei); }
+  .lane--ahmed .step { background: var(--ahmed-tint); color: var(--ahmed); }
+  .lane--lotte .step { background: var(--lotte-tint); color: var(--lotte); }
 
   /* extra zwembanen (gezamenlijke aanvraag met andere onderneming) -
      standaard verborgen, tonen via de toggle hierboven de journey-grid */
@@ -326,10 +326,10 @@
   }
   .legend-item { display: flex; align-items: center; gap: 8px; }
   .legend-dot { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
-  .legend-dot--yassin { background: var(--yassin); }
-  .legend-dot--sherida { background: var(--sherida); }
-  .legend-dot--karin { background: var(--karin); }
-  .legend-dot--bilal { background: var(--bilal); }
+  .legend-dot--sander { background: var(--sander); }
+  .legend-dot--wei { background: var(--wei); }
+  .legend-dot--ahmed { background: var(--ahmed); }
+  .legend-dot--lotte { background: var(--lotte); }
   .legend-dot--placeholder { border: 1.5px dashed var(--ink-mute); }
   .legend-dot--alt { background: var(--alt); }
   .legend-dot--auth { background: var(--auth); }
@@ -425,26 +425,19 @@
 
   <p class="eyebrow">Klantreis · MOZa</p>
   <h1>Gezamenlijke subsidieaanvraag</h1>
-  <p class="subtitle">Een subsidieaanvraag die samen met een andere onderneming wordt gedaan, door dezelfde drie fasen: oriënteren, uitvoeren en opvolgen. De inhoudelijke stappen volgen nog.</p>
+  <p class="subtitle">Een collectief van drie ondernemingen vraagt samen een subsidie aan bij RVO en machtigt daarvoor één externe intermediair. Ze doorlopen dezelfde drie fasen: oriënteren, uitvoeren en opvolgen. Rode kaders markeren autorisatie- en authenticatiemomenten.</p>
 
   <div class="goal">
     <p class="goal-label">Doel van deze klantreis</p>
-    <p class="goal-text goal-text--placeholder">Doeltekst volgt nog.</p>
+    <p class="goal-text">Een collectief van drie bedrijven doet samen een innovatieproject en vraagt daarvoor een subsidie aan bij RVO. Het collectief machtigt samen één externe adviseur (intermediair) om de aanvraag in te dienen.</p>
   </div>
 
-  <label class="toggle-row">
-    <input type="checkbox" id="extraLanesToggle" class="toggle-input">
-    <span class="toggle-track" aria-hidden="true"><span class="toggle-thumb"></span></span>
-    Gezamenlijke subsidieaanvraag met een andere onderneming
-  </label>
-
   <div class="legend" aria-hidden="true">
-    <span class="legend-item"><span class="legend-dot legend-dot--yassin"></span> Yassin Amrani - zelfstandig ondernemer (zzp)</span>
-    <span class="legend-item"><span class="legend-dot legend-dot--sherida"></span> Sherida Pinas - boekhouder / intermediair</span>
-    <span class="legend-item legend-extra"><span class="legend-dot legend-dot--karin"></span> Karin Jansen - eigenaar-directeur MKB (andere onderneming)</span>
-    <span class="legend-item legend-extra"><span class="legend-dot legend-dot--bilal"></span> Bilal Yılmaz - administratief medewerker MKB (andere onderneming)</span>
-    <span class="legend-item"><span class="legend-dot legend-dot--placeholder"></span> Stap volgt nog</span>
-    <span class="legend-item"><span class="legend-dot legend-dot--alt"></span> Alternatieve route of toekomstscenario bij een stap (stippellijn)</span>
+    <span class="legend-item"><span class="legend-dot legend-dot--sander"></span> Sander - GreenFlow BV (ondernemer)</span>
+    <span class="legend-item"><span class="legend-dot legend-dot--wei"></span> Wei - Polar Components BV (ondernemer)</span>
+    <span class="legend-item"><span class="legend-dot legend-dot--ahmed"></span> Ahmed - MetaalbouwZuid BV (ondernemer)</span>
+    <span class="legend-item"><span class="legend-dot legend-dot--lotte"></span> Lotte - Bureau Subsidiekracht (intermediair)</span>
+    <span class="legend-item"><span class="legend-dot legend-dot--alt"></span> Onderliggende stap of detail (stippellijn)</span>
     <span class="legend-item"><span class="legend-dot legend-dot--auth"></span> Autorisatie- of authenticatiemoment</span>
     <span class="legend-item">→ stappen lopen links naar rechts</span>
   </div>
@@ -461,126 +454,224 @@
       <div class="phase-head">Uitvoeren</div>
       <div class="phase-head">Opvolgen</div>
 
-      <!-- Yassin Amrani -->
-      <div class="lane-label lane--yassin">
+      <!-- Sander -->
+      <div class="lane-label lane--sander">
         <img class="lane-avatar" src="../../personas/images/avatar-yassin.png" alt="" width="52" height="52" loading="lazy">
-        <span class="lane-name">Yassin Amrani</span>
-        <span class="lane-role">Zelfstandig ondernemer (zzp)</span>
-        <a class="lane-link" href="../../personas/persona-yassin.html" target="_blank" rel="noopener">Bekijk persona ↗</a>
+        <span class="lane-name">Sander</span>
+        <span class="lane-role">GreenFlow BV (ondernemer)</span>
       </div>
 
-      <div class="phase-cell lane--yassin" aria-label="Yassin Amrani - Oriënteren">
+      <div class="phase-cell lane--sander" aria-label="Sander - Oriënteren">
         <div class="step-row">
-          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
+          <div class="step-wrap">
+            <div class="step">Netwerkborrel met Sander, Wei en Ahmed</div>
+          </div>
           <div class="step-connector" aria-hidden="true">→</div>
-          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
+          <div class="step-wrap">
+            <div class="step">Besluit tot samenwerking en een gezamenlijke subsidieaanvraag</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">DEI+ - Demonstratie Energie- en Klimaatinnovatie (RVO)</div>
+          </div>
+          <div class="step-connector" aria-hidden="true">→</div>
+          <div class="step-wrap">
+            <div class="step">Zoekt een intermediair in het eigen netwerk</div>
+          </div>
         </div>
       </div>
-      <div class="phase-cell lane--yassin" aria-label="Yassin Amrani - Uitvoeren">
+      <div class="phase-cell lane--sander" aria-label="Sander - Uitvoeren">
         <div class="step-row">
-          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
-          <div class="step-connector" aria-hidden="true">→</div>
-          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
+          <div class="step-wrap">
+            <div class="step step--auth">
+              Maakt een concept-subsidieaanvraag op, ter waarde van € 145.000
+              <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span>
+            </div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Nodigt de andere ondernemers met dezelfde rol uit</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Alle ondernemers ondertekenen</div>
+          </div>
         </div>
       </div>
-      <div class="phase-cell lane--yassin" aria-label="Yassin Amrani - Opvolgen">
+      <div class="phase-cell lane--sander" aria-label="Sander - Opvolgen">
         <div class="step-row">
-          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
+          <div class="step-wrap">
+            <div class="step">Ontvangt het voorschot in tranches</div>
+          </div>
           <div class="step-connector" aria-hidden="true">→</div>
-          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
+          <div class="step-wrap">
+            <div class="step">Bekijkt de voortgang vanuit interesse</div>
+          </div>
+          <div class="step-connector" aria-hidden="true">→</div>
+          <div class="step-wrap">
+            <div class="step step--auth">
+              Na uitkering 4 (jaar 1 van 4 voldaan): trekt als eerste ondernemer de machtiging van Lotte in
+              <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span>
+            </div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Ondertekent</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Notificaties naar de andere ondernemers ter ondertekening</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Volledig ondertekend</div>
+          </div>
+          <div class="step-connector" aria-hidden="true">→</div>
+          <div class="step-wrap">
+            <div class="step step--auth">
+              Wordt door het collectief benoemd tot penvoerder (GreenFlow)
+              <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span>
+            </div>
+            <details class="step-vraagstuk">
+              <summary><svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.3" stroke="currentColor" stroke-width="1.3"/><path d="M6.2 6.3a1.8 1.8 0 1 1 2.6 1.6c-.6.35-.8.7-.8 1.3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="8" cy="11.2" r=".2" fill="currentColor"/></svg>Vraagstuk</summary>
+              <div class="step-vraagstuk-body">Wat gebeurt er als er tijdelijk geen penvoerder is?</div>
+            </details>
+            <details class="step-vraagstuk">
+              <summary><svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.3" stroke="currentColor" stroke-width="1.3"/><path d="M6.2 6.3a1.8 1.8 0 1 1 2.6 1.6c-.6.35-.8.7-.8 1.3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="8" cy="11.2" r=".2" fill="currentColor"/></svg>Vraagstuk</summary>
+              <div class="step-vraagstuk-body">Het collectief wil deze ene nieuwe bevoegdheid kunnen afgeven, waarna alle bedrijven geïnformeerd blijven.</div>
+            </details>
+          </div>
+          <div class="step-connector" aria-hidden="true">→</div>
+          <div class="step-wrap">
+            <div class="step step--auth">
+              Na 2 jaar: stapt na onenigheid op als penvoerder; het collectief valt uit elkaar
+              <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span>
+            </div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">De subsidie wordt gepauzeerd tot er duidelijkheid is</div>
+          </div>
         </div>
       </div>
 
-      <!-- Sherida Pinas -->
-      <div class="lane-label lane--sherida">
+      <!-- Wei -->
+      <div class="lane-label lane--wei">
+        <img class="lane-avatar" src="../../personas/images/avatar-yassin.png" alt="" width="52" height="52" loading="lazy">
+        <span class="lane-name">Wei</span>
+        <span class="lane-role">Polar Components BV (ondernemer)</span>
+      </div>
+
+      <div class="phase-cell lane--wei" aria-label="Wei - Oriënteren"></div>
+      <div class="phase-cell lane--wei" aria-label="Wei - Uitvoeren">
+        <div class="step-row">
+          <div class="step-wrap">
+            <div class="step step--auth">
+              Vraagt de intermediair aan als aanvrager
+              <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span>
+            </div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">De andere ondernemers ondertekenen</div>
+          </div>
+        </div>
+      </div>
+      <div class="phase-cell lane--wei" aria-label="Wei - Opvolgen">
+        <div class="step-row">
+          <div class="step-wrap">
+            <div class="step">Ontvangt het voorschot in tranches</div>
+          </div>
+          <div class="step-connector" aria-hidden="true">→</div>
+          <div class="step-wrap">
+            <div class="step step--auth">
+              Trekt de machtiging in
+              <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span>
+            </div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Het terugtrekken moet meteen overal doorwerken, zodat niemand nog namens het collectief handelt</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ahmed -->
+      <div class="lane-label lane--ahmed">
+        <img class="lane-avatar" src="../../personas/images/avatar-yassin.png" alt="" width="52" height="52" loading="lazy">
+        <span class="lane-name">Ahmed</span>
+        <span class="lane-role">MetaalbouwZuid BV (ondernemer)</span>
+      </div>
+
+      <div class="phase-cell lane--ahmed" aria-label="Ahmed - Oriënteren"></div>
+      <div class="phase-cell lane--ahmed" aria-label="Ahmed - Uitvoeren">
+        <div class="step-row">
+          <div class="step-wrap">
+            <div class="step step--auth">
+              Ondertekent de aanvraag en de machtiging
+              <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="phase-cell lane--ahmed" aria-label="Ahmed - Opvolgen">
+        <div class="step-row">
+          <div class="step-wrap">
+            <div class="step">Ontvangt het voorschot in tranches</div>
+          </div>
+          <div class="step-connector" aria-hidden="true">→</div>
+          <div class="step-wrap">
+            <div class="step step--auth">
+              Trekt de machtiging in
+              <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lotte -->
+      <div class="lane-label lane--lotte">
         <img class="lane-avatar" src="../../personas/images/avatar-sherida.png" alt="" width="52" height="52" loading="lazy">
-        <span class="lane-name">Sherida Pinas</span>
-        <span class="lane-role">Boekhouder / intermediair</span>
-        <a class="lane-link" href="../../personas/persona-sherida.html" target="_blank" rel="noopener">Bekijk persona ↗</a>
+        <span class="lane-name">Lotte</span>
+        <span class="lane-role">Bureau Subsidiekracht (intermediair)</span>
       </div>
 
-      <div class="phase-cell lane--sherida" aria-label="Sherida Pinas - Oriënteren">
+      <div class="phase-cell lane--lotte" aria-label="Lotte - Oriënteren"></div>
+      <div class="phase-cell lane--lotte" aria-label="Lotte - Uitvoeren">
         <div class="step-row">
-          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
+          <div class="step-wrap">
+            <div class="step step--auth">
+              Accepteert de rol van aanvrager namens het collectief
+              <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span>
+            </div>
+          </div>
           <div class="step-connector" aria-hidden="true">→</div>
-          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
+          <div class="step-wrap">
+            <div class="step step--auth">
+              Dient de aanvraag in
+              <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span>
+            </div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Vraagt bij elke ondernemer de benodigde gegevens op</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Maakt de aanvraag compleet</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Systeem stuurt bij afronding notificaties naar alle ondernemers</div>
+          </div>
         </div>
       </div>
-      <div class="phase-cell lane--sherida" aria-label="Sherida Pinas - Uitvoeren">
+      <div class="phase-cell lane--lotte" aria-label="Lotte - Opvolgen">
         <div class="step-row">
-          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
+          <div class="step-wrap">
+            <div class="step">Aanvraag wordt beschikt (RVO)</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Dossier is inzichtelijk voor alle partijen via hun machtigingen</div>
+            <details class="step-vraagstuk">
+              <summary><svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.3" stroke="currentColor" stroke-width="1.3"/><path d="M6.2 6.3a1.8 1.8 0 1 1 2.6 1.6c-.6.35-.8.7-.8 1.3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="8" cy="11.2" r=".2" fill="currentColor"/></svg>Vraagstuk</summary>
+              <div class="step-vraagstuk-body">Wat mag je zien? Bijvoorbeeld het bankrekeningnummer niet.</div>
+            </details>
+          </div>
           <div class="step-connector" aria-hidden="true">→</div>
-          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
+          <div class="step-wrap">
+            <div class="step">Na 2 weken wordt het voorschot in tranches uitbetaald</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Voortgangsnotificatie naar iedereen</div>
+          </div>
+          <div class="step-connector" aria-hidden="true">→</div>
+          <div class="step-wrap">
+            <div class="step">Controleert de voortgang</div>
+          </div>
+          <div class="step-connector" aria-hidden="true">→</div>
+          <div class="step-wrap">
+            <div class="step step--auth">
+              Rol vervalt nadat de machtiging is ingetrokken; het dossier stopt voor haar
+              <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="phase-cell lane--sherida" aria-label="Sherida Pinas - Opvolgen">
-        <div class="step-row">
-          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
-          <div class="step-connector" aria-hidden="true">→</div>
-          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
-        </div>
-      </div>
-
-      <!-- Karin Jansen -->
-      <div class="lane-label lane--karin lane-extra">
-        <img class="lane-avatar" src="../../personas/images/avatar-karin.png" alt="" width="52" height="52" loading="lazy">
-        <span class="lane-name">Karin Jansen</span>
-        <span class="lane-role">Eigenaar-directeur MKB (andere onderneming)</span>
-        <a class="lane-link" href="../../personas/persona-karin.html" target="_blank" rel="noopener">Bekijk persona ↗</a>
-      </div>
-
-      <div class="phase-cell lane--karin lane-extra" aria-label="Karin Jansen - Oriënteren">
-        <div class="step-row">
-          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
-          <div class="step-connector" aria-hidden="true">→</div>
-          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
-        </div>
-      </div>
-      <div class="phase-cell lane--karin lane-extra" aria-label="Karin Jansen - Uitvoeren">
-        <div class="step-row">
-          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
-          <div class="step-connector" aria-hidden="true">→</div>
-          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
-        </div>
-      </div>
-      <div class="phase-cell lane--karin lane-extra" aria-label="Karin Jansen - Opvolgen">
-        <div class="step-row">
-          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
-          <div class="step-connector" aria-hidden="true">→</div>
-          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
-        </div>
-      </div>
-
-      <!-- Bilal Yılmaz -->
-      <div class="lane-label lane--bilal lane-extra">
-        <img class="lane-avatar" src="../../personas/images/avatar-bilal.png" alt="" width="52" height="52" loading="lazy">
-        <span class="lane-name">Bilal Yılmaz</span>
-        <span class="lane-role">Administratief medewerker MKB (andere onderneming)</span>
-        <a class="lane-link" href="../../personas/persona-bilal.html" target="_blank" rel="noopener">Bekijk persona ↗</a>
-      </div>
-
-      <div class="phase-cell lane--bilal lane-extra" aria-label="Bilal Yılmaz - Oriënteren">
-        <div class="step-row">
-          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
-          <div class="step-connector" aria-hidden="true">→</div>
-          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
-        </div>
-      </div>
-      <div class="phase-cell lane--bilal lane-extra" aria-label="Bilal Yılmaz - Uitvoeren">
-        <div class="step-row">
-          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
-          <div class="step-connector" aria-hidden="true">→</div>
-          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
-        </div>
-      </div>
-      <div class="phase-cell lane--bilal lane-extra" aria-label="Bilal Yılmaz - Opvolgen">
-        <div class="step-row">
-          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
-          <div class="step-connector" aria-hidden="true">→</div>
-          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
-        </div>
-      </div>
-
     </div>
     </div>
 
@@ -717,15 +808,6 @@
         toggleBtn.setAttribute('aria-expanded', String(collapsed));
       });
 
-      // Toont/verbergt de extra zwembanen (gezamenlijke aanvraag met een
-      // andere onderneming) en ververst canvas + minimap mee.
-      var extraLanesToggle = document.getElementById('extraLanesToggle');
-      extraLanesToggle.addEventListener('change', function () {
-        document.body.classList.toggle('show-extra-lanes', extraLanesToggle.checked);
-        layout();
-        buildClone();
-      });
-
       layout();
       buildClone();
       if (window.ResizeObserver) {
@@ -735,8 +817,8 @@
     })();
   </script>
 
-  <nldd-banner variant="neutral" heading-level="2" text="Volgende stap" style="display:block; margin-top:32px;">
-    <nldd-rich-text><p>Dit is de opzet van de klantreis "Gezamenlijke subsidieaanvraag". De inhoudelijke stappen per fase en per persona volgen nog; de kaartjes met stippellijn zijn placeholders.</p></nldd-rich-text>
+  <nldd-banner variant="neutral" heading-level="2" text="Over deze klantreis" style="display:block; margin-top:32px;">
+    <nldd-rich-text><p>Een collectief van drie ondernemingen (Sander, Wei en Ahmed) vraagt samen een DEI+-subsidie aan bij RVO en machtigt daarvoor intermediair Lotte. Rode kaders zijn autorisatie- of authenticatiemomenten; kaartjes met stippellijn zijn onderliggende stappen of details. De klikbare "Vraagstuk"-kaartjes zijn open punten om met stakeholders te bespreken, zoals wat er gebeurt als er tijdelijk geen penvoerder is.</p></nldd-rich-text>
   </nldd-banner>
 
 </main>
