@@ -167,16 +167,18 @@
     display: flex; flex-direction: column; gap: 4px;
     background: var(--paper);
   }
+  /* Foto-avatar (dezelfde afbeeldingen als de persona-pagina's), met een
+     ring in de persona-kleur zodat de zwembaan-kleurcodering behouden blijft. */
   .lane-avatar {
-    width: 44px; height: 44px; border-radius: 999px;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 15px;
-    color: var(--white); margin-bottom: 10px;
+    width: 52px; height: 52px; border-radius: 999px;
+    object-fit: cover; margin-bottom: 10px;
+    background: var(--paper);
+    box-shadow: 0 0 0 2px var(--white), 0 0 0 4px currentColor;
   }
-  .lane--yassin .lane-avatar { background: var(--yassin); }
-  .lane--sherida .lane-avatar { background: var(--sherida); }
-  .lane--karin .lane-avatar { background: var(--karin); }
-  .lane--bilal .lane-avatar { background: var(--bilal); }
+  .lane--yassin .lane-avatar { color: var(--yassin); }
+  .lane--sherida .lane-avatar { color: var(--sherida); }
+  .lane--karin .lane-avatar { color: var(--karin); }
+  .lane--bilal .lane-avatar { color: var(--bilal); }
   .lane-name { font-size: 16px; font-weight: 600; color: var(--ink); }
   .lane-role { font-size: 13px; color: var(--ink-soft); line-height: 1.4; }
   .lane-link {
@@ -434,7 +436,7 @@
 
       <!-- Rij 2: Yassin -->
       <div class="lane-label lane--yassin">
-        <span class="lane-avatar" aria-hidden="true">YA</span>
+        <img class="lane-avatar" src="../../personas/images/avatar-yassin.png" alt="" width="52" height="52" loading="lazy">
         <span class="lane-name">Yassin Amrani</span>
         <span class="lane-role">Zelfstandig ondernemer (zzp)</span>
         <a class="lane-link" href="../../personas/persona-yassin.html" target="_blank" rel="noopener">Bekijk persona ↗</a>
@@ -534,7 +536,7 @@
 
       <!-- Rij 3: Sherida -->
       <div class="lane-label lane--sherida">
-        <span class="lane-avatar" aria-hidden="true">SP</span>
+        <img class="lane-avatar" src="../../personas/images/avatar-sherida.png" alt="" width="52" height="52" loading="lazy">
         <span class="lane-name">Sherida Pinas</span>
         <span class="lane-role">Boekhouder / intermediair</span>
         <a class="lane-link" href="../../personas/persona-sherida.html" target="_blank" rel="noopener">Bekijk persona ↗</a>
@@ -604,7 +606,7 @@
            (Karin en Bilal) - standaard verborgen achter de toggle hierboven,
            inhoud nog placeholder. -->
       <div class="lane-label lane--karin lane-extra">
-        <span class="lane-avatar" aria-hidden="true">KJ</span>
+        <img class="lane-avatar" src="../../personas/images/avatar-karin.png" alt="" width="52" height="52" loading="lazy">
         <span class="lane-name">Karin Jansen</span>
         <span class="lane-role">Eigenaar-directeur MKB (andere onderneming)</span>
         <a class="lane-link" href="../../personas/persona-karin.html" target="_blank" rel="noopener">Bekijk persona ↗</a>
@@ -633,7 +635,7 @@
       </div>
 
       <div class="lane-label lane--bilal lane-extra">
-        <span class="lane-avatar" aria-hidden="true">BY</span>
+        <img class="lane-avatar" src="../../personas/images/avatar-bilal.png" alt="" width="52" height="52" loading="lazy">
         <span class="lane-name">Bilal Yılmaz</span>
         <span class="lane-role">Administratief medewerker MKB (andere onderneming)</span>
         <a class="lane-link" href="../../personas/persona-bilal.html" target="_blank" rel="noopener">Bekijk persona ↗</a>
