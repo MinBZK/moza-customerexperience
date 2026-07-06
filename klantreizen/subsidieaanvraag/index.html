@@ -275,6 +275,12 @@
     font-size: 12px; font-weight: 500; line-height: 1.3;
   }
 
+  /* Detail-kaartjes (verdiepingen, geel/amber) staan standaard ingeklapt.
+     De 'Details tonen'-toggle klapt ze in 1x allemaal tegelijk uit. */
+  .step-verdieping-connector, .step-verdieping { display: none; }
+  body.show-details .step-verdieping-connector { display: block; }
+  body.show-details .step-verdieping { display: block; }
+
   /* placeholder: inhoud volgt nog */
   .step--placeholder, .step-verdieping--placeholder {
     background: transparent;
@@ -436,6 +442,12 @@
     <input type="checkbox" id="extraLanesToggle" class="toggle-input">
     <span class="toggle-track" aria-hidden="true"><span class="toggle-thumb"></span></span>
     Gezamenlijke subsidieaanvraag met een andere onderneming
+  </label>
+
+  <label class="toggle-row">
+    <input type="checkbox" id="detailsToggle" class="toggle-input">
+    <span class="toggle-track" aria-hidden="true"><span class="toggle-thumb"></span></span>
+    Details tonen
   </label>
 
   <div class="legend" aria-hidden="true">
@@ -825,6 +837,17 @@
         toggleBtn.textContent = collapsed ? '−' : '+';
         toggleBtn.setAttribute('aria-expanded', String(collapsed));
       });
+
+      // Klapt alle detail-kaartjes (verdiepingen) in 1x uit/in en ververst
+      // canvas + minimap mee.
+      var detailsToggle = document.getElementById('detailsToggle');
+      if (detailsToggle) {
+        detailsToggle.addEventListener('change', function () {
+          document.body.classList.toggle('show-details', detailsToggle.checked);
+          layout();
+          buildClone();
+        });
+      }
 
       // Toont/verbergt de extra zwembanen (gezamenlijke aanvraag met een
       // andere onderneming) en ververst canvas + minimap mee.
