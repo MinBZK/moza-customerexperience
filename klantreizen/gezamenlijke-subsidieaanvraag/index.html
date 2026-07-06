@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Subsidieaanvraag - Klantreis MOZa</title>
+<title>Gezamenlijke subsidieaanvraag - Klantreis MOZa</title>
 <!-- MinBZK/storybook design tokens + web components (de echte, gepubliceerde @nldd/design-system) -->
 <link rel="stylesheet" href="https://esm.sh/@nldd/design-system@0.8.59/dist/css/settings.css">
 <script type="module" src="https://esm.sh/@nldd/design-system@0.8.59"></script>
@@ -402,8 +402,8 @@
   </a>
 
   <p class="eyebrow">Klantreis · MOZa</p>
-  <h1>Subsidieaanvraag</h1>
-  <p class="subtitle">Twee persona's doorlopen dezelfde drie fasen van hun klantreis binnen MOZa: oriënteren, uitvoeren en opvolgen. Rode kaders markeren autorisatie- en authenticatiemomenten - bewust uitgelicht, want dit zijn de momenten om met stakeholders over in gesprek te gaan.</p>
+  <h1>Gezamenlijke subsidieaanvraag</h1>
+  <p class="subtitle">Een subsidieaanvraag die samen met een andere onderneming wordt gedaan, door dezelfde drie fasen: oriënteren, uitvoeren en opvolgen. De inhoudelijke stappen volgen nog.</p>
 
   <label class="toggle-row">
     <input type="checkbox" id="extraLanesToggle" class="toggle-input">
@@ -434,7 +434,7 @@
       <div class="phase-head">Uitvoeren</div>
       <div class="phase-head">Opvolgen</div>
 
-      <!-- Rij 2: Yassin -->
+      <!-- Yassin Amrani -->
       <div class="lane-label lane--yassin">
         <img class="lane-avatar" src="../../personas/images/avatar-yassin.png" alt="" width="52" height="52" loading="lazy">
         <span class="lane-name">Yassin Amrani</span>
@@ -442,99 +442,29 @@
         <a class="lane-link" href="../../personas/persona-yassin.html" target="_blank" rel="noopener">Bekijk persona ↗</a>
       </div>
 
-      <div class="phase-cell lane--yassin" aria-label="Yassin - Oriënteren">
+      <div class="phase-cell lane--yassin" aria-label="Yassin Amrani - Oriënteren">
         <div class="step-row">
-          <div class="step-wrap">
-            <div class="step">Vraagt ChatGPT naar een mogelijke subsidie voor verduurzaming van zijn koelkast voor zijn onderneming</div>
-            <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Alternatief: via nieuwsbrief of eigen netwerk</div>
-          </div>
+          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
           <div class="step-connector" aria-hidden="true">→</div>
-          <div class="step-wrap">
-            <div class="step">ChatGPT geeft antwoord met een referentie naar Ondernemersplein en een aanvraaglink</div>
-            <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Toekomst: EU Business Wallet - ChatGPT vraagt bedrijfsgegevens te delen, bevestigt toekenning en verwijst alsnog naar MOZa</div>
-          </div>
-          <div class="step-connector" aria-hidden="true">→</div>
-          <div class="step-wrap">
-            <div class="step step--auth">
-              Link verwijst naar MOZa, logt in
-              <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Authenticatie</span>
-            </div>
-            <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Toekomst: authenticeert met Personal Wallet in plaats van DigiD</div>
-          </div>
-          <div class="step-connector" aria-hidden="true">→</div>
-          <div class="step-wrap">
-            <div class="step">Kiest aanvraag voor subsidie</div>
-          </div>
+          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
         </div>
       </div>
-      <div class="phase-cell lane--yassin" aria-label="Yassin - Uitvoeren">
+      <div class="phase-cell lane--yassin" aria-label="Yassin Amrani - Uitvoeren">
         <div class="step-row">
-          <div class="step-wrap">
-            <div class="step step--auth">
-              Toont bedrijven (KvK-nummers), kiest onderneming om voor aan te vragen
-              <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span>
-            </div>
-            <details class="step-vraagstuk">
-              <summary><svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.3" stroke="currentColor" stroke-width="1.3"/><path d="M6.2 6.3a1.8 1.8 0 1 1 2.6 1.6c-.6.35-.8.7-.8 1.3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="8" cy="11.2" r=".2" fill="currentColor"/></svg>Vraagstuk</summary>
-              <div class="step-vraagstuk-body">Is het huidige patroon van Logius ook de toekomst hiervoor?</div>
-            </details>
-            <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Toekomst: EU Business Wallet - gegevens worden geprefilled m.b.v. Digitale Assistent</div>
-            <details class="step-vraagstuk">
-              <summary><svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.3" stroke="currentColor" stroke-width="1.3"/><path d="M6.2 6.3a1.8 1.8 0 1 1 2.6 1.6c-.6.35-.8.7-.8 1.3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="8" cy="11.2" r=".2" fill="currentColor"/></svg>Vraagstuk</summary>
-              <div class="step-vraagstuk-body">Welke techniek wordt hiervoor gebruikt? Kan de oplossing van Mijn Betaaloverzicht gebruikt worden, met certificaten uitgeven via App Manager?</div>
-            </details>
-          </div>
+          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
           <div class="step-connector" aria-hidden="true">→</div>
-          <div class="step-wrap">
-            <div class="step">Vult aanvraag in en voegt bijlagen toe</div>
-          </div>
-          <div class="step-connector" aria-hidden="true">→</div>
-          <div class="step-wrap">
-            <div class="step step--auth">
-              Dient aanvraag in
-              <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span>
-            </div>
-            <details class="step-vraagstuk">
-              <summary><svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.3" stroke="currentColor" stroke-width="1.3"/><path d="M6.2 6.3a1.8 1.8 0 1 1 2.6 1.6c-.6.35-.8.7-.8 1.3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="8" cy="11.2" r=".2" fill="currentColor"/></svg>Vraagstuk</summary>
-              <div class="step-vraagstuk-body">Te bepalen hoe: Digipoort, Federatief of App Manager?</div>
-            </details>
-            <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Toekomst: Start Zaak - na indienen wordt een zaak aangemaakt met track &amp; trace</div>
-          </div>
+          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
         </div>
       </div>
-      <div class="phase-cell lane--yassin" aria-label="Yassin - Opvolgen">
+      <div class="phase-cell lane--yassin" aria-label="Yassin Amrani - Opvolgen">
         <div class="step-row">
-          <div class="step-wrap">
-            <div class="step">Ontvangt bevestiging per mail</div>
-          </div>
+          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
           <div class="step-connector" aria-hidden="true">→</div>
-          <div class="step-wrap">
-            <div class="step">Beantwoordt eventuele aanvullende vragen rechtstreeks</div>
-          </div>
-          <div class="step-connector" aria-hidden="true">→</div>
-          <div class="step-wrap">
-            <div class="step step--auth">
-              Ontvangt besluit: toekenning of afwijzing
-              <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span>
-            </div>
-          </div>
-          <div class="step-connector" aria-hidden="true">→</div>
-          <div class="step-wrap">
-            <div class="step">Ontvangt voorschot en vaststelling</div>
-          </div>
-          <div class="step-connector" aria-hidden="true">→</div>
-          <div class="step-wrap">
-            <div class="step">Kan zelf bezwaar maken bij afwijzing</div>
-          </div>
+          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
         </div>
       </div>
 
-      <!-- Rij 3: Sherida -->
+      <!-- Sherida Pinas -->
       <div class="lane-label lane--sherida">
         <img class="lane-avatar" src="../../personas/images/avatar-sherida.png" alt="" width="52" height="52" loading="lazy">
         <span class="lane-name">Sherida Pinas</span>
@@ -542,69 +472,29 @@
         <a class="lane-link" href="../../personas/persona-sherida.html" target="_blank" rel="noopener">Bekijk persona ↗</a>
       </div>
 
-      <div class="phase-cell lane--sherida" aria-label="Sherida - Oriënteren">
-        <!-- Bewust leeg: Sherida komt als intermediair pas in beeld zodra
-             de klant haar inschakelt, bij de fase Uitvoeren. -->
-      </div>
-      <div class="phase-cell lane--sherida" aria-label="Sherida - Uitvoeren">
+      <div class="phase-cell lane--sherida" aria-label="Sherida Pinas - Oriënteren">
         <div class="step-row">
-          <div class="step-wrap">
-            <div class="step step--auth">
-              Ontvangt machtiging van de klant
-              <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span>
-            </div>
-          </div>
+          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
           <div class="step-connector" aria-hidden="true">→</div>
-          <div class="step-wrap">
-            <div class="step step--auth">
-              Logt in met eigen eHerkenning namens de klant
-              <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Authenticatie</span>
-            </div>
-          </div>
-          <div class="step-connector" aria-hidden="true">→</div>
-          <div class="step-wrap">
-            <div class="step">Vult aanvraag in namens klant</div>
-          </div>
-          <div class="step-connector" aria-hidden="true">→</div>
-          <div class="step-wrap">
-            <div class="step">Voegt aangeleverde stukken toe</div>
-          </div>
-          <div class="step-connector" aria-hidden="true">→</div>
-          <div class="step-wrap">
-            <div class="step">Dient aanvraag in namens klant</div>
-          </div>
+          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
         </div>
       </div>
-      <div class="phase-cell lane--sherida" aria-label="Sherida - Opvolgen">
+      <div class="phase-cell lane--sherida" aria-label="Sherida Pinas - Uitvoeren">
         <div class="step-row">
-          <div class="step-wrap">
-            <div class="step">Stuurt bevestiging door aan klant</div>
-          </div>
+          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
           <div class="step-connector" aria-hidden="true">→</div>
-          <div class="step-wrap">
-            <div class="step">Stemt eventuele aanvullende vragen af met klant</div>
-          </div>
+          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
+        </div>
+      </div>
+      <div class="phase-cell lane--sherida" aria-label="Sherida Pinas - Opvolgen">
+        <div class="step-row">
+          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
           <div class="step-connector" aria-hidden="true">→</div>
-          <div class="step-wrap">
-            <div class="step step--auth">
-              Ontvangt besluit namens klant
-              <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span>
-            </div>
-          </div>
-          <div class="step-connector" aria-hidden="true">→</div>
-          <div class="step-wrap">
-            <div class="step">Verwerkt voorschot en vaststelling</div>
-          </div>
-          <div class="step-connector" aria-hidden="true">→</div>
-          <div class="step-wrap">
-            <div class="step">Begeleidt klant bij bezwaar</div>
-          </div>
+          <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
         </div>
       </div>
 
-      <!-- Rij 4-5: gezamenlijke subsidieaanvraag met een andere onderneming
-           (Karin en Bilal) - standaard verborgen achter de toggle hierboven,
-           inhoud nog placeholder. -->
+      <!-- Karin Jansen -->
       <div class="lane-label lane--karin lane-extra">
         <img class="lane-avatar" src="../../personas/images/avatar-karin.png" alt="" width="52" height="52" loading="lazy">
         <span class="lane-name">Karin Jansen</span>
@@ -612,21 +502,21 @@
         <a class="lane-link" href="../../personas/persona-karin.html" target="_blank" rel="noopener">Bekijk persona ↗</a>
       </div>
 
-      <div class="phase-cell lane--karin lane-extra" aria-label="Karin - Oriënteren">
+      <div class="phase-cell lane--karin lane-extra" aria-label="Karin Jansen - Oriënteren">
         <div class="step-row">
           <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
           <div class="step-connector" aria-hidden="true">→</div>
           <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
         </div>
       </div>
-      <div class="phase-cell lane--karin lane-extra" aria-label="Karin - Uitvoeren">
+      <div class="phase-cell lane--karin lane-extra" aria-label="Karin Jansen - Uitvoeren">
         <div class="step-row">
           <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
           <div class="step-connector" aria-hidden="true">→</div>
           <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
         </div>
       </div>
-      <div class="phase-cell lane--karin lane-extra" aria-label="Karin - Opvolgen">
+      <div class="phase-cell lane--karin lane-extra" aria-label="Karin Jansen - Opvolgen">
         <div class="step-row">
           <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
           <div class="step-connector" aria-hidden="true">→</div>
@@ -634,6 +524,7 @@
         </div>
       </div>
 
+      <!-- Bilal Yılmaz -->
       <div class="lane-label lane--bilal lane-extra">
         <img class="lane-avatar" src="../../personas/images/avatar-bilal.png" alt="" width="52" height="52" loading="lazy">
         <span class="lane-name">Bilal Yılmaz</span>
@@ -641,21 +532,21 @@
         <a class="lane-link" href="../../personas/persona-bilal.html" target="_blank" rel="noopener">Bekijk persona ↗</a>
       </div>
 
-      <div class="phase-cell lane--bilal lane-extra" aria-label="Bilal - Oriënteren">
+      <div class="phase-cell lane--bilal lane-extra" aria-label="Bilal Yılmaz - Oriënteren">
         <div class="step-row">
           <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
           <div class="step-connector" aria-hidden="true">→</div>
           <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
         </div>
       </div>
-      <div class="phase-cell lane--bilal lane-extra" aria-label="Bilal - Uitvoeren">
+      <div class="phase-cell lane--bilal lane-extra" aria-label="Bilal Yılmaz - Uitvoeren">
         <div class="step-row">
           <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
           <div class="step-connector" aria-hidden="true">→</div>
           <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
         </div>
       </div>
-      <div class="phase-cell lane--bilal lane-extra" aria-label="Bilal - Opvolgen">
+      <div class="phase-cell lane--bilal lane-extra" aria-label="Bilal Yılmaz - Opvolgen">
         <div class="step-row">
           <div class="step-wrap"><div class="step step--placeholder">Stap volgt</div></div>
           <div class="step-connector" aria-hidden="true">→</div>
@@ -818,7 +709,7 @@
   </script>
 
   <nldd-banner variant="neutral" heading-level="2" text="Volgende stap" style="display:block; margin-top:32px;">
-    <nldd-rich-text><p>De stappen voor Yassin en Sherida zijn ingevuld, inclusief autorisatie- en authenticatiemomenten (rood kader) en een aantal toekomstscenario's rond de EU Business Wallet, Personal Wallet en Start Zaak (stippellijn, amber). Sherida's fase Oriënteren is bewust leeg: als intermediair komt zij pas in beeld bij Uitvoeren. Een paar kaartjes hebben een klikbaar "Vraagstuk" - een open punt om met collega's te bespreken, bijvoorbeeld welke techniek een toekomstscenario precies zou gebruiken.</p></nldd-rich-text>
+    <nldd-rich-text><p>Dit is de opzet van de klantreis "Gezamenlijke subsidieaanvraag". De inhoudelijke stappen per fase en per persona volgen nog; de kaartjes met stippellijn zijn placeholders.</p></nldd-rich-text>
   </nldd-banner>
 
 </main>
