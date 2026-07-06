@@ -109,7 +109,29 @@
 
   .subtitle {
     font-size: 16px; color: var(--ink-soft);
-    line-height: 1.6; margin-bottom: var(--primitives-space-40, 40px); 
+    line-height: 1.6; margin-bottom: var(--primitives-space-24, 24px);
+  }
+
+  /* Doel van de klantreis: een uitgelicht blok bovenaan met wat deze reis
+     voor de ondernemer moet opleveren. */
+  .goal {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: var(--primitives-space-40, 40px);
+    max-width: var(--primitives-area-640, 640px);
+  }
+  .goal-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: .08em;
+    color: var(--accent); margin-bottom: 4px;
+  }
+  .goal-text { font-size: 15px; color: var(--ink); line-height: 1.6; }
+  .goal-text--placeholder {
+    color: var(--ink-mute); font-style: italic;
   }
 
   /* Klantreis-grid */
@@ -404,6 +426,11 @@
   <p class="eyebrow">Klantreis · MOZa</p>
   <h1>Gezamenlijke subsidieaanvraag</h1>
   <p class="subtitle">Een subsidieaanvraag die samen met een andere onderneming wordt gedaan, door dezelfde drie fasen: oriënteren, uitvoeren en opvolgen. De inhoudelijke stappen volgen nog.</p>
+
+  <div class="goal">
+    <p class="goal-label">Doel van deze klantreis</p>
+    <p class="goal-text goal-text--placeholder">Doeltekst volgt nog.</p>
+  </div>
 
   <label class="toggle-row">
     <input type="checkbox" id="extraLanesToggle" class="toggle-input">
