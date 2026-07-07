@@ -143,19 +143,18 @@
       a { color: inherit; }
 
       .print-banner {
-        display: flex;
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
         align-items: center;
         gap: 12px;
-        padding-bottom: 12px;
-        margin-bottom: 16px;
-        border-bottom: 2px solid #154273;
+        margin-bottom: 24px;
         break-inside: avoid;
         break-after: avoid;
       }
-      .print-logo { height: 20mm; width: auto; }
-      .print-banner-text { display: flex; flex-direction: column; }
+      .print-banner-text { grid-column: 1; display: flex; flex-direction: column; }
+      .print-logo { grid-column: 2; height: 20mm; width: auto; }
       .print-title { font-size: 1.15rem; font-weight: 700; color: #154273; }
-      .print-tagline { font-size: .9rem; color: #4a5a6a; }
+      .print-tagline { font-size: .95rem; font-style: italic; color: #154273; }
     }
   </style>
 </head>
@@ -170,11 +169,11 @@
 
     <!-- Alleen zichtbaar bij printen: Rijksoverheid-banner bovenaan de afdruk. -->
     <div class="print-banner" aria-hidden="true">
-      <img class="print-logo" src="images/logo-rijksoverheid.svg" alt="">
       <div class="print-banner-text">
         <span class="print-title">MijnOverheid Zakelijk</span>
         <span class="print-tagline">Makkelijk zakendoen met de overheid</span>
       </div>
+      <img class="print-logo" src="images/logo-rijksoverheid.svg" alt="">
     </div>
     <nldd-simple-section width="1000px">
       <div id="main">
