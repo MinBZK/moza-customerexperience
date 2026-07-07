@@ -122,6 +122,47 @@
       width: 100%;
       max-width: 1000px;
       margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    /* Print / opslaan-als-PDF knop */
+    .print-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: inherit;
+      font-size: .9rem;
+      font-weight: 600;
+      color: var(--primitives-color-hemelblauw-700, #01689b);
+      background: var(--primitives-color-neutral-0, #fff);
+      border: 1px solid var(--primitives-color-neutral-300, #b0b7be);
+      border-radius: 8px;
+      padding: 7px 14px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .print-btn:hover { background: var(--primitives-color-neutral-50, #f3f5f7); }
+    .print-btn:focus-visible {
+      outline: 3px solid var(--primitives-color-hemelblauw-500, #007bc7);
+      outline-offset: 2px;
+    }
+    .print-btn svg { flex-shrink: 0; }
+
+    /* Printbare versie: verberg de balk/knop, forceer wit + licht, en plat de
+       NLDD app-shell af (via de shadow-injectie in het script hieronder) zodat
+       de volledige pagina afdrukt in plaats van alleen het zichtbare deel. */
+    @page { margin: 14mm; }
+    @media print {
+      :root { color-scheme: light !important; }
+      html, body { height: auto !important; overflow: visible !important; background: #fff !important; }
+      nldd-app-view, nldd-page { display: contents !important; }
+      .sticky-bar, .print-btn { display: none !important; }
+      nldd-card { break-inside: avoid; }
+      h1, h2, h3, h4 { break-after: avoid; break-inside: avoid; }
+      a { color: inherit; }
     }
   </style>
 </head>
@@ -131,6 +172,10 @@
     <div slot="header" class="sticky-bar" id="backbar">
       <div class="sticky-bar-inner">
         <nldd-link href="index.html" start-icon="arrow-left" size="inherit">Terug naar alle persona's</nldd-link>
+        <button type="button" class="print-btn" id="printBtn">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 5.5V2.5h7v3M12 6.5h1.5a1 1 0 0 1 1 1v3.5H12M4 11.5H2.5a1 1 0 0 1-1-1V7.5a1 1 0 0 1 1-1H4M4 9h8v4.5H4z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+          Printen / opslaan als PDF
+        </button>
       </div>
     </div>
     <nldd-simple-section width="1000px">
@@ -259,6 +304,21 @@
   scroller?.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
+
+  // Printbare versie: plat de app-shell af tijdens het printen, zodat de
+  // interne scroll-container niet clipt en de hele pagina afdrukt. De
+  // @media print-regels leven in de shadow roots (daar zit de scroll-container).
+  const addPrintFlatten = (host, css) => {
+    if (!host?.shadowRoot) return;
+    const st = document.createElement('style');
+    st.textContent = css;
+    host.shadowRoot.appendChild(st);
+  };
+  addPrintFlatten(page, '@media print{ .page, .page__scroll, .page__header { display: contents !important; } }');
+  await customElements.whenDefined('nldd-app-view');
+  addPrintFlatten(document.querySelector('nldd-app-view'), '@media print{ .app-view { display: contents !important; } }');
+
+  document.getElementById('printBtn')?.addEventListener('click', () => window.print());
 </script>
 
 </body>
