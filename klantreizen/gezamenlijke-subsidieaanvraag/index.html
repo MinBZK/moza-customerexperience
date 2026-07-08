@@ -199,6 +199,64 @@
   /* Korte markering van de stap waar een uitleg bij hoort, tijdens navigeren. */
   .step--flash { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 12px; }
 
+  /* Zoom-/hiërarchie-knoppen in de toolbar (links van volledig scherm). */
+  .journey-tools { display: inline-flex; align-items: center; gap: 12px; }
+  .journey-zoom { display: inline-flex; align-items: center; gap: 6px; }
+  .journey-zoom-btn {
+    width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center;
+    background: var(--white); border: 1px solid var(--border); border-radius: 8px;
+    cursor: pointer; font-family: inherit; font-size: 17px; font-weight: 600; color: var(--ink); line-height: 1;
+  }
+  .journey-zoom-btn:hover:not(:disabled) { background: var(--paper); border-color: var(--ink-soft); }
+  .journey-zoom-btn:disabled { opacity: .4; cursor: default; }
+  .journey-zoom-btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+  .journey-zoom-label {
+    min-width: 92px; text-align: center;
+    font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 600; color: var(--ink-soft);
+  }
+
+  /* Mijlpaal-badge op de genummerde hoofdstappen. */
+  .step[data-milestone] { position: relative; }
+  .step[data-milestone]::before {
+    content: attr(data-milestone);
+    position: absolute; top: -10px; left: -10px; z-index: 3;
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--ink); color: #fff;
+    font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 0 2px var(--white);
+  }
+
+  /* Niveau 1 (mijlpalen): losse strip i.p.v. de volledige zwembanen. */
+  body.zoom-1 .journey-viewport, body.zoom-1 .minimap { display: none; }
+  .milestone-strip { display: none; }
+  body.zoom-1 .milestone-strip {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 40px 28px; overflow-x: auto;
+  }
+  .mstrip-phase { display: flex; flex-direction: column; flex-shrink: 0; }
+  .mstrip-head {
+    background: var(--ink); color: #fff;
+    padding: 12px 18px; border-radius: 8px 8px 0 0;
+    font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 600;
+    letter-spacing: .1em; text-transform: uppercase;
+  }
+  .mstrip-track { display: flex; align-items: center; gap: 12px; padding: 20px 4px 4px; }
+  .mstrip-box {
+    position: relative; flex-shrink: 0; width: 190px; min-height: 62px;
+    display: flex; align-items: center; gap: 10px;
+    background: var(--paper); border: 1px solid var(--border); border-radius: 12px;
+    padding: 12px 14px 12px 16px;
+    font-size: 13px; font-weight: 600; line-height: 1.3; color: var(--ink);
+  }
+  .mstrip-num {
+    flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%;
+    background: var(--ink); color: #fff;
+    font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .mstrip-arrow { flex-shrink: 0; color: var(--ink-mute); font-size: 18px; }
+
   .journey-grid {
     position: relative;
     display: grid;
@@ -628,11 +686,20 @@
 
     <div class="journey-toolbar">
       <span class="journey-toolbar-title">Klantreis-canvas</span>
-      <button type="button" class="journey-fs" id="journeyFs" aria-pressed="false">
-        <svg id="journeyFsIcon" width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 6V2.5h3.5M14 6V2.5h-3.5M2 10v3.5h3.5M14 10v3.5h-3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <span id="journeyFsLabel">Volledig scherm</span>
-      </button>
+      <div class="journey-tools">
+        <div class="journey-zoom" role="group" aria-label="Detailniveau">
+          <button type="button" class="journey-zoom-btn" id="zoomOut" aria-label="Uitzoomen (minder detail)">&minus;</button>
+          <span class="journey-zoom-label" id="zoomLabel">Hoofdlijnen</span>
+          <button type="button" class="journey-zoom-btn" id="zoomIn" aria-label="Inzoomen (meer detail)">+</button>
+        </div>
+        <button type="button" class="journey-fs" id="journeyFs" aria-pressed="false">
+          <svg id="journeyFsIcon" width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 6V2.5h3.5M14 6V2.5h-3.5M2 10v3.5h3.5M14 10v3.5h-3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span id="journeyFsLabel">Volledig scherm</span>
+        </button>
+      </div>
     </div>
+
+    <div class="milestone-strip" id="milestoneStrip"></div>
 
     <div class="journey-viewport" id="journeyViewport" tabindex="0" role="region" aria-label="Klantreis-canvas - sleep, scroll of gebruik de minimap rechtsonder">
     <div class="journey-grid" id="journeyGrid">
@@ -654,7 +721,7 @@
       <div class="phase-cell phase-cell--span3 lane--sander" aria-label="Oriënteren - Sander, Wei en Ahmed (gezamenlijk)">
         <div class="step-row">
           <div class="step-wrap">
-            <div class="step">Besluit samenwerking voor gezamenlijk subsidie aanvraag</div>
+            <div class="step" data-milestone="1">Besluit samenwerking voor gezamenlijk subsidie aanvraag</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Netwerkborrel met Sander, Wei en Ahmed</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
@@ -669,7 +736,7 @@
                               <div class="phase-cell lane--sander" aria-label="Sander - Uitvoeren">
         <div class="step-row">
           <div class="step-wrap">
-            <div class="step">Maakt een concept-subsidieaanvraag op, ter waarde van € 145.000</div>
+            <div class="step" data-milestone="2">Maakt een concept-subsidieaanvraag op, ter waarde van € 145.000</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Logt in op MijnOverheid Zakelijk <button type="button" class="step-tag step-tag--info" data-persona="Sander (GreenFlow BV)" data-phase="Uitvoeren" data-step="Logt in op MijnOverheid Zakelijk" data-panel-title="Toekomst: autoriseren met de EUDI wallet" data-panel-body-ref="panelBodyEudi"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
@@ -697,7 +764,7 @@
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step step--auth">
+            <div class="step step--auth" data-milestone="3">
               Draagt het penvoerderschap over aan Lotte
               <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span>
             </div>
@@ -748,7 +815,7 @@
       <div class="phase-cell lane--sander" aria-label="Sander - Opvolgen">
         <div class="step-row">
           <div class="step-wrap">
-            <div class="step">Ontvangt het voorschot in tranches</div>
+            <div class="step" data-milestone="5">Ontvangt het voorschot in tranches</div>
           </div>
           <div class="step-connector" aria-hidden="true">→</div>
           <div class="step-wrap">
@@ -756,7 +823,7 @@
           </div>
           <div class="step-connector" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step step--auth">
+            <div class="step step--auth" data-milestone="6">
               Na uitkering 4 (jaar 1 van 4 voldaan): trekt als eerste ondernemer de machtiging van Lotte in
               <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span>
             </div>
@@ -769,7 +836,7 @@
           </div>
           <div class="step-connector" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step step--auth">
+            <div class="step step--auth" data-milestone="7">
               Wordt door het collectief benoemd tot penvoerder (GreenFlow)
               <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span>
             </div>
@@ -784,7 +851,7 @@
           </div>
           <div class="step-connector" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step step--auth">
+            <div class="step step--auth" data-milestone="8">
               Na 2 jaar: stapt na onenigheid op als penvoerder; het collectief valt uit elkaar
               <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span>
             </div>
@@ -1032,7 +1099,7 @@
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step step--auth">
+            <div class="step step--auth" data-milestone="4">
               Maakt de aanvraag compleet en dient in
               <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span>
             </div>
@@ -1288,11 +1355,9 @@
       var CHEVRON = '<svg width="10" height="10" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
       var LOCK = '<svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>';
       var moreButtons = [];
+      // De "Details"-knoppen in de boxen schakelen tussen niveau 2 en 3.
       function toggleAllDetails() {
-        var open = document.body.classList.toggle('show-details');
-        moreButtons.forEach(function (b) { b.setAttribute('aria-expanded', String(open)); });
-        layout();
-        buildClone();
+        setZoom(document.body.classList.contains('show-details') ? 2 : 3);
       }
       document.querySelectorAll('.step-wrap').forEach(function (wrap) {
         var subs = wrap.querySelectorAll(':scope > .step-verdieping');
@@ -1461,8 +1526,59 @@
         });
       });
 
+      // ---- Zoom / detailniveau ----
+      // 1 = mijlpalen (losse strip, 1 rij), 2 = hoofdlijnen (alle banen, geen
+      // details), 3 = alle details (verdiepingen uitgeklapt).
+      var MILESTONES = [
+        { n: 1, phase: 'Oriënteren', text: 'Besluit samenwerking voor gezamenlijke subsidieaanvraag' },
+        { n: 2, phase: 'Uitvoeren', text: 'Aanmaken concept-subsidieaanvraag ter waarde van € 145.000' },
+        { n: 3, phase: 'Uitvoeren', text: 'Overdragen penvoerderschap aan Lotte' },
+        { n: 4, phase: 'Uitvoeren', text: 'Definitief indienen subsidieaanvraag' },
+        { n: 5, phase: 'Opvolgen', text: 'Ontvangt voorschot' },
+        { n: 6, phase: 'Opvolgen', text: 'Samenwerking met Lotte wordt stopgezet' },
+        { n: 7, phase: 'Opvolgen', text: 'Sander wordt door collectief tot penvoerder benoemd' },
+        { n: 8, phase: 'Opvolgen', text: 'Collectief valt uit elkaar' }
+      ];
+      var ZOOM_LABELS = { 1: 'Mijlpalen', 2: 'Hoofdlijnen', 3: 'Alle details' };
+      var zoomOutBtn = document.getElementById('zoomOut');
+      var zoomInBtn = document.getElementById('zoomIn');
+      var zoomLabelEl = document.getElementById('zoomLabel');
+      var zoom = 2;
+
+      (function buildStrip() {
+        var strip = document.getElementById('milestoneStrip');
+        if (!strip) return;
+        var phases = ['Oriënteren', 'Uitvoeren', 'Opvolgen'];
+        var html = '';
+        phases.forEach(function (ph, pi) {
+          var boxes = '';
+          MILESTONES.filter(function (m) { return m.phase === ph; }).forEach(function (m, i) {
+            if (i > 0) boxes += '<span class="mstrip-arrow" aria-hidden="true">&rarr;</span>';
+            boxes += '<div class="mstrip-box"><span class="mstrip-num">' + m.n + '</span><span>' + m.text + '</span></div>';
+          });
+          if (pi < phases.length - 1) boxes += '<span class="mstrip-arrow" aria-hidden="true">&rarr;</span>';
+          html += '<div class="mstrip-phase"><div class="mstrip-head">' + ph + '</div><div class="mstrip-track">' + boxes + '</div></div>';
+        });
+        strip.innerHTML = html;
+      })();
+
+      function setZoom(level) {
+        zoom = Math.max(1, Math.min(3, level));
+        document.body.classList.toggle('zoom-1', zoom === 1);
+        var details = (zoom === 3);
+        document.body.classList.toggle('show-details', details);
+        moreButtons.forEach(function (b) { b.setAttribute('aria-expanded', String(details)); });
+        if (zoomLabelEl) zoomLabelEl.textContent = ZOOM_LABELS[zoom];
+        if (zoomOutBtn) zoomOutBtn.disabled = (zoom <= 1);
+        if (zoomInBtn) zoomInBtn.disabled = (zoom >= 3);
+        if (zoom !== 1) { layout(); buildClone(); }
+      }
+      if (zoomOutBtn) zoomOutBtn.addEventListener('click', function () { setZoom(zoom - 1); });
+      if (zoomInBtn) zoomInBtn.addEventListener('click', function () { setZoom(zoom + 1); });
+
       layout();
       buildClone();
+      setZoom(2);
       if (window.ResizeObserver) {
         new ResizeObserver(layout).observe(grid);
       }
