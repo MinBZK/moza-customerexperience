@@ -277,10 +277,11 @@
 
   /* Detail-kaartjes (verdiepingen) staan standaard ingeklapt. Elke box met
      verdiepingen krijgt (via het script) een "Details"-knop met een chevron
-     als visuele hint; klikken klapt de subs van díe box uit. */
+     als visuele hint; klikken op een willekeurige knop klapt ALLE detail-
+     kaartjes in de klantreis tegelijk uit/in. */
   .step-verdieping-connector, .step-verdieping { display: none; }
-  .step-wrap.is-open > .step-verdieping-connector,
-  .step-wrap.is-open > .step-verdieping { display: block; }
+  body.show-details .step-verdieping-connector,
+  body.show-details .step-verdieping { display: block; }
 
   .step-more {
     display: inline-flex; align-items: center; gap: 5px;
@@ -291,7 +292,7 @@
     color: var(--alt);
   }
   .step-more svg { transition: transform .15s ease; }
-  .step-wrap.is-open .step-more svg { transform: rotate(180deg); }
+  body.show-details .step-more svg { transform: rotate(180deg); }
   .step-more:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 4px; }
 
   /* "wie"-markering: geeft aan voor wie een stap geldt (bv. "Alleen Sander"). */
@@ -846,9 +847,17 @@
       });
 
       // Per box: geef elke stap met verdiepingen een "Details"-knop (chevron)
-      // als visuele hint dat er meer is; klikken klapt de subs van díe box uit
+      // als visuele hint dat er meer is. Klikken op een willekeurige knop klapt
+      // ALLE detail-kaartjes in de klantreis tegelijk uit/in (globale toggle),
       // en ververst canvas + minimap.
       var CHEVRON = '<svg width="10" height="10" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      var moreButtons = [];
+      function toggleAllDetails() {
+        var open = document.body.classList.toggle('show-details');
+        moreButtons.forEach(function (b) { b.setAttribute('aria-expanded', String(open)); });
+        layout();
+        buildClone();
+      }
       document.querySelectorAll('.step-wrap').forEach(function (wrap) {
         var subs = wrap.querySelectorAll(':scope > .step-verdieping');
         if (!subs.length) return;
@@ -860,12 +869,8 @@
         btn.setAttribute('aria-expanded', 'false');
         btn.innerHTML = CHEVRON + '<span>' + subs.length + (subs.length === 1 ? ' detail' : ' details') + '</span>';
         step.insertAdjacentElement('afterend', btn);
-        btn.addEventListener('click', function () {
-          var open = wrap.classList.toggle('is-open');
-          btn.setAttribute('aria-expanded', String(open));
-          layout();
-          buildClone();
-        });
+        btn.addEventListener('click', toggleAllDetails);
+        moreButtons.push(btn);
       });
 
       layout();
