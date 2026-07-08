@@ -281,6 +281,18 @@
   body.show-details .step-verdieping-connector { display: block; }
   body.show-details .step-verdieping { display: block; }
 
+  /* "wie"-markering: een gedeelde stap (voor meerdere ondernemers) wordt 1x
+     getoond met een pill die aangeeft voor wie de stap geldt. */
+  .step-who {
+    display: inline-flex; align-items: center; gap: 4px;
+    margin-top: 8px; padding: 2px 9px;
+    border-radius: 999px;
+    border: 1px solid currentColor;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; font-weight: 600; letter-spacing: .02em;
+    opacity: .85;
+  }
+
   /* placeholder: inhoud volgt nog */
   .step--placeholder, .step-verdieping--placeholder {
     background: transparent;
@@ -475,17 +487,18 @@
       <div class="phase-cell lane--sander" aria-label="Sander - Oriënteren">
         <div class="step-row">
           <div class="step-wrap">
-            <div class="step">Netwerkborrel met Sander, Wei en Ahmed</div>
-          </div>
-          <div class="step-connector" aria-hidden="true">→</div>
-          <div class="step-wrap">
-            <div class="step">Besluit tot samenwerking en een gezamenlijke subsidieaanvraag</div>
+            <div class="step">
+              Besluit samenwerking voor gezamenlijk subsidie aanvraag
+              <span class="step-who">Sander, Wei &amp; Ahmed</span>
+            </div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">DEI+ - Demonstratie Energie- en Klimaatinnovatie (RVO)</div>
+            <div class="step-verdieping">Netwerkborrel met Yassin, Karin en Wei</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Besluit samenwerking voor gezamenlijk subsidie aanvraag: DEI+ - Demonstratie Energie- en Klimaatinnovatie</div>
           </div>
           <div class="step-connector" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step">Zoekt een intermediair in het eigen netwerk</div>
+            <div class="step">Zoekt naar intermediair in netwerk</div>
           </div>
         </div>
       </div>
