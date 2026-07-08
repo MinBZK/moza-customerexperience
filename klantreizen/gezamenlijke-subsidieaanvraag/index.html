@@ -1163,17 +1163,11 @@
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step step--auth">
-              Notificaties naar Wei en Ahmed voor het accepteren van de rol als mede-indiener
-              <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span>
-            </div>
+            <div class="step">Acceptatieverzoek naar Wei en Ahmed voor de rol als mede-indiener</div>
           </div>
           <div class="step-connector" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step step--auth">
-              Notificaties naar Wei en Ahmed voor het accepteren dat Sander de rol van penvoerder aanneemt
-              <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span>
-            </div>
+            <div class="step">Acceptatieverzoek naar Wei en Ahmed voor Sander als penvoerder</div>
           </div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
@@ -1181,10 +1175,7 @@
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step step--auth">
-              Notificaties naar Wei en Ahmed voor het accepteren van Lotte als penvoerder
-              <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span>
-            </div>
+            <div class="step">Acceptatieverzoek naar Wei en Ahmed voor Lotte als penvoerder</div>
           </div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
@@ -1605,6 +1596,27 @@
       }
       if (zoomOutBtn) zoomOutBtn.addEventListener('click', function () { setZoom(zoom - 1); });
       if (zoomInBtn) zoomInBtn.addEventListener('click', function () { setZoom(zoom + 1); });
+
+      // Toetsenbord: pijltjes pannen de klantreis (ook verticaal), + en -
+      // zoomen tussen mijlpalen en details. Niet actief bij een open uitleg-
+      // paneel (dan navigeren de pijltjes door de i's) of in een invoerveld.
+      document.addEventListener('keydown', function (e) {
+        var sp = document.getElementById('sidePanel');
+        if (sp && sp.classList.contains('is-open')) return;
+        var ae = document.activeElement;
+        if (ae && ae.closest && ae.closest('input, textarea, select, [contenteditable]')) return;
+        if (e.key === '+' || e.key === '=') { setZoom(zoom + 1); e.preventDefault(); return; }
+        if (e.key === '-' || e.key === '_') { setZoom(zoom - 1); e.preventDefault(); return; }
+        var dirs = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] };
+        var d = dirs[e.key];
+        if (!d) return;
+        var el = document.body.classList.contains('zoom-1') ? document.getElementById('milestoneStrip') : viewport;
+        if (!el) return;
+        var stepPx = e.shiftKey ? 420 : 150;
+        el.scrollLeft += d[0] * stepPx;
+        el.scrollTop += d[1] * stepPx;
+        e.preventDefault();
+      });
 
       layout();
       buildClone();
