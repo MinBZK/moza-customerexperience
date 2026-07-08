@@ -51,6 +51,9 @@
     --authenticatie: #1e40af;
   }
 
+  /* De beeldvullende (100vw) journey mag geen horizontale paginascroll geven. */
+  html { overflow-x: hidden; }
+
   body {
     font-family: 'Inter', sans-serif;
     background: var(--paper);
@@ -145,19 +148,22 @@
   .journey {
     position: relative;
     background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: var(--primitives-corner-radius-md, 8px);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
     box-shadow: var(--shadow);
+    /* Beeldvullend: breekt uit de paginacontainer over de volle schermbreedte. */
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
   }
 
-  /* Canvas kan zeer breed worden (veel stappen naast elkaar); geen scrollbar
-     per cel meer - één gedeelde pannable viewport, met een minimap (rechts-
-     onder, geïnspireerd op jointjs.com/demos/collapsible-minimap) als
-     overzicht + snelnavigatie. Native scroll (trackpad/toetsenbord) blijft
-     gewoon werken, alleen de scrollbar zelf is verborgen. */
+  /* Canvas kan zeer breed én hoog worden; één gedeelde, in beide richtingen
+     pannable viewport die (zodra je er naartoe scrollt) het scherm vult, met
+     een 2D-minimap (rechtsonder) als overzicht + snelnavigatie. Native scroll
+     (trackpad/toetsenbord) blijft werken; alleen de scrollbar is verborgen. */
   .journey-viewport {
-    overflow-x: auto;
-    overflow-y: hidden;
+    height: calc(100vh - 16px);
+    overflow: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
     cursor: grab;
@@ -182,11 +188,12 @@
     letter-spacing: .1em; text-transform: uppercase;
     display: flex; align-items: center;
   }
-  .phase-head--corner { background: var(--ink); }
+  .phase-head--corner { background: var(--ink); position: sticky; left: 0; top: 0; z-index: 4; }
   .phase-head + .phase-head { border-left: 1px solid rgba(255,255,255,.15); }
 
-  /* Zwembaanlabel (persona) */
+  /* Zwembaanlabel (persona) - blijft links staan bij horizontaal pannen. */
   .lane-label {
+    position: sticky; left: 0; z-index: 1;
     padding: 24px 20px;
     border-top: 1px solid var(--border);
     display: flex; flex-direction: column; gap: 4px;
@@ -934,7 +941,7 @@
       var minimapRect = document.getElementById('minimapRect');
       var toggleBtn = document.getElementById('minimapToggle');
 
-      var MAP_WIDTH = 200; // beeldbudget voor de minimap-breedte in px
+      var MAP_MAX_W = 200, MAP_MAX_H = 150; // beeldbudget voor de minimap (px)
       var scale = 1;
 
       function buildClone() {
@@ -964,7 +971,7 @@
         var fullW = grid.scrollWidth;
         var fullH = grid.scrollHeight;
         if (!fullW || !fullH) return;
-        scale = Math.min(1, MAP_WIDTH / fullW);
+        scale = Math.min(1, MAP_MAX_W / fullW, MAP_MAX_H / fullH);
         minimapBody.style.width = (fullW * scale) + 'px';
         minimapBody.style.height = (fullH * scale) + 'px';
         minimapContent.style.width = fullW + 'px';
@@ -974,34 +981,35 @@
       }
 
       function updateRect() {
-        minimapRect.style.width = Math.min(viewport.clientWidth * scale, grid.scrollWidth * scale) + 'px';
-        minimapRect.style.height = minimapBody.style.height;
+        minimapRect.style.width = (Math.min(viewport.clientWidth, grid.scrollWidth) * scale) + 'px';
+        minimapRect.style.height = (Math.min(viewport.clientHeight, grid.scrollHeight) * scale) + 'px';
         minimapRect.style.left = (viewport.scrollLeft * scale) + 'px';
+        minimapRect.style.top = (viewport.scrollTop * scale) + 'px';
       }
 
-      function panTo(clientX) {
+      function panTo(clientX, clientY) {
         var box = minimapBody.getBoundingClientRect();
-        var mapX = clientX - box.left;
-        var targetLeft = (mapX / scale) - (viewport.clientWidth / 2);
-        var maxScroll = Math.max(0, grid.scrollWidth - viewport.clientWidth);
-        viewport.scrollLeft = Math.max(0, Math.min(maxScroll, targetLeft));
+        var targetLeft = ((clientX - box.left) / scale) - (viewport.clientWidth / 2);
+        var targetTop = ((clientY - box.top) / scale) - (viewport.clientHeight / 2);
+        viewport.scrollLeft = Math.max(0, Math.min(grid.scrollWidth - viewport.clientWidth, targetLeft));
+        viewport.scrollTop = Math.max(0, Math.min(grid.scrollHeight - viewport.clientHeight, targetTop));
       }
 
       var dragging = false;
       minimapBody.addEventListener('pointerdown', function (e) {
         dragging = true;
         minimapBody.setPointerCapture(e.pointerId);
-        panTo(e.clientX);
+        panTo(e.clientX, e.clientY);
       });
       minimapBody.addEventListener('pointermove', function (e) {
-        if (dragging) panTo(e.clientX);
+        if (dragging) panTo(e.clientX, e.clientY);
       });
       minimapBody.addEventListener('pointerup', function () { dragging = false; });
       minimapBody.addEventListener('pointercancel', function () { dragging = false; });
 
       // Sleep-to-pan op het canvas zelf (net als de minimap) - alleen voor
       // muis, zodat native touch-scroll/trackpad ongemoeid blijft.
-      var panning = false, panStartX = 0, panStartScroll = 0, panMoved = false;
+      var panning = false, panStartX = 0, panStartY = 0, panStartLeft = 0, panStartTop = 0, panMoved = false;
       viewport.addEventListener('pointerdown', function (e) {
         // Reset dit altijd, óók als de klik hieronder wordt overgeslagen -
         // anders blijft panMoved van een eerdere sleepbeweging op true
@@ -1015,16 +1023,17 @@
         // gezamenlijke-aanvraag-toggle nooit meer.
         if (e.target.closest('summary, a, button, input, label')) return;
         panning = true;
-        panStartX = e.clientX;
-        panStartScroll = viewport.scrollLeft;
+        panStartX = e.clientX; panStartY = e.clientY;
+        panStartLeft = viewport.scrollLeft; panStartTop = viewport.scrollTop;
         viewport.setPointerCapture(e.pointerId);
         viewport.classList.add('is-panning');
       });
       viewport.addEventListener('pointermove', function (e) {
         if (!panning) return;
-        var dx = e.clientX - panStartX;
-        if (Math.abs(dx) > 3) panMoved = true;
-        viewport.scrollLeft = panStartScroll - dx;
+        var dx = e.clientX - panStartX, dy = e.clientY - panStartY;
+        if (Math.abs(dx) > 3 || Math.abs(dy) > 3) panMoved = true;
+        viewport.scrollLeft = panStartLeft - dx;
+        viewport.scrollTop = panStartTop - dy;
       });
       function endPan() {
         panning = false;
