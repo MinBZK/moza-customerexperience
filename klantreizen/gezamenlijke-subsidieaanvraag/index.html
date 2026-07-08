@@ -355,6 +355,47 @@
   .step-tag.is-authenticatie { background: var(--authenticatie); }
   .step-tag.is-autorisatie { background: var(--auth); }
 
+  /* klikbare tag die een zijvenster met uitleg opent */
+  .step-tag--info { border: none; cursor: pointer; font: inherit; }
+  .step-tag--info:hover { filter: brightness(1.12); }
+  .step-tag--info:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+  .step-tag-info-icon { margin-left: 1px; opacity: .9; }
+
+  /* Zijvenster (side panel) met uitleg, geopend vanuit een klikbare tag. */
+  .side-scrim {
+    position: fixed; inset: 0; z-index: 999;
+    background: rgba(26,26,46,.35);
+    opacity: 0; pointer-events: none; transition: opacity .25s ease;
+  }
+  .side-scrim.is-open { opacity: 1; pointer-events: auto; }
+  .side-panel {
+    position: fixed; top: 0; right: 0; bottom: 0; z-index: 1000;
+    width: min(420px, 92vw);
+    background: #154273; color: #fff;
+    box-shadow: -8px 0 30px rgba(0,0,0,.28);
+    padding: 28px 26px 32px;
+    overflow-y: auto;
+    transform: translateX(100%);
+    transition: transform .25s ease;
+  }
+  .side-panel.is-open { transform: translateX(0); }
+  .side-panel-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+    color: rgba(255,255,255,.7); margin-bottom: 12px;
+  }
+  .side-panel-title { font-size: 22px; font-weight: 600; line-height: 1.25; margin-bottom: 12px; }
+  .side-panel-body { font-size: 15px; line-height: 1.65; color: rgba(255,255,255,.92); }
+  .side-panel-close {
+    position: absolute; top: 16px; right: 16px;
+    width: 32px; height: 32px; border-radius: 999px;
+    background: rgba(255,255,255,.12); border: none; color: #fff;
+    font-size: 20px; line-height: 1; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .side-panel-close:hover { background: rgba(255,255,255,.22); }
+  .side-panel-close:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
   /* Vraagstuk: open vraag bij een stap, voor bespreking met collega's.
      Klapt open i.p.v. altijd zichtbaar, zodat de kaart zelf compact blijft. */
   .step-vraagstuk { margin-top: 8px; }
@@ -545,7 +586,7 @@
           <div class="step-wrap">
             <div class="step step--auth">
               Accepteert rol voor samenwerking subsidieaanvraag
-              <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span>
+              <button type="button" class="step-tag step-tag--info" data-panel-title="Wie mag dit?" data-panel-body="Mag Sander zichzelf aanwijzen al"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button>
             </div>
           </div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
@@ -1083,6 +1124,54 @@
   </nldd-banner>
 
 </main>
+
+<div class="side-scrim" id="sideScrim" hidden></div>
+<aside class="side-panel" id="sidePanel" role="dialog" aria-modal="true" aria-labelledby="sidePanelTitle" aria-hidden="true" hidden>
+  <button type="button" class="side-panel-close" id="sidePanelClose" aria-label="Sluiten">&times;</button>
+  <p class="side-panel-eyebrow">Vraagstuk · MOZa</p>
+  <h2 class="side-panel-title" id="sidePanelTitle"></h2>
+  <p class="side-panel-body" id="sidePanelBody"></p>
+</aside>
+
+<script>
+  (function () {
+    var panel = document.getElementById('sidePanel');
+    var scrim = document.getElementById('sideScrim');
+    var titleEl = document.getElementById('sidePanelTitle');
+    var bodyEl = document.getElementById('sidePanelBody');
+    var lastFocus = null;
+
+    function openPanel(title, body, trigger) {
+      lastFocus = trigger || null;
+      titleEl.textContent = title || '';
+      bodyEl.textContent = body || '';
+      panel.hidden = false; scrim.hidden = false;
+      // forceer reflow zodat de transitie speelt
+      panel.offsetWidth;
+      panel.classList.add('is-open'); scrim.classList.add('is-open');
+      panel.setAttribute('aria-hidden', 'false');
+      document.getElementById('sidePanelClose').focus();
+    }
+    function closePanel() {
+      panel.classList.remove('is-open'); scrim.classList.remove('is-open');
+      panel.setAttribute('aria-hidden', 'true');
+      window.setTimeout(function () { panel.hidden = true; scrim.hidden = true; }, 250);
+      if (lastFocus) lastFocus.focus();
+    }
+
+    document.querySelectorAll('#journeyGrid .step-tag--info').forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault(); e.stopPropagation();
+        openPanel(btn.getAttribute('data-panel-title'), btn.getAttribute('data-panel-body'), btn);
+      });
+    });
+    document.getElementById('sidePanelClose').addEventListener('click', closePanel);
+    scrim.addEventListener('click', closePanel);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && panel.classList.contains('is-open')) closePanel();
+    });
+  })();
+</script>
 
 </body>
 </html>
