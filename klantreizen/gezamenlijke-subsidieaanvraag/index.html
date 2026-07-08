@@ -48,6 +48,7 @@
        sterk afwijkende kleur bovenop de persona-tint */
     --auth: #b91c1c;
     --auth-tint: #fbe2e2;
+    --authenticatie: #1e40af;
   }
 
   body {
@@ -336,10 +337,7 @@
   /* Autorisatie- en authenticatiemomenten.
      Hier wil de opdrachtgever nadrukkelijk met stakeholders over in
      gesprek, dus sterk visueel uitgelicht bovenop de gewone stap-stijl. */
-  .step--auth {
-    border: 1.5px solid var(--auth);
-    box-shadow: inset 0 0 0 1px var(--auth-tint);
-  }
+  /* Tags leiden niet tot een kader om de stap; ze staan los in de kaart. */
   .step-tag {
     display: inline-flex; align-items: center; gap: 4px;
     margin-top: 8px; padding: 2px 9px;
@@ -349,6 +347,9 @@
     font-size: 10px; font-weight: 600; letter-spacing: .03em;
   }
   .step-tag svg { flex-shrink: 0; }
+  /* elke tag-soort een eigen kleur */
+  .step-tag.is-authenticatie { background: var(--authenticatie); }
+  .step-tag.is-autorisatie { background: var(--auth); }
 
   /* Vraagstuk: open vraag bij een stap, voor bespreking met collega's.
      Klapt open i.p.v. altijd zichtbaar, zodat de kaart zelf compact blijft. */
@@ -381,7 +382,8 @@
   .legend-dot--systeem { background: var(--systeem); }
   .legend-dot--placeholder { border: 1.5px dashed var(--ink-mute); }
   .legend-dot--alt { background: var(--alt); }
-  .legend-dot--auth { background: var(--auth); }
+  .legend-dot--authenticatie { background: var(--authenticatie); }
+  .legend-dot--autorisatie { background: var(--auth); }
 
   /* Toggle: gezamenlijke aanvraag */
   .toggle-row {
@@ -486,7 +488,8 @@
     <span class="legend-item"><span class="legend-dot legend-dot--lotte"></span> Lotte - Bureau Subsidiekracht (intermediair)</span>
     <span class="legend-item"><span class="legend-dot legend-dot--systeem"></span> Systeem - automatische acties (MOZa)</span>
     <span class="legend-item"><span class="legend-dot legend-dot--alt"></span> Onderliggende stap of detail (stippellijn)</span>
-    <span class="legend-item"><span class="legend-dot legend-dot--auth"></span> Autorisatie- of authenticatiemoment</span>
+    <span class="legend-item"><span class="legend-dot legend-dot--authenticatie"></span> Authenticatiemoment</span>
+    <span class="legend-item"><span class="legend-dot legend-dot--autorisatie"></span> Autorisatiemoment</span>
     <span class="legend-item">→ stappen lopen links naar rechts</span>
   </div>
 
@@ -977,6 +980,13 @@
         step.insertAdjacentElement('afterend', btn);
         btn.addEventListener('click', toggleAllDetails);
         moreButtons.push(btn);
+      });
+
+      // Kleur elke tag naar soort: authenticatie (blauw) vs autorisatie (rood).
+      document.querySelectorAll('.step-tag').forEach(function (t) {
+        var label = t.textContent.trim().toLowerCase();
+        if (label.indexOf('authenticatie') !== -1) t.classList.add('is-authenticatie');
+        else if (label.indexOf('autorisatie') !== -1) t.classList.add('is-autorisatie');
       });
 
       layout();
