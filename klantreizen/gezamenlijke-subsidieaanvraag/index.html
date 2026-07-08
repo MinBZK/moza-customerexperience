@@ -444,6 +444,19 @@
     align-items: center;
   }
 
+  /* Gedeelde Wei & Ahmed-cellen: één cel die de twee (identieke) rijen
+     overspant, verticaal gecentreerd, zodat hun stappen maar één keer
+     voorkomen. Uitvoeren = kolom 3, Opvolgen = kolom 4. */
+  .phase-cell--wa-u { grid-column: 3; grid-row: span 2; display: flex; align-items: center; }
+  .phase-cell--wa-o { grid-column: 4; grid-row: span 2; display: flex; align-items: center; }
+  .lane--weiahmed .step { background: #eceafb; color: #322d6e; }
+  .lane--weiahmed .lane-avatar { color: var(--wei); }
+  /* Markering "geldt voor Wei én Ahmed" bovenin elke gedeelde box. */
+  .wa-chip { display: inline-flex; align-items: center; gap: 5px; font-size: 10px; font-weight: 600; letter-spacing: .02em; color: var(--ink-soft); margin-bottom: 7px; }
+  .wa-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .wa-dot--wei { background: var(--wei); }
+  .wa-dot--ahmed { background: var(--ahmed); }
+
   /* placeholder: inhoud volgt nog */
   .step--placeholder, .step-verdieping--placeholder {
     background: transparent;
@@ -874,7 +887,7 @@
         <a class="lane-link" href="../../personas/persona-yassin.html" target="_blank" rel="noopener">Alter-ego van persona Yassin ↗</a>
       </div>
 
-                              <div class="phase-cell lane--wei" aria-label="Wei - Uitvoeren">
+                              <div class="phase-cell phase-cell--wa-u lane--weiahmed" aria-label="Wei & Ahmed - Uitvoeren">
         <div class="step-row">
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
@@ -888,8 +901,8 @@
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
             <div class="step step--auth">
-              Accepteert de rol van mede-indiener (van zichzelf, Ahmed en Sander) en Sander als penvoerder
-              <button type="button" class="step-tag step-tag--info" data-persona="Wei (Polar Components BV)" data-phase="Uitvoeren" data-step="Accepteert de rol van mede-indiener en Sander als penvoerder" data-panel-title="Wie mag wat" data-panel-body="Op dit moment zijn de rollen door iedere partij vastgelegd:&#10;1. Sander, Wei en Ahmed als mede-indieners&#10;2. Sander als penvoerder&#10;&#10;Wie mag dit?&#10;Mag Sander zichzelf aanwijzen als penvoerder? Nee - mag pas namens het collectief handelen zodra hij formeel is aangewezen.&#10;&#10;Wie mag wat?&#10;Sander is op dit moment nog geen penvoerder. Dit is pas formeel als alle mede-indieners hiermee akkoord zijn gegaan."><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button>
+              Accepteert rol-verzoeken
+              <button type="button" class="step-tag step-tag--info" data-persona="Wei &amp; Ahmed" data-phase="Uitvoeren" data-step="Accepteert rol-verzoeken" data-panel-title="Wie mag wat" data-panel-body="Op dit moment zijn de rollen door iedere partij vastgelegd:&#10;1. Sander, Wei en Ahmed als mede-indieners&#10;2. Sander als penvoerder&#10;&#10;Wie mag dit?&#10;Mag Sander zichzelf aanwijzen als penvoerder? Nee - mag pas namens het collectief handelen zodra hij formeel is aangewezen.&#10;&#10;Wie mag wat?&#10;Sander is op dit moment nog geen penvoerder. Dit is pas formeel als alle mede-indieners hiermee akkoord zijn gegaan."><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button>
             </div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Logt in op MijnOverheid Zakelijk <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span></div>
@@ -922,7 +935,7 @@
           <div class="step-wrap">
             <div class="step step--auth">
               Autoriseert en levert de gegevens aan
-              <button type="button" class="step-tag step-tag--info" data-persona="Wei (Polar Components BV)" data-phase="Uitvoeren" data-step="Autoriseert en levert de gegevens aan" data-panel-title="Aanvullende gegevens via de EUDI wallet" data-panel-body="Via de EUDI wallet kan de ondernemer, naast zijn identiteit en bevoegdheid, ook aanvullende gegevens (attestaties) rechtstreeks aanleveren die voor de aanvraag nodig zijn. Dit gaat samen met het uploaden van de gevraagde documenten."><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button>
+              <button type="button" class="step-tag step-tag--info" data-persona="Wei &amp; Ahmed" data-phase="Uitvoeren" data-step="Autoriseert en levert de gegevens aan" data-panel-title="Aanvullende gegevens via de EUDI wallet" data-panel-body="Via de EUDI wallet kan de ondernemer, naast zijn identiteit en bevoegdheid, ook aanvullende gegevens (attestaties) rechtstreeks aanleveren die voor de aanvraag nodig zijn. Dit gaat samen met het uploaden van de gevraagde documenten."><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button>
             </div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Logt in op MijnOverheid Zakelijk <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span></div>
@@ -945,7 +958,7 @@
           </div>
         </div>
       </div>
-      <div class="phase-cell lane--wei" aria-label="Wei - Opvolgen">
+      <div class="phase-cell phase-cell--wa-o lane--weiahmed" aria-label="Wei & Ahmed - Opvolgen">
         <div class="step-row">
           <div class="step-wrap">
             <div class="step">Ontvangt het voorschot in tranches</div>
@@ -970,91 +983,8 @@
         <a class="lane-link" href="../../personas/persona-yassin.html" target="_blank" rel="noopener">Alter-ego van persona Yassin ↗</a>
       </div>
 
-                              <div class="phase-cell lane--ahmed" aria-label="Ahmed - Uitvoeren">
-        <div class="step-row">
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap">
-            <div class="step step--auth">
-              Accepteert de rol van mede-indiener (van zichzelf, Wei en Sander) en Sander als penvoerder
-              <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span>
-            </div>
-            <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Logt in op MijnOverheid Zakelijk <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span></div>
-            <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Notificaties lezen</div>
-          </div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap">
-            <div class="step">Accepteert Lotte als penvoerder</div>
-            <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Logt in op MijnOverheid Zakelijk <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span></div>
-            <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Notificaties lezen</div>
-            <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Accepteert Lotte als penvoerder <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span></div>
-          </div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap">
-            <div class="step step--auth">
-              Autoriseert en levert de gegevens aan
-              <button type="button" class="step-tag step-tag--info" data-persona="Ahmed (MetaalbouwZuid BV)" data-phase="Uitvoeren" data-step="Autoriseert en levert de gegevens aan" data-panel-title="Aanvullende gegevens via de EUDI wallet" data-panel-body="Via de EUDI wallet kan de ondernemer, naast zijn identiteit en bevoegdheid, ook aanvullende gegevens (attestaties) rechtstreeks aanleveren die voor de aanvraag nodig zijn. Dit gaat samen met het uploaden van de gevraagde documenten."><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button>
-            </div>
-            <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Logt in op MijnOverheid Zakelijk <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span></div>
-            <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Notificaties lezen</div>
-            <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Uploadt documenten</div>
-          </div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap">
-            <div class="step">Ontvangt de notificatie</div>
-            <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Logt in op MijnOverheid Zakelijk <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span></div>
-            <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Notificaties lezen</div>
-          </div>
-        </div>
-      </div>
-      <div class="phase-cell lane--ahmed" aria-label="Ahmed - Opvolgen">
-        <div class="step-row">
-          <div class="step-wrap">
-            <div class="step">Ontvangt het voorschot in tranches</div>
-          </div>
-          <div class="step-connector" aria-hidden="true">→</div>
-          <div class="step-wrap">
-            <div class="step step--auth">
-              Trekt de machtiging in
-              <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span>
-            </div>
-          </div>
-        </div>
-      </div>
+                              
+      
 
       <!-- Lotte -->
       <div class="lane-label lane--lotte">
@@ -1406,32 +1336,27 @@
       // [bron-cel, kolom] -> [doel-cel, kolom]. De flow loopt door alle fasen:
       // Oriënteren -> Uitvoeren (tussen de banen) -> Opvolgen, zodat de hele
       // keten als één doorlopende volgorde leest.
+      var WA = 'Wei & Ahmed' + U;
       var EDGES = [
         [ORI, 1, 'Sander' + U, 0],
         ['Sander' + U, 2, 'Systeem' + U, 3],
-        ['Systeem' + U, 4, 'Wei' + U, 5],
-        ['Systeem' + U, 4, 'Ahmed' + U, 5],
-        ['Wei' + U, 5, 'Sander' + U, 6],
-        ['Ahmed' + U, 5, 'Sander' + U, 6],
+        ['Systeem' + U, 4, WA, 5],
+        [WA, 5, 'Sander' + U, 6],
         ['Sander' + U, 6, 'Systeem' + U, 7],
-        ['Systeem' + U, 7, 'Wei' + U, 8],
-        ['Systeem' + U, 7, 'Ahmed' + U, 8],
-        ['Wei' + U, 8, 'Lotte' + U, 9],
-        ['Ahmed' + U, 8, 'Lotte' + U, 9],
-        ['Lotte' + U, 9, 'Systeem' + U, 10],
-        ['Systeem' + U, 10, 'Lotte' + U, 11],
-        ['Lotte' + U, 11, 'Systeem' + U, 12],
-        ['Systeem' + U, 12, 'Sander' + U, 13],
-        ['Systeem' + U, 12, 'Wei' + U, 13],
-        ['Systeem' + U, 12, 'Ahmed' + U, 13],
-        ['Sander' + U, 13, 'Lotte' + U, 14],
-        ['Wei' + U, 13, 'Lotte' + U, 14],
-        ['Ahmed' + U, 13, 'Lotte' + U, 14],
-        ['Lotte' + U, 14, 'Systeem' + U, 15],
-        ['Systeem' + U, 15, 'Sander' + U, 16],
-        ['Systeem' + U, 15, 'Wei' + U, 16],
-        ['Systeem' + U, 15, 'Ahmed' + U, 16],
-        ['Lotte' + U, 14, 'Lotte - Opvolgen', 0]
+        ['Systeem' + U, 7, WA, 8],
+        [WA, 8, 'Systeem' + U, 9],
+        ['Systeem' + U, 9, 'Lotte' + U, 10],
+        ['Lotte' + U, 10, 'Systeem' + U, 11],
+        ['Systeem' + U, 11, 'Lotte' + U, 12],
+        ['Lotte' + U, 12, 'Systeem' + U, 13],
+        ['Systeem' + U, 13, 'Sander' + U, 14],
+        ['Systeem' + U, 13, WA, 14],
+        ['Sander' + U, 14, 'Lotte' + U, 15],
+        [WA, 14, 'Lotte' + U, 15],
+        ['Lotte' + U, 15, 'Systeem' + U, 16],
+        ['Systeem' + U, 16, 'Sander' + U, 17],
+        ['Systeem' + U, 16, WA, 17],
+        ['Lotte' + U, 15, 'Lotte - Opvolgen', 0]
       ];
       var flowSvg = document.createElementNS(SVGNS, 'svg');
       flowSvg.setAttribute('id', 'flowArrows');
@@ -1520,6 +1445,41 @@
         head.addEventListener('keydown', function (e) {
           if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); }
         });
+      });
+
+      // Gedeelde Wei & Ahmed-boxen krijgen bovenin een chip die aangeeft dat de
+      // stap (incl. de details) voor beide personas geldt.
+      [].forEach.call(document.querySelectorAll('.lane--weiahmed .step-wrap > .step'), function (s) {
+        var chip = document.createElement('div');
+        chip.className = 'wa-chip';
+        chip.innerHTML = '<span class="wa-dot wa-dot--wei"></span><span class="wa-dot wa-dot--ahmed"></span>Wei &amp; Ahmed';
+        s.insertBefore(chip, s.firstChild);
+      });
+
+      // Nieuwe tijd-kolom (index 9) tussen "accepteert Lotte" (col8) en Lotte's
+      // acceptatie: een Systeem-notificatie naar Lotte. Voor elke baan schuift
+      // alles vanaf kolom 9 één plek op; alleen Systeem krijgt hier een kaart.
+      ['Sander', 'Wei & Ahmed', 'Lotte', 'Systeem'].forEach(function (lane) {
+        var cell = grid.querySelector('[aria-label="' + lane + ' - Uitvoeren"]');
+        if (!cell) return;
+        var row = cell.querySelector('.step-row');
+        if (!row) return;
+        var oldSlot = row.children[2 * 9];
+        if (!oldSlot) return;
+        var wrap = document.createElement('div');
+        if (lane === 'Systeem') {
+          wrap.className = 'step-wrap';
+          wrap.innerHTML = '<div class="step">Notificatie voor acceptatie rol penvoerder naar Lotte</div>';
+        } else {
+          wrap.className = 'step-wrap step-wrap--spacer';
+          wrap.setAttribute('aria-hidden', 'true');
+        }
+        var conn = document.createElement('div');
+        conn.className = 'step-connector step-connector--spacer';
+        conn.setAttribute('aria-hidden', 'true');
+        conn.textContent = '→';
+        row.insertBefore(wrap, oldSlot);
+        row.insertBefore(conn, oldSlot);
       });
 
       // ---- Zoom / detailniveau ----
