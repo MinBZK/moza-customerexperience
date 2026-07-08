@@ -261,6 +261,10 @@
   /* horizontale connector tussen opeenvolgende stappen - hoogte wordt via JS
      gelijkgezet aan de laagste stap-box in de rij, zodat de pijl altijd op
      het midden van die laagste box uitkomt (niet op het midden van de rij). */
+  /* Onzichtbare plek om een stap verticaal uit te lijnen onder dezelfde
+     stap in een andere zwembaan (Sander is leidend). */
+  .step-wrap--spacer, .step-connector--spacer { visibility: hidden; }
+
   .step-connector {
     align-self: flex-start;
     display: flex; align-items: center; justify-content: center;
@@ -613,6 +617,8 @@
 
             <div class="phase-cell lane--wei" aria-label="Wei - Uitvoeren">
         <div class="step-row">
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
             <div class="step">Accepteert rol voor samenwerking subsidieaanvraag</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
@@ -673,6 +679,8 @@
 
             <div class="phase-cell lane--ahmed" aria-label="Ahmed - Uitvoeren">
         <div class="step-row">
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
             <div class="step">Accepteert rol voor samenwerking subsidieaanvraag</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
