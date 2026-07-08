@@ -212,9 +212,12 @@
   .flow-arrows path.flow-edge { fill: none; stroke: var(--ink-mute); stroke-width: 1.6; }
   .flow-arrows marker path { fill: var(--ink-mute); }
 
-  /* Fasekoppen (Oriënteren / Uitvoeren / Opvolgen) */
+  /* Fasekoppen (Oriënteren / Uitvoeren / Opvolgen). Naast sticky-top ook
+     sticky-left (na de labelkolom): zo blijft de fasetitel in beeld zodra je
+     binnen die fase naar rechts scrolt en de titel anders uit beeld zou lopen.
+     Klikken op de titel scrolt terug naar het begin van die fase. */
   .phase-head {
-    position: sticky; top: 0; z-index: 2;
+    position: sticky; top: 0; left: 240px; z-index: 2;
     background: var(--ink);
     color: var(--white);
     padding: 14px 20px;
@@ -223,8 +226,13 @@
     letter-spacing: .1em; text-transform: uppercase;
     display: flex; align-items: center;
   }
-  .phase-head--corner { background: var(--ink); position: sticky; left: 0; top: 0; z-index: 4; }
+  .phase-head:not(.phase-head--corner) { cursor: pointer; }
+  .phase-head:not(.phase-head--corner):hover { background: #26263f; }
+  .phase-head:not(.phase-head--corner):focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
+  .phase-head--corner { background: var(--ink); position: sticky; left: 0; top: 0; z-index: 4; cursor: default; }
   .phase-head + .phase-head { border-left: 1px solid rgba(255,255,255,.15); }
+  /* Sluitende lijn onder de laatste (Systeem) rij van het canvas. */
+  .lane-label.lane--systeem, .phase-cell.lane--systeem { border-bottom: 1px solid var(--border); }
 
   /* Zwembaanlabel (persona) - blijft links staan bij horizontaal pannen. */
   .lane-label {
@@ -908,9 +916,15 @@
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Vraagt bij elke ondernemer de benodigde gegevens op</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Maakt de aanvraag compleet</div>
+            <div class="step-verdieping">Notificatie naar de ondernemer</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Systeem stuurt bij afronding notificaties naar alle ondernemers</div>
+            <div class="step-verdieping">Ondernemer autoriseert <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span></div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Levert de gegevens aan en uploadt documenten <button type="button" class="step-tag step-tag--info" data-persona="Ondernemer" data-phase="Uitvoeren" data-step="Levert de gegevens aan en uploadt documenten" data-panel-title="Aanvullende gegevens via de EUDI wallet" data-panel-body="Via de EUDI wallet kan de ondernemer, naast zijn identiteit en bevoegdheid, ook aanvullende gegevens (attestaties) rechtstreeks aanleveren die voor de aanvraag nodig zijn. Dit gaat samen met het uploaden van de gevraagde documenten."><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Lotte maakt de aanvraag compleet</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Systeem: notificaties dat de aanvraag compleet is en in behandeling wordt genomen</div>
           </div>
         </div>
       </div>
@@ -1307,6 +1321,19 @@
       } else if (fsBtn) {
         fsBtn.style.display = 'none';
       }
+
+      // Klik op een (meescrollende) fasetitel -> terug naar het begin van die fase.
+      var LABEL_W = 240;
+      [].forEach.call(grid.querySelectorAll('.phase-head:not(.phase-head--corner)'), function (head) {
+        head.setAttribute('role', 'button');
+        head.setAttribute('tabindex', '0');
+        head.setAttribute('title', 'Ga naar het begin van fase ' + head.textContent.trim());
+        function go() { viewport.scrollTo({ left: Math.max(0, head.offsetLeft - LABEL_W), behavior: 'smooth' }); }
+        head.addEventListener('click', go);
+        head.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); }
+        });
+      });
 
       layout();
       buildClone();
