@@ -35,6 +35,8 @@
     --ahmed-tint: #e0e7ff;
     --lotte: #7e22ce;
     --lotte-tint: #f3e8ff;
+    --systeem: #475569;
+    --systeem-tint: #e2e8f0;
 
     /* alternatieve-route kleur (verdieping onder een stap), los van de
        persona-kleuren zodat 'm meteen als iets anders herkenbaar is */
@@ -201,6 +203,11 @@
   .lane--wei .lane-avatar { color: var(--wei); }
   .lane--ahmed .lane-avatar { color: var(--ahmed); }
   .lane--lotte .lane-avatar { color: var(--lotte); }
+  .lane-avatar--systeem {
+    background: var(--systeem); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 0 2px var(--white), 0 0 0 4px var(--systeem);
+  }
   .lane-name { font-size: 16px; font-weight: 600; color: var(--ink); }
   .lane-role { font-size: 13px; color: var(--ink-soft); line-height: 1.4; }
   .lane-link {
@@ -240,6 +247,7 @@
   .lane--wei .step { background: var(--wei-tint); color: var(--wei); }
   .lane--ahmed .step { background: var(--ahmed-tint); color: var(--ahmed); }
   .lane--lotte .step { background: var(--lotte-tint); color: var(--lotte); }
+  .lane--systeem .step { background: var(--systeem-tint); color: var(--systeem); }
 
   /* extra zwembanen (gezamenlijke aanvraag met andere onderneming) -
      standaard verborgen, tonen via de toggle hierboven de journey-grid */
@@ -370,6 +378,7 @@
   .legend-dot--wei { background: var(--wei); }
   .legend-dot--ahmed { background: var(--ahmed); }
   .legend-dot--lotte { background: var(--lotte); }
+  .legend-dot--systeem { background: var(--systeem); }
   .legend-dot--placeholder { border: 1.5px dashed var(--ink-mute); }
   .legend-dot--alt { background: var(--alt); }
   .legend-dot--auth { background: var(--auth); }
@@ -475,6 +484,7 @@
     <span class="legend-item"><span class="legend-dot legend-dot--wei"></span> Wei - Polar Components BV (ondernemer)</span>
     <span class="legend-item"><span class="legend-dot legend-dot--ahmed"></span> Ahmed - MetaalbouwZuid BV (ondernemer)</span>
     <span class="legend-item"><span class="legend-dot legend-dot--lotte"></span> Lotte - Bureau Subsidiekracht (intermediair)</span>
+    <span class="legend-item"><span class="legend-dot legend-dot--systeem"></span> Systeem - automatische acties (MOZa)</span>
     <span class="legend-item"><span class="legend-dot legend-dot--alt"></span> Onderliggende stap of detail (stippellijn)</span>
     <span class="legend-item"><span class="legend-dot legend-dot--auth"></span> Autorisatie- of authenticatiemoment</span>
     <span class="legend-item">→ stappen lopen links naar rechts</span>
@@ -515,17 +525,32 @@
           </div>
         </div>
       </div>
-      <div class="phase-cell lane--sander" aria-label="Sander - Uitvoeren">
+            <div class="phase-cell lane--sander" aria-label="Sander - Uitvoeren">
         <div class="step-row">
           <div class="step-wrap">
             <div class="step step--auth">
-              Maakt een concept-subsidieaanvraag op, ter waarde van € 145.000
+              Maakt een concept-subsidieaanvraag op, ter waarde van € 145.000
               <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span>
             </div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Nodigt de andere ondernemers met dezelfde rol uit</div>
+            <div class="step-verdieping">Logt in op MijnOverheid Zakelijk <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Authenticatie</span></div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Alle ondernemers ondertekenen</div>
+            <div class="step-verdieping">Maakt een concept-subsidieaanvraag voor DEI+</div>
+          </div>
+          <div class="step-connector" aria-hidden="true">→</div>
+          <div class="step-wrap">
+            <div class="step step--auth">
+              Accepteert rol voor samenwerking subsidieaanvraag
+              <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span>
+            </div>
+          </div>
+          <div class="step-connector" aria-hidden="true">→</div>
+          <div class="step-wrap">
+            <div class="step">Accepteert de rol van Lotte</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Logt in op MijnOverheid Zakelijk <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Authenticatie</span></div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Accepteert de rol van Lotte als penvoerder <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span></div>
           </div>
         </div>
       </div>
@@ -586,15 +611,38 @@
         <a class="lane-link" href="../../personas/persona-yassin.html" target="_blank" rel="noopener">Alter-ego van persona Yassin ↗</a>
       </div>
 
-      <div class="phase-cell lane--wei" aria-label="Wei - Uitvoeren">
+            <div class="phase-cell lane--wei" aria-label="Wei - Uitvoeren">
         <div class="step-row">
           <div class="step-wrap">
+            <div class="step">Accepteert rol voor samenwerking subsidieaanvraag</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Ontvangt uitnodiging voor gezamenlijke aanvraag via e-mail</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Logt in op MijnOverheid Zakelijk <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Authenticatie</span></div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Accepteert rol voor samenwerking subsidieaanvraag <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span></div>
+          </div>
+          <div class="step-connector" aria-hidden="true">→</div>
+          <div class="step-wrap">
+            <div class="step">Stelt Lotte voor als geschikte intermediair voor de subsidieaanvraag</div>
+          </div>
+          <div class="step-connector" aria-hidden="true">→</div>
+          <div class="step-wrap">
             <div class="step step--auth">
-              Vraagt de intermediair aan als aanvrager
+              Logt in op MijnOverheid Zakelijk
+              <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Authenticatie</span>
+            </div>
+          </div>
+          <div class="step-connector" aria-hidden="true">→</div>
+          <div class="step-wrap">
+            <div class="step">Koppelt Lotte aan de aanvraag als penvoerder</div>
+          </div>
+          <div class="step-connector" aria-hidden="true">→</div>
+          <div class="step-wrap">
+            <div class="step step--auth">
+              Accepteert de rol van Lotte
               <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span>
             </div>
-            <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">De andere ondernemers ondertekenen</div>
           </div>
         </div>
       </div>
@@ -623,13 +671,24 @@
         <a class="lane-link" href="../../personas/persona-yassin.html" target="_blank" rel="noopener">Alter-ego van persona Yassin ↗</a>
       </div>
 
-      <div class="phase-cell lane--ahmed" aria-label="Ahmed - Uitvoeren">
+            <div class="phase-cell lane--ahmed" aria-label="Ahmed - Uitvoeren">
         <div class="step-row">
           <div class="step-wrap">
-            <div class="step step--auth">
-              Ondertekent de aanvraag en de machtiging
-              <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span>
-            </div>
+            <div class="step">Accepteert rol voor samenwerking subsidieaanvraag</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Ontvangt uitnodiging voor gezamenlijke aanvraag via e-mail</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Logt in op MijnOverheid Zakelijk <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Authenticatie</span></div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Accepteert rol voor samenwerking subsidieaanvraag <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span></div>
+          </div>
+          <div class="step-connector" aria-hidden="true">→</div>
+          <div class="step-wrap">
+            <div class="step">Accepteert de rol van Lotte</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Logt in op MijnOverheid Zakelijk <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Authenticatie</span></div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Accepteert de rol van Lotte als penvoerder <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span></div>
           </div>
         </div>
       </div>
@@ -657,13 +716,14 @@
       </div>
 
       <div class="phase-cell lane--lotte" aria-label="Lotte - Oriënteren"></div>
-      <div class="phase-cell lane--lotte" aria-label="Lotte - Uitvoeren">
+            <div class="phase-cell lane--lotte" aria-label="Lotte - Uitvoeren">
         <div class="step-row">
           <div class="step-wrap">
-            <div class="step step--auth">
-              Accepteert de rol van aanvrager namens het collectief
-              <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span>
-            </div>
+            <div class="step">Accepteert rol</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Logt in op MijnOverheid Zakelijk <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Authenticatie</span></div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Accepteert de rol van penvoerder <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span></div>
           </div>
           <div class="step-connector" aria-hidden="true">→</div>
           <div class="step-wrap">
@@ -710,6 +770,35 @@
           </div>
         </div>
       </div>
+
+      <!-- Systeem -->
+      <div class="lane-label lane--systeem">
+        <div class="lane-avatar lane-avatar--systeem" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="3.2" stroke="currentColor" stroke-width="1.6"/><path d="M12 2.4v3.2M12 18.4v3.2M2.4 12h3.2M18.4 12h3.2M5.15 5.15l2.26 2.26M16.59 16.59l2.26 2.26M18.85 5.15l-2.26 2.26M7.41 16.59l-2.26 2.26" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+        <span class="lane-name">Systeem</span>
+        <span class="lane-role">Automatische acties (MOZa)</span>
+      </div>
+
+      <div class="phase-cell lane--systeem" aria-label="Systeem - Oriënteren"></div>
+      <div class="phase-cell lane--systeem" aria-label="Systeem - Uitvoeren">
+        <div class="step-row">
+          <div class="step-wrap">
+            <div class="step step--auth">
+              Nodigt Wei en Ahmed uit
+              <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span>
+            </div>
+          </div>
+          <div class="step-connector" aria-hidden="true">→</div>
+          <div class="step-wrap">
+            <div class="step">Verstuurt e-mail voor acceptatie rol van Lotte naar Sander en Ahmed</div>
+          </div>
+          <div class="step-connector" aria-hidden="true">→</div>
+          <div class="step-wrap">
+            <div class="step">Verstuurt e-mails dat Lotte de rol als penvoerder heeft geaccepteerd naar Sander, Ahmed en Wei</div>
+          </div>
+        </div>
+      </div>
+      <div class="phase-cell lane--systeem" aria-label="Systeem - Opvolgen"></div>
+
     </div>
     </div>
 
