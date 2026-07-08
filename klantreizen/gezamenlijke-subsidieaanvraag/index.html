@@ -181,7 +181,7 @@
   /* Flow-pijlen: een SVG-overlay die de volgorde tussen de banen (persona's
      en Systeem) verbindt, zodat het geheel als één doorlopende flow leest. */
   .flow-arrows { position: absolute; top: 0; left: 0; pointer-events: none; overflow: visible; }
-  .flow-arrows path.flow-edge { fill: none; stroke: var(--ink-mute); stroke-width: 1.6; stroke-dasharray: 5 4; }
+  .flow-arrows path.flow-edge { fill: none; stroke: var(--ink-mute); stroke-width: 1.6; }
   .flow-arrows marker path { fill: var(--ink-mute); }
 
   /* Fasekoppen (Oriënteren / Uitvoeren / Opvolgen) */
@@ -1140,19 +1140,26 @@
       // flow van de ene baan naar de andere springt, tekenen we een pijl, zodat
       // de hele keten als één doorlopende volgorde leest. [baan, kolom] -> [baan, kolom].
       var SVGNS = 'http://www.w3.org/2000/svg';
+      var U = ' - Uitvoeren';
+      var ORI = 'Oriënteren - Sander, Wei en Ahmed (gezamenlijk)';
+      // [bron-cel, kolom] -> [doel-cel, kolom]. De flow loopt door alle fasen:
+      // Oriënteren -> Uitvoeren (tussen de banen) -> Opvolgen, zodat de hele
+      // keten als één doorlopende volgorde leest.
       var EDGES = [
-        ['Sander', 2, 'Systeem', 3],
-        ['Systeem', 4, 'Wei', 5],
-        ['Systeem', 4, 'Ahmed', 5],
-        ['Wei', 5, 'Sander', 6],
-        ['Ahmed', 5, 'Sander', 6],
-        ['Sander', 6, 'Systeem', 7],
-        ['Systeem', 7, 'Wei', 8],
-        ['Systeem', 7, 'Ahmed', 8],
-        ['Wei', 8, 'Lotte', 9],
-        ['Ahmed', 8, 'Lotte', 9],
-        ['Lotte', 9, 'Systeem', 10],
-        ['Systeem', 10, 'Lotte', 11]
+        [ORI, 1, 'Sander' + U, 0],
+        ['Sander' + U, 2, 'Systeem' + U, 3],
+        ['Systeem' + U, 4, 'Wei' + U, 5],
+        ['Systeem' + U, 4, 'Ahmed' + U, 5],
+        ['Wei' + U, 5, 'Sander' + U, 6],
+        ['Ahmed' + U, 5, 'Sander' + U, 6],
+        ['Sander' + U, 6, 'Systeem' + U, 7],
+        ['Systeem' + U, 7, 'Wei' + U, 8],
+        ['Systeem' + U, 7, 'Ahmed' + U, 8],
+        ['Wei' + U, 8, 'Lotte' + U, 9],
+        ['Ahmed' + U, 8, 'Lotte' + U, 9],
+        ['Lotte' + U, 9, 'Systeem' + U, 10],
+        ['Systeem' + U, 10, 'Lotte' + U, 11],
+        ['Lotte' + U, 11, 'Lotte - Opvolgen', 0]
       ];
       var flowSvg = document.createElementNS(SVGNS, 'svg');
       flowSvg.setAttribute('id', 'flowArrows');
@@ -1160,8 +1167,8 @@
       flowSvg.innerHTML = '<defs><marker id="flowArrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z"/></marker></defs>';
       grid.appendChild(flowSvg);
 
-      function flowCard(lane, col) {
-        var cell = grid.querySelector('[aria-label="' + lane + ' - Uitvoeren"]');
+      function flowCard(label, col) {
+        var cell = grid.querySelector('[aria-label="' + label + '"]');
         if (!cell) return null;
         var row = cell.querySelector('.step-row');
         if (!row) return null;
