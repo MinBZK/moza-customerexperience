@@ -275,14 +275,26 @@
     font-size: 12px; font-weight: 500; line-height: 1.3;
   }
 
-  /* Detail-kaartjes (verdiepingen, geel/amber) staan standaard ingeklapt.
-     De 'Details tonen'-toggle klapt ze in 1x allemaal tegelijk uit. */
+  /* Detail-kaartjes (verdiepingen) staan standaard ingeklapt. Elke box met
+     verdiepingen krijgt (via het script) een "Details"-knop met een chevron
+     als visuele hint; klikken klapt de subs van díe box uit. */
   .step-verdieping-connector, .step-verdieping { display: none; }
-  body.show-details .step-verdieping-connector { display: block; }
-  body.show-details .step-verdieping { display: block; }
+  .step-wrap.is-open > .step-verdieping-connector,
+  .step-wrap.is-open > .step-verdieping { display: block; }
 
-  /* "wie"-markering: een gedeelde stap (voor meerdere ondernemers) wordt 1x
-     getoond met een pill die aangeeft voor wie de stap geldt. */
+  .step-more {
+    display: inline-flex; align-items: center; gap: 5px;
+    margin-top: 8px; padding: 0;
+    background: none; border: none; cursor: pointer;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; font-weight: 600; letter-spacing: .02em;
+    color: var(--alt);
+  }
+  .step-more svg { transition: transform .15s ease; }
+  .step-wrap.is-open .step-more svg { transform: rotate(180deg); }
+  .step-more:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 4px; }
+
+  /* "wie"-markering: geeft aan voor wie een stap geldt (bv. "Alleen Sander"). */
   .step-who {
     display: inline-flex; align-items: center; gap: 4px;
     margin-top: 8px; padding: 2px 9px;
@@ -291,6 +303,15 @@
     font-family: 'IBM Plex Mono', monospace;
     font-size: 10px; font-weight: 600; letter-spacing: .02em;
     opacity: .85;
+  }
+
+  /* Gedeelde Oriëntatie-stap over de drie ondernemers-zwembanen: één cel die
+     de rijen van Sander, Wei en Ahmed overspant. */
+  .phase-cell--span3 {
+    grid-column: 2;
+    grid-row: span 3;
+    display: flex;
+    align-items: center;
   }
 
   /* placeholder: inhoud volgt nog */
@@ -448,12 +469,6 @@
     <p class="goal-text">Een collectief van drie bedrijven doet samen een innovatieproject en vraagt daarvoor een subsidie aan bij RVO. Het collectief machtigt samen één externe adviseur (intermediair) om de aanvraag in te dienen.</p>
   </div>
 
-  <label class="toggle-row">
-    <input type="checkbox" id="detailsToggle" class="toggle-input">
-    <span class="toggle-track" aria-hidden="true"><span class="toggle-thumb"></span></span>
-    Details tonen
-  </label>
-
   <div class="legend" aria-hidden="true">
     <span class="legend-item"><span class="legend-dot legend-dot--sander"></span> Sander - GreenFlow BV (ondernemer)</span>
     <span class="legend-item"><span class="legend-dot legend-dot--wei"></span> Wei - Polar Components BV (ondernemer)</span>
@@ -484,21 +499,21 @@
         <a class="lane-link" href="../../personas/persona-yassin.html" target="_blank" rel="noopener">Alter-ego van persona Yassin ↗</a>
       </div>
 
-      <div class="phase-cell lane--sander" aria-label="Sander - Oriënteren">
+      <div class="phase-cell phase-cell--span3 lane--sander" aria-label="Oriënteren - Sander, Wei en Ahmed (gezamenlijk)">
         <div class="step-row">
           <div class="step-wrap">
-            <div class="step">
-              Besluit samenwerking voor gezamenlijk subsidie aanvraag
-              <span class="step-who">Sander, Wei &amp; Ahmed</span>
-            </div>
+            <div class="step">Besluit samenwerking voor gezamenlijk subsidie aanvraag</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Netwerkborrel met Yassin, Karin en Wei</div>
+            <div class="step-verdieping">Netwerkborrel met Sander, Wei en Ahmed</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Besluit samenwerking voor gezamenlijk subsidie aanvraag: DEI+ - Demonstratie Energie- en Klimaatinnovatie</div>
           </div>
           <div class="step-connector" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step">Zoekt naar intermediair in netwerk</div>
+            <div class="step">
+              Zoekt naar intermediair in netwerk
+              <span class="step-who">Alleen Sander</span>
+            </div>
           </div>
         </div>
       </div>
@@ -573,7 +588,6 @@
         <a class="lane-link" href="../../personas/persona-yassin.html" target="_blank" rel="noopener">Alter-ego van persona Yassin ↗</a>
       </div>
 
-      <div class="phase-cell lane--wei" aria-label="Wei - Oriënteren"></div>
       <div class="phase-cell lane--wei" aria-label="Wei - Uitvoeren">
         <div class="step-row">
           <div class="step-wrap">
@@ -611,7 +625,6 @@
         <a class="lane-link" href="../../personas/persona-yassin.html" target="_blank" rel="noopener">Alter-ego van persona Yassin ↗</a>
       </div>
 
-      <div class="phase-cell lane--ahmed" aria-label="Ahmed - Oriënteren"></div>
       <div class="phase-cell lane--ahmed" aria-label="Ahmed - Uitvoeren">
         <div class="step-row">
           <div class="step-wrap">
@@ -835,16 +848,28 @@
         toggleBtn.setAttribute('aria-expanded', String(collapsed));
       });
 
-      // Klapt alle detail-kaartjes (verdiepingen) in 1x uit/in en ververst
-      // canvas + minimap mee.
-      var detailsToggle = document.getElementById('detailsToggle');
-      if (detailsToggle) {
-        detailsToggle.addEventListener('change', function () {
-          document.body.classList.toggle('show-details', detailsToggle.checked);
+      // Per box: geef elke stap met verdiepingen een "Details"-knop (chevron)
+      // als visuele hint dat er meer is; klikken klapt de subs van díe box uit
+      // en ververst canvas + minimap.
+      var CHEVRON = '<svg width="10" height="10" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      document.querySelectorAll('.step-wrap').forEach(function (wrap) {
+        var subs = wrap.querySelectorAll(':scope > .step-verdieping');
+        if (!subs.length) return;
+        var step = wrap.querySelector(':scope > .step');
+        if (!step) return;
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'step-more';
+        btn.setAttribute('aria-expanded', 'false');
+        btn.innerHTML = CHEVRON + '<span>' + subs.length + (subs.length === 1 ? ' detail' : ' details') + '</span>';
+        step.insertAdjacentElement('afterend', btn);
+        btn.addEventListener('click', function () {
+          var open = wrap.classList.toggle('is-open');
+          btn.setAttribute('aria-expanded', String(open));
           layout();
           buildClone();
         });
-      }
+      });
 
       layout();
       buildClone();
