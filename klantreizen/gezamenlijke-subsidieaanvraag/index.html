@@ -215,8 +215,10 @@
     font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 600; color: var(--ink-soft);
   }
 
-  /* Mijlpaal-badge op de genummerde hoofdstappen. */
-  .step[data-milestone] { position: relative; }
+  /* Mijlpaal-badge op de genummerde hoofdstappen. z-index:0 maakt van de stap
+     een eigen stacking-context, zodat de badge onder de sticky rij-/fasekoppen
+     door scrolt i.p.v. eroverheen. */
+  .step[data-milestone] { position: relative; z-index: 0; }
   .step[data-milestone]::before {
     content: attr(data-milestone);
     position: absolute; top: -10px; left: -10px; z-index: 3;
@@ -232,8 +234,11 @@
   .milestone-strip { display: none; }
   body.zoom-1 .milestone-strip {
     display: flex; align-items: flex-start; gap: 12px;
-    padding: 40px 28px; overflow-x: auto;
+    padding: 40px 28px; overflow: auto; cursor: grab;
+    scrollbar-width: none; -ms-overflow-style: none;
   }
+  .milestone-strip::-webkit-scrollbar { display: none; }
+  .milestone-strip.is-panning { cursor: grabbing; user-select: none; }
   .mstrip-phase { display: flex; flex-direction: column; flex-shrink: 0; }
   .mstrip-head {
     background: var(--ink); color: #fff;
@@ -1560,6 +1565,31 @@
           html += '<div class="mstrip-phase"><div class="mstrip-head">' + ph + '</div><div class="mstrip-track">' + boxes + '</div></div>';
         });
         strip.innerHTML = html;
+      })();
+
+      // Slepen (pannen) in de mijlpalen-strip, net als op het canvas.
+      (function () {
+        var strip = document.getElementById('milestoneStrip');
+        if (!strip) return;
+        var down = false, sx = 0, sy = 0, sl = 0, st = 0;
+        strip.addEventListener('pointerdown', function (e) {
+          if (e.target.closest('a, button')) return;
+          down = true; sx = e.clientX; sy = e.clientY; sl = strip.scrollLeft; st = strip.scrollTop;
+          strip.classList.add('is-panning');
+          try { strip.setPointerCapture(e.pointerId); } catch (_) {}
+        });
+        strip.addEventListener('pointermove', function (e) {
+          if (!down) return;
+          strip.scrollLeft = sl - (e.clientX - sx);
+          strip.scrollTop = st - (e.clientY - sy);
+        });
+        function end(e) {
+          if (!down) return;
+          down = false; strip.classList.remove('is-panning');
+          try { strip.releasePointerCapture(e.pointerId); } catch (_) {}
+        }
+        strip.addEventListener('pointerup', end);
+        strip.addEventListener('pointercancel', end);
       })();
 
       function setZoom(level) {
