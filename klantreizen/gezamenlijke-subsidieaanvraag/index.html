@@ -528,10 +528,7 @@
             <div class="phase-cell lane--sander" aria-label="Sander - Uitvoeren">
         <div class="step-row">
           <div class="step-wrap">
-            <div class="step step--auth">
-              Maakt een concept-subsidieaanvraag op, ter waarde van € 145.000
-              <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span>
-            </div>
+            <div class="step">Maakt een concept-subsidieaanvraag op, ter waarde van € 145.000</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Logt in op MijnOverheid Zakelijk <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Authenticatie</span></div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
@@ -940,6 +937,7 @@
       // ALLE detail-kaartjes in de klantreis tegelijk uit/in (globale toggle),
       // en ververst canvas + minimap.
       var CHEVRON = '<svg width="10" height="10" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      var LOCK = '<svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>';
       var moreButtons = [];
       function toggleAllDetails() {
         var open = document.body.classList.toggle('show-details');
@@ -952,6 +950,25 @@
         if (!subs.length) return;
         var step = wrap.querySelector(':scope > .step');
         if (!step) return;
+
+        // Tag-overerving: de (altijd zichtbare) parent-stap toont ook de tags
+        // van zijn verdiepingen, zodat autorisatie-/authenticatiemomenten
+        // zichtbaar zijn ook als de details zijn ingeklapt.
+        var own = {};
+        step.querySelectorAll('.step-tag').forEach(function (t) { own[t.textContent.trim()] = true; });
+        var inherited = {};
+        subs.forEach(function (sub) {
+          sub.querySelectorAll('.step-tag').forEach(function (t) { inherited[t.textContent.trim()] = true; });
+        });
+        Object.keys(inherited).forEach(function (label) {
+          if (own[label]) return;
+          var span = document.createElement('span');
+          span.className = 'step-tag';
+          span.innerHTML = LOCK + label;
+          step.appendChild(span);
+        });
+        if (step.querySelector('.step-tag')) step.classList.add('step--auth');
+
         var btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'step-more';
