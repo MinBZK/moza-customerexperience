@@ -534,6 +534,7 @@
   .step-tag.is-authenticatie { background: var(--authenticatie); }
   .step-tag.is-autorisatie { background: var(--auth); }
   .step-tag.is-inloggen { background: var(--authenticatie); }
+  .step-tag.is-wmw { background: #6d4aa8; }
 
   /* klikbare tag die een zijvenster met uitleg opent */
   .step-tag--info { border: none; cursor: pointer; font: inherit; }
@@ -583,6 +584,10 @@
   .side-panel-more:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 3px; }
   .side-panel-more-content[hidden] { display: none; }
   .side-panel-muted { color: rgba(255,255,255,.6); font-style: italic; }
+  /* "Wie mag wat"-overlay: per persona wie wat mag. */
+  .side-panel-body.is-rich .wmw-item { display: flex; align-items: flex-start; gap: 10px; margin: 0 0 13px; }
+  .side-panel-body.is-rich .wmw-item strong { font-weight: 600; }
+  .wmw-dot { flex-shrink: 0; width: 11px; height: 11px; border-radius: 50%; margin-top: 5px; box-shadow: 0 0 0 2px rgba(255,255,255,.3); }
   .side-panel-nav {
     display: flex; align-items: center; justify-content: space-between; gap: 10px;
     margin-top: 24px; padding-top: 16px;
@@ -814,16 +819,13 @@
           </div>
           <div class="step-connector" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step step--auth">
-              Nodigt Wei en Ahmed uit als mede-indiener
-              <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span>
-            </div>
+            <div class="step">Nodigt Wei en Ahmed uit als mede-indiener</div>
           </div>
           <div class="step-connector" aria-hidden="true">→</div>
           <div class="step-wrap">
             <div class="step step--auth">
               Geeft zichzelf de rol als mede-indiener en penvoerder
-              <button type="button" class="step-tag step-tag--info" data-persona="Sander (GreenFlow BV)" data-phase="Uitvoeren" data-step="Geeft zichzelf de rol als mede-indiener en penvoerder" data-panel-title="Wie mag dit?" data-panel-body="Mag Sander zichzelf aanwijzen als penvoerder? Nee - mag pas namens het collectief handelen zodra hij formeel is aangewezen."><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button>
+              <button type="button" class="step-tag step-tag--info" data-persona="Sander (GreenFlow BV)" data-phase="Uitvoeren" data-step="Geeft zichzelf de rol als mede-indiener en penvoerder" data-panel-title="Wie mag wat" data-panel-body-ref="panelBodyWieMagWat">Wie mag wat<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button>
             </div>
           </div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
@@ -1421,7 +1423,8 @@
       // Kleur elke tag naar soort: inloggen/authenticatie (blauw) vs autorisatie (rood).
       document.querySelectorAll('.step-tag').forEach(function (t) {
         var label = t.textContent.trim().toLowerCase();
-        if (label.indexOf('inloggen') !== -1) t.classList.add('is-inloggen');
+        if (label.indexOf('wie mag wat') !== -1) t.classList.add('is-wmw');
+        else if (label.indexOf('inloggen') !== -1) t.classList.add('is-inloggen');
         else if (label.indexOf('authenticatie') !== -1) t.classList.add('is-authenticatie');
         else if (label.indexOf('autorisatie') !== -1) t.classList.add('is-autorisatie');
       });
@@ -1792,6 +1795,12 @@
   </div>
   <h3 class="side-panel-heading">Nu: autoriseren met DigiD/eHerkenning.</h3>
   <p class="side-panel-muted">Wordt binnenkort aangevuld.</p>
+</template>
+<template id="panelBodyWieMagWat">
+  <p>Wie mag wat:</p>
+  <div class="wmw-item"><span class="wmw-dot" style="background:var(--sander)"></span><span><strong>Sander</strong> is mede-indiener en vraagt goedkeuring voor de rol van penvoerder</span></div>
+  <div class="wmw-item"><span class="wmw-dot" style="background:var(--wei)"></span><span><strong>Wei</strong>, uitgenodigd door Sander als mede-indiener</span></div>
+  <div class="wmw-item"><span class="wmw-dot" style="background:var(--ahmed)"></span><span><strong>Ahmed</strong>, uitgenodigd door Sander als mede-indiener</span></div>
 </template>
 <div class="side-scrim" id="sideScrim" hidden></div>
 <aside class="side-panel" id="sidePanel" role="dialog" aria-modal="true" aria-labelledby="sidePanelTitle" aria-hidden="true" hidden>
