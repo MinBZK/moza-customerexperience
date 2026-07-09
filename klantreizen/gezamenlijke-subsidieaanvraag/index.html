@@ -1487,6 +1487,13 @@
           var on = document.fullscreenElement === journeyEl;
           fsBtn.setAttribute('aria-pressed', String(on));
           fsLabel.textContent = on ? 'Sluit volledig scherm' : 'Volledig scherm';
+          // Het uitleg-paneel (blauwe overlay) + scrim staan buiten .journey en
+          // zouden anders in volledig scherm niet renderen; verplaats ze in/uit
+          // het fullscreen-element mee.
+          var sPanel = document.getElementById('sidePanel'), sScrim = document.getElementById('sideScrim');
+          var host = on ? journeyEl : document.body;
+          if (sScrim) host.appendChild(sScrim);
+          if (sPanel) host.appendChild(sPanel);
           layout();
         });
       } else if (fsBtn) {
