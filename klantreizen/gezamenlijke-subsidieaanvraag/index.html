@@ -184,7 +184,21 @@
     font-family: 'IBM Plex Mono', monospace;
     font-size: 12px; font-weight: 600; letter-spacing: .08em;
     text-transform: uppercase; color: var(--ink-soft);
+    flex-shrink: 0;
   }
+  /* Subtiele lijst met sneltoetsen, midden in de canvas-toolbar. */
+  .journey-shortcuts {
+    display: flex; align-items: center; gap: 5px 9px; flex-wrap: wrap;
+    justify-content: center; flex: 1 1 auto;
+    font-size: 11px; color: var(--ink-mute);
+  }
+  .journey-shortcuts .sc { display: inline-flex; align-items: center; gap: 4px; }
+  .journey-shortcuts kbd {
+    font-family: 'IBM Plex Mono', monospace; font-size: 10px; line-height: 1.4;
+    background: var(--paper); border: 1px solid var(--border); border-radius: 4px;
+    padding: 1px 5px; color: var(--ink-soft);
+  }
+  @media (max-width: 720px) { .journey-shortcuts { display: none; } }
   .journey-fs {
     display: inline-flex; align-items: center; gap: 7px;
     background: var(--white); border: 1px solid var(--border); border-radius: 8px;
@@ -273,9 +287,9 @@
 
   /* Flow-pijlen: een SVG-overlay die de volgorde tussen de banen (persona's
      en Systeem) verbindt, zodat het geheel als één doorlopende flow leest. */
-  .flow-arrows { position: absolute; top: 0; left: 0; pointer-events: none; overflow: visible; }
-  .flow-arrows path.flow-edge { fill: none; stroke: var(--ink-mute); stroke-width: 1.6; }
-  .flow-arrows marker path { fill: var(--ink-mute); }
+  .flow-arrows { position: absolute; top: 0; left: 0; pointer-events: none; overflow: visible; z-index: 2; }
+  .flow-arrows path.flow-edge { fill: none; stroke: var(--ink-soft); stroke-width: 2.2; }
+  .flow-arrows marker path { fill: var(--ink-soft); }
 
   /* Fasekoppen (Oriënteren / Uitvoeren / Opvolgen). Naast sticky-top ook
      sticky-left (na de labelkolom): zo blijft de fasetitel in beeld zodra je
@@ -418,18 +432,22 @@
   .step-wrap--spacer, .step-connector--spacer { visibility: hidden; }
 
   /* Bredere tussenruimte waar de "na 2 weken"-tijdmarker doorheen loopt. */
-  .step-connector--gap { min-width: 78px; }
+  .step-connector--gap { min-width: 92px; }
 
   /* Verticale tijdmarker ("na 2 weken") die door alle rijen van het canvas
      loopt (onder de fasekoppen), op de plek waar de tijd verstrijkt voordat
      het voorschot wordt uitbetaald. */
   .time-gap {
-    position: absolute; z-index: 1; pointer-events: none;
-    width: 74px;
-    display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 8px;
-    padding-top: 18px;
-    border-left: 1px dashed var(--ink-mute); border-right: 1px dashed var(--ink-mute);
-    background: rgba(120, 120, 140, .05);
+    position: absolute; z-index: 0; pointer-events: none;
+    width: 88px; overflow: hidden;
+    border-left: 1px dashed var(--border); border-right: 1px dashed var(--border);
+    background: rgba(120, 120, 140, .035);
+  }
+  /* De inhoud (klok + label) blijft via JS verticaal in het midden van het
+     beeld staan en beweegt mee bij verticaal scrollen. */
+  .time-gap-inner {
+    position: absolute; left: 0; right: 0;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
   }
   .time-gap-clock { color: var(--ink-mute); }
   .time-gap-label {
@@ -777,6 +795,14 @@
 
     <div class="journey-toolbar">
       <span class="journey-toolbar-title">Klantreis-canvas</span>
+      <div class="journey-shortcuts" aria-hidden="true">
+        <span class="sc"><kbd>&larr;</kbd><kbd>&rarr;</kbd> stappen</span>
+        <span class="sc"><kbd>&uarr;</kbd><kbd>&darr;</kbd> scrollen</span>
+        <span class="sc"><kbd>+</kbd><kbd>&minus;</kbd> zoom</span>
+        <span class="sc"><kbd>i</kbd> uitleg</span>
+        <span class="sc"><kbd>Esc</kbd> sluiten</span>
+        <span class="sc"><kbd>F</kbd> volledig scherm</span>
+      </div>
       <div class="journey-tools">
         <div class="journey-zoom" role="group" aria-label="Detailniveau">
           <button type="button" class="journey-zoom-btn" id="zoomOut" aria-label="Uitzoomen (minder detail)">&minus;</button>
@@ -1144,9 +1170,7 @@
           <div class="step-connector step-connector--spacer step-connector--gap" data-gap-label="na 2 weken" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap">
-            <div class="step">Controleert de voortgang</div>
-          </div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer step-connector--gap" data-gap-label="na 1 jaar" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
@@ -1478,7 +1502,7 @@
         if (panMoved) { e.preventDefault(); e.stopPropagation(); }
       }, true);
 
-      viewport.addEventListener('scroll', updateRect);
+      viewport.addEventListener('scroll', function () { updateRect(); centerTimeGaps(); });
       window.addEventListener('resize', layout);
 
       toggleBtn.addEventListener('click', function () {
@@ -1570,8 +1594,9 @@
         ['Lotte' + U, 12, 'Systeem' + U, 13],
         ['Systeem' + U, 13, 'Sander' + U, 14],
         ['Systeem' + U, 13, WA, 14],
-        ['Sander' + U, 14, 'Lotte' + U, 15],
-        [WA, 14, 'Lotte' + U, 15],
+        ['Sander' + U, 14, 'Systeem' + U, 14],
+        [WA, 14, 'Systeem' + U, 14],
+        ['Systeem' + U, 14, 'Lotte' + U, 15],
         ['Lotte' + U, 15, RVO, 15],
         [RVO, 15, 'Systeem' + U, 15],
         [RVO, 15, 'RVO - Opvolgen', 0],
@@ -1597,8 +1622,9 @@
 
       // Verticale "na 2 weken"-tijdmarker: door alle rijen (onder de fasekoppen),
       // op de bredere tussenruimte (.step-connector--gap) in de Opvolgen-fase.
-      var CLOCK_SVG = '<svg class="time-gap-clock" width="30" height="30" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.5"/><line x1="12" y1="12" x2="12" y2="7.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 12 12" to="360 12 12" dur="2s" repeatCount="indefinite"/></line><line x1="12" y1="12" x2="15.5" y2="12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 12 12" to="360 12 12" dur="24s" repeatCount="indefinite"/></line></svg>';
+      var CLOCK_SVG = '<svg class="time-gap-clock" width="60" height="60" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.5"/><line x1="12" y1="12" x2="12" y2="7.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 12 12" to="360 12 12" dur="2s" repeatCount="indefinite"/></line><line x1="12" y1="12" x2="15.5" y2="12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 12 12" to="360 12 12" dur="24s" repeatCount="indefinite"/></line></svg>';
       var timeGapEls = [];
+      var GAP_HALF = 44;
 
       // Meerdere tijdmarkers: elke baan heeft dezelfde bredere gap-kolom voor de
       // uitlijning, maar per tijdmoment (= x-positie) tonen we één marker die door
@@ -1616,7 +1642,7 @@
         while (timeGapEls.length < order.length) {
           var el = document.createElement('div');
           el.className = 'time-gap';
-          el.innerHTML = CLOCK_SVG + '<span class="time-gap-label"></span>';
+          el.innerHTML = '<div class="time-gap-inner">' + CLOCK_SVG + '<span class="time-gap-label"></span></div>';
           grid.appendChild(el);
           timeGapEls.push(el);
         }
@@ -1624,11 +1650,32 @@
         timeGapEls.forEach(function (el, i) {
           if (i >= order.length || !head) { el.style.display = 'none'; return; }
           var gap = seen[order[i]];
-          el.style.display = 'flex';
+          el.style.display = 'block';
           el.querySelector('.time-gap-label').textContent = gap.getAttribute('data-gap-label') || 'na 2 weken';
-          el.style.left = (order[i] - 37) + 'px';
+          el.style.left = (order[i] - GAP_HALF) + 'px';
           el.style.top = headH + 'px';
           el.style.height = (grid.scrollHeight - headH) + 'px';
+        });
+        centerTimeGaps();
+      }
+
+      // Houd de klok + het label verticaal in het midden van het zichtbare canvas,
+      // zodat ze meebewegen bij verticaal scrollen (en niet bovenaan blijven staan).
+      function centerTimeGaps() {
+        var head = grid.querySelector('.phase-head');
+        var headH = head ? head.getBoundingClientRect().height : 0;
+        var visTop = viewport.scrollTop + headH;
+        var visH = viewport.clientHeight - headH;
+        timeGapEls.forEach(function (el) {
+          if (el.style.display === 'none') return;
+          var inner = el.querySelector('.time-gap-inner');
+          if (!inner) return;
+          var bandTop = headH;
+          var bandH = el.offsetHeight;
+          var innerH = inner.offsetHeight;
+          var t = visTop + visH / 2 - bandTop - innerH / 2;
+          t = Math.max(6, Math.min(t, bandH - innerH - 6));
+          inner.style.top = t + 'px';
         });
       }
 
@@ -1656,9 +1703,13 @@
           var sCx = (sr.left + sr.right) / 2 - gRect.left, tCx = (tr.left + tr.right) / 2 - gRect.left;
           var d;
           // Verticale flow: staat de bron recht boven het doel (zelfde kolom, doel
-          // lager), teken dan een rechte lijn van de onderkant naar de bovenkant.
+          // lager), teken dan een rechte lijn recht naar beneden. Start onder de
+          // hele step-wrap (dus onder eventuele detail-kaartjes), zodat de lijn
+          // niet over de eigen content van de bronstap heen loopt.
+          var sWrap = s.closest ? s.closest('.step-wrap') : null;
+          var startY = (sWrap ? sWrap.getBoundingClientRect().bottom : sr.bottom) - gRect.top;
           if (Math.abs(sCx - tCx) < Math.min(sr.width, tr.width) * 0.6 && tr.top > sr.bottom - 4) {
-            d = 'M ' + sCx + ' ' + (sr.bottom - gRect.top) + ' V ' + (tr.top - gRect.top);
+            d = 'M ' + sCx + ' ' + startY + ' V ' + (tr.top - gRect.top);
           } else {
             var x1 = sr.right - gRect.left, y1 = (sr.top + sr.bottom) / 2 - gRect.top;
             var x2 = tr.left - gRect.left, y2 = (tr.top + tr.bottom) / 2 - gRect.top;
@@ -1892,6 +1943,11 @@
         if (ae && ae.closest && ae.closest('input, textarea, select, [contenteditable]')) return;
         if (e.key === '+' || e.key === '=') { setZoom(zoom + 1); e.preventDefault(); return; }
         if (e.key === '-' || e.key === '_') { setZoom(zoom - 1); e.preventDefault(); return; }
+        if (e.key === 'f' || e.key === 'F') {
+          var jEl = document.querySelector('.journey');
+          if (jEl && jEl.requestFullscreen) { if (document.fullscreenElement) document.exitFullscreen(); else jEl.requestFullscreen(); e.preventDefault(); }
+          return;
+        }
         var dirs = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] };
         var d = dirs[e.key];
         if (!d) return;
@@ -2095,7 +2151,19 @@
     document.getElementById('sidePanelClose').addEventListener('click', closePanel);
     scrim.addEventListener('click', closePanel);
     document.addEventListener('keydown', function (e) {
-      if (!panel.classList.contains('is-open')) return;
+      if (!panel.classList.contains('is-open')) {
+        // "i" opent het uitleg-paneel: bij de i van de gemarkeerde stap, anders de eerste.
+        if ((e.key === 'i' || e.key === 'I') && infos.length) {
+          var ae = document.activeElement;
+          if (ae && ae.closest && ae.closest('input, textarea, select, [contenteditable]')) return;
+          var f = document.querySelector('.step--flash .step-tag--info');
+          var idx = f ? infos.indexOf(f) : 0;
+          if (idx < 0) idx = 0;
+          e.preventDefault();
+          openAt(idx, infos[idx]);
+        }
+        return;
+      }
       if (e.key === 'Escape') closePanel();
       else if (e.key === 'ArrowLeft' && current > 0) render(current - 1);
       else if (e.key === 'ArrowRight' && current < infos.length - 1) render(current + 1);
