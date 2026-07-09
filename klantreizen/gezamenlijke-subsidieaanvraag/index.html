@@ -627,6 +627,10 @@
   /* Rijke panelen (met kopjes/links) gebruiken echte <p>/<h3>, geen pre-line. */
   .side-panel-body.is-rich { white-space: normal; }
   .side-panel-body.is-rich p { margin: 0 0 14px; }
+  .side-panel-body.is-rich ul { margin: 0 0 14px; padding-left: 20px; }
+  .side-panel-body.is-rich ul ul { margin: 8px 0 0; }
+  .side-panel-body.is-rich li { margin: 0 0 8px; }
+  .side-panel-body.is-rich li:last-child { margin-bottom: 0; }
   .side-panel-body.is-rich > :last-child { margin-bottom: 0; }
   .side-panel-heading {
     font-size: 22px; font-weight: 600; line-height: 1.25;
@@ -2166,6 +2170,17 @@
   <div class="wmw-item"><span class="wmw-dot" style="background:var(--sander)"></span><span><strong class="p-sander">Sander</strong> is mede-aanvrager en vraagt goedkeuring voor de rol van penvoerder</span></div>
   <div class="wmw-item"><span class="wmw-dot" style="background:var(--wei)"></span><span><strong class="p-wei">Wei</strong>, uitgenodigd door Sander als mede-aanvrager</span></div>
   <div class="wmw-item"><span class="wmw-dot" style="background:var(--ahmed)"></span><span><strong class="p-ahmed">Ahmed</strong>, uitgenodigd door Sander als mede-aanvrager</span></div>
+  <h3 class="side-panel-heading">Vraagstukken</h3>
+  <ul>
+    <li>Hoe wordt dit nu opgelost en hoe kunnen we dit in de toekomst oplossen?</li>
+    <li>Welke rol hebben de actoren hierin:
+      <ul>
+        <li>ondernemers</li>
+        <li>overheidsinstanties</li>
+        <li>MijnOverheid Zakelijk</li>
+      </ul>
+    </li>
+  </ul>
 </template>
 <template id="panelBodyWieMagWat2">
   <div class="wmw-item"><span class="wmw-dot" style="background:var(--sander)"></span><span><strong class="p-sander">Sander</strong> is mede-aanvrager en penvoerder met de bevoegdheid voor roloverdracht</span></div>
