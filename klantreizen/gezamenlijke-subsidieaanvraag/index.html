@@ -1779,11 +1779,11 @@
           } else {
             // Doel ligt eronder (zelfde/linker kolom): verlaat rechts, zak strak
             // in de goot net rechts van de kolom recht naar beneden, en haak het
-            // doel met een korte stub aan de rechterkant binnen. Zo ontstaat er
-            // geen brede "doos" die de kolom oversteekt. Elk edge krijgt zijn
-            // eigen kanaal (offset) zodat parallelle lijnen niet samenvallen.
-            var off = (ei % 4) * 16;
-            var gutR = Math.max(x1, tr.right - gRect.left) + 14 + off;
+            // doel met een korte stub aan de rechterkant binnen. Deze neerwaartse
+            // lijnen lopen allemaal dezelfde kant op en mogen dus samenvallen in
+            // één goot; de opwaartse lijnen lopen via hun eigen route (het midden
+            // tussen de kolommen), zodat tegengestelde richtingen apart blijven.
+            var gutR = Math.max(x1, tr.right - gRect.left) + 14;
             d = 'M ' + x1 + ' ' + y1 + ' H ' + gutR + ' V ' + y2 + ' H ' + (tr.right - gRect.left);
           }
           var path = document.createElementNS(SVGNS, 'path');
