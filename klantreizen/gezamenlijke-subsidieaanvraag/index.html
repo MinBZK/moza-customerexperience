@@ -537,13 +537,13 @@
   }
   /* Easter egg: verschijnt met "c", gluurt vanachter stap 4 om het hoekje. */
   .clippy-egg {
-    position: absolute; right: -26px; bottom: -14px; width: 46px; height: 72px;
-    z-index: -1; opacity: 0; transform: translate(-18px, 10px) rotate(-14deg);
-    transform-origin: bottom right;
-    transition: opacity .4s ease, transform .55s cubic-bezier(.34, 1.56, .64, 1);
+    position: absolute; top: -50px; right: -6px; width: 44px; height: 70px;
+    z-index: -1; opacity: 0; transform: translateY(34px) rotate(-12deg);
+    transform-origin: bottom center;
+    transition: opacity .35s ease, transform .5s cubic-bezier(.34, 1.56, .64, 1);
     pointer-events: none;
   }
-  .clippy-egg.is-peeking { opacity: 1; transform: translate(0, 0) rotate(8deg); }
+  .clippy-egg.is-peeking { opacity: 1; transform: translateY(0) rotate(8deg); }
   .lane--weiahmed .step { background: #eceafb; color: #322d6e; }
   .lane--weiahmed .lane-avatar { color: var(--wei); }
   /* Markering "geldt voor Wei én Ahmed" bovenin elke gedeelde box. */
@@ -1658,7 +1658,18 @@
 
       // Verticale "na 2 weken"-tijdmarker: door alle rijen (onder de fasekoppen),
       // op de bredere tussenruimte (.step-connector--gap) in de Opvolgen-fase.
-      var CLOCK_SVG = '<svg class="time-gap-clock" width="60" height="60" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.5"/><line x1="12" y1="12" x2="12" y2="7.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 12 12" to="1440 12 12" dur="4s" repeatCount="1" fill="freeze"/></line><line x1="12" y1="12" x2="15.5" y2="12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 12 12" to="360 12 12" dur="4s" repeatCount="1" fill="freeze"/></line></svg>';
+      // begin="indefinite": de klok start niet bij het laden, maar pas als de
+      // marker in beeld scrollt (via de IntersectionObserver hieronder).
+      var CLOCK_SVG = '<svg class="time-gap-clock" width="60" height="60" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.5"/><line x1="12" y1="12" x2="12" y2="7.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 12 12" to="1440 12 12" dur="4s" begin="indefinite" repeatCount="1" fill="freeze"/></line><line x1="12" y1="12" x2="15.5" y2="12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 12 12" to="360 12 12" dur="4s" begin="indefinite" repeatCount="1" fill="freeze"/></line></svg>';
+      var clockObserver = ('IntersectionObserver' in window) ? new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (!en.isIntersecting) return;
+          [].forEach.call(en.target.querySelectorAll('animateTransform'), function (a) {
+            try { a.beginElement(); } catch (e) {}
+          });
+          clockObserver.unobserve(en.target); // 1x afspelen, bij eerste keer in beeld
+        });
+      }, { root: viewport, threshold: 0.01 }) : null;
       var timeGapEls = [];
       var GAP_HALF = 44;
 
@@ -1681,6 +1692,7 @@
           el.innerHTML = '<div class="time-gap-inner">' + CLOCK_SVG + '<span class="time-gap-label"></span></div>';
           grid.appendChild(el);
           timeGapEls.push(el);
+          if (clockObserver) clockObserver.observe(el);
         }
         var headH = head ? head.getBoundingClientRect().height : 0;
         timeGapEls.forEach(function (el, i) {
@@ -1732,7 +1744,7 @@
         flowSvg.setAttribute('height', H);
         flowSvg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
         [].slice.call(flowSvg.querySelectorAll('path.flow-edge')).forEach(function (p) { p.remove(); });
-        EDGES.forEach(function (e) {
+        EDGES.forEach(function (e, ei) {
           var s = flowCard(e[0], e[1]), t = flowCard(e[2], e[3]);
           if (!s || !t) return;
           var sr = s.getBoundingClientRect(), tr = t.getBoundingClientRect();
@@ -1747,14 +1759,13 @@
             d = 'M ' + x1 + ' ' + y1 + ' H ' + midX + ' V ' + y2 + ' H ' + x2;
           } else {
             // Doel ligt eronder (zelfde/linker kolom): verlaat rechts, zak strak
-            // in de goot rechts van de bron naar beneden, en haak pas vlak boven
-            // het doel naar links om er van links (netjes) binnen te komen.
-            var sWrap = s.closest ? s.closest('.step-wrap') : null;
-            var sBotY = (sWrap ? sWrap.getBoundingClientRect().bottom : sr.bottom) - gRect.top;
-            var gutR = Math.max(x1, tr.right - gRect.left) + 18;
-            var gutL = x2 - 18;
-            var crossY = Math.max(sBotY + 12, (tr.top - gRect.top) - 18);
-            d = 'M ' + x1 + ' ' + y1 + ' H ' + gutR + ' V ' + crossY + ' H ' + gutL + ' V ' + y2 + ' H ' + x2;
+            // in de goot net rechts van de kolom recht naar beneden, en haak het
+            // doel met een korte stub aan de rechterkant binnen. Zo ontstaat er
+            // geen brede "doos" die de kolom oversteekt. Elk edge krijgt zijn
+            // eigen kanaal (offset) zodat parallelle lijnen niet samenvallen.
+            var off = (ei % 4) * 12;
+            var gutR = Math.max(x1, tr.right - gRect.left) + 14 + off;
+            d = 'M ' + x1 + ' ' + y1 + ' H ' + gutR + ' V ' + y2 + ' H ' + (tr.right - gRect.left);
           }
           var path = document.createElementNS(SVGNS, 'path');
           path.setAttribute('class', 'flow-edge');
@@ -1848,13 +1859,17 @@
         clip.className = 'clippy-egg';
         clip.innerHTML = '<svg viewBox="0 0 48 74" width="46" height="72" fill="none" aria-hidden="true"><path d="M16 70 V26 C16 15 32 15 32 26 V58 C32 65 22 65 22 58 V30" stroke="#8a94a6" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="19" cy="20" rx="6.5" ry="9" fill="#fff" stroke="#2b2b3a" stroke-width="1.6"/><ellipse cx="33" cy="20" rx="6.5" ry="9" fill="#fff" stroke="#2b2b3a" stroke-width="1.6"/><circle cx="20.5" cy="22.5" r="2.8" fill="#1a1a2e"/><circle cx="34.5" cy="22.5" r="2.8" fill="#1a1a2e"/><path d="M12 9 L24 13" stroke="#2b2b3a" stroke-width="2" stroke-linecap="round"/><path d="M40 9 L28 13" stroke="#2b2b3a" stroke-width="2" stroke-linecap="round"/></svg>';
         wrap.appendChild(clip);
+        var clipTimer = null;
         document.addEventListener('keydown', function (e) {
           if (e.key !== 'c' && e.key !== 'C') return;
           var ae = document.activeElement;
           if (ae && ae.closest && ae.closest('input, textarea, select, [contenteditable]')) return;
           var sp = document.getElementById('sidePanel');
           if (sp && sp.classList.contains('is-open')) return;
-          clip.classList.toggle('is-peeking');
+          // Even gluren en dan weer wegduiken, zodat je 'm opnieuw kunt starten.
+          clip.classList.add('is-peeking');
+          window.clearTimeout(clipTimer);
+          clipTimer = window.setTimeout(function () { clip.classList.remove('is-peeking'); }, 3200);
         });
       })();
 
