@@ -1746,14 +1746,14 @@
             var midX = (x1 + x2) / 2;
             d = 'M ' + x1 + ' ' + y1 + ' H ' + midX + ' V ' + y2 + ' H ' + x2;
           } else {
-            // Doel ligt eronder (zelfde/linker kolom): verlaat rechts de goot in,
-            // steek onder de hele bron-kaart (incl. details) over in de lege
-            // ruimte, en kom van links het doel binnen.
+            // Doel ligt eronder (zelfde/linker kolom): verlaat rechts, zak strak
+            // in de goot rechts van de bron naar beneden, en haak pas vlak boven
+            // het doel naar links om er van links (netjes) binnen te komen.
             var sWrap = s.closest ? s.closest('.step-wrap') : null;
             var sBotY = (sWrap ? sWrap.getBoundingClientRect().bottom : sr.bottom) - gRect.top;
-            var gutR = Math.max(x1, tr.right - gRect.left) + 26;
-            var gutL = x2 - 26;
-            var crossY = sBotY + 16;
+            var gutR = Math.max(x1, tr.right - gRect.left) + 18;
+            var gutL = x2 - 18;
+            var crossY = Math.max(sBotY + 12, (tr.top - gRect.top) - 18);
             d = 'M ' + x1 + ' ' + y1 + ' H ' + gutR + ' V ' + crossY + ' H ' + gutL + ' V ' + y2 + ' H ' + x2;
           }
           var path = document.createElementNS(SVGNS, 'path');
