@@ -1391,6 +1391,8 @@
             <div class="step">Notificaties: bericht aan Sander, Wei en Ahmed met verzoek om gegevens aan te leveren</div>
           </div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
             <div class="step">Notificaties: melding aan Lotte dat de ontbrekende gegevens zijn aangeleverd door Sander, Wei en Ahmed</div>
           </div>
@@ -1400,27 +1402,25 @@
           </div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
         </div>
       </div>
       <div class="phase-cell lane--systeem" aria-label="Systeem - Opvolgen">
         <div class="step-row">
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer step-connector--gap" data-gap-label="na 2 weken" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
             <div class="step">Notificaties: melding over de uitbetaling van het voorschot</div>
           </div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer step-connector--gap" data-gap-label="na 1 jaar" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
             <div class="step">Notificaties: verzoek tot wijziging rol</div>
           </div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
             <div class="step">Notificaties: rol gewijzigd</div>
@@ -1689,22 +1689,22 @@
         ['Lotte' + U, 12, 'Systeem' + U, 13],
         ['Systeem' + U, 13, 'Sander' + U, 14],
         ['Systeem' + U, 13, WA, 14],
-        ['Sander' + U, 14, 'Systeem' + U, 14],
-        [WA, 14, 'Systeem' + U, 14],
-        ['Systeem' + U, 14, 'Lotte' + U, 15],
+        ['Sander' + U, 14, 'Systeem' + U, 15],
+        [WA, 14, 'Systeem' + U, 15],
+        ['Systeem' + U, 15, 'Lotte' + U, 15],
         ['Lotte' + U, 15, RVO, 15],
-        ['Lotte' + U, 15, 'Systeem' + U, 15],
+        ['Lotte' + U, 15, 'Systeem' + U, 16],
         [RVO, 15, 'RVO - Opvolgen', 0],
-        ['Systeem' + U, 15, 'Sander' + U, 17],
-        ['Systeem' + U, 15, WA, 17],
+        ['Systeem' + U, 16, 'Sander' + U, 17],
+        ['Systeem' + U, 16, WA, 17],
         [RO, 0, RO, 1],
-        [RO, 1, SYO, 1],
-        [SYO, 1, SO, 2],
-        [SYO, 1, WAO, 2],
+        [RO, 1, SYO, 2],
+        [SYO, 2, SO, 2],
+        [SYO, 2, WAO, 2],
         [SO, 2, SO, 3],
         [SO, 3, SO, 4],
-        [SO, 4, SYO, 4],
-        [SYO, 4, WAO, 5],
+        [SO, 4, SYO, 5],
+        [SYO, 5, WAO, 5],
         [WAO, 5, SYO, 6],
         [SYO, 6, SO, 7],
         [SO, 7, SO, 8],
@@ -1818,16 +1818,23 @@
             var midX = (x1 + x2) / 2;
             d = 'M ' + x1 + ' ' + y1 + ' H ' + midX + ' V ' + y2 + ' H ' + x2;
           } else {
-            // Doel ligt eronder (zelfde/linker kolom): verlaat rechts, zak in de
-            // goot net RECHTS van de kolom naar beneden (deze neerwaartse lijnen
-            // lopen dezelfde kant op en vallen daar samen; de opwaartse lijnen
-            // lopen links ervan, dus tegengestelde richtingen blijven apart), en
-            // buig vlak boven het doel om zodat de pijl van LINKS binnenkomt.
+            // Doel in dezelfde/linker kolom: verlaat rechts via de goot net RECHTS
+            // van de kolom (gelijke richting valt daar samen; tegengesteld loopt
+            // links ervan), en buig vlak bij het doel om zodat de pijl van LINKS
+            // binnenkomt. Werkt zowel omlaag (stap -> notificatie) als omhoog
+            // (notificatie -> stap die 'm leest).
             var sWrap = s.closest ? s.closest('.step-wrap') : null;
             var sBotY = (sWrap ? sWrap.getBoundingClientRect().bottom : sr.bottom) - gRect.top;
             var gutR = Math.max(x1, tr.right - gRect.left) + 14;
             var gutL = x2 - 16;
-            var yTurn = Math.max((tr.top - gRect.top) - 14, sBotY + 12);
+            var yTurn;
+            if (tr.bottom - gRect.top < sr.top - gRect.top) {
+              // Doel ligt erboven: omhoog en vlak onder het doel naar links.
+              yTurn = Math.min((tr.bottom - gRect.top) + 14, (sr.top - gRect.top) - 12);
+            } else {
+              // Doel ligt eronder: omlaag en vlak boven het doel naar links.
+              yTurn = Math.max((tr.top - gRect.top) - 14, sBotY + 12);
+            }
             d = 'M ' + x1 + ' ' + y1 + ' H ' + gutR + ' V ' + yTurn + ' H ' + gutL + ' V ' + y2 + ' H ' + x2;
           }
           var path = document.createElementNS(SVGNS, 'path');
