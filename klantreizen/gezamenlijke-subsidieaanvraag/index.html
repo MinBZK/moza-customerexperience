@@ -449,10 +449,11 @@
   .time-gap-inner {
     position: absolute; left: 0; right: 0;
     display: flex; flex-direction: column; align-items: center; gap: 8px;
+    opacity: .42; /* bewust naar achteren: trekt minder aandacht dan de stappen */
   }
   .time-gap-clock { color: var(--ink-mute); }
   .time-gap-label {
-    font-size: 11px; font-weight: 600; letter-spacing: .04em; color: var(--ink-soft);
+    font-size: 11px; font-weight: 500; letter-spacing: .04em; color: var(--ink-mute);
     white-space: nowrap; text-align: center;
   }
 
@@ -647,6 +648,24 @@
   .side-panel-body.is-rich .wmw-item { display: flex; align-items: flex-start; gap: 10px; margin: 0 0 13px; }
   .side-panel-body.is-rich .wmw-item strong { font-weight: 600; }
   .wmw-dot { flex-shrink: 0; width: 11px; height: 11px; border-radius: 50%; margin-top: 5px; box-shadow: 0 0 0 2px rgba(255,255,255,.3); }
+  /* Simpele verticale timeline: nu -> binnenkort -> toekomst. */
+  .side-panel-body.is-rich .tl { position: relative; margin-left: 5px; padding-left: 24px; }
+  .side-panel-body.is-rich .tl::before {
+    content: ''; position: absolute; left: 5px; top: 8px; bottom: 10px; width: 2px;
+    background: rgba(255,255,255,.22);
+  }
+  .side-panel-body.is-rich .tl-item { position: relative; margin: 0 0 26px; }
+  .side-panel-body.is-rich .tl-item:last-child { margin-bottom: 0; }
+  .side-panel-body.is-rich .tl-item::before {
+    content: ''; position: absolute; left: -24px; top: 5px; width: 12px; height: 12px;
+    border-radius: 50%; background: #fff; box-shadow: 0 0 0 3px #154273;
+  }
+  .side-panel-body.is-rich .tl-phase {
+    display: inline-block; font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+    color: rgba(255,255,255,.6); margin-bottom: 6px;
+  }
+  .side-panel-body.is-rich .tl-item .side-panel-heading { margin: 0 0 10px; font-size: 18px; }
   .side-panel-nav {
     display: flex; align-items: center; justify-content: space-between; gap: 10px;
     margin-top: 24px; padding-top: 16px;
@@ -884,7 +903,7 @@
           <div class="step-wrap">
             <div class="step" data-milestone="2">Maakt een concept-subsidieaanvraag op, ter waarde van € 145.000</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Logt in op MijnOverheid Zakelijk <button type="button" class="step-tag step-tag--info" data-persona="Sander (GreenFlow BV)" data-phase="Uitvoeren" data-step="Logt in op MijnOverheid Zakelijk" data-panel-title="Toekomst: autoriseren met de EUDI wallet" data-panel-body-ref="panelBodyEudi"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
+            <div class="step-verdieping">Logt in op MijnOverheid Zakelijk <button type="button" class="step-tag step-tag--info" data-persona="Sander (GreenFlow BV)" data-phase="Uitvoeren" data-step="Logt in op MijnOverheid Zakelijk" data-panel-title="Inloggen: nu en in de toekomst" data-panel-body-ref="panelBodyEudi"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Maakt een concept-subsidieaanvraag voor DEI+</div>
           </div>
@@ -2099,15 +2118,28 @@
 </main>
 
 <template id="panelBodyEudi">
-  <p>Gebruikers autoriseren altijd met hun eigen EUDI wallet. Die wallet draagt zowel de persoonsidentiteit als de bevoegdheidsattestatie die uit de EUBW komt. <button type="button" class="side-panel-more" data-more>Lees meer</button></p>
-  <div class="side-panel-more-content" data-more-content hidden>
-    <p>Concreet gaat dat zo. De onderneming laat via de EUBW een Digital Power of Attorney uitgeven aan een medewerker. Die attestatie wordt tegen het handelsregister (BRIS/BORIS) gecontroleerd, door een QTSP ondertekend en vervolgens in de EUDI wallet van die persoon geplaatst. Vanaf dat moment draagt de persoon de bevoegdheid zelf bij zich.</p>
-    <p>Bij een handeling namens het bedrijf presenteert de gebruiker met zijn EUDI wallet twee dingen tegelijk: wie hij is (persoonsidentiteit) en dat hij bevoegd is (de EUBW attestatie). De relying party verifieert die attestatie in real time op echtheid, geldigheid en of hij niet is ingetrokken, en autoriseert op basis daarvan de handeling.</p>
-    <p>Belangrijk is dat je zowel bij het inloggen als bij het goedkeuren technisch gezien altijd beide lagen doorloopt. Je authenticeert (je bewijst als houder van de wallet wie je bent) en je autoriseert (je toont met de EUBW attestatie aan dat je bevoegd bent te handelen). Bij inloggen namens de onderneming gebeurt dit om toegang te krijgen, bij goedkeuren om de specifieke handeling geldig te maken. In beide gevallen worden identiteit en bevoegdheid samen gepresenteerd en geverifieerd.</p>
-    <p>De EUBW is dus de bron die de bevoegdheid uitgeeft. De EUDI wallet is het instrument waarmee de gebruiker die bevoegdheid draagt en presenteert. De autorisatie gebeurt met de EUDI wallet, op basis van een attestatie die haar oorsprong heeft in de EUBW.</p>
+  <div class="tl">
+    <div class="tl-item">
+      <span class="tl-phase">Nu</span>
+      <h3 class="side-panel-heading">Inloggen met DigiD/eHerkenning</h3>
+    </div>
+    <div class="tl-item">
+      <span class="tl-phase">Binnenkort</span>
+      <h3 class="side-panel-heading">Inloggen kan ook met de EUDI wallet</h3>
+      <p class="side-panel-muted">Wordt binnenkort aangevuld.</p>
+    </div>
+    <div class="tl-item">
+      <span class="tl-phase">Toekomst</span>
+      <h3 class="side-panel-heading">Autoriseren met de EUDI wallet</h3>
+      <p>Gebruikers autoriseren altijd met hun eigen EUDI wallet. Die wallet draagt zowel de persoonsidentiteit als de bevoegdheidsattestatie die uit de EUBW komt. <button type="button" class="side-panel-more" data-more>Lees meer</button></p>
+      <div class="side-panel-more-content" data-more-content hidden>
+        <p>Concreet gaat dat zo. De onderneming laat via de EUBW een Digital Power of Attorney uitgeven aan een medewerker. Die attestatie wordt tegen het handelsregister (BRIS/BORIS) gecontroleerd, door een QTSP ondertekend en vervolgens in de EUDI wallet van die persoon geplaatst. Vanaf dat moment draagt de persoon de bevoegdheid zelf bij zich.</p>
+        <p>Bij een handeling namens het bedrijf presenteert de gebruiker met zijn EUDI wallet twee dingen tegelijk: wie hij is (persoonsidentiteit) en dat hij bevoegd is (de EUBW attestatie). De relying party verifieert die attestatie in real time op echtheid, geldigheid en of hij niet is ingetrokken, en autoriseert op basis daarvan de handeling.</p>
+        <p>Belangrijk is dat je zowel bij het inloggen als bij het goedkeuren technisch gezien altijd beide lagen doorloopt. Je authenticeert (je bewijst als houder van de wallet wie je bent) en je autoriseert (je toont met de EUBW attestatie aan dat je bevoegd bent te handelen). Bij inloggen namens de onderneming gebeurt dit om toegang te krijgen, bij goedkeuren om de specifieke handeling geldig te maken. In beide gevallen worden identiteit en bevoegdheid samen gepresenteerd en geverifieerd.</p>
+        <p>De EUBW is dus de bron die de bevoegdheid uitgeeft. De EUDI wallet is het instrument waarmee de gebruiker die bevoegdheid draagt en presenteert. De autorisatie gebeurt met de EUDI wallet, op basis van een attestatie die haar oorsprong heeft in de EUBW.</p>
+      </div>
+    </div>
   </div>
-  <h3 class="side-panel-heading">Nu: autoriseren met DigiD/eHerkenning.</h3>
-  <p class="side-panel-muted">Wordt binnenkort aangevuld.</p>
 </template>
 <template id="panelBodyWieMagWat">
   <div class="wmw-item"><span class="wmw-dot" style="background:var(--sander)"></span><span><strong>Sander</strong> is mede-aanvrager en vraagt goedkeuring voor de rol van penvoerder</span></div>
@@ -2133,8 +2165,8 @@
 </template>
 <template id="panelBodyWieMagWat5">
   <div class="wmw-item"><span class="wmw-dot" style="background:var(--sander)"></span><span><strong>Sander</strong> zet de samenwerking met Lotte stop en neemt het penvoerderschap zelf over</span></div>
-  <div class="wmw-item"><span class="wmw-dot" style="background:var(--lotte)"></span><span><strong>Lotte</strong>'s machtiging wordt ingetrokken; haar rol als penvoerder vervalt</span></div>
   <div class="wmw-item"><span class="wmw-dot" style="background:var(--wei)"></span><span><strong>Wei</strong> en <strong>Ahmed</strong> moeten de rolwijziging goedkeuren</span></div>
+  <div class="wmw-item"><span class="wmw-dot" style="background:var(--lotte)"></span><span><strong>Lotte</strong>'s machtiging wordt ingetrokken; haar rol als penvoerder vervalt</span></div>
 </template>
 <template id="panelBodyWieMagWat6">
   <p>Iedere mede-aanvrager mag de rol van penvoerder intrekken en heeft daar geen goedkeuring voor nodig van de anderen.</p>
