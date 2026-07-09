@@ -1200,13 +1200,15 @@
             <div class="step">Notificaties: bericht aan Sander, Wei en Ahmed met verzoek om gegevens aan te leveren</div>
           </div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-wrap">
+            <div class="step">Notificaties: melding aan Lotte dat de ontbrekende gegevens zijn aangeleverd door Sander, Wei en Ahmed</div>
+          </div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
             <div class="step">Notificaties: melding dat de aanvraag compleet is en in behandeling wordt genomen</div>
           </div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
         </div>
@@ -1465,10 +1467,9 @@
         ['Systeem' + U, 13, WA, 14],
         ['Sander' + U, 14, 'Lotte' + U, 15],
         [WA, 14, 'Lotte' + U, 15],
-        ['Lotte' + U, 15, 'Systeem' + U, 16],
-        ['Systeem' + U, 16, 'Sander' + U, 17],
-        ['Systeem' + U, 16, WA, 17],
-        ['Lotte' + U, 15, 'Lotte - Opvolgen', 0]
+        ['Lotte' + U, 15, 'Systeem' + U, 15],
+        ['Systeem' + U, 15, 'Sander' + U, 17],
+        ['Systeem' + U, 15, WA, 17]
       ];
       var flowSvg = document.createElementNS(SVGNS, 'svg');
       flowSvg.setAttribute('id', 'flowArrows');
@@ -1519,10 +1520,18 @@
           var s = flowCard(e[0], e[1]), t = flowCard(e[2], e[3]);
           if (!s || !t) return;
           var sr = s.getBoundingClientRect(), tr = t.getBoundingClientRect();
-          var x1 = sr.right - gRect.left, y1 = (sr.top + sr.bottom) / 2 - gRect.top;
-          var x2 = tr.left - gRect.left, y2 = (tr.top + tr.bottom) / 2 - gRect.top;
-          var midX = (x1 + x2) / 2;
-          var d = 'M ' + x1 + ' ' + y1 + ' H ' + midX + ' V ' + y2 + ' H ' + x2;
+          var sCx = (sr.left + sr.right) / 2 - gRect.left, tCx = (tr.left + tr.right) / 2 - gRect.left;
+          var d;
+          // Verticale flow: staat de bron recht boven het doel (zelfde kolom, doel
+          // lager), teken dan een rechte lijn van de onderkant naar de bovenkant.
+          if (Math.abs(sCx - tCx) < Math.min(sr.width, tr.width) * 0.6 && tr.top > sr.bottom - 4) {
+            d = 'M ' + sCx + ' ' + (sr.bottom - gRect.top) + ' V ' + (tr.top - gRect.top);
+          } else {
+            var x1 = sr.right - gRect.left, y1 = (sr.top + sr.bottom) / 2 - gRect.top;
+            var x2 = tr.left - gRect.left, y2 = (tr.top + tr.bottom) / 2 - gRect.top;
+            var midX = (x1 + x2) / 2;
+            d = 'M ' + x1 + ' ' + y1 + ' H ' + midX + ' V ' + y2 + ' H ' + x2;
+          }
           var path = document.createElementNS(SVGNS, 'path');
           path.setAttribute('class', 'flow-edge');
           path.setAttribute('d', d);
