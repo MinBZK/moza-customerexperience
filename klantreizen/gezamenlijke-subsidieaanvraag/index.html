@@ -535,6 +535,7 @@
   .step-tag.is-autorisatie { background: var(--auth); }
   .step-tag.is-inloggen { background: var(--authenticatie); }
   .step-tag.is-wmw { background: #6d4aa8; }
+  .step-tag.is-goedkeuren { background: #0f766e; }
 
   /* klikbare tag die een zijvenster met uitleg opent */
   .step-tag--info { border: none; cursor: pointer; font: inherit; }
@@ -647,6 +648,7 @@
   .legend-dot--alt { background: var(--alt); }
   .legend-dot--authenticatie { background: var(--authenticatie); }
   .legend-dot--autorisatie { background: var(--auth); }
+  .legend-dot--goedkeuren { background: #0f766e; }
 
   /* Toggle: gezamenlijke aanvraag */
   .toggle-row {
@@ -753,6 +755,7 @@
     <span class="legend-item"><span class="legend-dot legend-dot--alt"></span> Onderliggende stap of detail (stippellijn)</span>
     <span class="legend-item"><span class="legend-dot legend-dot--authenticatie"></span> Inloggen</span>
     <span class="legend-item"><span class="legend-dot legend-dot--autorisatie"></span> Autorisatiemoment</span>
+    <span class="legend-item"><span class="legend-dot legend-dot--goedkeuren"></span> Goedkeuren</span>
     <span class="legend-item">→ stappen lopen links naar rechts</span>
   </div>
 
@@ -870,7 +873,7 @@
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Uploadt documenten</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Accepteert delen gegevens met Lotte <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span></div>
+            <div class="step-verdieping">Accepteert delen gegevens met Lotte <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Goedkeuren</span></div>
           </div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
@@ -964,14 +967,14 @@
           <div class="step-wrap">
             <div class="step step--auth">
               Accepteert rol-verzoeken
-              <button type="button" class="step-tag step-tag--info" data-persona="Wei &amp; Ahmed" data-phase="Uitvoeren" data-step="Accepteert rol-verzoeken" data-panel-title="Wie mag wat" data-panel-body="Op dit moment zijn de rollen door iedere partij vastgelegd:&#10;1. Sander, Wei en Ahmed als mede-indieners&#10;2. Sander als penvoerder&#10;&#10;Wie mag dit?&#10;Mag Sander zichzelf aanwijzen als penvoerder? Nee - mag pas namens het collectief handelen zodra hij formeel is aangewezen.&#10;&#10;Wie mag wat?&#10;Sander is op dit moment nog geen penvoerder. Dit is pas formeel als alle mede-indieners hiermee akkoord zijn gegaan."><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button>
+              <button type="button" class="step-tag step-tag--info" data-persona="Wei &amp; Ahmed" data-phase="Uitvoeren" data-step="Accepteert rol-verzoeken" data-panel-title="Wie mag wat" data-panel-body="Op dit moment zijn de rollen door iedere partij vastgelegd:&#10;1. Sander, Wei en Ahmed als mede-indieners&#10;2. Sander als penvoerder&#10;&#10;Wie mag dit?&#10;Mag Sander zichzelf aanwijzen als penvoerder? Nee - mag pas namens het collectief handelen zodra hij formeel is aangewezen.&#10;&#10;Wie mag wat?&#10;Sander is op dit moment nog geen penvoerder. Dit is pas formeel als alle mede-indieners hiermee akkoord zijn gegaan."><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Goedkeuren<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button>
             </div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Logt in op MijnOverheid Zakelijk <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen</span></div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Leest notificatie</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Accepteert de rol van mede-indieners <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span></div>
+            <div class="step-verdieping">Accepteert de rol van mede-indieners <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Goedkeuren</span></div>
           </div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
@@ -985,7 +988,7 @@
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Leest notificatie</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Accepteert Lotte als penvoerder <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span></div>
+            <div class="step-verdieping">Accepteert Lotte als penvoerder <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Goedkeuren</span></div>
           </div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
@@ -1008,7 +1011,7 @@
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Uploadt documenten</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Accepteert delen gegevens met Lotte <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span></div>
+            <div class="step-verdieping">Accepteert delen gegevens met Lotte <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Goedkeuren</span></div>
           </div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
@@ -1092,7 +1095,7 @@
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Logt in op MijnOverheid Zakelijk <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen</span></div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Accepteert de rol van penvoerder <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span></div>
+            <div class="step-verdieping">Accepteert de rol van penvoerder <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Goedkeuren</span></div>
           </div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
@@ -1189,7 +1192,7 @@
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step">Notificaties: verzoek dat Sander, Wei en Ahmed gegevens aanleveren</div>
+            <div class="step">Notificaties: bericht aan Sander, Wei en Ahmed met verzoek om gegevens aan te leveren</div>
           </div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
@@ -1424,6 +1427,7 @@
       document.querySelectorAll('.step-tag').forEach(function (t) {
         var label = t.textContent.trim().toLowerCase();
         if (label.indexOf('wie mag wat') !== -1) t.classList.add('is-wmw');
+        else if (label.indexOf('goedkeuren') !== -1) t.classList.add('is-goedkeuren');
         else if (label.indexOf('inloggen') !== -1) t.classList.add('is-inloggen');
         else if (label.indexOf('authenticatie') !== -1) t.classList.add('is-authenticatie');
         else if (label.indexOf('autorisatie') !== -1) t.classList.add('is-autorisatie');
