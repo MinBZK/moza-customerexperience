@@ -527,15 +527,11 @@
      overspant, verticaal gecentreerd, zodat hun stappen maar één keer
      voorkomen. Uitvoeren = kolom 3, Opvolgen = kolom 4. */
   .phase-cell--wa-u { grid-column: 3; grid-row: span 2; display: flex; align-items: center; }
-  .phase-cell--wa-o { grid-column: 4; grid-row: span 2; display: flex; align-items: stretch; }
-  .phase-cell--wa-o .step-row { align-items: center; }
-  /* Alleen bij Ahmeds solo-stap splitst de gedeelde baan: zijn kaart zakt naar
-     de onderste (Ahmed-)helft, met een scheidslijn op de grens Wei/Ahmed. */
-  .phase-cell--wa-o .step-wrap.wa-solo-ahmed { align-self: stretch; justify-content: flex-end; position: relative; }
-  .wa-solo-ahmed::before {
-    content: ''; position: absolute; left: -10px; right: -10px; top: 50%;
-    border-top: 1px dashed var(--border);
-  }
+  .phase-cell--wa-o { grid-column: 4; grid-row: span 2; display: flex; align-items: center; }
+  /* Ahmeds solo-stap ("Trekt rol penvoerder in") hoort bij Ahmed alleen; hij
+     wordt via JS (alignAhmedSolo) verticaal uitgelijnd op de Ahmed-baan i.p.v.
+     midden in de gedeelde Wei & Ahmed-cel. */
+  .phase-cell--wa-o .step-wrap.wa-solo-ahmed { position: relative; }
   /* Easter egg: verschijnt met "c", gluurt vanachter stap 4 om het hoekje. */
   .clippy-egg {
     position: absolute; top: -50px; right: -6px; width: 44px; height: 70px;
@@ -1485,8 +1481,21 @@
         minimapContent.style.height = fullH + 'px';
         minimapContent.style.transform = 'scale(' + scale + ')';
         updateRect();
+        alignAhmedSolo();
         drawFlow();
         drawTimeGap();
+      }
+
+      // Ahmeds solo-stap staat in de gedeelde Wei & Ahmed-cel maar hoort bij
+      // Ahmed alleen; lijn 'm verticaal uit op de Ahmed-baan (onderste helft).
+      function alignAhmedSolo() {
+        var solo = grid.querySelector('.wa-solo-ahmed');
+        var ahmedLabel = grid.querySelector('.lane-label.lane--ahmed');
+        if (!solo || !ahmedLabel) return;
+        solo.style.transform = 'none';
+        var sr = solo.getBoundingClientRect(), ar = ahmedLabel.getBoundingClientRect();
+        var dy = (ar.top + ar.bottom) / 2 - (sr.top + sr.bottom) / 2;
+        solo.style.transform = 'translateY(' + Math.round(dy) + 'px)';
       }
 
       function updateRect() {
@@ -1777,14 +1786,17 @@
             var midX = (x1 + x2) / 2;
             d = 'M ' + x1 + ' ' + y1 + ' H ' + midX + ' V ' + y2 + ' H ' + x2;
           } else {
-            // Doel ligt eronder (zelfde/linker kolom): verlaat rechts, zak strak
-            // in de goot net rechts van de kolom recht naar beneden, en haak het
-            // doel met een korte stub aan de rechterkant binnen. Deze neerwaartse
-            // lijnen lopen allemaal dezelfde kant op en mogen dus samenvallen in
-            // één goot; de opwaartse lijnen lopen via hun eigen route (het midden
-            // tussen de kolommen), zodat tegengestelde richtingen apart blijven.
+            // Doel ligt eronder (zelfde/linker kolom): verlaat rechts, zak in de
+            // goot net RECHTS van de kolom naar beneden (deze neerwaartse lijnen
+            // lopen dezelfde kant op en vallen daar samen; de opwaartse lijnen
+            // lopen links ervan, dus tegengestelde richtingen blijven apart), en
+            // buig vlak boven het doel om zodat de pijl van LINKS binnenkomt.
+            var sWrap = s.closest ? s.closest('.step-wrap') : null;
+            var sBotY = (sWrap ? sWrap.getBoundingClientRect().bottom : sr.bottom) - gRect.top;
             var gutR = Math.max(x1, tr.right - gRect.left) + 14;
-            d = 'M ' + x1 + ' ' + y1 + ' H ' + gutR + ' V ' + y2 + ' H ' + (tr.right - gRect.left);
+            var gutL = x2 - 16;
+            var yTurn = Math.max((tr.top - gRect.top) - 14, sBotY + 12);
+            d = 'M ' + x1 + ' ' + y1 + ' H ' + gutR + ' V ' + yTurn + ' H ' + gutL + ' V ' + y2 + ' H ' + x2;
           }
           var path = document.createElementNS(SVGNS, 'path');
           path.setAttribute('class', 'flow-edge');
