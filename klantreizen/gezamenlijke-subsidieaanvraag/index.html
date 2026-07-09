@@ -529,7 +529,7 @@
   .lane--weiahmed .step { background: #eceafb; color: #322d6e; }
   .lane--weiahmed .lane-avatar { color: var(--wei); }
   /* Markering "geldt voor Wei én Ahmed" bovenin elke gedeelde box. */
-  .wa-chip { display: inline-flex; align-items: center; gap: 5px; font-size: 10px; font-weight: 600; letter-spacing: .02em; color: var(--ink-soft); margin-bottom: 7px; }
+  .wa-chip { display: flex; width: fit-content; align-items: center; gap: 5px; font-size: 10px; font-weight: 600; letter-spacing: .02em; color: var(--ink-soft); margin-bottom: 7px; }
   .wa-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
   .wa-dot--wei { background: var(--wei); }
   .wa-dot--ahmed { background: var(--ahmed); }
@@ -964,7 +964,7 @@
           </div>
           <div class="step-connector step-connector--spacer step-connector--gap" data-gap-label="na 2 jaar" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step" data-milestone="8">Het collectief krijgt ruzie, en alle bedrijven pauzeren de beschikte aanvraag</div>
+            <div class="step" data-milestone="8">Het collectief krijgt ruzie met Sander</div>
           </div>
         </div>
       </div>
@@ -1083,7 +1083,15 @@
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer step-connector--gap" data-gap-label="na 2 jaar" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-wrap">
+            <div class="step" data-actor="Ahmed">Trekt rol penvoerder in <button type="button" class="step-tag step-tag--info" data-persona="Ahmed" data-phase="Opvolgen" data-step="Trekt rol penvoerder in" data-panel-title="Wie mag wat" data-panel-body-ref="panelBodyWieMagWat6">Wie mag wat<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Logt in op MijnOverheid Zakelijk <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen</span></div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Trekt de rol penvoerder van Sander in</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Keurt het intrekken goed <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Goedkeuren</span></div>
+          </div>
         </div>
       </div>
 
@@ -1176,9 +1184,7 @@
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap">
-            <div class="step">Rol vervalt nadat de machtiging is ingetrokken; het dossier stopt voor haar</div>
-          </div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
@@ -1612,7 +1618,8 @@
         [SYO, 4, WAO, 5],
         [WAO, 5, SYO, 6],
         [SYO, 6, SO, 7],
-        [SO, 7, SO, 8]
+        [SO, 7, SO, 8],
+        [SO, 8, WAO, 8]
       ];
       var flowSvg = document.createElementNS(SVGNS, 'svg');
       flowSvg.setAttribute('id', 'flowArrows');
@@ -1786,7 +1793,11 @@
       [].forEach.call(document.querySelectorAll('.lane--weiahmed .step-wrap > .step'), function (s) {
         var chip = document.createElement('div');
         chip.className = 'wa-chip';
-        chip.innerHTML = '<span class="wa-dot wa-dot--wei"></span><span class="wa-dot wa-dot--ahmed"></span>Wei &amp; Ahmed';
+        if (s.getAttribute('data-actor') === 'Ahmed') {
+          chip.innerHTML = '<span class="wa-dot wa-dot--ahmed"></span>Ahmed';
+        } else {
+          chip.innerHTML = '<span class="wa-dot wa-dot--wei"></span><span class="wa-dot wa-dot--ahmed"></span>Wei &amp; Ahmed';
+        }
         s.insertBefore(chip, s.firstChild);
       });
 
@@ -1845,7 +1856,7 @@
         { n: 5, phase: 'Opvolgen', text: 'Ontvangt voorschot' },
         { n: 6, phase: 'Opvolgen', text: 'Samenwerking met Lotte wordt stopgezet' },
         { n: 7, phase: 'Opvolgen', text: 'Sander is herbenoemd tot penvoerder' },
-        { n: 8, phase: 'Opvolgen', text: 'Collectief krijgt ruzie en pauzeert de aanvraag' }
+        { n: 8, phase: 'Opvolgen', text: 'Collectief krijgt ruzie met Sander' }
       ];
       var ZOOM_LABELS = { 1: 'Mijlpalen', 2: 'Hoofdlijnen', 3: 'Alle details' };
       var zoomOutBtn = document.getElementById('zoomOut');
@@ -2029,6 +2040,9 @@
   <div class="wmw-item"><span class="wmw-dot" style="background:var(--sander)"></span><span><strong>Sander</strong> zet de samenwerking met Lotte stop en neemt het penvoerderschap zelf over</span></div>
   <div class="wmw-item"><span class="wmw-dot" style="background:var(--lotte)"></span><span><strong>Lotte</strong>'s machtiging wordt ingetrokken; haar rol als penvoerder vervalt</span></div>
   <div class="wmw-item"><span class="wmw-dot" style="background:var(--wei)"></span><span><strong>Wei</strong> en <strong>Ahmed</strong> moeten de rolwijziging goedkeuren</span></div>
+</template>
+<template id="panelBodyWieMagWat6">
+  <p>Iedere mede-aanvrager mag de rol van penvoerder intrekken en heeft daar geen goedkeuring voor nodig van de anderen.</p>
 </template>
 <div class="side-scrim" id="sideScrim" hidden></div>
 <aside class="side-panel" id="sidePanel" role="dialog" aria-modal="true" aria-labelledby="sidePanelTitle" aria-hidden="true" hidden>
