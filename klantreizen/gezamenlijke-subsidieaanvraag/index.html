@@ -609,6 +609,7 @@
     font-family: 'IBM Plex Mono', monospace;
     font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
     color: rgba(255,255,255,.7); margin-bottom: 12px;
+    padding-right: 42px; /* ruimte voor het sluitkruisje rechtsboven */
   }
   /* De tag die deze overlay opende, als pill (dezelfde kleurcodering). */
   .side-panel-tag {
@@ -644,6 +645,14 @@
   .side-panel-body.is-rich .wmw-item { display: flex; align-items: flex-start; gap: 10px; margin: 0 0 13px; }
   .side-panel-body.is-rich .wmw-item strong { font-weight: 600; }
   .wmw-dot { flex-shrink: 0; width: 11px; height: 11px; border-radius: 50%; margin-top: 5px; box-shadow: 0 0 0 2px rgba(255,255,255,.3); }
+  /* Meerdere dots naast elkaar als één zin meerdere persona's noemt. */
+  .side-panel-body.is-rich .wmw-dots { display: flex; gap: 3px; flex-shrink: 0; margin-top: 5px; }
+  .side-panel-body.is-rich .wmw-dots .wmw-dot { margin-top: 0; }
+  /* Persona-namen in hun eigen kleur (consistente kleurcodering). */
+  .side-panel-body.is-rich strong.p-sander { color: var(--sander-tint); }
+  .side-panel-body.is-rich strong.p-wei { color: var(--wei-tint); }
+  .side-panel-body.is-rich strong.p-ahmed { color: var(--ahmed-tint); }
+  .side-panel-body.is-rich strong.p-lotte { color: var(--lotte-tint); }
   /* Simpele verticale timeline: nu -> binnenkort -> toekomst. */
   .side-panel-body.is-rich .tl { position: relative; margin-left: 5px; padding-left: 24px; }
   .side-panel-body.is-rich .tl::before {
@@ -911,7 +920,7 @@
           <div class="step-wrap">
             <div class="step step--auth">
               Geeft zichzelf de rol als mede-aanvrager en penvoerder
-              <button type="button" class="step-tag step-tag--info" data-persona="Sander (GreenFlow BV)" data-phase="Uitvoeren" data-step="Geeft zichzelf de rol als mede-aanvrager en penvoerder" data-panel-title="Wie mag wat" data-panel-body-ref="panelBodyWieMagWat">Wie mag wat<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button>
+              <button type="button" class="step-tag step-tag--info" data-persona="Sander (GreenFlow BV)" data-phase="Uitvoeren" data-step="Geeft zichzelf de rol als mede-aanvrager en penvoerder" data-panel-title="Wie mag wat?" data-panel-body-ref="panelBodyWieMagWat">Wie mag wat<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button>
             </div>
           </div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
@@ -931,7 +940,7 @@
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Koppelt Lotte aan de aanvraag als penvoerder</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Verzoek tot overdracht penvoerder rol aan Lotte <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Goedkeuren</span> <button type="button" class="step-tag step-tag--info" data-persona="Sander (GreenFlow BV)" data-phase="Uitvoeren" data-step="Verzoek tot overdracht penvoerder rol aan Lotte" data-panel-title="Wie mag wat" data-panel-body-ref="panelBodyWieMagWat2">Wie mag wat<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
+            <div class="step-verdieping">Verzoek tot overdracht penvoerder rol aan Lotte <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Goedkeuren</span> <button type="button" class="step-tag step-tag--info" data-persona="Sander (GreenFlow BV)" data-phase="Uitvoeren" data-step="Verzoek tot overdracht penvoerder rol aan Lotte" data-panel-title="Wie mag wat?" data-panel-body-ref="panelBodyWieMagWat2">Wie mag wat<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
           </div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
@@ -988,7 +997,7 @@
           </div>
           <div class="step-connector step-connector--spacer step-connector--gap" data-gap-label="na 1 jaar" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step" data-milestone="6">Samenwerking met Lotte wordt stopgezet <button type="button" class="step-tag step-tag--info" data-persona="Sander (GreenFlow BV)" data-phase="Opvolgen" data-step="Samenwerking met Lotte wordt stopgezet" data-panel-title="Wie mag wat" data-panel-body-ref="panelBodyWieMagWat5">Wie mag wat<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
+            <div class="step" data-milestone="6">Samenwerking met Lotte wordt stopgezet</div>
           </div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
@@ -996,7 +1005,7 @@
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Logt in op MijnOverheid Zakelijk <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen</span></div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Verzoek tot wijzigen rol penvoerder <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Goedkeuren</span> <button type="button" class="step-tag step-tag--info" data-persona="Sander (GreenFlow BV)" data-phase="Opvolgen" data-step="Verzoek tot wijzigen rol penvoerder" data-panel-title="Wie mag wat" data-panel-body-ref="panelBodyWieMagWat5">Wie mag wat<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
+            <div class="step-verdieping">Verzoek tot wijzigen rol penvoerder <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Goedkeuren</span> <button type="button" class="step-tag step-tag--info" data-persona="Sander (GreenFlow BV)" data-phase="Opvolgen" data-step="Verzoek tot wijzigen rol penvoerder" data-panel-title="Wie mag wat?" data-panel-body-ref="panelBodyWieMagWat5">Wie mag wat<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
           </div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
@@ -1036,7 +1045,7 @@
           <div class="step-wrap">
             <div class="step step--auth">
               Accepteren rol-verzoeken
-              <button type="button" class="step-tag step-tag--info" data-persona="Wei &amp; Ahmed" data-phase="Uitvoeren" data-step="Accepteren rol-verzoeken" data-panel-title="Wie mag wat" data-panel-body="Op dit moment zijn de rollen door iedere partij vastgelegd:&#10;1. Sander, Wei en Ahmed als mede-aanvragers&#10;2. Sander als penvoerder&#10;&#10;Wie mag dit?&#10;Mag Sander zichzelf aanwijzen als penvoerder? Nee - mag pas namens het collectief handelen zodra hij formeel is aangewezen.&#10;&#10;Wie mag wat?&#10;Sander is op dit moment nog geen penvoerder. Dit is pas formeel als alle mede-aanvragers hiermee akkoord zijn gegaan."><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Goedkeuren<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button>
+              <button type="button" class="step-tag step-tag--info" data-persona="Wei &amp; Ahmed" data-phase="Uitvoeren" data-step="Accepteren rol-verzoeken" data-panel-title="Wie mag wat?" data-panel-body="Op dit moment zijn de rollen door iedere partij vastgelegd:&#10;1. Sander, Wei en Ahmed als mede-aanvragers&#10;2. Sander als penvoerder&#10;&#10;Wie mag dit?&#10;Mag Sander zichzelf aanwijzen als penvoerder? Nee - mag pas namens het collectief handelen zodra hij formeel is aangewezen.&#10;&#10;Wie mag wat?&#10;Sander is op dit moment nog geen penvoerder. Dit is pas formeel als alle mede-aanvragers hiermee akkoord zijn gegaan."><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Goedkeuren<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button>
             </div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Loggen in op MijnOverheid Zakelijk <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen</span></div>
@@ -1128,7 +1137,7 @@
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer step-connector--gap" data-gap-label="na 2 jaar" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step" data-actor="Ahmed">Trekt rol penvoerder in <button type="button" class="step-tag step-tag--info" data-persona="Ahmed" data-phase="Opvolgen" data-step="Trekt rol penvoerder in" data-panel-title="Wie mag wat" data-panel-body-ref="panelBodyWieMagWat6">Wie mag wat<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
+            <div class="step" data-actor="Ahmed">Trekt rol penvoerder in <button type="button" class="step-tag step-tag--info" data-persona="Ahmed" data-phase="Opvolgen" data-step="Trekt rol penvoerder in" data-panel-title="Wie mag wat?" data-panel-body-ref="panelBodyWieMagWat6">Wie mag wat<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Logt in op MijnOverheid Zakelijk <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen</span></div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
@@ -1180,7 +1189,7 @@
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step">Accepteert de rol van penvoerder <button type="button" class="step-tag step-tag--info" data-persona="Lotte" data-phase="Uitvoeren" data-step="Accepteert de rol van penvoerder" data-panel-title="Wie mag wat" data-panel-body-ref="panelBodyWieMagWat3">Wie mag wat<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
+            <div class="step">Accepteert de rol van penvoerder <button type="button" class="step-tag step-tag--info" data-persona="Lotte" data-phase="Uitvoeren" data-step="Accepteert de rol van penvoerder" data-panel-title="Wie mag wat?" data-panel-body-ref="panelBodyWieMagWat3">Wie mag wat<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Logt in op MijnOverheid Zakelijk <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen</span></div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
@@ -1288,7 +1297,7 @@
       <div class="phase-cell lane--rvo" aria-label="RVO - Opvolgen">
         <div class="step-row">
           <div class="step-wrap">
-            <div class="step">Aanvraag wordt beschikt <button type="button" class="step-tag step-tag--info" data-persona="RVO" data-phase="Opvolgen" data-step="Aanvraag wordt beschikt" data-panel-title="Wie mag wat" data-panel-body-ref="panelBodyWieMagWat4">Wie mag wat<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
+            <div class="step">Aanvraag wordt beschikt <button type="button" class="step-tag step-tag--info" data-persona="RVO" data-phase="Opvolgen" data-step="Aanvraag wordt beschikt" data-panel-title="Wie mag wat?" data-panel-body-ref="panelBodyWieMagWat4">Wie mag wat<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Dossier is inzichtelijk voor alle partijen via hun machtigingen</div>
           </div>
@@ -2138,11 +2147,11 @@
     <div class="tl-item">
       <span class="tl-phase">Binnenkort</span>
       <h3 class="side-panel-heading">Inloggen kan ook met de EUDI wallet</h3>
-      <p class="side-panel-muted">Wordt binnenkort aangevuld.</p>
+      <p class="side-panel-muted">input nodig</p>
     </div>
     <div class="tl-item">
       <span class="tl-phase">Toekomst</span>
-      <h3 class="side-panel-heading">Autoriseren met de EUDI wallet</h3>
+      <h3 class="side-panel-heading">Autoriseren met de EUDI wallet met bevoegdheidsattestatie</h3>
       <p>Gebruikers autoriseren altijd met hun eigen EUDI wallet. Die wallet draagt zowel de persoonsidentiteit als de bevoegdheidsattestatie die uit de EUBW komt. <button type="button" class="side-panel-more" data-more>Lees meer</button></p>
       <div class="side-panel-more-content" data-more-content hidden>
         <p>Concreet gaat dat zo. De onderneming laat via de EUBW een Digital Power of Attorney uitgeven aan een medewerker. Die attestatie wordt tegen het handelsregister (BRIS/BORIS) gecontroleerd, door een QTSP ondertekend en vervolgens in de EUDI wallet van die persoon geplaatst. Vanaf dat moment draagt de persoon de bevoegdheid zelf bij zich.</p>
@@ -2154,31 +2163,31 @@
   </div>
 </template>
 <template id="panelBodyWieMagWat">
-  <div class="wmw-item"><span class="wmw-dot" style="background:var(--sander)"></span><span><strong>Sander</strong> is mede-aanvrager en vraagt goedkeuring voor de rol van penvoerder</span></div>
-  <div class="wmw-item"><span class="wmw-dot" style="background:var(--wei)"></span><span><strong>Wei</strong>, uitgenodigd door Sander als mede-aanvrager</span></div>
-  <div class="wmw-item"><span class="wmw-dot" style="background:var(--ahmed)"></span><span><strong>Ahmed</strong>, uitgenodigd door Sander als mede-aanvrager</span></div>
+  <div class="wmw-item"><span class="wmw-dot" style="background:var(--sander)"></span><span><strong class="p-sander">Sander</strong> is mede-aanvrager en vraagt goedkeuring voor de rol van penvoerder</span></div>
+  <div class="wmw-item"><span class="wmw-dot" style="background:var(--wei)"></span><span><strong class="p-wei">Wei</strong>, uitgenodigd door Sander als mede-aanvrager</span></div>
+  <div class="wmw-item"><span class="wmw-dot" style="background:var(--ahmed)"></span><span><strong class="p-ahmed">Ahmed</strong>, uitgenodigd door Sander als mede-aanvrager</span></div>
 </template>
 <template id="panelBodyWieMagWat2">
-  <div class="wmw-item"><span class="wmw-dot" style="background:var(--sander)"></span><span><strong>Sander</strong> is mede-aanvrager en penvoerder met de bevoegdheid voor roloverdracht</span></div>
-  <div class="wmw-item"><span class="wmw-dot" style="background:var(--wei)"></span><span><strong>Wei</strong> is mede-aanvrager en mag roloverdrachtswijzigingen goedkeuren</span></div>
-  <div class="wmw-item"><span class="wmw-dot" style="background:var(--ahmed)"></span><span><strong>Ahmed</strong> is mede-aanvrager en mag roloverdrachtswijzigingen goedkeuren</span></div>
+  <div class="wmw-item"><span class="wmw-dot" style="background:var(--sander)"></span><span><strong class="p-sander">Sander</strong> is mede-aanvrager en penvoerder met de bevoegdheid voor roloverdracht</span></div>
+  <div class="wmw-item"><span class="wmw-dot" style="background:var(--wei)"></span><span><strong class="p-wei">Wei</strong> is mede-aanvrager en mag roloverdrachtswijzigingen goedkeuren</span></div>
+  <div class="wmw-item"><span class="wmw-dot" style="background:var(--ahmed)"></span><span><strong class="p-ahmed">Ahmed</strong> is mede-aanvrager en mag roloverdrachtswijzigingen goedkeuren</span></div>
   <h3 class="side-panel-heading">Hoe</h3>
-  <div class="wmw-item"><span class="wmw-dot" style="background:rgba(255,255,255,.55)"></span><span>Zou Wei of Ahmed ook een verzoek tot roloverdracht kunnen indienen?</span></div>
+  <div class="wmw-item"><span class="wmw-dots"><span class="wmw-dot" style="background:var(--wei)"></span><span class="wmw-dot" style="background:var(--ahmed)"></span></span><span>Zou <strong class="p-wei">Wei</strong> of <strong class="p-ahmed">Ahmed</strong> ook een verzoek tot roloverdracht kunnen indienen?</span></div>
 </template>
 <template id="panelBodyWieMagWat3">
-  <div class="wmw-item"><span class="wmw-dot" style="background:var(--sander)"></span><span><strong>Sander</strong>, mede-aanvrager</span></div>
-  <div class="wmw-item"><span class="wmw-dot" style="background:var(--wei)"></span><span><strong>Wei</strong>, mede-aanvrager</span></div>
-  <div class="wmw-item"><span class="wmw-dot" style="background:var(--ahmed)"></span><span><strong>Ahmed</strong>, mede-aanvrager</span></div>
-  <div class="wmw-item"><span class="wmw-dot" style="background:var(--lotte)"></span><span><strong>Lotte</strong>, penvoerder. Zij dient de aanvraag in namens het collectief</span></div>
+  <div class="wmw-item"><span class="wmw-dot" style="background:var(--sander)"></span><span><strong class="p-sander">Sander</strong>, mede-aanvrager</span></div>
+  <div class="wmw-item"><span class="wmw-dot" style="background:var(--wei)"></span><span><strong class="p-wei">Wei</strong>, mede-aanvrager</span></div>
+  <div class="wmw-item"><span class="wmw-dot" style="background:var(--ahmed)"></span><span><strong class="p-ahmed">Ahmed</strong>, mede-aanvrager</span></div>
+  <div class="wmw-item"><span class="wmw-dot" style="background:var(--lotte)"></span><span><strong class="p-lotte">Lotte</strong>, penvoerder. Zij dient de aanvraag in namens het collectief</span></div>
 </template>
 <template id="panelBodyWieMagWat4">
   <p>Het dossier is inzichtelijk voor alle betrokken partijen via hun machtigingen.</p>
   <p>Niet alles is voor iedereen zichtbaar: gevoelige gegevens zoals het bankrekeningnummer worden afgeschermd.</p>
 </template>
 <template id="panelBodyWieMagWat5">
-  <div class="wmw-item"><span class="wmw-dot" style="background:var(--sander)"></span><span><strong>Sander</strong> zet de samenwerking met Lotte stop en neemt het penvoerderschap zelf over</span></div>
-  <div class="wmw-item"><span class="wmw-dot" style="background:var(--wei)"></span><span><strong>Wei</strong> en <strong>Ahmed</strong> moeten de rolwijziging goedkeuren</span></div>
-  <div class="wmw-item"><span class="wmw-dot" style="background:var(--lotte)"></span><span><strong>Lotte</strong>'s machtiging wordt ingetrokken; haar rol als penvoerder vervalt</span></div>
+  <div class="wmw-item"><span class="wmw-dot" style="background:var(--sander)"></span><span><strong class="p-sander">Sander</strong> zet de samenwerking met Lotte stop en neemt het penvoerderschap zelf over</span></div>
+  <div class="wmw-item"><span class="wmw-dots"><span class="wmw-dot" style="background:var(--wei)"></span><span class="wmw-dot" style="background:var(--ahmed)"></span></span><span><strong class="p-wei">Wei</strong> en <strong class="p-ahmed">Ahmed</strong> moeten de rolwijziging goedkeuren</span></div>
+  <div class="wmw-item"><span class="wmw-dot" style="background:var(--lotte)"></span><span><strong class="p-lotte">Lotte</strong>'s machtiging wordt ingetrokken; haar rol als penvoerder vervalt</span></div>
 </template>
 <template id="panelBodyWieMagWat6">
   <p>Iedere mede-aanvrager mag de rol van penvoerder intrekken en heeft daar geen goedkeuring voor nodig van de anderen.</p>
@@ -2212,6 +2221,23 @@
     // Alle info-knoppen (ⓘ) in documentvolgorde = ongeveer de volgorde in de
     // klantreis; hierdoor kun je met vorige/volgende door alle vraagstukken.
     var infos = [].slice.call(document.querySelectorAll('#journeyGrid .step-tag--info'));
+    // Doorblader-volgorde volgt de canvas-orientatie: eerst links->rechts (tijd),
+    // dan boven->onder (baan). We nemen de positie van de kolom (step-wrap).
+    (function sortInfosByReadingOrder() {
+      var g = document.getElementById('journeyGrid');
+      if (!g) return;
+      var gr = g.getBoundingClientRect();
+      function pos(btn) {
+        var w = btn.closest('.step-wrap') || btn;
+        var r = w.getBoundingClientRect();
+        return { x: r.left - gr.left, y: r.top - gr.top };
+      }
+      infos.sort(function (a, b) {
+        var pa = pos(a), pb = pos(b);
+        if (Math.abs(pa.x - pb.x) > 10) return pa.x - pb.x;
+        return pa.y - pb.y;
+      });
+    })();
     var current = -1;
 
     var viewport = document.getElementById('journeyViewport');
@@ -2252,14 +2278,14 @@
         .filter(Boolean).join(' · ');
       ctxEl.textContent = ctx;
       // Toon de tag die deze overlay opende, als pill met dezelfde kleurcodering.
+      // Bij "Wie mag wat" niet als pill: dat staat al (met vraagteken) in de titel.
       var tagEl = document.getElementById('sidePanelTag');
       var tagLabel = (btn.textContent || '').trim();
-      if (tagLabel) {
+      var low = tagLabel.toLowerCase();
+      if (tagLabel && low.indexOf('wie mag wat') === -1) {
         tagEl.textContent = tagLabel;
         tagEl.className = 'side-panel-tag';
-        var low = tagLabel.toLowerCase();
-        if (low.indexOf('wie mag wat') !== -1) tagEl.classList.add('is-wmw');
-        else if (low.indexOf('goedkeuren') !== -1) tagEl.classList.add('is-goedkeuren');
+        if (low.indexOf('goedkeuren') !== -1) tagEl.classList.add('is-goedkeuren');
         else if (low.indexOf('inloggen') !== -1) tagEl.classList.add('is-inloggen');
         tagEl.hidden = false;
       } else { tagEl.hidden = true; }
