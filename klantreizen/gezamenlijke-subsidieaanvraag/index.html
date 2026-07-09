@@ -409,6 +409,25 @@
      stap in een andere zwembaan (Sander is leidend). */
   .step-wrap--spacer, .step-connector--spacer { visibility: hidden; }
 
+  /* Bredere tussenruimte waar de "na 2 weken"-tijdmarker doorheen loopt. */
+  .step-connector--gap { min-width: 60px; }
+
+  /* Verticale tijdmarker ("na 2 weken") die door alle rijen van het canvas
+     loopt (onder de fasekoppen), op de plek waar de tijd verstrijkt voordat
+     het voorschot wordt uitbetaald. */
+  .time-gap {
+    position: absolute; z-index: 1; pointer-events: none;
+    width: 56px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+    border-left: 1px dashed var(--ink-mute); border-right: 1px dashed var(--ink-mute);
+    background: rgba(120, 120, 140, .05);
+  }
+  .time-gap-clock { color: var(--ink-mute); }
+  .time-gap-label {
+    writing-mode: vertical-rl;
+    font-size: 11px; font-weight: 600; letter-spacing: .04em; color: var(--ink-soft);
+  }
+
   /* De horizontale connector reserveert alleen de tussenruimte; de pijl zelf
      wordt als doorlopende SVG-lijn getekend (flow-overlay), net als de pijlen
      tussen de banen. Daarom is de "→" glyph transparant (behoudt wel breedte). */
@@ -865,8 +884,14 @@
       </div>
       <div class="phase-cell lane--sander" aria-label="Sander - Opvolgen">
         <div class="step-row">
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer step-connector--gap" aria-hidden="true">&rarr;</div>
           <div class="step-wrap">
             <div class="step" data-milestone="5">Ontvangt het voorschot in tranches</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Logt in op MijnOverheid Zakelijk <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span></div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Leest notificatie</div>
           </div>
           <div class="step-connector" aria-hidden="true">→</div>
           <div class="step-wrap">
@@ -997,8 +1022,14 @@
       </div>
       <div class="phase-cell phase-cell--wa-o lane--weiahmed" aria-label="Wei & Ahmed - Opvolgen">
         <div class="step-row">
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer step-connector--gap" aria-hidden="true">&rarr;</div>
           <div class="step-wrap">
             <div class="step">Ontvangt het voorschot in tranches</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Logt in op MijnOverheid Zakelijk <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span></div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Leest notificatie</div>
           </div>
           <div class="step-connector" aria-hidden="true">→</div>
           <div class="step-wrap">
@@ -1093,11 +1124,9 @@
               <div class="step-vraagstuk-body">Wat mag je zien? Bijvoorbeeld het bankrekeningnummer niet.</div>
             </details>
           </div>
-          <div class="step-connector" aria-hidden="true">→</div>
+          <div class="step-connector step-connector--spacer step-connector--gap" aria-hidden="true">→</div>
           <div class="step-wrap">
             <div class="step">Na 2 weken wordt het voorschot in tranches uitbetaald</div>
-            <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Voortgangsnotificatie naar iedereen</div>
           </div>
           <div class="step-connector" aria-hidden="true">→</div>
           <div class="step-wrap">
@@ -1170,7 +1199,15 @@
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
         </div>
       </div>
-      <div class="phase-cell lane--systeem" aria-label="Systeem - Opvolgen"></div>
+      <div class="phase-cell lane--systeem" aria-label="Systeem - Opvolgen">
+        <div class="step-row">
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer step-connector--gap" aria-hidden="true">&rarr;</div>
+          <div class="step-wrap">
+            <div class="step">Voortgangsnotificaties voor uitbetaling voorschot</div>
+          </div>
+        </div>
+      </div>
 
       <!-- Systeem-diensten: sublanen, voorlopig leeg. Zichtbaar wanneer de
            Systeem-baan wordt uitgeklapt (.journey-grid.systeem-open). -->
@@ -1254,6 +1291,7 @@
         minimapContent.style.transform = 'scale(' + scale + ')';
         updateRect();
         drawFlow();
+        drawTimeGap();
       }
 
       function updateRect() {
@@ -1422,6 +1460,28 @@
       flowSvg.setAttribute('class', 'flow-arrows');
       flowSvg.innerHTML = '<defs><marker id="flowArrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z"/></marker></defs>';
       grid.appendChild(flowSvg);
+
+      // Verticale "na 2 weken"-tijdmarker: door alle rijen (onder de fasekoppen),
+      // op de bredere tussenruimte (.step-connector--gap) in de Opvolgen-fase.
+      var timeGap = document.createElement('div');
+      timeGap.className = 'time-gap';
+      timeGap.id = 'timeGap';
+      timeGap.innerHTML = '<svg class="time-gap-clock" width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.5"/><path d="M12 7.5V12l3 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="time-gap-label">na 2 weken</span>';
+      grid.appendChild(timeGap);
+
+      function drawTimeGap() {
+        var gap = grid.querySelector('.step-connector--gap');
+        var head = grid.querySelector('.phase-head');
+        if (!gap || !head) { timeGap.style.display = 'none'; return; }
+        var gRect = grid.getBoundingClientRect();
+        var cr = gap.getBoundingClientRect();
+        var headH = head.getBoundingClientRect().height;
+        var cx = (cr.left + cr.right) / 2 - gRect.left;
+        timeGap.style.display = 'flex';
+        timeGap.style.left = (cx - 28) + 'px';
+        timeGap.style.top = headH + 'px';
+        timeGap.style.height = (grid.scrollHeight - headH) + 'px';
+      }
 
       function flowCard(label, col) {
         var cell = grid.querySelector('[aria-label="' + label + '"]');
