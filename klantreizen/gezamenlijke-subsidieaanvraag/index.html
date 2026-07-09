@@ -37,6 +37,8 @@
     --lotte-tint: #f3e8ff;
     --systeem: #475569;
     --systeem-tint: #e2e8f0;
+    --rvo: #b45309;
+    --rvo-tint: #fdebd0;
 
     /* alternatieve-route kleur (verdieping onder een stap), los van de
        persona-kleuren zodat 'm meteen als iets anders herkenbaar is */
@@ -353,6 +355,11 @@
     display: flex; align-items: center; justify-content: center;
     box-shadow: 0 0 0 2px var(--white), 0 0 0 4px var(--systeem);
   }
+  .lane-avatar--rvo {
+    background: var(--rvo); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 0 2px var(--white), 0 0 0 4px var(--rvo);
+  }
   .lane-name { font-size: 16px; font-weight: 600; color: var(--ink); }
   .lane-role { font-size: 13px; color: var(--ink-soft); line-height: 1.4; }
   .lane-link {
@@ -393,6 +400,7 @@
   .lane--ahmed .step { background: var(--ahmed-tint); color: var(--ahmed); }
   .lane--lotte .step { background: var(--lotte-tint); color: var(--lotte); }
   .lane--systeem .step { background: var(--systeem-tint); color: var(--systeem); }
+  .lane--rvo .step { background: var(--rvo-tint); color: var(--rvo); }
 
   /* extra zwembanen (gezamenlijke aanvraag met andere onderneming) -
      standaard verborgen, tonen via de toggle hierboven de journey-grid */
@@ -410,22 +418,23 @@
   .step-wrap--spacer, .step-connector--spacer { visibility: hidden; }
 
   /* Bredere tussenruimte waar de "na 2 weken"-tijdmarker doorheen loopt. */
-  .step-connector--gap { min-width: 60px; }
+  .step-connector--gap { min-width: 78px; }
 
   /* Verticale tijdmarker ("na 2 weken") die door alle rijen van het canvas
      loopt (onder de fasekoppen), op de plek waar de tijd verstrijkt voordat
      het voorschot wordt uitbetaald. */
   .time-gap {
     position: absolute; z-index: 1; pointer-events: none;
-    width: 56px;
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+    width: 74px;
+    display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 8px;
+    padding-top: 18px;
     border-left: 1px dashed var(--ink-mute); border-right: 1px dashed var(--ink-mute);
     background: rgba(120, 120, 140, .05);
   }
   .time-gap-clock { color: var(--ink-mute); }
   .time-gap-label {
-    writing-mode: vertical-rl;
     font-size: 11px; font-weight: 600; letter-spacing: .04em; color: var(--ink-soft);
+    white-space: nowrap; text-align: center;
   }
 
   /* De horizontale connector reserveert alleen de tussenruimte; de pijl zelf
@@ -756,7 +765,6 @@
     <span class="legend-item"><span class="legend-dot legend-dot--systeem"></span> Systeem - automatische acties (MOZa)</span>
     <span class="legend-item"><span class="legend-dot legend-dot--alt"></span> Onderliggende stap of detail (stippellijn)</span>
     <span class="legend-item"><span class="legend-dot legend-dot--authenticatie"></span> Inloggen</span>
-    <span class="legend-item"><span class="legend-dot legend-dot--autorisatie"></span> Autorisatiemoment</span>
     <span class="legend-item"><span class="legend-dot legend-dot--goedkeuren"></span> Goedkeuren</span>
     <span class="legend-item">→ stappen lopen links naar rechts</span>
   </div>
@@ -824,13 +832,13 @@
           </div>
           <div class="step-connector" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step">Nodigt Wei en Ahmed uit als mede-indiener</div>
+            <div class="step">Nodigt Wei en Ahmed uit als mede-aanvrager</div>
           </div>
           <div class="step-connector" aria-hidden="true">→</div>
           <div class="step-wrap">
             <div class="step step--auth">
-              Geeft zichzelf de rol als mede-indiener en penvoerder
-              <button type="button" class="step-tag step-tag--info" data-persona="Sander (GreenFlow BV)" data-phase="Uitvoeren" data-step="Geeft zichzelf de rol als mede-indiener en penvoerder" data-panel-title="Wie mag wat" data-panel-body-ref="panelBodyWieMagWat">Wie mag wat<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button>
+              Geeft zichzelf de rol als mede-aanvrager en penvoerder
+              <button type="button" class="step-tag step-tag--info" data-persona="Sander (GreenFlow BV)" data-phase="Uitvoeren" data-step="Geeft zichzelf de rol als mede-aanvrager en penvoerder" data-panel-title="Wie mag wat" data-panel-body-ref="panelBodyWieMagWat">Wie mag wat<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button>
             </div>
           </div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
@@ -842,8 +850,8 @@
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
             <div class="step step--auth" data-milestone="3">
-              Draagt het penvoerderschap over aan Lotte
-              <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span>
+              Gezamenlijk besluit om Lotte penvoerder te maken en draagt het over
+             
             </div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Logt in op MijnOverheid Zakelijk <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen</span></div>
@@ -868,7 +876,6 @@
           <div class="step-wrap">
             <div class="step step--auth">
               Autoriseert en levert de gegevens aan
-              <button type="button" class="step-tag step-tag--info" data-persona="Sander (GreenFlow BV)" data-phase="Uitvoeren" data-step="Autoriseert en levert de gegevens aan" data-panel-title="Aanvullende gegevens via de EUDI wallet" data-panel-body="Via de EUDI wallet kan de ondernemer, naast zijn identiteit en bevoegdheid, ook aanvullende gegevens (attestaties) rechtstreeks aanleveren die voor de aanvraag nodig zijn. Dit gaat samen met het uploaden van de gevraagde documenten."><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button>
             </div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Logt in op MijnOverheid Zakelijk <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen</span></div>
@@ -912,7 +919,7 @@
           <div class="step-wrap">
             <div class="step step--auth" data-milestone="6">
               Na uitkering 4 (jaar 1 van 4 voldaan): trekt als eerste ondernemer de machtiging van Lotte in
-              <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span>
+             
             </div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Ondertekent</div>
@@ -925,7 +932,7 @@
           <div class="step-wrap">
             <div class="step step--auth" data-milestone="7">
               Wordt door het collectief benoemd tot penvoerder (GreenFlow)
-              <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span>
+             
             </div>
             <details class="step-vraagstuk">
               <summary><svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.3" stroke="currentColor" stroke-width="1.3"/><path d="M6.2 6.3a1.8 1.8 0 1 1 2.6 1.6c-.6.35-.8.7-.8 1.3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="8" cy="11.2" r=".2" fill="currentColor"/></svg>Vraagstuk</summary>
@@ -940,7 +947,7 @@
           <div class="step-wrap">
             <div class="step step--auth" data-milestone="8">
               Na 2 jaar: stapt na onenigheid op als penvoerder; het collectief valt uit elkaar
-              <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span>
+             
             </div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">De subsidie wordt gepauzeerd tot er duidelijkheid is</div>
@@ -970,15 +977,15 @@
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
             <div class="step step--auth">
-              Accepteert rol-verzoeken
-              <button type="button" class="step-tag step-tag--info" data-persona="Wei &amp; Ahmed" data-phase="Uitvoeren" data-step="Accepteert rol-verzoeken" data-panel-title="Wie mag wat" data-panel-body="Op dit moment zijn de rollen door iedere partij vastgelegd:&#10;1. Sander, Wei en Ahmed als mede-indieners&#10;2. Sander als penvoerder&#10;&#10;Wie mag dit?&#10;Mag Sander zichzelf aanwijzen als penvoerder? Nee - mag pas namens het collectief handelen zodra hij formeel is aangewezen.&#10;&#10;Wie mag wat?&#10;Sander is op dit moment nog geen penvoerder. Dit is pas formeel als alle mede-indieners hiermee akkoord zijn gegaan."><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Goedkeuren<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button>
+              Accepteren rol-verzoeken
+              <button type="button" class="step-tag step-tag--info" data-persona="Wei &amp; Ahmed" data-phase="Uitvoeren" data-step="Accepteren rol-verzoeken" data-panel-title="Wie mag wat" data-panel-body="Op dit moment zijn de rollen door iedere partij vastgelegd:&#10;1. Sander, Wei en Ahmed als mede-aanvragers&#10;2. Sander als penvoerder&#10;&#10;Wie mag dit?&#10;Mag Sander zichzelf aanwijzen als penvoerder? Nee - mag pas namens het collectief handelen zodra hij formeel is aangewezen.&#10;&#10;Wie mag wat?&#10;Sander is op dit moment nog geen penvoerder. Dit is pas formeel als alle mede-aanvragers hiermee akkoord zijn gegaan."><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Goedkeuren<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button>
             </div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Logt in op MijnOverheid Zakelijk <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen</span></div>
+            <div class="step-verdieping">Loggen in op MijnOverheid Zakelijk <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen</span></div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Leest bericht</div>
+            <div class="step-verdieping">Lezen bericht</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Accepteert de rol van mede-indieners <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Goedkeuren</span></div>
+            <div class="step-verdieping">Accepteren de rol van mede-aanvragers <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Goedkeuren</span></div>
           </div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
@@ -986,13 +993,13 @@
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step">Accepteert Lotte als penvoerder</div>
+            <div class="step">Accepteren Lotte als penvoerder</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Logt in op MijnOverheid Zakelijk <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen</span></div>
+            <div class="step-verdieping">Loggen in op MijnOverheid Zakelijk <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen</span></div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Leest bericht</div>
+            <div class="step-verdieping">Lezen bericht</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Accepteert Lotte als penvoerder <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Goedkeuren</span></div>
+            <div class="step-verdieping">Accepteren Lotte als penvoerder <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Goedkeuren</span></div>
           </div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
@@ -1005,17 +1012,16 @@
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
             <div class="step step--auth">
-              Autoriseert en levert de gegevens aan
-              <button type="button" class="step-tag step-tag--info" data-persona="Wei &amp; Ahmed" data-phase="Uitvoeren" data-step="Autoriseert en levert de gegevens aan" data-panel-title="Aanvullende gegevens via de EUDI wallet" data-panel-body="Via de EUDI wallet kan de ondernemer, naast zijn identiteit en bevoegdheid, ook aanvullende gegevens (attestaties) rechtstreeks aanleveren die voor de aanvraag nodig zijn. Dit gaat samen met het uploaden van de gevraagde documenten."><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button>
+              Autoriseren en leveren de gegevens aan
             </div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Logt in op MijnOverheid Zakelijk <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen</span></div>
+            <div class="step-verdieping">Loggen in op MijnOverheid Zakelijk <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen</span></div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Leest bericht</div>
+            <div class="step-verdieping">Lezen bericht</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Uploadt documenten</div>
+            <div class="step-verdieping">Uploaden documenten</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Accepteert delen gegevens met Lotte <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Goedkeuren</span></div>
+            <div class="step-verdieping">Accepteren delen gegevens met Lotte <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Goedkeuren</span></div>
           </div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
@@ -1023,11 +1029,11 @@
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step">Ontvangt de notificatie</div>
+            <div class="step">Ontvangen de notificatie</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Logt in op MijnOverheid Zakelijk <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen</span></div>
+            <div class="step-verdieping">Loggen in op MijnOverheid Zakelijk <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen</span></div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Leest bericht</div>
+            <div class="step-verdieping">Lezen bericht</div>
           </div>
         </div>
       </div>
@@ -1036,17 +1042,17 @@
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer step-connector--gap" aria-hidden="true">&rarr;</div>
           <div class="step-wrap">
-            <div class="step">Ontvangt het voorschot in tranches</div>
+            <div class="step">Ontvangen het voorschot in tranches</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Logt in op MijnOverheid Zakelijk <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen</span></div>
+            <div class="step-verdieping">Loggen in op MijnOverheid Zakelijk <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen</span></div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Leest bericht</div>
+            <div class="step-verdieping">Lezen bericht</div>
           </div>
           <div class="step-connector" aria-hidden="true">→</div>
           <div class="step-wrap">
             <div class="step step--auth">
-              Trekt de machtiging in
-              <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span>
+              Trekken de machtiging in
+             
             </div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Het terugtrekken moet meteen overal doorwerken, zodat niemand nog namens het collectief handelt</div>
@@ -1095,7 +1101,7 @@
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step">Accepteert de rol van penvoerder</div>
+            <div class="step">Accepteert de rol van penvoerder <button type="button" class="step-tag step-tag--info" data-persona="Lotte" data-phase="Uitvoeren" data-step="Accepteert de rol van penvoerder" data-panel-title="Wie mag wat" data-panel-body-ref="panelBodyWieMagWat3">Wie mag wat<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Logt in op MijnOverheid Zakelijk <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen</span></div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
@@ -1106,6 +1112,10 @@
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
             <div class="step">Vraagt bij elke ondernemer de benodigde gegevens op</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Logt in op MijnOverheid Zakelijk <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen</span></div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Vraagt de ontbrekende gegevens op bij de bedrijven</div>
           </div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
@@ -1113,10 +1123,13 @@
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step step--auth" data-milestone="4">
-              Maakt de aanvraag compleet en dient in
-              <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span>
-            </div>
+            <div class="step step--auth" data-milestone="4">Maakt de aanvraag compleet en dient in</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Logt in op MijnOverheid Zakelijk <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen</span></div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Leest bericht</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Dient de aanvraag in <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Goedkeuren</span></div>
           </div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
@@ -1126,15 +1139,7 @@
       </div>
       <div class="phase-cell lane--lotte" aria-label="Lotte - Opvolgen">
         <div class="step-row">
-          <div class="step-wrap">
-            <div class="step">Aanvraag wordt beschikt (RVO)</div>
-            <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Dossier is inzichtelijk voor alle partijen via hun machtigingen</div>
-            <details class="step-vraagstuk">
-              <summary><svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.3" stroke="currentColor" stroke-width="1.3"/><path d="M6.2 6.3a1.8 1.8 0 1 1 2.6 1.6c-.6.35-.8.7-.8 1.3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="8" cy="11.2" r=".2" fill="currentColor"/></svg>Vraagstuk</summary>
-              <div class="step-vraagstuk-body">Wat mag je zien? Bijvoorbeeld het bankrekeningnummer niet.</div>
-            </details>
-          </div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer step-connector--gap" aria-hidden="true">→</div>
           <div class="step-wrap">
             <div class="step">Na 2 weken wordt het voorschot in tranches uitbetaald</div>
@@ -1147,9 +1152,72 @@
           <div class="step-wrap">
             <div class="step step--auth">
               Rol vervalt nadat de machtiging is ingetrokken; het dossier stopt voor haar
-              <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Autorisatie</span>
+             
             </div>
           </div>
+        </div>
+      </div>
+
+      <!-- RVO -->
+      <div class="lane-label lane--rvo">
+        <div class="lane-avatar lane-avatar--rvo" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 20V9.5l8-5.5 8 5.5V20" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M3 20h18M9.5 20v-4.5h5V20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="lane-name">RVO</span>
+        <span class="lane-role">Rijksdienst voor Ondernemend Nederland</span>
+      </div>
+
+      <div class="phase-cell lane--rvo" aria-label="RVO - Oriënteren"></div>
+      <div class="phase-cell lane--rvo" aria-label="RVO - Uitvoeren">
+        <div class="step-row">
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap">
+            <div class="step">Aanvraag in behandeling</div>
+          </div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+        </div>
+      </div>
+      <div class="phase-cell lane--rvo" aria-label="RVO - Opvolgen">
+        <div class="step-row">
+          <div class="step-wrap">
+            <div class="step">Aanvraag wordt beschikt <button type="button" class="step-tag step-tag--info" data-persona="RVO" data-phase="Opvolgen" data-step="Aanvraag wordt beschikt" data-panel-title="Wie mag wat" data-panel-body-ref="panelBodyWieMagWat4">Wie mag wat<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Dossier is inzichtelijk voor alle partijen via hun machtigingen</div>
+          </div>
+          <div class="step-connector step-connector--spacer step-connector--gap" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
         </div>
       </div>
 
@@ -1170,7 +1238,7 @@
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step">Notificaties: verzoek dat Wei en Ahmed de rol van mede-indiener accepteren</div>
+            <div class="step">Notificaties: verzoek dat Wei en Ahmed de rol van mede-aanvrager accepteren</div>
           </div>
           <div class="step-connector" aria-hidden="true">→</div>
           <div class="step-wrap">
@@ -1199,13 +1267,15 @@
             <div class="step">Notificaties: bericht aan Sander, Wei en Ahmed met verzoek om gegevens aan te leveren</div>
           </div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-wrap">
+            <div class="step">Notificaties: melding aan Lotte dat de ontbrekende gegevens zijn aangeleverd door Sander, Wei en Ahmed</div>
+          </div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
             <div class="step">Notificaties: melding dat de aanvraag compleet is en in behandeling wordt genomen</div>
           </div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
         </div>
@@ -1448,6 +1518,7 @@
       // Oriënteren -> Uitvoeren (tussen de banen) -> Opvolgen, zodat de hele
       // keten als één doorlopende volgorde leest.
       var WA = 'Wei & Ahmed' + U;
+      var RVO = 'RVO' + U;
       var EDGES = [
         [ORI, 1, 'Sander' + U, 0],
         ['Sander' + U, 2, 'Systeem' + U, 3],
@@ -1464,10 +1535,11 @@
         ['Systeem' + U, 13, WA, 14],
         ['Sander' + U, 14, 'Lotte' + U, 15],
         [WA, 14, 'Lotte' + U, 15],
-        ['Lotte' + U, 15, 'Systeem' + U, 16],
-        ['Systeem' + U, 16, 'Sander' + U, 17],
-        ['Systeem' + U, 16, WA, 17],
-        ['Lotte' + U, 15, 'Lotte - Opvolgen', 0]
+        ['Lotte' + U, 15, RVO, 15],
+        [RVO, 15, 'Systeem' + U, 15],
+        [RVO, 15, 'RVO - Opvolgen', 0],
+        ['Systeem' + U, 15, 'Sander' + U, 17],
+        ['Systeem' + U, 15, WA, 17]
       ];
       var flowSvg = document.createElementNS(SVGNS, 'svg');
       flowSvg.setAttribute('id', 'flowArrows');
@@ -1480,7 +1552,7 @@
       var timeGap = document.createElement('div');
       timeGap.className = 'time-gap';
       timeGap.id = 'timeGap';
-      timeGap.innerHTML = '<svg class="time-gap-clock" width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.5"/><path d="M12 7.5V12l3 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="time-gap-label">na 2 weken</span>';
+      timeGap.innerHTML = '<svg class="time-gap-clock" width="30" height="30" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.5"/><line x1="12" y1="12" x2="12" y2="7.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 12 12" to="360 12 12" dur="2s" repeatCount="indefinite"/></line><line x1="12" y1="12" x2="15.5" y2="12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 12 12" to="360 12 12" dur="24s" repeatCount="indefinite"/></line></svg><span class="time-gap-label">na 2 weken</span>';
       grid.appendChild(timeGap);
 
       function drawTimeGap() {
@@ -1492,7 +1564,7 @@
         var headH = head.getBoundingClientRect().height;
         var cx = (cr.left + cr.right) / 2 - gRect.left;
         timeGap.style.display = 'flex';
-        timeGap.style.left = (cx - 28) + 'px';
+        timeGap.style.left = (cx - 37) + 'px';
         timeGap.style.top = headH + 'px';
         timeGap.style.height = (grid.scrollHeight - headH) + 'px';
       }
@@ -1518,10 +1590,18 @@
           var s = flowCard(e[0], e[1]), t = flowCard(e[2], e[3]);
           if (!s || !t) return;
           var sr = s.getBoundingClientRect(), tr = t.getBoundingClientRect();
-          var x1 = sr.right - gRect.left, y1 = (sr.top + sr.bottom) / 2 - gRect.top;
-          var x2 = tr.left - gRect.left, y2 = (tr.top + tr.bottom) / 2 - gRect.top;
-          var midX = (x1 + x2) / 2;
-          var d = 'M ' + x1 + ' ' + y1 + ' H ' + midX + ' V ' + y2 + ' H ' + x2;
+          var sCx = (sr.left + sr.right) / 2 - gRect.left, tCx = (tr.left + tr.right) / 2 - gRect.left;
+          var d;
+          // Verticale flow: staat de bron recht boven het doel (zelfde kolom, doel
+          // lager), teken dan een rechte lijn van de onderkant naar de bovenkant.
+          if (Math.abs(sCx - tCx) < Math.min(sr.width, tr.width) * 0.6 && tr.top > sr.bottom - 4) {
+            d = 'M ' + sCx + ' ' + (sr.bottom - gRect.top) + ' V ' + (tr.top - gRect.top);
+          } else {
+            var x1 = sr.right - gRect.left, y1 = (sr.top + sr.bottom) / 2 - gRect.top;
+            var x2 = tr.left - gRect.left, y2 = (tr.top + tr.bottom) / 2 - gRect.top;
+            var midX = (x1 + x2) / 2;
+            d = 'M ' + x1 + ' ' + y1 + ' H ' + midX + ' V ' + y2 + ' H ' + x2;
+          }
           var path = document.createElementNS(SVGNS, 'path');
           path.setAttribute('class', 'flow-edge');
           path.setAttribute('d', d);
@@ -1599,7 +1679,7 @@
       // Nieuwe tijd-kolom (index 9) tussen "accepteert Lotte" (col8) en Lotte's
       // acceptatie: een Systeem-notificatie naar Lotte. Voor elke baan schuift
       // alles vanaf kolom 9 één plek op; alleen Systeem krijgt hier een kaart.
-      ['Sander', 'Wei & Ahmed', 'Lotte', 'Systeem'].forEach(function (lane) {
+      ['Sander', 'Wei & Ahmed', 'Lotte', 'RVO', 'Systeem'].forEach(function (lane) {
         var cell = grid.querySelector('[aria-label="' + lane + ' - Uitvoeren"]');
         if (!cell) return;
         var row = cell.querySelector('.step-row');
@@ -1805,16 +1885,26 @@
   <p class="side-panel-muted">Wordt binnenkort aangevuld.</p>
 </template>
 <template id="panelBodyWieMagWat">
-  <div class="wmw-item"><span class="wmw-dot" style="background:var(--sander)"></span><span><strong>Sander</strong> is mede-indiener en vraagt goedkeuring voor de rol van penvoerder</span></div>
-  <div class="wmw-item"><span class="wmw-dot" style="background:var(--wei)"></span><span><strong>Wei</strong>, uitgenodigd door Sander als mede-indiener</span></div>
-  <div class="wmw-item"><span class="wmw-dot" style="background:var(--ahmed)"></span><span><strong>Ahmed</strong>, uitgenodigd door Sander als mede-indiener</span></div>
+  <div class="wmw-item"><span class="wmw-dot" style="background:var(--sander)"></span><span><strong>Sander</strong> is mede-aanvrager en vraagt goedkeuring voor de rol van penvoerder</span></div>
+  <div class="wmw-item"><span class="wmw-dot" style="background:var(--wei)"></span><span><strong>Wei</strong>, uitgenodigd door Sander als mede-aanvrager</span></div>
+  <div class="wmw-item"><span class="wmw-dot" style="background:var(--ahmed)"></span><span><strong>Ahmed</strong>, uitgenodigd door Sander als mede-aanvrager</span></div>
 </template>
 <template id="panelBodyWieMagWat2">
-  <div class="wmw-item"><span class="wmw-dot" style="background:var(--sander)"></span><span><strong>Sander</strong> is mede-indiener en penvoerder met de bevoegdheid voor roloverdracht</span></div>
-  <div class="wmw-item"><span class="wmw-dot" style="background:var(--wei)"></span><span><strong>Wei</strong> is mede-indiener en mag roloverdrachtswijzigingen goedkeuren</span></div>
-  <div class="wmw-item"><span class="wmw-dot" style="background:var(--ahmed)"></span><span><strong>Ahmed</strong> is mede-indiener en mag roloverdrachtswijzigingen goedkeuren</span></div>
+  <div class="wmw-item"><span class="wmw-dot" style="background:var(--sander)"></span><span><strong>Sander</strong> is mede-aanvrager en penvoerder met de bevoegdheid voor roloverdracht</span></div>
+  <div class="wmw-item"><span class="wmw-dot" style="background:var(--wei)"></span><span><strong>Wei</strong> is mede-aanvrager en mag roloverdrachtswijzigingen goedkeuren</span></div>
+  <div class="wmw-item"><span class="wmw-dot" style="background:var(--ahmed)"></span><span><strong>Ahmed</strong> is mede-aanvrager en mag roloverdrachtswijzigingen goedkeuren</span></div>
   <h3 class="side-panel-heading">Hoe</h3>
   <div class="wmw-item"><span class="wmw-dot" style="background:rgba(255,255,255,.55)"></span><span>Zou Wei of Ahmed ook een verzoek tot roloverdracht kunnen indienen?</span></div>
+</template>
+<template id="panelBodyWieMagWat3">
+  <div class="wmw-item"><span class="wmw-dot" style="background:var(--sander)"></span><span><strong>Sander</strong>, mede-aanvrager</span></div>
+  <div class="wmw-item"><span class="wmw-dot" style="background:var(--wei)"></span><span><strong>Wei</strong>, mede-aanvrager</span></div>
+  <div class="wmw-item"><span class="wmw-dot" style="background:var(--ahmed)"></span><span><strong>Ahmed</strong>, mede-aanvrager</span></div>
+  <div class="wmw-item"><span class="wmw-dot" style="background:var(--lotte)"></span><span><strong>Lotte</strong>, penvoerder. Zij dient de aanvraag in namens het collectief</span></div>
+</template>
+<template id="panelBodyWieMagWat4">
+  <p>Het dossier is inzichtelijk voor alle betrokken partijen via hun machtigingen.</p>
+  <p>Niet alles is voor iedereen zichtbaar: gevoelige gegevens zoals het bankrekeningnummer worden afgeschermd.</p>
 </template>
 <div class="side-scrim" id="sideScrim" hidden></div>
 <aside class="side-panel" id="sidePanel" role="dialog" aria-modal="true" aria-labelledby="sidePanelTitle" aria-hidden="true" hidden>
