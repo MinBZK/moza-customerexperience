@@ -344,9 +344,10 @@
   .lane-expand svg { transition: transform .15s ease; }
   .journey-grid.systeem-open .lane-expand svg { transform: rotate(180deg); }
 
-  /* Zwembaanlabel (persona) - blijft links staan bij horizontaal pannen. */
+  /* Zwembaanlabel (persona) - blijft links staan bij horizontaal pannen; ligt
+     boven de flow-lijnen zodat die eronderdoor scrollen. */
   .lane-label {
-    position: sticky; left: 0; z-index: 1;
+    position: sticky; left: 0; z-index: 3;
     padding: 24px 20px;
     border-top: 1px solid var(--border);
     display: flex; flex-direction: column; gap: 4px;
@@ -525,7 +526,24 @@
      overspant, verticaal gecentreerd, zodat hun stappen maar één keer
      voorkomen. Uitvoeren = kolom 3, Opvolgen = kolom 4. */
   .phase-cell--wa-u { grid-column: 3; grid-row: span 2; display: flex; align-items: center; }
-  .phase-cell--wa-o { grid-column: 4; grid-row: span 2; display: flex; align-items: center; }
+  .phase-cell--wa-o { grid-column: 4; grid-row: span 2; display: flex; align-items: stretch; }
+  .phase-cell--wa-o .step-row { align-items: center; }
+  /* Alleen bij Ahmeds solo-stap splitst de gedeelde baan: zijn kaart zakt naar
+     de onderste (Ahmed-)helft, met een scheidslijn op de grens Wei/Ahmed. */
+  .phase-cell--wa-o .step-wrap.wa-solo-ahmed { align-self: stretch; justify-content: flex-end; position: relative; }
+  .wa-solo-ahmed::before {
+    content: ''; position: absolute; left: -10px; right: -10px; top: 50%;
+    border-top: 1px dashed var(--border);
+  }
+  /* Easter egg: verschijnt met "c", gluurt vanachter stap 4 om het hoekje. */
+  .clippy-egg {
+    position: absolute; right: -26px; bottom: -14px; width: 46px; height: 72px;
+    z-index: -1; opacity: 0; transform: translate(-18px, 10px) rotate(-14deg);
+    transform-origin: bottom right;
+    transition: opacity .4s ease, transform .55s cubic-bezier(.34, 1.56, .64, 1);
+    pointer-events: none;
+  }
+  .clippy-egg.is-peeking { opacity: 1; transform: translate(0, 0) rotate(8deg); }
   .lane--weiahmed .step { background: #eceafb; color: #322d6e; }
   .lane--weiahmed .lane-avatar { color: var(--wei); }
   /* Markering "geldt voor Wei én Ahmed" bovenin elke gedeelde box. */
@@ -595,6 +613,17 @@
     font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
     color: rgba(255,255,255,.7); margin-bottom: 12px;
   }
+  /* De tag die deze overlay opende, als pill (dezelfde kleurcodering). */
+  .side-panel-tag {
+    display: inline-block; margin-bottom: 12px;
+    padding: 3px 11px; border-radius: 999px;
+    font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 600; letter-spacing: .03em;
+    background: var(--auth); color: #fff;
+  }
+  .side-panel-tag[hidden] { display: none; }
+  .side-panel-tag.is-wmw { background: #6d4aa8; }
+  .side-panel-tag.is-goedkeuren { background: #0f766e; }
+  .side-panel-tag.is-inloggen { background: var(--authenticatie); }
   .side-panel-title { font-size: 22px; font-weight: 600; line-height: 1.25; margin-bottom: 12px; }
   .side-panel-body { font-size: 15px; line-height: 1.65; color: rgba(255,255,255,.92); white-space: pre-line; }
   /* Rijke panelen (met kopjes/links) gebruiken echte <p>/<h3>, geen pre-line. */
@@ -1604,7 +1633,7 @@
         [WA, 14, 'Systeem' + U, 14],
         ['Systeem' + U, 14, 'Lotte' + U, 15],
         ['Lotte' + U, 15, RVO, 15],
-        [RVO, 15, 'Systeem' + U, 15],
+        ['Lotte' + U, 15, 'Systeem' + U, 15],
         [RVO, 15, 'RVO - Opvolgen', 0],
         ['Systeem' + U, 15, 'Sander' + U, 17],
         ['Systeem' + U, 15, WA, 17],
@@ -1629,7 +1658,7 @@
 
       // Verticale "na 2 weken"-tijdmarker: door alle rijen (onder de fasekoppen),
       // op de bredere tussenruimte (.step-connector--gap) in de Opvolgen-fase.
-      var CLOCK_SVG = '<svg class="time-gap-clock" width="60" height="60" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.5"/><line x1="12" y1="12" x2="12" y2="7.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 12 12" to="360 12 12" dur="2s" repeatCount="indefinite"/></line><line x1="12" y1="12" x2="15.5" y2="12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 12 12" to="360 12 12" dur="24s" repeatCount="indefinite"/></line></svg>';
+      var CLOCK_SVG = '<svg class="time-gap-clock" width="60" height="60" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.5"/><line x1="12" y1="12" x2="12" y2="7.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 12 12" to="1440 12 12" dur="4s" repeatCount="1" fill="freeze"/></line><line x1="12" y1="12" x2="15.5" y2="12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 12 12" to="360 12 12" dur="4s" repeatCount="1" fill="freeze"/></line></svg>';
       var timeGapEls = [];
       var GAP_HALF = 44;
 
@@ -1709,19 +1738,23 @@
           var sr = s.getBoundingClientRect(), tr = t.getBoundingClientRect();
           var sCx = (sr.left + sr.right) / 2 - gRect.left, tCx = (tr.left + tr.right) / 2 - gRect.left;
           var d;
-          // Verticale flow: staat de bron recht boven het doel (zelfde kolom, doel
-          // lager), teken dan een rechte lijn recht naar beneden. Start onder de
-          // hele step-wrap (dus onder eventuele detail-kaartjes), zodat de lijn
-          // niet over de eigen content van de bronstap heen loopt.
-          var sWrap = s.closest ? s.closest('.step-wrap') : null;
-          var startY = (sWrap ? sWrap.getBoundingClientRect().bottom : sr.bottom) - gRect.top;
-          if (Math.abs(sCx - tCx) < Math.min(sr.width, tr.width) * 0.6 && tr.top > sr.bottom - 4) {
-            d = 'M ' + sCx + ' ' + startY + ' V ' + (tr.top - gRect.top);
-          } else {
-            var x1 = sr.right - gRect.left, y1 = (sr.top + sr.bottom) / 2 - gRect.top;
-            var x2 = tr.left - gRect.left, y2 = (tr.top + tr.bottom) / 2 - gRect.top;
+          // Conventie: een pijl verlaat de box altijd RECHTS en komt LINKS binnen.
+          var x1 = sr.right - gRect.left, y1 = (sr.top + sr.bottom) / 2 - gRect.top;
+          var x2 = tr.left - gRect.left, y2 = (tr.top + tr.bottom) / 2 - gRect.top;
+          if (x2 > x1 + 8) {
+            // Doel ligt rechts: rechte hoek rechts-eruit, links-erin.
             var midX = (x1 + x2) / 2;
             d = 'M ' + x1 + ' ' + y1 + ' H ' + midX + ' V ' + y2 + ' H ' + x2;
+          } else {
+            // Doel ligt eronder (zelfde/linker kolom): verlaat rechts de goot in,
+            // steek onder de hele bron-kaart (incl. details) over in de lege
+            // ruimte, en kom van links het doel binnen.
+            var sWrap = s.closest ? s.closest('.step-wrap') : null;
+            var sBotY = (sWrap ? sWrap.getBoundingClientRect().bottom : sr.bottom) - gRect.top;
+            var gutR = Math.max(x1, tr.right - gRect.left) + 26;
+            var gutL = x2 - 26;
+            var crossY = sBotY + 16;
+            d = 'M ' + x1 + ' ' + y1 + ' H ' + gutR + ' V ' + crossY + ' H ' + gutL + ' V ' + y2 + ' H ' + x2;
           }
           var path = document.createElementNS(SVGNS, 'path');
           path.setAttribute('class', 'flow-edge');
@@ -1795,11 +1828,35 @@
         chip.className = 'wa-chip';
         if (s.getAttribute('data-actor') === 'Ahmed') {
           chip.innerHTML = '<span class="wa-dot wa-dot--ahmed"></span>Ahmed';
+          var solo = s.closest('.step-wrap'); if (solo) solo.classList.add('wa-solo-ahmed');
         } else {
           chip.innerHTML = '<span class="wa-dot wa-dot--wei"></span><span class="wa-dot wa-dot--ahmed"></span>Wei &amp; Ahmed';
         }
         s.insertBefore(chip, s.firstChild);
       });
+
+      // Verborgen easter egg: druk op "c" en Clippy gluurt vanachter stap 4 om
+      // het hoekje. Nergens als tip getoond; de reveal speelt 1x (geen loop).
+      (function () {
+        var s4 = grid.querySelector('.step[data-milestone="4"]');
+        if (!s4) return;
+        var wrap = s4.closest('.step-wrap');
+        if (!wrap) return;
+        wrap.style.position = 'relative';
+        wrap.style.zIndex = '1';
+        var clip = document.createElement('div');
+        clip.className = 'clippy-egg';
+        clip.innerHTML = '<svg viewBox="0 0 48 74" width="46" height="72" fill="none" aria-hidden="true"><path d="M16 70 V26 C16 15 32 15 32 26 V58 C32 65 22 65 22 58 V30" stroke="#8a94a6" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="19" cy="20" rx="6.5" ry="9" fill="#fff" stroke="#2b2b3a" stroke-width="1.6"/><ellipse cx="33" cy="20" rx="6.5" ry="9" fill="#fff" stroke="#2b2b3a" stroke-width="1.6"/><circle cx="20.5" cy="22.5" r="2.8" fill="#1a1a2e"/><circle cx="34.5" cy="22.5" r="2.8" fill="#1a1a2e"/><path d="M12 9 L24 13" stroke="#2b2b3a" stroke-width="2" stroke-linecap="round"/><path d="M40 9 L28 13" stroke="#2b2b3a" stroke-width="2" stroke-linecap="round"/></svg>';
+        wrap.appendChild(clip);
+        document.addEventListener('keydown', function (e) {
+          if (e.key !== 'c' && e.key !== 'C') return;
+          var ae = document.activeElement;
+          if (ae && ae.closest && ae.closest('input, textarea, select, [contenteditable]')) return;
+          var sp = document.getElementById('sidePanel');
+          if (sp && sp.classList.contains('is-open')) return;
+          clip.classList.toggle('is-peeking');
+        });
+      })();
 
       // Nieuwe tijd-kolom (index 9) tussen "accepteert Lotte" (col8) en Lotte's
       // acceptatie: een Systeem-notificatie naar Lotte. Voor elke baan schuift
@@ -1937,11 +1994,34 @@
         var i = navCur ? list.indexOf(navCur) : -1;
         i = Math.max(0, Math.min(list.length - 1, i + dir));
         navCur = list[i];
-        // scrollIntoView scrolt alle scroll-containers (canvas én pagina) zodat
-        // de stap zowel horizontaal als verticaal echt in beeld komt.
-        navCur.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+        // Zachte, iets langere eigen scroll (i.p.v. de snelle browser-default),
+        // zodat je de sprong naar de volgende stap goed kunt volgen.
+        animateScrollTo(navCur, 650);
         [].forEach.call(document.querySelectorAll('.step--flash'), function (s) { s.classList.remove('step--flash'); });
         navCur.classList.add('step--flash');
+      }
+
+      // Vloeiende scroll van het canvas naar een element (beide assen, met easing).
+      var scrollAnim = null;
+      function animateScrollTo(el, dur) {
+        var vr = viewport.getBoundingClientRect(), er = el.getBoundingClientRect();
+        var fromL = viewport.scrollLeft, fromT = viewport.scrollTop;
+        var toL = fromL + (er.left + er.width / 2) - (vr.left + vr.width / 2);
+        var toT = fromT + (er.top + er.height / 2) - (vr.top + vr.height / 2);
+        toL = Math.max(0, Math.min(toL, viewport.scrollWidth - viewport.clientWidth));
+        toT = Math.max(0, Math.min(toT, viewport.scrollHeight - viewport.clientHeight));
+        if (scrollAnim) cancelAnimationFrame(scrollAnim);
+        var start = null;
+        function ease(p) { return p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2; }
+        function frame(ts) {
+          if (start === null) start = ts;
+          var p = dur > 0 ? Math.min(1, (ts - start) / dur) : 1;
+          var e = ease(p);
+          viewport.scrollLeft = fromL + (toL - fromL) * e;
+          viewport.scrollTop = fromT + (toT - fromT) * e;
+          if (p < 1) scrollAnim = requestAnimationFrame(frame); else scrollAnim = null;
+        }
+        scrollAnim = requestAnimationFrame(frame);
       }
 
       // Toetsenbord: links/rechts stappen door de flow (met verticaal
@@ -2048,6 +2128,7 @@
 <aside class="side-panel" id="sidePanel" role="dialog" aria-modal="true" aria-labelledby="sidePanelTitle" aria-hidden="true" hidden>
   <button type="button" class="side-panel-close" id="sidePanelClose" aria-label="Sluiten">&times;</button>
   <p class="side-panel-eyebrow" id="sidePanelContext"></p>
+  <span class="side-panel-tag" id="sidePanelTag" hidden></span>
   <h2 class="side-panel-title" id="sidePanelTitle"></h2>
   <p class="side-panel-body" id="sidePanelBody"></p>
   <div class="side-panel-nav">
@@ -2111,6 +2192,18 @@
       var ctx = [btn.getAttribute('data-persona'), btn.getAttribute('data-phase'), btn.getAttribute('data-step')]
         .filter(Boolean).join(' · ');
       ctxEl.textContent = ctx;
+      // Toon de tag die deze overlay opende, als pill met dezelfde kleurcodering.
+      var tagEl = document.getElementById('sidePanelTag');
+      var tagLabel = (btn.textContent || '').trim();
+      if (tagLabel) {
+        tagEl.textContent = tagLabel;
+        tagEl.className = 'side-panel-tag';
+        var low = tagLabel.toLowerCase();
+        if (low.indexOf('wie mag wat') !== -1) tagEl.classList.add('is-wmw');
+        else if (low.indexOf('goedkeuren') !== -1) tagEl.classList.add('is-goedkeuren');
+        else if (low.indexOf('inloggen') !== -1) tagEl.classList.add('is-inloggen');
+        tagEl.hidden = false;
+      } else { tagEl.hidden = true; }
       titleEl.textContent = btn.getAttribute('data-panel-title') || '';
       // Rijke inhoud (met kopjes/link) via een <template>; anders platte tekst.
       var ref = btn.getAttribute('data-panel-body-ref');
