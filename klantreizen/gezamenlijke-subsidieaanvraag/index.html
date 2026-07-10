@@ -1019,6 +1019,8 @@
           <div class="step-connector step-connector--spacer step-connector--gap" data-gap-label="na 2 weken" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
             <div class="step" data-milestone="5">Ontvangt voorschot</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
@@ -1141,6 +1143,8 @@
         <div class="step-row">
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer step-connector--gap" data-gap-label="na 2 weken" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
@@ -1267,6 +1271,8 @@
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer step-connector--gap" data-gap-label="na 1 jaar" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
@@ -1342,6 +1348,8 @@
           <div class="step-wrap">
             <div class="step">Voorschot wordt uitbetaald</div>
           </div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer step-connector--gap" data-gap-label="na 1 jaar" aria-hidden="true">→</div>
@@ -1429,6 +1437,8 @@
           <div class="step-wrap">
             <div class="step">Notificaties: melding over de uitbetaling van het voorschot</div>
           </div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer step-connector--gap" data-gap-label="na 1 jaar" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
@@ -1715,16 +1725,16 @@
         ['Systeem' + U, 17, WA, 18],
         [RO, 0, RO, 1],
         [RO, 1, SYO, 2],
-        [SYO, 2, SO, 2],
-        [SYO, 2, WAO, 2],
-        [SO, 2, SO, 3],
+        [SYO, 2, SO, 3],
+        [SYO, 2, WAO, 3],
         [SO, 3, SO, 4],
-        [SO, 4, SYO, 5],
-        [SYO, 5, WAO, 5],
-        [WAO, 5, SYO, 6],
-        [SYO, 6, SO, 7],
-        [SO, 7, SO, 8],
-        [SO, 8, WAO, 8]
+        [SO, 4, SO, 5],
+        [SO, 5, SYO, 6],
+        [SYO, 6, WAO, 6],
+        [WAO, 6, SYO, 7],
+        [SYO, 7, SO, 8],
+        [SO, 8, SO, 9],
+        [SO, 9, WAO, 9]
       ];
       var flowSvg = document.createElementNS(SVGNS, 'svg');
       flowSvg.setAttribute('id', 'flowArrows');
