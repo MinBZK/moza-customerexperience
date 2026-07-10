@@ -756,6 +756,12 @@
   .legend-dot--authenticatie { background: var(--authenticatie); }
   .legend-dot--autorisatie { background: var(--auth); }
   .legend-dot--goedkeuren { background: #0f766e; }
+  .legend-verdieping-sample {
+    width: 26px; height: 15px; border-radius: 5px;
+    background: var(--alt-tint); border: 1px solid var(--alt);
+    flex-shrink: 0;
+  }
+  .legend-item .step-tag { margin-top: 0; }
 
   /* Toggle: gezamenlijke aanvraag */
   .toggle-row {
@@ -860,11 +866,10 @@
     <span class="legend-item"><span class="legend-dot legend-dot--lotte"></span> Lotte - Bureau Subsidiekracht (intermediair)</span>
     <span class="legend-item"><span class="legend-dot legend-dot--systeem"></span> Systeem - automatische acties (MOZa)</span>
     <span class="legend-item"><span class="legend-dot legend-dot--rvo"></span> RVO - Rijksdienst voor Ondernemend Nederland</span>
-    <span class="legend-item"><span class="legend-dot legend-dot--alt"></span> Onderliggende stap of detail (stippellijn)</span>
-    <span class="legend-item"><span class="legend-dot legend-dot--authenticatie"></span> Inloggen</span>
-    <span class="legend-item"><span class="legend-dot legend-dot--goedkeuren"></span> Goedkeuren</span>
-    <span class="legend-item"><span class="legend-dot" style="background:#6d4aa8"></span> Wie mag wat</span>
-    <span class="legend-item">→ stappen lopen links naar rechts</span>
+    <span class="legend-item"><span class="legend-verdieping-sample"></span> Onderliggende stap of detail (stippellijn)</span>
+    <span class="legend-item"><span class="step-tag is-inloggen"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen</span></span>
+    <span class="legend-item"><span class="step-tag is-goedkeuren"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Goedkeuren</span></span>
+    <span class="legend-item"><span class="step-tag is-wmw">Wie mag wat<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></span></span>
   </div>
 
   <section class="journey" aria-labelledby="journey-heading">
@@ -2147,10 +2152,6 @@
       window.addEventListener('load', function () { layout(); buildClone(); });
     })();
   </script>
-
-  <nldd-banner variant="neutral" heading-level="2" text="Over deze klantreis" style="display:block; margin-top:32px;">
-    <nldd-rich-text><p>Een collectief van drie ondernemingen (Sander, Wei en Ahmed) vraagt samen een DEI+-subsidie aan bij RVO en machtigt daarvoor intermediair Lotte. De tags Inloggen, Goedkeuren en Wie mag wat markeren wat er bij een stap gebeurt; kaartjes met stippellijn zijn onderliggende stappen of details. Klik op een Wie mag wat-tag om te zien wie welke rol of bevoegdheid heeft.</p></nldd-rich-text>
-  </nldd-banner>
 
   <section style="display:block; margin-top:32px;">
     <nldd-title size="4"><h2>Bronnen</h2></nldd-title>
