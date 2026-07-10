@@ -311,6 +311,38 @@
   .phase-head:not(.phase-head--corner):focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
   .phase-head--corner { background: var(--ink); position: sticky; left: 0; top: 0; z-index: 4; cursor: default; }
   .phase-head + .phase-head { border-left: 1px solid rgba(255,255,255,.15); }
+
+  /* Vastgezette "waar ben ik"-indicator: toont de huidige fase + milestone
+     terwijl je horizontaal door het canvas scrolt. Grid-item position:sticky
+     is onbetrouwbaar, dus deze balk wordt via JS gepositioneerd (op de fasekop-
+     rij, net na de labelkolom) en de tekst wordt op scroll bijgewerkt. */
+  .canvas-hud {
+    position: absolute; z-index: 6; pointer-events: none;
+    display: flex; flex-direction: column; align-items: flex-start; gap: 8px;
+  }
+  body.zoom-1 .canvas-hud { display: none; }
+  .canvas-hud-phase {
+    background: var(--ink); color: var(--white);
+    font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 600;
+    letter-spacing: .1em; text-transform: uppercase;
+    padding: 14px 20px; white-space: nowrap;
+  }
+  .canvas-hud-ms {
+    margin-left: 14px;
+    display: inline-flex; align-items: center; gap: 8px; max-width: 300px;
+    background: var(--paper); border: 1px solid var(--border);
+    border-radius: 999px; padding: 5px 14px 5px 6px;
+    box-shadow: 0 4px 14px rgba(31, 31, 51, .12);
+    font-size: 12px; font-weight: 600; color: var(--ink);
+  }
+  .canvas-hud-ms-num {
+    flex-shrink: 0; width: 20px; height: 20px; border-radius: 50%;
+    background: var(--ink); color: var(--white);
+    font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .canvas-hud-ms-title { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
   /* Sluitende lijn onder de laatste (Systeem) rij van het canvas. */
   .lane-label.lane--systeem, .phase-cell.lane--systeem { border-bottom: 1px solid var(--border); }
 
@@ -1037,7 +1069,7 @@
           </div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step">Machtiging van Lotte wordt ingetrokken en herbenoemt zichzelf tot penvoerder</div>
+            <div class="step">Machtiging van Lotte wordt ingetrokken en herbenoemt zichzelf tot penvoerder <button type="button" class="step-tag step-tag--info" data-persona="Sander (GreenFlow BV)" data-phase="Opvolgen" data-step="Machtiging van Lotte wordt ingetrokken en herbenoemt zichzelf tot penvoerder" data-panel-title="Wie mag wat?" data-panel-body-ref="panelBodyWieMagWat7" data-vraagstukken-ref="vraagstukkenMachtiging">Wie mag wat<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Logt in op MijnOverheid Zakelijk <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen</span></div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
@@ -1237,7 +1269,7 @@
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step">Accepteert de rol van penvoerder <button type="button" class="step-tag step-tag--info" data-persona="Lotte" data-phase="Uitvoeren" data-step="Accepteert de rol van penvoerder" data-panel-title="Wie mag wat?" data-panel-body-ref="panelBodyWieMagWat3">Wie mag wat<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
+            <div class="step">Accepteert de rol van penvoerder <button type="button" class="step-tag step-tag--info" data-persona="Lotte" data-phase="Uitvoeren" data-step="Accepteert de rol van penvoerder" data-panel-title="Wie mag wat?" data-panel-body-ref="panelBodyWieMagWat3" data-vraagstukken-ref="vraagstukkenWieMagWat3">Wie mag wat<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Logt in op MijnOverheid Zakelijk <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen</span></div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
@@ -1504,6 +1536,11 @@
       <div class="phase-cell lane--sub lane--sub-end" aria-hidden="true"></div>
 
     </div>
+    </div>
+
+    <div class="canvas-hud" id="canvasHud" aria-hidden="true" hidden>
+      <span class="canvas-hud-phase" id="canvasHudPhase"></span>
+      <span class="canvas-hud-ms" id="canvasHudMs" hidden><span class="canvas-hud-ms-num" id="canvasHudMsNum"></span><span class="canvas-hud-ms-title" id="canvasHudMsTitle"></span></span>
     </div>
 
     <div class="minimap" id="minimap" aria-hidden="true">
@@ -2267,6 +2304,15 @@
 <template id="panelBodyWieMagWat6">
   <p>Iedere mede-aanvrager mag de rol van penvoerder intrekken en heeft daar geen goedkeuring voor nodig van de anderen.</p>
 </template>
+<template id="panelBodyWieMagWat7">
+  <div class="wmw-item"><span class="wmw-dot" style="background:var(--sander)"></span><span><strong class="p-sander">Sander</strong>, mede-aanvrager. Trekt de machtiging van Lotte in en herbenoemt zichzelf tot penvoerder</span></div>
+  <div class="wmw-item"><span class="wmw-dots"><span class="wmw-dot" style="background:var(--wei)"></span><span class="wmw-dot" style="background:var(--ahmed)"></span></span><span><strong class="p-wei">Wei</strong> en <strong class="p-ahmed">Ahmed</strong>, mede-aanvragers. Moeten de rolwijziging goedkeuren</span></div>
+  <div class="wmw-item"><span class="wmw-dot" style="background:var(--lotte)"></span><span><strong class="p-lotte">Lotte</strong>, penvoerder. Haar machtiging wordt ingetrokken; haar rol als penvoerder vervalt</span></div>
+  <h3 class="side-panel-heading">Mag dit?</h3>
+  <p>Iedere mede-aanvrager mag een verzoek tot wijziging van de penvoerder indienen. De wijziging is pas definitief als de andere mede-aanvragers (<strong class="p-wei">Wei</strong> en <strong class="p-ahmed">Ahmed</strong>) akkoord zijn.</p>
+</template>
+<template id="vraagstukkenWieMagWat3"><li>Rollen en mandaten: waar wordt dit vastgelegd en hoe is in te zien wie wat heeft goedgekeurd (logboek)?</li></template>
+<template id="vraagstukkenMachtiging"><li>Hoe wordt de RVO geïnformeerd over deze wijziging?</li><li>RVO informeert alle leden (en de gemachtigde zolang die er is). Hoe houd je bij wie op welk moment in het dossier mag, als de samenstelling verandert?</li><li>Overkoepelend: wat organiseren wij als overheid, wat ligt bij het collectief, en hoe komt dat samen?</li></template>
 <div class="side-scrim" id="sideScrim" hidden></div>
 <aside class="side-panel" id="sidePanel" role="dialog" aria-modal="true" aria-labelledby="sidePanelTitle" aria-hidden="true" hidden>
   <button type="button" class="side-panel-close" id="sidePanelClose" aria-label="Sluiten">&times;</button>
@@ -2294,6 +2340,7 @@
           </ul>
         </li>
       </ul>
+      <ul id="sidePanelVraagstukkenExtra" hidden></ul>
     </div>
   </div>
 </aside>
@@ -2390,6 +2437,14 @@
         bodyEl.textContent = btn.getAttribute('data-panel-body') || '';
         bodyEl.classList.remove('is-rich');
       }
+      // Item-specifieke vraagstukken (optioneel), onder de generieke lijst.
+      var vExtra = document.getElementById('sidePanelVraagstukkenExtra');
+      if (vExtra) {
+        var vref = btn.getAttribute('data-vraagstukken-ref');
+        var vtpl = vref ? document.getElementById(vref) : null;
+        if (vtpl) { vExtra.innerHTML = vtpl.innerHTML; vExtra.hidden = false; }
+        else { vExtra.innerHTML = ''; vExtra.hidden = true; }
+      }
     }
     function render(i) {
       current = i;
@@ -2473,6 +2528,65 @@
       else if (e.key === 'ArrowLeft' && current > 0) render(current - 1);
       else if (e.key === 'ArrowRight' && current < infos.length - 1) render(current + 1);
     });
+  })();
+</script>
+
+<script>
+  // Vastgezette "waar ben ik"-HUD: houdt de huidige fase + milestone in beeld
+  // terwijl je horizontaal door het canvas scrolt.
+  (function () {
+    var journey = document.querySelector('.journey');
+    var viewport = document.getElementById('journeyViewport');
+    var grid = document.getElementById('journeyGrid');
+    var hud = document.getElementById('canvasHud');
+    if (!journey || !viewport || !grid || !hud) return;
+    var hudPhase = document.getElementById('canvasHudPhase');
+    var hudMs = document.getElementById('canvasHudMs');
+    var hudMsNum = document.getElementById('canvasHudMsNum');
+    var hudMsTitle = document.getElementById('canvasHudMsTitle');
+    var corner = grid.querySelector('.phase-head--corner');
+    var phaseHeads = [].slice.call(grid.querySelectorAll('.phase-head:not(.phase-head--corner)'));
+    // Milestones (genummerde stappen) met hun titel; x wordt live gemeten.
+    var milestones = [].slice.call(grid.querySelectorAll('.step[data-milestone]')).map(function (s) {
+      var t = (s.childNodes[0] && s.childNodes[0].nodeType === 3) ? s.childNodes[0].textContent : s.textContent;
+      return { n: s.getAttribute('data-milestone'), title: t.trim(), el: s.closest('.step-wrap') || s };
+    });
+    var raf = null;
+    function update() {
+      raf = null;
+      if (document.body.classList.contains('zoom-1')) { hud.hidden = true; return; }
+      var gRect = grid.getBoundingClientRect();
+      var cRect = corner.getBoundingClientRect();
+      var jRect = journey.getBoundingClientRect();
+      hud.style.top = (cRect.top - jRect.top) + 'px';
+      hud.style.left = (cRect.right - jRect.left) + 'px';
+      // x (grid-relatief) aan de linkerrand van het fase-gebied (na de labelkolom).
+      var leftEdge = cRect.right - gRect.left;
+      var phaseName = '';
+      phaseHeads.forEach(function (h) {
+        var r = h.getBoundingClientRect();
+        var l = r.left - gRect.left, rr = r.right - gRect.left;
+        if (leftEdge >= l - 1 && leftEdge < rr) phaseName = h.textContent.trim();
+      });
+      hudPhase.textContent = phaseName;
+      // Huidige milestone = de laatst gepasseerde genummerde stap (met wat
+      // voorsprong, zodat de HUD wisselt zodra de box duidelijk in beeld komt).
+      var probe = leftEdge + 120, cur = null;
+      milestones.forEach(function (m) {
+        var x = m.el.getBoundingClientRect().left - gRect.left;
+        if (x <= probe && (!cur || x > cur.x)) cur = { x: x, n: m.n, title: m.title };
+      });
+      if (cur) { hudMsNum.textContent = cur.n; hudMsTitle.textContent = cur.title; hudMs.hidden = false; }
+      else { hudMs.hidden = true; }
+      hud.hidden = false;
+    }
+    function schedule() { if (raf == null) raf = window.requestAnimationFrame(update); }
+    viewport.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(schedule);
+    window.addEventListener('load', schedule);
+    schedule();
   })();
 </script>
 
