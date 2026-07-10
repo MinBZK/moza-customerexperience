@@ -283,6 +283,7 @@
     display: grid;
     grid-template-columns: 240px repeat(3, minmax(280px, max-content));
     width: max-content;
+    padding-right: 96px; /* ruimte na het laatste element op het canvas */
   }
 
   /* Flow-pijlen: een SVG-overlay die de volgorde tussen de banen (persona's
@@ -433,14 +434,14 @@
   .step-wrap--spacer, .step-connector--spacer { visibility: hidden; }
 
   /* Bredere tussenruimte waar de "na 2 weken"-tijdmarker doorheen loopt. */
-  .step-connector--gap { min-width: 92px; }
+  .step-connector--gap { min-width: 110px; }
 
   /* Verticale tijdmarker ("na 2 weken") die door alle rijen van het canvas
      loopt (onder de fasekoppen), op de plek waar de tijd verstrijkt voordat
      het voorschot wordt uitbetaald. */
   .time-gap {
     position: absolute; z-index: 0; pointer-events: none;
-    width: 88px; overflow: hidden;
+    width: 76px; overflow: hidden;
     border-left: 1px dashed var(--border); border-right: 1px dashed var(--border);
     background: rgba(120, 120, 140, .035);
   }
@@ -600,16 +601,16 @@
     background: #154273; color: #fff;
     box-shadow: -8px 0 30px rgba(0,0,0,.28);
     padding: 28px 26px 24px;
-    overflow: hidden;
-    display: flex; flex-direction: column;
+    overflow-y: auto;
     transform: translateX(100%);
     transition: transform .25s ease;
   }
   .side-panel.is-open { transform: translateX(0); }
-  /* Scrollend deel (varieert per item) boven de vaste voettekst. */
-  .side-panel-scroll { flex: 1 1 auto; overflow-y: auto; min-height: 0; }
-  /* Vaste voettekst: nav bovenaan (verspringt niet), Vraagstukken-blok eronder. */
-  .side-panel-footer { flex-shrink: 0; }
+  /* Het variabele deel krijgt via JS een vaste min-hoogte (= de langste content
+     van alle items), zodat de Vraagstukken-box eronder altijd op dezelfde plek
+     staat en niet verspringt tussen items. */
+  .side-panel-scroll { min-height: 0; }
+  .side-panel-footer { }
   .side-panel-vraagstukken {
     margin-top: 14px; padding: 12px 14px;
     border: 1px solid rgba(255,255,255,.25); border-radius: 10px;
@@ -1731,7 +1732,7 @@
         });
       }, { root: viewport, threshold: 0.01 }) : null;
       var timeGapEls = [];
-      var GAP_HALF = 44;
+      var GAP_HALF = 38;
 
       // Meerdere tijdmarkers: elke baan heeft dezelfde bredere gap-kolom voor de
       // uitlijning, maar per tijdmoment (= x-positie) tonen we één marker die door
@@ -2318,12 +2319,10 @@
       target.classList.add('step--flash');
     }
 
-    function render(i) {
-      current = i;
-      var btn = infos[i];
-      var ctx = [btn.getAttribute('data-persona'), btn.getAttribute('data-phase'), btn.getAttribute('data-step')]
+    // Vul het variabele deel (eyebrow, tag, titel, body) voor een i-knop.
+    function setContent(btn) {
+      ctxEl.textContent = [btn.getAttribute('data-persona'), btn.getAttribute('data-phase'), btn.getAttribute('data-step')]
         .filter(Boolean).join(' · ');
-      ctxEl.textContent = ctx;
       // Toon de tag die deze overlay opende, als pill met dezelfde kleurcodering.
       // Bij "Wie mag wat" niet als pill: dat staat al (met vraagteken) in de titel.
       var tagEl = document.getElementById('sidePanelTag');
@@ -2347,11 +2346,34 @@
         bodyEl.textContent = btn.getAttribute('data-panel-body') || '';
         bodyEl.classList.remove('is-rich');
       }
+    }
+    function render(i) {
+      current = i;
+      var btn = infos[i];
+      setContent(btn);
       counterEl.textContent = (i + 1) + ' / ' + infos.length;
       prevBtn.disabled = (i <= 0);
       nextBtn.disabled = (i >= infos.length - 1);
       panToTag(btn);
     }
+    // Zet de min-hoogte van het variabele deel op de langste content van alle
+    // items, zodat de Vraagstukken-box eronder altijd op dezelfde plek staat.
+    // Opnieuw meten na het laden van de webfonts (die veranderen de teksthoogte).
+    function fixScrollMinHeight() {
+      var scrollEl = panel.querySelector('.side-panel-scroll');
+      if (!scrollEl || !infos.length) return;
+      var wasHidden = panel.hidden, savedIdx = current;
+      panel.hidden = false; // renderbaar maken (nog off-screen via de transform)
+      scrollEl.style.minHeight = '0px'; // reset: meet de echte content-hoogte
+      var maxH = 0;
+      infos.forEach(function (btn) { setContent(btn); if (scrollEl.scrollHeight > maxH) maxH = scrollEl.scrollHeight; });
+      scrollEl.style.minHeight = (maxH + 18) + 'px'; // kleine marge zodat alles er ruim in past
+      if (savedIdx >= 0) setContent(infos[savedIdx]); // huidige inhoud terugzetten
+      panel.hidden = wasHidden;
+    }
+    fixScrollMinHeight();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fixScrollMinHeight);
+    window.addEventListener('load', fixScrollMinHeight);
     function openAt(i, trigger) {
       lastFocus = trigger || null;
       render(i);
