@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MOZa personas</title>
+  <link rel="stylesheet" href="vendor/nldd/css/settings.css">
+  <link rel="stylesheet" href="vendor/nldd/css/global.css">
+  <link rel="stylesheet" href="vendor/nldd/css/rich-text.css">
+  <script type="module" src="vendor/nldd/design-system.js"></script>
+  <style>
+    :root { color-scheme: light; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: var(--primitives-font-family-body, RijksSans, system-ui, sans-serif);
+    }
+
+    /* tiles on the index */
+    .tile {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      border-radius: var(--primitives-border-radius-large, 16px);
+      transition: transform .12s ease, box-shadow .12s ease;
+      outline-offset: 4px;
+    }
+    .tile:hover {
+      transform: translateY(-4px);
+    }
+    .tile:hover nldd-card {
+      box-shadow: 0 12px 28px rgba(0,0,0,.14);
+    }
+    .tile:focus-visible {
+      outline: 3px solid var(--primitives-color-hemelblauw-500, #007bc7);
+      border-radius: 16px;
+    }
+    .tile nldd-image { pointer-events: none; }
+
+    .profile-head {
+      display: flex;
+      gap: var(--primitives-space-24, 24px);
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .profile-head .titles { flex: 1 1 260px; min-width: 240px; }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--primitives-space-8, 8px);
+      margin-top: var(--primitives-space-12, 12px);
+    }
+
+    .sec-head {
+      display: flex;
+      align-items: center;
+      gap: var(--primitives-space-8, 8px);
+    }
+    .sec-head h2 {
+      margin: 0;
+      font-size: var(--primitives-font-size-16, 1rem);
+      font-weight: 700;
+      font-family: "RijksSans", system-ui, sans-serif;
+    }
+
+    .fact { }
+    .fact .fact-label {
+      display: flex; align-items: center; gap: 8px;
+      font-size: .78rem; letter-spacing: .04em; text-transform: uppercase;
+      font-weight: 700;
+      color: light-dark(var(--primitives-color-neutral-600, #4a5a6a), var(--primitives-color-neutral-300, #ccc));
+    }
+    .fact .fact-value {
+      margin-top: 6px;
+      font-family: "RijksSans", system-ui, sans-serif;
+      color: light-dark(var(--primitives-color-neutral-900, #1a1a1a), var(--primitives-color-neutral-100, #f5f5f5));
+    }
+
+    .rt ul { margin: 0; padding-left: 1.15em; }
+    .rt li { margin: 4px 0; }
+
+    /* context-items in de persona-kaart: kleiner, secundair aan de hoofdsecties */
+    .ctx .sec-head { gap: 6px; }
+    .ctx .sec-head h2 { font-size: .8rem; letter-spacing: .01em; }
+    .ctx .sec-head nldd-icon {
+      color: light-dark(var(--primitives-color-neutral-600, #4a5a6a), var(--primitives-color-neutral-300, #ccc));
+    }
+    .ctx .rt p {
+      margin: 0;
+      font-size: .82rem;
+      line-height: 1.35;
+      color: light-dark(var(--primitives-color-neutral-600, #4a5a6a), var(--primitives-color-neutral-300, #ccc));
+    }
+
+    .tile-name h2 { margin: 0; text-align: center; }
+
+    /* sticky terug-balk op detailpagina's */
+    .sticky-bar {
+      display: flex;
+      align-items: center;
+      font-family: var(--primitives-font-family-body, RijksSans, system-ui, sans-serif);
+      font-size: 1rem;
+      padding: 14px 20px;
+      background: light-dark(
+        var(--primitives-color-neutral-50, #f3f5f7),
+        var(--primitives-color-neutral-800, #23272b)
+      );
+      border-bottom: 1px solid transparent;
+      transition: padding .15s ease, font-size .15s ease,
+                  box-shadow .15s ease, border-color .15s ease;
+    }
+    .sticky-bar.scrolled {
+      padding: 7px 20px;
+      font-size: .82rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,.10);
+      border-bottom-color: light-dark(
+        var(--primitives-color-neutral-200, #d8dee3),
+        var(--primitives-color-neutral-700, #3a4046)
+      );
+    }
+    .sticky-bar-inner {
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+<nldd-app-view background="tinted">
+  <nldd-page background="tinted">
+    <nldd-simple-section width="1120px">
+      <nldd-link slot="header" href="../index.html" start-icon="arrow-left" size="sm">Terug naar overzicht</nldd-link>
+      <nldd-title slot="header" size="4">
+        <h1>MOZa personas</h1>
+        <p slot="subtitle">Kies een persona voor de volledige beschrijving.</p>
+      </nldd-title>
+
+      <div id="main">
+        <nldd-collection layout="grid" item-width="250px">
+          <a class="tile" href="persona-yassin.html">
+            <nldd-card accessible-label="Yassin Amrani - Zelfstandige (ZZP)">
+              <nldd-container padding="24" layout="stack" gap="16" horizontal-alignment="center">
+                <nldd-image src="images/avatar-yassin.png" alt="Avatar van Yassin Amrani" width="176" shape="circle" aspect-ratio="1/1" loading="eager"></nldd-image>
+                <div class="tile-name">
+                  <nldd-title size="4"><h2>Yassin Amrani</h2></nldd-title>
+                </div>
+                <nldd-tag color="hemelblauw" text="Zelfstandige (ZZP)"></nldd-tag>
+              </nldd-container>
+            </nldd-card>
+          </a>
+          <a class="tile" href="persona-karin.html">
+            <nldd-card accessible-label="Karin Jansen - Directeur MKB">
+              <nldd-container padding="24" layout="stack" gap="16" horizontal-alignment="center">
+                <nldd-image src="images/avatar-karin.png" alt="Avatar van Karin Jansen" width="176" shape="circle" aspect-ratio="1/1" loading="eager"></nldd-image>
+                <div class="tile-name">
+                  <nldd-title size="4"><h2>Karin Jansen</h2></nldd-title>
+                </div>
+                <nldd-tag color="donkergroen" text="Directeur MKB"></nldd-tag>
+              </nldd-container>
+            </nldd-card>
+          </a>
+          <a class="tile" href="persona-bilal.html">
+            <nldd-card accessible-label="Bilal Yılmaz - Werknemer MKB">
+              <nldd-container padding="24" layout="stack" gap="16" horizontal-alignment="center">
+                <nldd-image src="images/avatar-bilal.png" alt="Avatar van Bilal Yılmaz" width="176" shape="circle" aspect-ratio="1/1" loading="eager"></nldd-image>
+                <div class="tile-name">
+                  <nldd-title size="4"><h2>Bilal Yılmaz</h2></nldd-title>
+                </div>
+                <nldd-tag color="paars" text="Werknemer MKB"></nldd-tag>
+              </nldd-container>
+            </nldd-card>
+          </a>
+          <a class="tile" href="persona-sherida.html">
+            <nldd-card accessible-label="Sherida Pinas - Intermediair">
+              <nldd-container padding="24" layout="stack" gap="16" horizontal-alignment="center">
+                <nldd-image src="images/avatar-sherida.png" alt="Avatar van Sherida Pinas" width="176" shape="circle" aspect-ratio="1/1" loading="eager"></nldd-image>
+                <div class="tile-name">
+                  <nldd-title size="4"><h2>Sherida Pinas</h2></nldd-title>
+                </div>
+                <nldd-tag color="oranje" text="Intermediair"></nldd-tag>
+              </nldd-container>
+            </nldd-card>
+          </a>
+        </nldd-collection>
+      </div>
+
+      <nldd-spacer size="32"></nldd-spacer>
+    </nldd-simple-section>
+  </nldd-page>
+</nldd-app-view>
+</body>
+</html>
