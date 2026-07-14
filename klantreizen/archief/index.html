@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Klantreizen - MOZa</title>
+  <title>Archief - Klantreizen - MOZa</title>
   <link rel="stylesheet" href="https://esm.sh/@nldd/design-system@0.8.59/dist/css/global.css">
   <script type="module" src="https://esm.sh/@nldd/design-system@0.8.59"></script>
   <style>
@@ -37,26 +37,23 @@
 <nldd-app-view background="tinted">
   <nldd-page background="tinted">
     <nldd-simple-section width="900px">
-      <nldd-link slot="header" href="../index.html" start-icon="arrow-left" size="sm">Terug naar overzicht</nldd-link>
+      <nldd-link slot="header" href="../index.html" start-icon="arrow-left" size="sm">Terug naar klantreizen</nldd-link>
       <nldd-title slot="header" size="4">
-        <h1>Klantreizen</h1>
-        <p slot="subtitle">De klantreizen binnen MijnOverheid Zakelijk, per fase en per persona.</p>
+        <h1>Archief</h1>
+        <p slot="subtitle">Gearchiveerde klantreizen binnen MijnOverheid Zakelijk.</p>
       </nldd-title>
 
       <nldd-collection layout="grid" item-width="380px">
-        <a class="tile" href="gezamenlijke-subsidieaanvraag/index.html">
-          <nldd-card accessible-label="Gezamenlijke subsidieaanvraag">
+        <a class="tile" href="../subsidieaanvraag/index.html">
+          <nldd-card accessible-label="Subsidieaanvraag">
             <nldd-container padding="24" layout="stack" gap="12" horizontal-alignment="center">
-              <nldd-icon name="person-2" size="32"></nldd-icon>
-              <nldd-title size="4"><h2>Gezamenlijke subsidieaanvraag</h2></nldd-title>
-              <nldd-rich-text><p>Een subsidieaanvraag samen met een andere onderneming.</p></nldd-rich-text>
+              <nldd-icon name="check-list" size="32"></nldd-icon>
+              <nldd-title size="4"><h2>Subsidieaanvraag</h2></nldd-title>
+              <nldd-rich-text><p>Oriënteren, uitvoeren en opvolgen: de klantreis per persona.</p></nldd-rich-text>
             </nldd-container>
           </nldd-card>
         </a>
       </nldd-collection>
-
-      <nldd-spacer size="24"></nldd-spacer>
-      <nldd-link href="archief/index.html" end-icon="arrow-right">Archief</nldd-link>
 
       <nldd-spacer size="32"></nldd-spacer>
     </nldd-simple-section>
