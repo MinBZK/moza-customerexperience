@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Klantreizen - MOZa</title>
+  <link rel="stylesheet" href="https://esm.sh/@nldd/design-system@0.8.59/dist/css/global.css">
+  <script type="module" src="https://esm.sh/@nldd/design-system@0.8.59"></script>
+  <style>
+    :root { color-scheme: light; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: var(--primitives-font-family-body, RijksSans, system-ui, sans-serif);
+    }
+
+    .tile {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      border-radius: var(--primitives-border-radius-large, 16px);
+      transition: transform .12s ease, box-shadow .12s ease;
+      outline-offset: 4px;
+    }
+    .tile:hover {
+      transform: translateY(-4px);
+    }
+    .tile:hover nldd-card {
+      box-shadow: 0 12px 28px rgba(0,0,0,.14);
+    }
+    .tile:focus-visible {
+      outline: 3px solid var(--primitives-color-hemelblauw-500, #007bc7);
+      border-radius: 16px;
+    }
+  </style>
+</head>
+<body>
+<nldd-app-view background="tinted">
+  <nldd-page background="tinted">
+    <nldd-simple-section width="900px">
+      <nldd-link slot="header" href="../index.html" start-icon="arrow-left" size="sm">Terug naar overzicht</nldd-link>
+      <nldd-title slot="header" size="4">
+        <h1>Klantreizen</h1>
+        <p slot="subtitle">De klantreizen binnen MijnOverheid Zakelijk, per fase en per persona.</p>
+      </nldd-title>
+
+      <nldd-collection layout="grid" item-width="380px">
+        <a class="tile" href="subsidieaanvraag/index.html">
+          <nldd-card accessible-label="Subsidieaanvraag">
+            <nldd-container padding="24" layout="stack" gap="12" horizontal-alignment="center">
+              <nldd-icon name="check-list" size="32"></nldd-icon>
+              <nldd-title size="4"><h2>Subsidieaanvraag</h2></nldd-title>
+              <nldd-rich-text><p>Oriënteren, uitvoeren en opvolgen: de klantreis per persona.</p></nldd-rich-text>
+            </nldd-container>
+          </nldd-card>
+        </a>
+        <a class="tile" href="gezamenlijke-subsidieaanvraag/index.html">
+          <nldd-card accessible-label="Gezamenlijke subsidieaanvraag">
+            <nldd-container padding="24" layout="stack" gap="12" horizontal-alignment="center">
+              <nldd-icon name="person-2" size="32"></nldd-icon>
+              <nldd-title size="4"><h2>Gezamenlijke subsidieaanvraag</h2></nldd-title>
+              <nldd-rich-text><p>Een subsidieaanvraag samen met een andere onderneming.</p></nldd-rich-text>
+            </nldd-container>
+          </nldd-card>
+        </a>
+      </nldd-collection>
+
+      <nldd-spacer size="32"></nldd-spacer>
+    </nldd-simple-section>
+  </nldd-page>
+</nldd-app-view>
+</body>
+</html>

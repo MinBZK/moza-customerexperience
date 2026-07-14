@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Karin Jansen - Directeur MKB</title>
+  <link rel="stylesheet" href="vendor/nldd/css/settings.css">
+  <link rel="stylesheet" href="vendor/nldd/css/global.css">
+  <link rel="stylesheet" href="vendor/nldd/css/rich-text.css">
+  <script type="module" src="vendor/nldd/design-system.js"></script>
+  <style>
+    :root { color-scheme: light; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: var(--primitives-font-family-body, RijksSans, system-ui, sans-serif);
+    }
+
+    /* tiles on the index */
+    .tile {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      border-radius: var(--primitives-border-radius-large, 16px);
+      transition: transform .12s ease, box-shadow .12s ease;
+      outline-offset: 4px;
+    }
+    .tile:hover {
+      transform: translateY(-4px);
+    }
+    .tile:hover nldd-card {
+      box-shadow: 0 12px 28px rgba(0,0,0,.14);
+    }
+    .tile:focus-visible {
+      outline: 3px solid var(--primitives-color-hemelblauw-500, #007bc7);
+      border-radius: 16px;
+    }
+    .tile nldd-image { pointer-events: none; }
+
+    .profile-head {
+      display: flex;
+      gap: var(--primitives-space-24, 24px);
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .profile-head .titles { flex: 1 1 260px; min-width: 240px; }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--primitives-space-8, 8px);
+      margin-top: var(--primitives-space-12, 12px);
+    }
+
+    .sec-head {
+      display: flex;
+      align-items: center;
+      gap: var(--primitives-space-8, 8px);
+    }
+    .sec-head h2 {
+      margin: 0;
+      font-size: var(--primitives-font-size-16, 1rem);
+      font-weight: 700;
+      font-family: "RijksSans", system-ui, sans-serif;
+    }
+
+    .fact { }
+    .fact .fact-label {
+      display: flex; align-items: center; gap: 8px;
+      font-size: .78rem; letter-spacing: .04em; text-transform: uppercase;
+      font-weight: 700;
+      color: light-dark(var(--primitives-color-neutral-600, #4a5a6a), var(--primitives-color-neutral-300, #ccc));
+    }
+    .fact .fact-value {
+      margin-top: 6px;
+      font-family: "RijksSans", system-ui, sans-serif;
+      color: light-dark(var(--primitives-color-neutral-900, #1a1a1a), var(--primitives-color-neutral-100, #f5f5f5));
+    }
+
+    .rt ul { margin: 0; padding-left: 1.15em; }
+    .rt li { margin: 4px 0; }
+
+    /* context-items in de persona-kaart: kleiner, secundair aan de hoofdsecties */
+    .ctx .sec-head { gap: 6px; }
+    .ctx .sec-head h2 { font-size: .8rem; letter-spacing: .01em; }
+    .ctx .sec-head nldd-icon {
+      color: light-dark(var(--primitives-color-neutral-600, #4a5a6a), var(--primitives-color-neutral-300, #ccc));
+    }
+    .ctx .rt p {
+      margin: 0;
+      font-size: .82rem;
+      line-height: 1.35;
+      color: light-dark(var(--primitives-color-neutral-600, #4a5a6a), var(--primitives-color-neutral-300, #ccc));
+    }
+
+    .tile-name h2 { margin: 0; text-align: center; }
+
+    /* sticky terug-balk op detailpagina's */
+    .sticky-bar {
+      display: flex;
+      align-items: center;
+      font-family: var(--primitives-font-family-body, RijksSans, system-ui, sans-serif);
+      font-size: 1rem;
+      padding: 14px 20px;
+      background: light-dark(
+        var(--primitives-color-neutral-50, #f3f5f7),
+        var(--primitives-color-neutral-800, #23272b)
+      );
+      border-bottom: 1px solid transparent;
+      transition: padding .15s ease, font-size .15s ease,
+                  box-shadow .15s ease, border-color .15s ease;
+    }
+    .sticky-bar.scrolled {
+      padding: 7px 20px;
+      font-size: .82rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,.10);
+      border-bottom-color: light-dark(
+        var(--primitives-color-neutral-200, #d8dee3),
+        var(--primitives-color-neutral-700, #3a4046)
+      );
+    }
+    .sticky-bar-inner {
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* Print-banner (Rijksoverheid-logo + titel): alleen zichtbaar op de afdruk. */
+    .print-banner { display: none; }
+
+    /* Printbare versie, geinspireerd op mijnoverheidzakelijk.nl: verberg de
+       scherm-chrome, toon de Rijksoverheid-banner, forceer wit + licht, en
+       plat de NLDD app-shell af (deels via de shadow-injectie in het script
+       hieronder) zodat de volledige pagina afdrukt i.p.v. alleen het
+       zichtbare deel. */
+    @page { margin: 14mm; }
+    @media print {
+      :root { color-scheme: light !important; }
+      html, body { height: auto !important; overflow: visible !important; background: #fff !important; }
+      nldd-app-view, nldd-page { display: contents !important; }
+      .sticky-bar { display: none !important; }
+      nldd-card { break-inside: avoid; }
+      h1, h2, h3, h4 { break-after: avoid; break-inside: avoid; }
+      a { color: inherit; }
+
+      .print-banner {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 24px;
+        break-inside: avoid;
+        break-after: avoid;
+      }
+      .print-banner-text { grid-column: 1; display: flex; flex-direction: column; }
+      .print-logo { grid-column: 2; height: 20mm; width: auto; }
+      .print-title { font-size: 1.15rem; font-weight: 700; color: #154273; }
+      .print-tagline { font-size: .95rem; font-style: italic; color: #154273; }
+    }
+  </style>
+</head>
+<body>
+<nldd-app-view background="tinted">
+  <nldd-page background="tinted" sticky-header>
+    <div slot="header" class="sticky-bar" id="backbar">
+      <div class="sticky-bar-inner">
+        <nldd-link href="index.html" start-icon="arrow-left" size="inherit">Terug naar alle persona's</nldd-link>
+      </div>
+    </div>
+
+    <!-- Alleen zichtbaar bij printen: Rijksoverheid-banner bovenaan de afdruk. -->
+    <div class="print-banner" aria-hidden="true">
+      <div class="print-banner-text">
+        <span class="print-title">MijnOverheid Zakelijk</span>
+        <span class="print-tagline">Makkelijk zakendoen met de overheid</span>
+      </div>
+      <img class="print-logo" src="images/logo-rijksoverheid.svg" alt="">
+    </div>
+    <nldd-simple-section width="1000px">
+      <div id="main">
+      <nldd-card>
+        <nldd-container padding="20" layout="stack" gap="16">
+          <div class="profile-head">
+            <nldd-image src="images/avatar-karin.png" alt="Avatar van Karin Jansen" width="176" shape="circle" aspect-ratio="1/1" loading="eager"></nldd-image>
+            <div class="titles">
+              <nldd-title size="3">
+                <span slot="overline">Persona 2 · MKB · Directeur</span>
+                <h1>Karin Jansen</h1>
+                <p slot="subtitle">Eigenaar-directeur MKB - burger én ondernemer met personeel</p>
+              </nldd-title>
+              <div class="tag-row"><nldd-tag color="donkergroen" text="MKB"></nldd-tag><nldd-tag color="donkergroen" text="eHerkenning"></nldd-tag><nldd-tag color="donkergroen" text="werkgever"></nldd-tag><nldd-tag color="donkergroen" text="delegeren"></nldd-tag></div>
+            </div>
+          </div>
+          <nldd-divider></nldd-divider>
+          <nldd-container layout="grid" column-count="3" sm-column-count="1" gap="16">
+          <div class="ctx">
+            <div class="sec-head">
+              <nldd-icon name="apartment-building" size="16"></nldd-icon>
+              <h2>Organisatie &amp; context</h2>
+            </div>
+            <nldd-rich-text class="rt"><p>MKB · onderneming met personeel · tot 20 werknemers</p></nldd-rich-text>
+          </div>
+          <div class="ctx">
+            <div class="sec-head">
+              <nldd-icon name="star" size="16"></nldd-icon>
+              <h2>Ervaring &amp; vaardigheid</h2>
+            </div>
+            <nldd-rich-text class="rt"><p>ervaren ondernemer · delegeert de administratie</p></nldd-rich-text>
+          </div>
+          <div class="ctx">
+            <div class="sec-head">
+              <nldd-icon name="clock" size="16"></nldd-icon>
+              <h2>Frequentie van gebruik</h2>
+            </div>
+            <nldd-rich-text class="rt"><p>wekelijks</p></nldd-rich-text>
+          </div>
+          </nldd-container>
+        </nldd-container>
+      </nldd-card>
+
+      <nldd-spacer size="24"></nldd-spacer>
+
+      <nldd-container layout="grid" column-count="2" sm-column-count="1" gap="16">
+      <nldd-card>
+        <nldd-container padding="24" layout="stack" gap="12">
+          <div class="sec-head">
+            <nldd-icon name="flag" size="20"></nldd-icon>
+            <h2>Doelen</h2>
+          </div>
+          <nldd-rich-text class="rt"><ul><li>Diensten regelen voor de onderneming én de werknemers</li><li>Taken veilig delegeren en toch grip houden</li><li>Zo min mogelijk zelf doen; zet daar haar werknemers voor in</li></ul></nldd-rich-text>
+        </nldd-container>
+      </nldd-card>
+      <nldd-card>
+        <nldd-container padding="24" layout="stack" gap="12">
+          <div class="sec-head">
+            <nldd-icon name="check-list" size="20"></nldd-icon>
+            <h2>Taken &amp; verantwoordelijkheden</h2>
+          </div>
+          <nldd-rich-text class="rt"><ul><li>Loonaangifte, personeel, vergunningen, contracten, ziekmeldingen en subsidies</li><li>Berichten ontvangen en opvolgen</li><li>Eindverantwoordelijk; kent rechten toe aan medewerkers</li></ul></nldd-rich-text>
+        </nldd-container>
+      </nldd-card>
+      <nldd-card>
+        <nldd-container padding="24" layout="stack" gap="12">
+          <div class="sec-head">
+            <nldd-icon name="key" size="20"></nldd-icon>
+            <h2>Benodigde rechten &amp; autorisatie</h2>
+          </div>
+          <nldd-rich-text class="rt"><ul><li>Volledige toegang plus beheer van machtigingen</li><li>Kan rollen en rechten toekennen aan werknemers, maar ook aan intermediairs</li></ul></nldd-rich-text>
+        </nldd-container>
+      </nldd-card>
+      <nldd-card>
+        <nldd-container padding="24" layout="stack" gap="12">
+          <div class="sec-head">
+            <nldd-icon name="handshake" size="20"></nldd-icon>
+            <h2>Machtigingen &amp; mandaten</h2>
+          </div>
+          <nldd-rich-text class="rt"><ul><li>Handelt namens het bedrijf (tekenbevoegd)</li><li>Mandateert werknemers en/of een externe partij</li><li>Moet ook intern zaken regelen per werknemer</li></ul></nldd-rich-text>
+        </nldd-container>
+      </nldd-card>
+      <nldd-card>
+        <nldd-container padding="24" layout="stack" gap="12">
+          <div class="sec-head">
+            <nldd-icon name="shield-check-mark" size="20"></nldd-icon>
+            <h2>Authenticatie-context</h2>
+          </div>
+          <nldd-rich-text class="rt"><ul><li>eHerkenning op hoog niveau (EH3 / EH4)</li><li>Hoog niveau voor gevoelige en bevoegde handelingen</li><li>Wil hier niet mee lastiggevallen worden</li></ul></nldd-rich-text>
+        </nldd-container>
+      </nldd-card>
+      <nldd-card>
+        <nldd-container padding="24" layout="stack" gap="12">
+          <div class="sec-head">
+            <nldd-icon name="face-frowning" size="20"></nldd-icon>
+            <h2>Frustraties &amp; pijnpunten</h2>
+          </div>
+          <nldd-rich-text class="rt"><ul><li>Overzicht houden over wie wat mag binnen het bedrijf en bijbehorende applicaties</li><li>Alles is van haar afhankelijk</li><li>Niemand kan haar vertellen wat ze waar moet regelen</li></ul></nldd-rich-text>
+        </nldd-container>
+      </nldd-card>
+      </nldd-container>
+      </div>
+
+      <nldd-spacer size="32"></nldd-spacer>
+    </nldd-simple-section>
+  </nldd-page>
+</nldd-app-view>
+<script type="module">
+  await customElements.whenDefined('nldd-page');
+  const page = document.querySelector('nldd-page');
+  const bar = document.getElementById('backbar');
+  // scroll-container: interne .page__scroll (sticky-header) met fallbacks
+  const scroller =
+    page?.shadowRoot?.querySelector('.page__scroll') ??
+    page?.shadowRoot?.querySelector('[class*="scroll"]') ??
+    page;
+  const onScroll = () => {
+    const top = Math.max(
+      scroller?.scrollTop || 0,
+      window.scrollY || 0,
+      document.documentElement.scrollTop || 0
+    );
+    bar.classList.toggle('scrolled', top > 24);
+  };
+  scroller?.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Printbare versie: plat de app-shell af tijdens het printen, zodat de
+  // interne scroll-container niet clipt en de hele pagina afdrukt. De
+  // @media print-regels leven in de shadow roots (daar zit de scroll-container).
+  const addPrintFlatten = (host, css) => {
+    if (!host?.shadowRoot) return;
+    const st = document.createElement('style');
+    st.textContent = css;
+    host.shadowRoot.appendChild(st);
+  };
+  addPrintFlatten(page, '@media print{ .page, .page__scroll, .page__header { display: contents !important; } }');
+  await customElements.whenDefined('nldd-app-view');
+  addPrintFlatten(document.querySelector('nldd-app-view'), '@media print{ .app-view { display: contents !important; } }');
+</script>
+
+</body>
+</html>
