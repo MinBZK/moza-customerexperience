@@ -34,8 +34,8 @@
     --femke-tint: var(--primitives-color-mintgroen-150);
     --deniz: var(--primitives-color-robijnrood-600);
     --deniz-tint: var(--primitives-color-robijnrood-150);
-    --marije: var(--primitives-color-violet-600);
-    --marije-tint: var(--primitives-color-violet-150);
+    --pieter: var(--primitives-color-bruin-600);
+    --pieter-tint: var(--primitives-color-bruin-150);
 
     /* alternatieve-route kleur (verdieping onder een stap) */
     --alt: var(--primitives-color-oranje-600);
@@ -298,8 +298,8 @@
   .phase-head--corner { background: var(--ink); position: sticky; left: 0; top: 0; z-index: 4; cursor: default; }
   .phase-head + .phase-head { border-left: 1px solid rgba(255,255,255,.15); }
 
-  /* Sluitende lijn onder de laatste (Marije) rij van het canvas. */
-  .lane-label.lane--marije, .phase-cell.lane--marije { border-bottom: 1px solid var(--border); }
+  /* Sluitende lijn onder de laatste (Pieter) rij van het canvas. */
+  .lane-label.lane--pieter, .phase-cell.lane--pieter { border-bottom: 1px solid var(--border); }
 
   /* Zwembaanlabel (persona) - blijft links staan bij horizontaal pannen. */
   .lane-label {
@@ -319,12 +319,12 @@
   .lane--annemieke .lane-avatar { background: var(--primitives-color-donkergeel-150); }
   .lane--femke .lane-avatar { background: var(--primitives-color-mintgroen-150); }
   .lane--deniz .lane-avatar { background: var(--primitives-color-robijnrood-150); }
-  .lane--marije .lane-avatar { background: var(--primitives-color-violet-150); }
+  .lane--pieter .lane-avatar { background: var(--primitives-color-bruin-150); }
   .lane--ruben .lane-avatar { color: var(--ruben); }
   .lane--annemieke .lane-avatar { color: var(--annemieke); }
   .lane--femke .lane-avatar { color: var(--femke); }
   .lane--deniz .lane-avatar { color: var(--deniz); }
-  .lane--marije .lane-avatar { color: var(--marije); }
+  .lane--pieter .lane-avatar { color: var(--pieter); }
   .lane-name { font-size: 16px; font-weight: 600; color: var(--ink); }
   .lane-role { font-size: 13px; color: var(--ink-soft); line-height: 1.4; }
   .lane-link {
@@ -361,7 +361,7 @@
   .lane--annemieke .step { background: var(--annemieke-tint); color: var(--annemieke); }
   .lane--femke .step { background: var(--femke-tint); color: var(--femke); }
   .lane--deniz .step { background: var(--deniz-tint); color: var(--deniz); }
-  .lane--marije .step { background: var(--marije-tint); color: var(--marije); }
+  .lane--pieter .step { background: var(--pieter-tint); color: var(--pieter); }
 
   /* Onzichtbare plek om een stap verticaal uit te lijnen onder dezelfde
      tijd-kolom in een andere zwembaan. */
@@ -532,7 +532,7 @@
   .side-panel-body.is-rich strong.p-annemieke { color: var(--annemieke-tint); }
   .side-panel-body.is-rich strong.p-femke { color: var(--femke-tint); }
   .side-panel-body.is-rich strong.p-deniz { color: var(--deniz-tint); }
-  .side-panel-body.is-rich strong.p-marije { color: var(--marije-tint); }
+  .side-panel-body.is-rich strong.p-pieter { color: var(--pieter-tint); }
   /* Simpele verticale timeline: nu -> binnenkort -> toekomst. */
   .side-panel-body.is-rich .tl { position: relative; margin-left: 5px; padding-left: 24px; }
   .side-panel-body.is-rich .tl::before {
@@ -589,7 +589,7 @@
   .legend-dot--annemieke { background: var(--annemieke); }
   .legend-dot--femke { background: var(--femke); }
   .legend-dot--deniz { background: var(--deniz); }
-  .legend-dot--marije { background: var(--marije); }
+  .legend-dot--pieter { background: var(--pieter); }
   .legend-verdieping-sample {
     width: 26px; height: 15px; border-radius: 5px;
     background: var(--alt-tint); border: 1px solid var(--alt);
@@ -670,7 +670,7 @@
     <span class="legend-item"><span class="legend-dot legend-dot--annemieke"></span> Annemieke - Inkoopadviseur KvK</span>
     <span class="legend-item"><span class="legend-dot legend-dot--femke"></span> Femke - Functioneel beheerder KvK</span>
     <span class="legend-item"><span class="legend-dot legend-dot--deniz"></span> Deniz - DevOps engineer KvK</span>
-    <span class="legend-item"><span class="legend-dot legend-dot--marije"></span> Marije - Portfoliomanager (Logius)</span>
+    <span class="legend-item"><span class="legend-dot legend-dot--pieter"></span> Pieter - Productmanager notificatiedienst (Logius)</span>
     <span class="legend-item"><span class="legend-verdieping-sample"></span> Onderliggende stap of detail (stippellijn)</span>
     <span class="legend-item"><span class="step-tag is-inloggen"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen</span></span>
     <span class="legend-item"><span class="step-tag is-goedkeuren"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Goedkeuren</span></span>
@@ -864,14 +864,14 @@
         </div>
       </div>
 
-      <!-- Marije - Logius (aanbieder) -->
-      <div class="lane-label lane--marije">
-        <img class="lane-avatar" src="../../personas/images/marije.svg" alt="" width="52" height="52" loading="lazy">
-        <span class="lane-name">Marije</span>
-        <span class="lane-role">Portfoliomanager (Logius)</span>
-        <a class="lane-link" href="../../personas/persona-marije.html" target="_blank" rel="noopener">Bekijk persona ↗</a>
+      <!-- Pieter - Logius (aanbieder) -->
+      <div class="lane-label lane--pieter">
+        <img class="lane-avatar" src="../../personas/images/pieter.svg" alt="" width="52" height="52" loading="lazy">
+        <span class="lane-name">Pieter</span>
+        <span class="lane-role">Productmanager notificatiedienst (Logius)</span>
+        <a class="lane-link" href="../../personas/persona-pieter.html" target="_blank" rel="noopener">Bekijk persona ↗</a>
       </div>
-      <div class="phase-cell lane--marije" aria-label="Marije - Oriënteren">
+      <div class="phase-cell lane--pieter" aria-label="Pieter - Oriënteren">
         <div class="step-row">
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
@@ -880,7 +880,7 @@
           </div>
         </div>
       </div>
-      <div class="phase-cell lane--marije" aria-label="Marije - Uitvoeren">
+      <div class="phase-cell lane--pieter" aria-label="Pieter - Uitvoeren">
         <div class="step-row">
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
@@ -895,7 +895,7 @@
           </div>
         </div>
       </div>
-      <div class="phase-cell lane--marije" aria-label="Marije - Opvolgen">
+      <div class="phase-cell lane--pieter" aria-label="Pieter - Opvolgen">
         <div class="step-row">
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer step-connector--gap" data-gap-label="na 3 maanden" aria-hidden="true">→</div>
@@ -1098,15 +1098,15 @@
       // (zichtbare connectors) worden automatisch getekend.
       var SVGNS = 'http://www.w3.org/2000/svg';
       var EDGES = [
-        ['Ruben - Oriënteren', 0, 'Marije - Oriënteren', 1],
-        ['Marije - Oriënteren', 1, 'Ruben - Oriënteren', 2],
+        ['Ruben - Oriënteren', 0, 'Pieter - Oriënteren', 1],
+        ['Pieter - Oriënteren', 1, 'Ruben - Oriënteren', 2],
         ['Ruben - Oriënteren', 2, 'Ruben - Uitvoeren', 0],
         ['Ruben - Uitvoeren', 1, 'Annemieke - Uitvoeren', 2],
-        ['Annemieke - Uitvoeren', 2, 'Marije - Uitvoeren', 3],
-        ['Marije - Uitvoeren', 3, 'Ruben - Uitvoeren', 4],
+        ['Annemieke - Uitvoeren', 2, 'Pieter - Uitvoeren', 3],
+        ['Pieter - Uitvoeren', 3, 'Ruben - Uitvoeren', 4],
         ['Ruben - Uitvoeren', 4, 'Femke - Opvolgen', 0],
-        ['Femke - Opvolgen', 0, 'Marije - Opvolgen', 1],
-        ['Marije - Opvolgen', 1, 'Deniz - Opvolgen', 2]
+        ['Femke - Opvolgen', 0, 'Pieter - Opvolgen', 1],
+        ['Pieter - Opvolgen', 1, 'Deniz - Opvolgen', 2]
       ];
       var flowSvg = document.createElementNS(SVGNS, 'svg');
       flowSvg.setAttribute('id', 'flowArrows');
@@ -1465,7 +1465,7 @@
   <div class="wmw-item"><span class="wmw-dot" style="background:var(--ruben)"></span><span><strong class="p-ruben">Ruben</strong>, servicemanager. Kent de beheerrollen toe binnen de KvK</span></div>
   <div class="wmw-item"><span class="wmw-dot" style="background:var(--femke)"></span><span><strong class="p-femke">Femke</strong> krijgt de rol functioneel beheer: inrichting en templates</span></div>
   <div class="wmw-item"><span class="wmw-dot" style="background:var(--deniz)"></span><span><strong class="p-deniz">Deniz</strong> krijgt de technische beheerrol: koppelingen, sleutels en dashboards</span></div>
-  <div class="wmw-item"><span class="wmw-dot" style="background:var(--marije)"></span><span><strong class="p-marije">Marije</strong> (Logius) kent geen rollen toe binnen de KvK; dat doet de servicemanager zelf</span></div>
+  <div class="wmw-item"><span class="wmw-dot" style="background:var(--pieter)"></span><span><strong class="p-pieter">Pieter</strong> (Logius) kent geen rollen toe binnen de KvK; dat doet de servicemanager zelf</span></div>
 </template>
 <template id="panelBodyWmwTemplate">
   <div class="wmw-item"><span class="wmw-dot" style="background:var(--femke)"></span><span><strong class="p-femke">Femke</strong>, functioneel beheerder. Mag templates aanmaken en publiceren naar productie</span></div>
