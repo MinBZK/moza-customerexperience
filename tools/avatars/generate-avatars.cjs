@@ -15,6 +15,22 @@ const Avatar = require("avataaars").default;
 
 const personas = require("./personas.js");
 
+// ---- NLDD-kleurenpalet (light-waarden uit palettes.generated.css) ----
+// Per persona (veld "nldd" in personas.js): achtergrondcirkel = tint 150,
+// kleding = 600. Zo draagt elke avatar de Rijkskleur die de persona ook op
+// tags en in de klantreis-zwembanen heeft.
+const NLDD = {
+  hemelblauw:  { bg: "#B4D1ED", clothes: "#1065A0" },
+  donkergroen: { bg: "#BAD4C0", clothes: "#3A6B48" },
+  paars:       { bg: "#E2C1FF", clothes: "#794E9B" },
+  oranje:      { bg: "#F6C3A5", clothes: "#9B4A00" },
+  donkergeel:  { bg: "#FFC45C", clothes: "#815A00" },
+  lintblauw:   { bg: "#B1D1F7", clothes: "#366396" },
+  mintgroen:   { bg: "#96DCC5", clothes: "#006E58" },
+  robijnrood:  { bg: "#FFBCCA", clothes: "#BE0B58" },
+  violet:      { bg: "#FFBBD3", clothes: "#B71B6C" },
+};
+
 // ---------------------- CONFIG ------------------------------
 const CONFIG = {
   outDir: path.join(__dirname, "avatars"), // waar de SVG's komen
@@ -67,13 +83,22 @@ personas.forEach((p) => {
     facialHairType: p.gender === "male" ? pick(rand, BEARD) : "Blank",
     facialHairColor: p.hairColor,
     clotheType: pick(rand, CLOTHES),
+    // rand-call bewust behouden voor een stabiele seed-volgorde; de waarde
+    // zelf wordt hieronder overschreven met een marker en dan NLDD-gekleurd
     clotheColor: pick(rand, CLOTHE_C),
     eyeType: pick(rand, EYES),
     eyebrowType: pick(rand, BROWS),
     mouthType: pick(rand, MOUTH),
   };
 
-  const svg = renderToStaticMarkup(React.createElement(Avatar, props));
+  if (NLDD[p.nldd]) props.clotheColor = "Heather"; // marker #3C4F5C
+  let svg = renderToStaticMarkup(React.createElement(Avatar, props));
+  const pal = NLDD[p.nldd];
+  if (pal) {
+    svg = svg.replace(/#65C9FF/gi, pal.bg);      // achtergrondcirkel -> tint 150
+    svg = svg.replace(/#3C4F5C/gi, pal.clothes); // kleding via marker -> 600
+    svg = svg.replace(/#262E33/gi, pal.clothes); // blazer-body (negeert clotheColor) -> 600
+  }
   fs.writeFileSync(
     path.join(CONFIG.outDir, `${p.id}.svg`),
     '<?xml version="1.0" encoding="UTF-8"?>\n' + svg + "\n",
