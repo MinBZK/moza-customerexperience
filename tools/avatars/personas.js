@@ -46,4 +46,6 @@ module.exports = [
   { id: "deniz",     name: "Deniz Kaya",         gender: "male",   skinColor: "Brown", hairColor: "Black",      top: "ShortHairTheCaesar", nldd: "robijnrood" },
   // profiel: Logius-beheerder, leest ouder (grijze bob)
   { id: "marije",    name: "Marije de Wit",      gender: "female", skinColor: "Pale",  hairColor: "SilverGray", top: "LongHairBob"       , nldd: "violet" },
+  // profiel: productmanager notificatiedienst (Logius), blond, jonger
+  { id: "pieter",    name: "Pieter de Vries",    gender: "male",   skinColor: "Light", hairColor: "Blonde",     top: "ShortHairFrizzle", nldd: "bruin" },
 ];

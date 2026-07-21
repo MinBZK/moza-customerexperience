@@ -29,6 +29,7 @@ const NLDD = {
   mintgroen:   { bg: "#96DCC5", clothes: "#006E58" },
   robijnrood:  { bg: "#FFBCCA", clothes: "#BE0B58" },
   violet:      { bg: "#FFBBD3", clothes: "#B71B6C" },
+  bruin:       { bg: "#D9CDB2", clothes: "#785D15" },
 };
 
 // ---------------------- CONFIG ------------------------------

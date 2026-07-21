@@ -28,7 +28,7 @@ Referentie-implementatie: de vier oorspronkelijke persona's (`personas/persona-y
 
 ## Kleur per persona
 
-Elke persona heeft één vaste Rijkskleur voor alle tags (tegel én detailpagina): yassin hemelblauw, karin donkergroen, bilal paars, sherida oranje, annemieke donkergeel, ruben lintblauw, femke mintgroen, deniz robijnrood, marije violet. Kies voor een nieuwe persona een nog ongebruikte kleur uit de nldd-tag Rijkskleuren.
+Elke persona heeft één vaste Rijkskleur voor alle tags (tegel én detailpagina): yassin hemelblauw, karin donkergroen, bilal paars, sherida oranje, annemieke donkergeel, ruben lintblauw, femke mintgroen, deniz robijnrood, marije violet, pieter bruin. Kies voor een nieuwe persona een nog ongebruikte kleur uit de nldd-tag Rijkskleuren.
 
 ## Draft-status
 
