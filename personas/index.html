@@ -36,6 +36,14 @@
     }
     .tile nldd-image { pointer-events: none; }
 
+    /* Draft-badge in de kaart van een concept-persona */
+    .tile { position: relative; }
+    .tile .draft-badge {
+      position: absolute;
+      top: 12px; right: 12px;
+      z-index: 1;
+    }
+
     .profile-head {
       display: flex;
       gap: var(--primitives-space-24, 24px);
@@ -181,17 +189,9 @@
               </nldd-container>
             </nldd-card>
           </a>
-        </nldd-collection>
-
-        <nldd-spacer size="32"></nldd-spacer>
-
-        <nldd-banner variant="warning" text="Draft" supporting-text="De persona's hieronder zijn een concept voor de klantreis 'Afnemen van de notificatiedienst' (dienstverlener) en zijn nog niet vastgesteld."></nldd-banner>
-
-        <nldd-spacer size="16"></nldd-spacer>
-
-        <nldd-collection layout="grid" item-width="250px">
           <a class="tile" href="persona-annemieke.html">
             <nldd-card accessible-label="Annemieke Verhoef - Inkoopambtenaar KvK (draft)">
+                <nldd-badge class="draft-badge" color="warning" text="Draft"></nldd-badge>
               <nldd-container padding="24" layout="stack" gap="16" horizontal-alignment="center">
                 <nldd-image src="images/avatar-annemieke.svg" alt="Avatar van Annemieke Verhoef" width="176" shape="circle" aspect-ratio="1/1" loading="eager"></nldd-image>
                 <div class="tile-name">
@@ -203,6 +203,7 @@
           </a>
           <a class="tile" href="persona-ruben.html">
             <nldd-card accessible-label="Ruben van Leeuwen - Organisatiebeheerder KvK (draft)">
+                <nldd-badge class="draft-badge" color="warning" text="Draft"></nldd-badge>
               <nldd-container padding="24" layout="stack" gap="16" horizontal-alignment="center">
                 <nldd-image src="images/avatar-ruben.svg" alt="Avatar van Ruben van Leeuwen" width="176" shape="circle" aspect-ratio="1/1" loading="eager"></nldd-image>
                 <div class="tile-name">
@@ -214,6 +215,7 @@
           </a>
           <a class="tile" href="persona-femke.html">
             <nldd-card accessible-label="Femke Bosch - Dienstbeheerder KvK (draft)">
+                <nldd-badge class="draft-badge" color="warning" text="Draft"></nldd-badge>
               <nldd-container padding="24" layout="stack" gap="16" horizontal-alignment="center">
                 <nldd-image src="images/avatar-femke.svg" alt="Avatar van Femke Bosch" width="176" shape="circle" aspect-ratio="1/1" loading="eager"></nldd-image>
                 <div class="tile-name">
@@ -225,6 +227,7 @@
           </a>
           <a class="tile" href="persona-deniz.html">
             <nldd-card accessible-label="Deniz Kaya - DevOps-engineer KvK (draft)">
+                <nldd-badge class="draft-badge" color="warning" text="Draft"></nldd-badge>
               <nldd-container padding="24" layout="stack" gap="16" horizontal-alignment="center">
                 <nldd-image src="images/avatar-deniz.svg" alt="Avatar van Deniz Kaya" width="176" shape="circle" aspect-ratio="1/1" loading="eager"></nldd-image>
                 <div class="tile-name">
@@ -236,6 +239,7 @@
           </a>
           <a class="tile" href="persona-marije.html">
             <nldd-card accessible-label="Marije de Wit - Beheerder dienstverlenerportaal Logius (draft)">
+                <nldd-badge class="draft-badge" color="warning" text="Draft"></nldd-badge>
               <nldd-container padding="24" layout="stack" gap="16" horizontal-alignment="center">
                 <nldd-image src="images/avatar-marije.svg" alt="Avatar van Marije de Wit" width="176" shape="circle" aspect-ratio="1/1" loading="eager"></nldd-image>
                 <div class="tile-name">
