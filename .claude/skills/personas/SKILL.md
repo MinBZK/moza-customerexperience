@@ -42,7 +42,7 @@ Een persona kan concept zijn ("draft") totdat hij is vastgesteld:
 
 Avatars komen uit de generator in `tools/avatars/` (avataaars; niet van library wisselen - zie de toelichting daar). Werkwijze:
 
-1. Voeg in `tools/avatars/personas.js` een regel toe: `id` (bestandsnaam), `name` (seed - stabiel houden, bepaalt ogen/mond/kleding/baard/bril), `gender`, `skinColor`, `hairColor`, `top`. Let op: `Tanned` rendert oranje; leeftijd suggereer je alleen via grijs haar.
+1. Voeg in `tools/avatars/personas.js` een regel toe: `id` (bestandsnaam), `name` (seed - stabiel houden, bepaalt ogen/mond/kleding/baard/bril), `gender`, `skinColor`, `hairColor`, `top` en `nldd` (de Rijkskleur van de persona: cirkel wordt tint 150, kleding 600). Let op: `Tanned` rendert oranje; leeftijd suggereer je alleen via grijs haar.
 2. `npm install && npm run generate` in `tools/avatars/`.
 3. Kopieer `avatars/<id>.svg` naar `personas/images/<id>.svg`; pagina's verwijzen naar `images/<id>.svg`.
 4. Houd de set divers (huidskleur, gender, leeftijd, hoofdbedekking) over het geheel.
