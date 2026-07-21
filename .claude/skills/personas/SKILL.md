@@ -53,4 +53,5 @@ Avatars komen uit de generator in `tools/avatars/` (avataaars; niet van library 
 - **Namen**: geen voor- of achternamen die al voorkomen bij bestaande persona's of klantreis-alter-ego's (o.a. Sander, Wei, Ahmed, Lotte).
 - **Tellers**: werk bij een nieuwe persona de tag op de startpagina bij ("N persona's").
 - **Klantreizen** linken vanuit hun zwembaan-labels naar de persona-pagina's ("Bekijk persona ↗" of "Alter-ego van persona X ↗"); controleer die links bij hernoemen.
+- **Site-brede consistentie is verplicht.** Een persona leeft op meer plekken dan zijn eigen pagina: index-tag en accessible-label, kaart-inhoud van ándere persona's die naar zijn rol verwijzen, klantreis-zwembanen, legenda's, zijpaneel-teksten en HTML-comments. Bij elke hernoeming of inhoudswijziging: grep op de oude term over de hele repo (personas/ én klantreizen/) en werk álle vindplaatsen bij voordat je afrondt. Rond nooit af met een restant van de oude term (uitgezonderd het bevroren archief).
 - Wijzigingen via een PR naar `main`; merge deployt automatisch. Schrijfstijl: Nederlands, geen em-dash, beknopt.
