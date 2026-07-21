@@ -31,13 +31,12 @@ section.journey
 │       ├── .lane-label     per persona: avatar, naam, rol, persona-link (sticky links)
 │       └── .phase-cell     per baan × fase, aria-label="<Naam> - <Fase>" (uniek!)
 │           └── .step-row   stappen links→rechts op globale tijd-kolommen
-├── .canvas-hud             "waar ben ik" (fase + mijlpaal), door JS gepositioneerd
 └── .minimap                2D-overzicht rechtsonder
 ```
 
 - **Tijd-kolommen**: elke `.step-row` bestaat uit afwisselend `.step-wrap` en `.step-connector`; slot-index van kolom *c* is `2*c`. Banen zonder stap op een kolom vullen met `--spacer`-varianten, zodat alles verticaal uitlijnt. Een rij mag eerder eindigen dan de laatste kolom.
 - **Connectors**: binnen een baan een zichtbare `.step-connector` alleen tussen twee direct opeenvolgende stappen; de pijl zelf wordt door JS als SVG getekend (de → glyph is transparant). Kruist de flow van baan, dan spacers gebruiken en de sprong opnemen in `EDGES`.
-- **Mijlpalen**: `data-milestone="n"` op de `.step` geeft de genummerde badge. Zelfde nummers + teksten in het JS-array `MILESTONES` (voedt de strip op zoomniveau 1 en de HUD).
+- **Mijlpalen**: `data-milestone="n"` op de `.step` geeft de genummerde badge. Zelfde nummers + teksten in het JS-array `MILESTONES` (voedt de strip op zoomniveau 1). Geen zwevende "waar ben ik"-indicator over het canvas; de sticky fasekoppen en badges zijn de oriëntatie.
 - **Verdiepingen**: onder een stap `.step-verdieping-connector` + `.step-verdieping` (herhalend). Verborgen op niveau 2, zichtbaar op niveau 3; JS voegt automatisch een "n details"-knop toe en erft tags van verdiepingen naar de parent-stap (kloon met doorklik naar het origineel).
 - **Tags**: `.step-tag` met slot-icoon (lock-SVG) + label. Kleurklasse wordt door JS toegekend op labeltekst: "Inloggen" (blauw), "Goedkeuren" (teal), "Wie mag wat" (paars), "Autorisatie" (rood). Klikbare uitleg: `<button class="step-tag step-tag--info">` met `data-persona`, `data-phase`, `data-step`, `data-panel-title` en `data-panel-body` (platte tekst) of `data-panel-body-ref` (id van een `<template>` voor rijke inhoud) en optioneel `data-vraagstukken-ref`.
 - **Zijpaneel**: vaste markup (`#sidePanel` + `#sideScrim` + templates onderaan). Rijke panelen gebruiken `.wmw-item`-regels met gekleurde dots (`var(--<naam>)`) en `strong.p-<naam>` (kleur = tint-variabele); timeline-panelen gebruiken `.tl`-opmaak (Nu/Binnenkort/Toekomst). De generieke "Vraagstukken"-lijst in de footer per reis aanpassen aan de actoren.
@@ -51,7 +50,7 @@ Kopieer de drie scriptblokken uit de referentie integraal en pas alleen dit aan:
 2. `EDGES` - baan-overstijgende flow: `[bron-aria-label, kolom, doel-aria-label, kolom]`. Binnen-baan pijlen (zichtbare connectors) tekent JS zelf.
 3. Reis-specifieke blokken uit de subsidieaanvraag NIET meenemen naar andere reizen: gedeelde Wei & Ahmed-cellen (`alignAhmedSolo`, wa-chips), de clippy-easter-egg, de kolom-injectie ("Nieuwe tijd-kolom"), en de Systeem-sublanen/uitklapper - tenzij de nieuwe reis zoiets nodig heeft.
 
-Generiek en ongemoeid laten: minimap + sleep-pan, zoomniveaus (1 mijlpalen / 2 hoofdlijnen / 3 alle details), details-knoppen + tag-overerving, tag-kleuring, flow-tekenen, tijdmarkers, fasekop-navigatie, volledig scherm, toetsenbord (pijltjes, +/−, i, f, Esc), zijpaneel met doorbladeren, canvas-HUD.
+Generiek en ongemoeid laten: minimap + sleep-pan, zoomniveaus (1 mijlpalen / 2 hoofdlijnen / 3 alle details), details-knoppen + tag-overerving, tag-kleuring, flow-tekenen, tijdmarkers, fasekop-navigatie, volledig scherm, toetsenbord (pijltjes, +/−, i, f, Esc), zijpaneel met doorbladeren.
 
 ## Werkwijze
 
