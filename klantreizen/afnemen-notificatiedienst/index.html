@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl" data-scheme="light">
+<html lang="nl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,38 +13,38 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    color-scheme: light;
-    --ink: #1a1a2e;
-    --ink-soft: #3d3d5c;
-    --ink-mute: #6b6b8a;
-    --paper: #f7f7f2;
-    --white: #ffffff;
-    --accent: #1a4bbf;
-    --accent-light: #dde8ff;
-    --border: #c8c8dc;
+    color-scheme: light dark;
+    --ink: var(--primitives-color-neutral-900);
+    --ink-soft: var(--primitives-color-neutral-700);
+    --ink-mute: var(--primitives-color-neutral-600);
+    --paper: var(--primitives-color-neutral-50);
+    --white: var(--primitives-color-neutral-0);
+    --accent: light-dark(#1a4bbf, #9ec3e6);
+    --accent-light: var(--primitives-color-lintblauw-100);
+    --border: var(--primitives-color-neutral-300);
     --shadow: 0 2px 12px rgba(26,26,46,0.10);
     --focus: #ffbf00;
 
     /* een accentkleur per persona-zwembaan (4 KvK-ambtenaren + 1 Logius) */
-    --ruben: #1d4ed8;
-    --ruben-tint: #dbeafe;
-    --annemieke: #b45309;
-    --annemieke-tint: #fdebd0;
-    --femke: #0f766e;
-    --femke-tint: #d9f2ec;
-    --deniz: #9f1239;
-    --deniz-tint: #fbdde2;
-    --marije: #6d28d9;
-    --marije-tint: #eaddf7;
+    --ruben: var(--primitives-color-lintblauw-600);
+    --ruben-tint: var(--primitives-color-lintblauw-150);
+    --annemieke: var(--primitives-color-donkergeel-600);
+    --annemieke-tint: var(--primitives-color-donkergeel-150);
+    --femke: var(--primitives-color-mintgroen-600);
+    --femke-tint: var(--primitives-color-mintgroen-150);
+    --deniz: var(--primitives-color-robijnrood-600);
+    --deniz-tint: var(--primitives-color-robijnrood-150);
+    --marije: var(--primitives-color-violet-600);
+    --marije-tint: var(--primitives-color-violet-150);
 
     /* alternatieve-route kleur (verdieping onder een stap) */
-    --alt: #b45309;
-    --alt-tint: #fdecd2;
+    --alt: var(--primitives-color-oranje-600);
+    --alt-tint: var(--primitives-color-oranje-100);
 
     /* autorisatie- en authenticatiemomenten */
-    --auth: #b91c1c;
-    --auth-tint: #fbe2e2;
-    --authenticatie: #1e40af;
+    --auth: var(--primitives-color-rood-600);
+    --auth-tint: var(--primitives-color-rood-100);
+    --authenticatie: var(--primitives-color-donkerblauw-600);
   }
 
   /* De beeldvullende (100vw) journey mag geen horizontale paginascroll geven. */
@@ -115,20 +115,20 @@
     display: flex; align-items: flex-start; gap: 10px;
     max-width: var(--primitives-area-640, 640px);
     margin-bottom: var(--primitives-space-24, 24px);
-    background: #fdebd0;
-    border: 1px solid #e8c290;
-    border-left: 4px solid #b45309;
+    background: var(--primitives-color-oranje-100);
+    border: 1px solid var(--primitives-color-oranje-200);
+    border-left: 4px solid var(--primitives-color-oranje-600);
     border-radius: 8px;
     padding: 12px 16px;
     font-size: 14px; line-height: 1.5; color: var(--ink);
   }
-  .draft-banner svg { flex-shrink: 0; margin-top: 2px; color: #b45309; }
+  .draft-banner svg { flex-shrink: 0; margin-top: 2px; color: var(--primitives-color-oranje-600); }
   .draft-banner strong {
     display: block;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 11px; font-weight: 600;
     text-transform: uppercase; letter-spacing: .08em;
-    color: #b45309; margin-bottom: 2px;
+    color: var(--primitives-color-oranje-600); margin-bottom: 2px;
   }
 
   /* Doel van de klantreis: een uitgelicht blok bovenaan. */
@@ -230,7 +230,7 @@
     content: attr(data-milestone);
     position: absolute; top: -10px; left: -10px; z-index: 3;
     width: 22px; height: 22px; border-radius: 50%;
-    background: var(--ink); color: #fff;
+    background: var(--ink); color: var(--white);
     font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 700;
     display: flex; align-items: center; justify-content: center;
     box-shadow: 0 0 0 2px var(--white);
@@ -248,7 +248,7 @@
   .milestone-strip.is-panning { cursor: grabbing; user-select: none; }
   .mstrip-phase { display: flex; flex-direction: column; flex-shrink: 0; }
   .mstrip-head {
-    background: var(--ink); color: #fff;
+    background: var(--ink); color: var(--white);
     padding: 12px 18px; border-radius: 8px 8px 0 0;
     font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 600;
     letter-spacing: .1em; text-transform: uppercase;
@@ -263,7 +263,7 @@
   }
   .mstrip-num {
     flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%;
-    background: var(--ink); color: #fff;
+    background: var(--ink); color: var(--white);
     font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 700;
     display: flex; align-items: center; justify-content: center;
   }
@@ -293,7 +293,7 @@
     display: flex; align-items: center;
   }
   .phase-head:not(.phase-head--corner) { cursor: pointer; }
-  .phase-head:not(.phase-head--corner):hover { background: #26263f; }
+  .phase-head:not(.phase-head--corner):hover { background: light-dark(#26263f, #e2e6ee); }
   .phase-head:not(.phase-head--corner):focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
   .phase-head--corner { background: var(--ink); position: sticky; left: 0; top: 0; z-index: 4; cursor: default; }
   .phase-head + .phase-head { border-left: 1px solid rgba(255,255,255,.15); }
@@ -315,6 +315,11 @@
     background: var(--paper);
     box-shadow: 0 0 0 2px var(--white), 0 0 0 4px currentColor;
   }
+  .lane--ruben .lane-avatar { background: var(--primitives-color-lintblauw-150); }
+  .lane--annemieke .lane-avatar { background: var(--primitives-color-donkergeel-150); }
+  .lane--femke .lane-avatar { background: var(--primitives-color-mintgroen-150); }
+  .lane--deniz .lane-avatar { background: var(--primitives-color-robijnrood-150); }
+  .lane--marije .lane-avatar { background: var(--primitives-color-violet-150); }
   .lane--ruben .lane-avatar { color: var(--ruben); }
   .lane--annemieke .lane-avatar { color: var(--annemieke); }
   .lane--femke .lane-avatar { color: var(--femke); }
@@ -436,8 +441,8 @@
   .step-tag.is-authenticatie { background: var(--authenticatie); }
   .step-tag.is-autorisatie { background: var(--auth); }
   .step-tag.is-inloggen { background: var(--authenticatie); }
-  .step-tag.is-wmw { background: #6d4aa8; }
-  .step-tag.is-goedkeuren { background: #0f766e; }
+  .step-tag.is-wmw { background: var(--primitives-color-paars-600); }
+  .step-tag.is-goedkeuren { background: var(--primitives-color-mintgroen-650); }
 
   /* klikbare tag die een zijvenster met uitleg opent */
   .step-tag--info { border: none; cursor: pointer; }
@@ -492,8 +497,8 @@
     background: var(--auth); color: #fff;
   }
   .side-panel-tag[hidden] { display: none; }
-  .side-panel-tag.is-wmw { background: #6d4aa8; }
-  .side-panel-tag.is-goedkeuren { background: #0f766e; }
+  .side-panel-tag.is-wmw { background: var(--primitives-color-paars-600); }
+  .side-panel-tag.is-goedkeuren { background: var(--primitives-color-mintgroen-650); }
   .side-panel-tag.is-inloggen { background: var(--authenticatie); }
   .side-panel-title { font-size: 22px; font-weight: 600; line-height: 1.25; margin-bottom: 12px; }
   .side-panel-body { font-size: 15px; line-height: 1.65; color: rgba(255,255,255,.92); white-space: pre-line; }

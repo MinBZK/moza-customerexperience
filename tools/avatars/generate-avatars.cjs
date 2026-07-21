@@ -34,10 +34,10 @@ const NLDD = {
 // ---------------------- CONFIG ------------------------------
 const CONFIG = {
   outDir: path.join(__dirname, "avatars"), // waar de SVG's komen
-  // "Circle" = avataaars' eigen (blauwe) cirkel.
-  // "Transparent" = geen achtergrond; geef zelf een cirkel via CSS
-  //   (bv. border-radius:50%;background:#e8eff3 op de <img>).
-  avatarStyle: "Circle",
+  // "Transparent": geen achtergrond in de SVG. De pagina's geven de cirkel
+  // via CSS met de NLDD-token van de persona-kleur (tint 150), zodat de
+  // achtergrond automatisch meebeweegt met light/dark mode.
+  avatarStyle: "Transparent",
 };
 // ------------------------------------------------------------
 
@@ -95,7 +95,6 @@ personas.forEach((p) => {
   let svg = renderToStaticMarkup(React.createElement(Avatar, props));
   const pal = NLDD[p.nldd];
   if (pal) {
-    svg = svg.replace(/#65C9FF/gi, pal.bg);      // achtergrondcirkel -> tint 150
     svg = svg.replace(/#3C4F5C/gi, pal.clothes); // kleding via marker -> 600
     svg = svg.replace(/#262E33/gi, pal.clothes); // blazer-body (negeert clotheColor) -> 600
   }

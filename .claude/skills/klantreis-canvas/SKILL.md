@@ -17,7 +17,7 @@ Referentie-implementatie: `klantreizen/gezamenlijke-subsidieaanvraag/index.html`
 ## Head en stijl-laag
 
 - Alleen design-tokens + fonts: `settings.css` en het design-system-module via esm.sh, plus Inter en IBM Plex Mono via Google Fonts. **Geen nldd-componenten in de body** - het canvas is eigen CSS bovenop de tokens. `nldd-banner` e.d. renderen niet betrouwbaar via de CDN; gebruik voor de draft-banner de eigen `.draft-banner`-opmaak (zie afnemen-notificatiedienst).
-- Vaste kleurtokens in `:root`: `--ink/--paper/--accent/--border/--focus` en per zwembaan `--<naam>` + `--<naam>-tint`. Autorisatie-momenten: `--auth` (rood), `--authenticatie` (blauw), alternatieve route: `--alt` (oker).
+- Vaste kleurtokens in `:root`: `--ink/--paper/--white/--border` etc. en per zwembaan `--<naam>` + `--<naam>-tint`. **Alle kleuren verwijzen naar NLDD-primitives** (die zelf `light-dark()` zijn), zodat het canvas automatisch dark mode volgt: neutralen op `--primitives-color-neutral-*` (ink=900, soft=700, mute=600, paper=50, white=0, border=300), zwembanen op de Rijkskleur van de persona (`-600` voor tekst/ring, `-150` voor vlakvulling), autorisatie `rood-600/100`, authenticatie `donkerblauw-600`, alternatieve route `oranje-600/100`. Waar `#fff` op een `--ink`-vlak stond: `var(--white)` gebruiken (flipt mee). Geen `data-scheme="light"` op `<html>` en `color-scheme: light dark` op `:root`. Het vaste donkerblauwe zijpaneel (#154273) blijft bewust vast in beide thema's.
 
 ## Canvas-anatomie (vaste opbouw)
 
