@@ -16,7 +16,7 @@ Referentie-implementatie: de vier oorspronkelijke persona's (`personas/persona-y
 
 1. Sticky terug-balk (`.sticky-bar`, krimpt bij scrollen via het module-script).
 2. Print-banner (Rijksoverheid-logo, alleen zichtbaar op de afdruk) + print-CSS die de NLDD-shell platslaat via shadow-injectie.
-3. Profielkaart: avatar (`nldd-image` 176px, `shape="circle"`), `nldd-title` met overline **"Persona N · context · rol"** (2 of 3 delen, doorlopende nummering over alle persona's), `<h1>` naam, ondertitel, en een tag-row.
+3. Profielkaart: avatar (`nldd-image` 176px, `shape="circle"`), `nldd-title` met overline **"Persona N · context · rol"** (2 of 3 delen, doorlopende nummering over alle persona's), `<h1>` naam, ondertitel, en een tag-row. De tag-row opent met de doelgroep-tag (`ondernemer` donkergroen / `dienstverlener` hemelblauw), gevolgd door 3-4 tags in de persona-kleur.
 4. Drie context-items in een 3-koloms grid, vaste koppen en iconen: **Organisatie & context** (apartment-building), **Ervaring & vaardigheid** (star), **Frequentie van gebruik** (clock). Inhoud als korte fragmenten gescheiden door " · ".
 5. Zes kaarten in een 2-koloms grid, vaste volgorde, koppen en iconen: **Doelen** (flag), **Taken & verantwoordelijkheden** (check-list), **Benodigde rechten & autorisatie** (key), **Machtigingen & mandaten** (handshake), **Authenticatie-context** (shield-check-mark), **Frustraties & pijnpunten** (face-frowning). Inhoud: `<ul>` met 2-3 beknopte punten.
 
@@ -24,7 +24,7 @@ Referentie-implementatie: de vier oorspronkelijke persona's (`personas/persona-y
 
 ## Overzichtstegel
 
-`nldd-card` in de `nldd-collection` (item-width 250px) met: avatar, naam (`nldd-title size="4"` met `<h2>`), en één rol-tag. `accessible-label="Naam - Rol"`. De tegel is een `<a class="tile">` naar de detailpagina.
+`nldd-card` in de `nldd-collection` (item-width 250px) met: avatar, naam (`nldd-title size="4"` met `<h2>`), en een `nldd-container layout="row"` met de rol-tag (persona-kleur) plus de **doelgroep-tag**: `ondernemer` (donkergroen) of `dienstverlener` (hemelblauw) - dezelfde kleuren als de doelgroep-tags op de klantreizen-index. `accessible-label="Naam - Rol"`. De tegel is een `<a class="tile">` naar de detailpagina.
 
 ## Kleur per persona
 
