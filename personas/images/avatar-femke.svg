@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 176 176" role="img" aria-label="Illustratie van Femke Bosch">
+  <rect width="176" height="176" fill="#D9F2E5"/>
+  <path d="M26 176c4-36 30-54 62-54s58 18 62 54z" fill="#0F766E"/>
+  <rect x="76" y="94" width="24" height="28" rx="10" fill="#E0A97C"/>
+  <circle cx="88" cy="72" r="34" fill="#F6CBA6"/>
+  <path d="M118 60c4-2 10 0 12 6 2 7-3 13-10 13l-4-1c2-6 2-12 2-18z" fill="#A0522D"/>
+  <path d="M54 72c0-23 15-37 34-37s34 14 34 37c0-9-7-13-11-21-8 6-36 8-46 2-4 6-11 10-11 19z" fill="#A0522D"/>
+  <circle cx="75" cy="74" r="3.4" fill="#2B2118"/>
+  <circle cx="101" cy="74" r="3.4" fill="#2B2118"/>
+  <path d="M80 92c5 4 11 4 16 0" stroke="#8A5A3B" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+</svg>
