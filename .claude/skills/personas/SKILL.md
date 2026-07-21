@@ -10,7 +10,7 @@ Referentie-implementatie: de vier oorspronkelijke persona's (`personas/persona-y
 ## Bestanden en head
 
 - Overzicht: `personas/index.html` · detail: `personas/persona-<voornaam>.html` · avatar: `personas/images/<id>.svg`.
-- Persona-pagina's laden de **lokale vendor-bundel** (`vendor/nldd/css/*.css` + `vendor/nldd/design-system.js`), niet de CDN. Daardoor werken nldd-componenten hier wel betrouwbaar (anders dan op de klantreis-pagina's) en is de pagina offline/preview-proof.
+- Persona-pagina's laden de **lokale vendor-bundel** (`vendor/nldd/css/*.css` + `vendor/nldd/design-system.js`), niet de CDN. Daardoor werken nldd-componenten hier wel betrouwbaar (anders dan op de klantreis-pagina's) en is de pagina offline/preview-proof. `:root` heeft `color-scheme: light dark`: de pagina volgt de OS-voorkeur en de NLDD-tokens leveren de dark-variant; eigen CSS gebruikt `light-dark()` of tokens, en de printweergave forceert licht.
 
 ## Detailpagina: vaste anatomie
 
@@ -45,6 +45,7 @@ Avatars komen uit de generator in `tools/avatars/` (avataaars; niet van library 
 1. Voeg in `tools/avatars/personas.js` een regel toe: `id` (bestandsnaam), `name` (seed - stabiel houden, bepaalt ogen/mond/kleding/baard/bril), `gender`, `skinColor`, `hairColor`, `top` en `nldd` (de Rijkskleur van de persona: cirkel wordt tint 150, kleding 600). Let op: `Tanned` rendert oranje; leeftijd suggereer je alleen via grijs haar.
 2. `npm install && npm run generate` in `tools/avatars/`.
 3. Kopieer `avatars/<id>.svg` naar `personas/images/<id>.svg`; pagina's verwijzen naar `images/<id>.svg`.
+   De SVG is **transparant** (geen achtergrond): de cirkel komt van de pagina zelf via `style="background: var(--primitives-color-<kleur>-150); border-radius: 50%;"` op de `nldd-image` (en in klantreizen via `.lane--<naam> .lane-avatar { background: ... }`). Zo volgt de cirkel automatisch light/dark mode.
 4. Houd de set divers (huidskleur, gender, leeftijd, hoofdbedekking) over het geheel.
 
 ## Verder

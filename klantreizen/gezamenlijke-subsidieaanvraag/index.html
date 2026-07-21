@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl" data-scheme="light">
+<html lang="nl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,43 +14,43 @@
   *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    color-scheme: light;
-    --ink: #1a1a2e;
-    --ink-soft: #3d3d5c;
-    --ink-mute: #6b6b8a;
-    --paper: #f7f7f2;
-    --white: #ffffff;
-    --accent: #1a4bbf;
-    --accent-light: #dde8ff;
-    --border: #c8c8dc;
+    color-scheme: light dark;
+    --ink: var(--primitives-color-neutral-900);
+    --ink-soft: var(--primitives-color-neutral-700);
+    --ink-mute: var(--primitives-color-neutral-600);
+    --paper: var(--primitives-color-neutral-50);
+    --white: var(--primitives-color-neutral-0);
+    --accent: light-dark(#1a4bbf, #9ec3e6);
+    --accent-light: var(--primitives-color-lintblauw-100);
+    --border: var(--primitives-color-neutral-300);
     --shadow: 0 2px 12px rgba(26,26,46,0.10);
     --focus: #ffbf00;
 
     /* een accentkleur per persona-zwembaan (collectief van 3 ondernemers + 1 intermediair) */
-    --sander: #15803d;
-    --sander-tint: #dcfce7;
-    --wei: #1d4ed8;
-    --wei-tint: #dbeafe;
-    --ahmed: #4338ca;
-    --ahmed-tint: #e0e7ff;
-    --lotte: #7e22ce;
-    --lotte-tint: #f3e8ff;
-    --systeem: #475569;
-    --systeem-tint: #e2e8f0;
-    --rvo: #b45309;
-    --rvo-tint: #fdebd0;
+    --sander: var(--primitives-color-groen-600);
+    --sander-tint: var(--primitives-color-groen-150);
+    --wei: var(--primitives-color-lichtblauw-600);
+    --wei-tint: var(--primitives-color-lichtblauw-150);
+    --ahmed: var(--primitives-color-donkerblauw-600);
+    --ahmed-tint: var(--primitives-color-donkerblauw-150);
+    --lotte: var(--primitives-color-paars-600);
+    --lotte-tint: var(--primitives-color-paars-150);
+    --systeem: var(--primitives-color-coolgray-600);
+    --systeem-tint: var(--primitives-color-coolgray-150);
+    --rvo: var(--primitives-color-bruin-600);
+    --rvo-tint: var(--primitives-color-bruin-150);
 
     /* alternatieve-route kleur (verdieping onder een stap), los van de
        persona-kleuren zodat 'm meteen als iets anders herkenbaar is */
-    --alt: #b45309;
-    --alt-tint: #fdecd2;
+    --alt: var(--primitives-color-oranje-600);
+    --alt-tint: var(--primitives-color-oranje-100);
 
     /* autorisatie- en authenticatiemomenten: hier wil de opdrachtgever
        nadrukkelijk met stakeholders over in gesprek, dus een eigen,
        sterk afwijkende kleur bovenop de persona-tint */
-    --auth: #b91c1c;
-    --auth-tint: #fbe2e2;
-    --authenticatie: #1e40af;
+    --auth: var(--primitives-color-rood-600);
+    --auth-tint: var(--primitives-color-rood-100);
+    --authenticatie: var(--primitives-color-donkerblauw-600);
   }
 
   /* De beeldvullende (100vw) journey mag geen horizontale paginascroll geven. */
@@ -239,7 +239,7 @@
     content: attr(data-milestone);
     position: absolute; top: -10px; left: -10px; z-index: 3;
     width: 22px; height: 22px; border-radius: 50%;
-    background: var(--ink); color: #fff;
+    background: var(--ink); color: var(--white);
     font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 700;
     display: flex; align-items: center; justify-content: center;
     box-shadow: 0 0 0 2px var(--white);
@@ -257,7 +257,7 @@
   .milestone-strip.is-panning { cursor: grabbing; user-select: none; }
   .mstrip-phase { display: flex; flex-direction: column; flex-shrink: 0; }
   .mstrip-head {
-    background: var(--ink); color: #fff;
+    background: var(--ink); color: var(--white);
     padding: 12px 18px; border-radius: 8px 8px 0 0;
     font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 600;
     letter-spacing: .1em; text-transform: uppercase;
@@ -272,7 +272,7 @@
   }
   .mstrip-num {
     flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%;
-    background: var(--ink); color: #fff;
+    background: var(--ink); color: var(--white);
     font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 700;
     display: flex; align-items: center; justify-content: center;
   }
@@ -307,7 +307,7 @@
     display: flex; align-items: center;
   }
   .phase-head:not(.phase-head--corner) { cursor: pointer; }
-  .phase-head:not(.phase-head--corner):hover { background: #26263f; }
+  .phase-head:not(.phase-head--corner):hover { background: light-dark(#26263f, #e2e6ee); }
   .phase-head:not(.phase-head--corner):focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
   .phase-head--corner { background: var(--ink); position: sticky; left: 0; top: 0; z-index: 4; cursor: default; }
   .phase-head + .phase-head { border-left: 1px solid rgba(255,255,255,.15); }
@@ -547,7 +547,7 @@
     pointer-events: none;
   }
   .clippy-egg.is-peeking { opacity: 1; transform: translateY(0) rotate(8deg); }
-  .lane--weiahmed .step { background: #eceafb; color: #322d6e; }
+  .lane--weiahmed .step { background: var(--primitives-color-donkerblauw-100); color: var(--primitives-color-donkerblauw-650); }
   .lane--weiahmed .lane-avatar { color: var(--wei); }
   /* Markering "geldt voor Wei én Ahmed" bovenin elke gedeelde box. */
   .wa-chip { display: flex; width: fit-content; align-items: center; gap: 5px; font-size: 10px; font-weight: 600; letter-spacing: .02em; color: var(--ink-soft); margin-bottom: 7px; }
@@ -584,8 +584,8 @@
   .step-tag.is-authenticatie { background: var(--authenticatie); }
   .step-tag.is-autorisatie { background: var(--auth); }
   .step-tag.is-inloggen { background: var(--authenticatie); }
-  .step-tag.is-wmw { background: #6d4aa8; }
-  .step-tag.is-goedkeuren { background: #0f766e; }
+  .step-tag.is-wmw { background: var(--primitives-color-paars-600); }
+  .step-tag.is-goedkeuren { background: var(--primitives-color-mintgroen-650); }
 
   /* klikbare tag die een zijvenster met uitleg opent */
   .step-tag--info { border: none; cursor: pointer; }
@@ -644,8 +644,8 @@
     background: var(--auth); color: #fff;
   }
   .side-panel-tag[hidden] { display: none; }
-  .side-panel-tag.is-wmw { background: #6d4aa8; }
-  .side-panel-tag.is-goedkeuren { background: #0f766e; }
+  .side-panel-tag.is-wmw { background: var(--primitives-color-paars-600); }
+  .side-panel-tag.is-goedkeuren { background: var(--primitives-color-mintgroen-650); }
   .side-panel-tag.is-inloggen { background: var(--authenticatie); }
   .side-panel-title { font-size: 22px; font-weight: 600; line-height: 1.25; margin-bottom: 12px; }
   .side-panel-body { font-size: 15px; line-height: 1.65; color: rgba(255,255,255,.92); white-space: pre-line; }
