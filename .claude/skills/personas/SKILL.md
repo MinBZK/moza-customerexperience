@@ -26,9 +26,17 @@ Referentie-implementatie: de vier oorspronkelijke persona's (`personas/persona-y
 
 `nldd-card` in de `nldd-collection` (item-width 250px) met: avatar, naam (`nldd-title size="4"` met `<h2>`), en een `<div class="tile-tags">` (eigen flex-wrap-div; nldd-container wrapt niet en laat tags buiten de kaart lopen) met de rol-tag (persona-kleur) plus de **doelgroep-tag**: `ondernemer` (groen) of `dienstverlener` (donkerblauw) - dezelfde kleuren als op de klantreizen-index, en bewust kleuren die geen enkele persona gebruikt zodat elke tag-kleur uniek blijft. `accessible-label="Naam - Rol"`. De tegel is een `<a class="tile">` naar de detailpagina, met `display: flex` en `width: 100%` op de kaart zodat alle kaarten in een rij dezelfde hoogte krijgen (de grid-tegel strekt, de kaart vult hem).
 
-## Kleur per persona
+## Kleurgebruik (vaste regels - niet van afwijken)
 
-Elke persona heeft één vaste Rijkskleur voor avatar-cirkel en eigen beschrijvende tags: yassin hemelblauw, karin rood, bilal paars, sherida oranje, annemieke donkergeel, ruben lintblauw, femke mintgroen, deniz robijnrood, marije violet, pieter bruin. **Rol-tags op de index kleuren per organisatie**: KvK-rollen geel, Logius-rollen lichtblauw; ondernemers-rollen in de persona-kleur. Kies voor een nieuwe persona een nog ongebruikte kleur uit de nldd-tag Rijkskleuren. **Gereserveerde kleuren** (voor tags die op meerdere plekken voorkomen; elke kleur hoort bij precies eén tag-betekenis): `groen` = ondernemer, `donkerblauw` = dienstverlener, `geel` = KvK, `lichtblauw` = Logius, `roze` = eHerkenning, `neutral` = tellers op de startpagina. Komt een tag-tekst op meerdere persona's voor, geef hem dan zo'n eigen gereserveerde kleur in plaats van de persona-kleur.
+Deze regels zijn expliciet met de gebruiker afgestemd; pas ze bij elke wijziging toe zonder ze opnieuw te bevragen.
+
+1. **Eén kleur = eén betekenis.** Een kleur mag nooit twee verschillende dingen aanduiden (dus geen doelgroep-tag in een persona-kleur, geen teller in een organisatie-kleur).
+2. **Eén tag-tekst = overal dezelfde kleur**, site-breed (index, detailpagina's, klantreizen-index). Controleer met een grep op `nldd-tag color=.*text=` dat geen tekst in twee kleuren voorkomt.
+3. **Persona-kleur** (uniek per persona) geldt voor: avatar-cirkel (tint 150), avatar-kleding (600), de eigen beschrijvende tags op de detailpagina en de zwembaan in klantreizen. Huidige toewijzing: yassin hemelblauw, karin rood, bilal paars, sherida oranje, annemieke donkergeel, ruben lintblauw, femke mintgroen, deniz robijnrood, marije violet, pieter bruin.
+4. **Rol-tags groeperen per organisatie**: alle KvK-rollen geel, alle Logius-rollen lichtblauw. Rollen zonder organisatie (de ondernemers) staan in de persona-kleur.
+5. **Gereserveerde kleuren** (nooit aan een persona geven): `groen` = ondernemer, `donkerblauw` = dienstverlener, `geel` = KvK, `lichtblauw` = Logius, `roze` = eHerkenning, `neutral` = tellers op de startpagina, `warning` = draft. Komt een tag-tekst op meerdere persona's voor, geef hem dan een eigen gereserveerde kleur in plaats van de persona-kleur.
+6. **Geen bijna-gelijke kleuren naast elkaar** in eén kaart of tegel (zoals donkergroen naast groen); kies dan een duidelijk andere persona-kleur.
+7. **Nieuwe persona**: kies een Rijkskleur die niet in de lijsten hierboven staat en draai daarna de grep-controle uit regel 2.
 
 ## Draft-status
 
