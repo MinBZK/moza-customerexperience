@@ -28,7 +28,7 @@ Referentie-implementatie: de vier oorspronkelijke persona's (`personas/persona-y
 
 ## Kleur per persona
 
-Elke persona heeft één vaste Rijkskleur voor alle tags (tegel én detailpagina): yassin hemelblauw, karin donkergroen, bilal paars, sherida oranje, annemieke donkergeel, ruben lintblauw, femke mintgroen, deniz robijnrood, marije violet, pieter bruin. Kies voor een nieuwe persona een nog ongebruikte kleur uit de nldd-tag Rijkskleuren. **Gereserveerde kleuren** (voor tags die op meerdere plekken voorkomen; elke kleur hoort bij precies eén tag-betekenis): `groen` = ondernemer, `donkerblauw` = dienstverlener, `geel` = KvK, `lichtblauw` = Logius, `roze` = eHerkenning, `neutral` = tellers op de startpagina. Komt een tag-tekst op meerdere persona's voor, geef hem dan zo'n eigen gereserveerde kleur in plaats van de persona-kleur.
+Elke persona heeft één vaste Rijkskleur voor avatar-cirkel en eigen beschrijvende tags: yassin hemelblauw, karin rood, bilal paars, sherida oranje, annemieke donkergeel, ruben lintblauw, femke mintgroen, deniz robijnrood, marije violet, pieter bruin. **Rol-tags op de index kleuren per organisatie**: KvK-rollen geel, Logius-rollen lichtblauw; ondernemers-rollen in de persona-kleur. Kies voor een nieuwe persona een nog ongebruikte kleur uit de nldd-tag Rijkskleuren. **Gereserveerde kleuren** (voor tags die op meerdere plekken voorkomen; elke kleur hoort bij precies eén tag-betekenis): `groen` = ondernemer, `donkerblauw` = dienstverlener, `geel` = KvK, `lichtblauw` = Logius, `roze` = eHerkenning, `neutral` = tellers op de startpagina. Komt een tag-tekst op meerdere persona's voor, geef hem dan zo'n eigen gereserveerde kleur in plaats van de persona-kleur.
 
 ## Draft-status
 
