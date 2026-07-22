@@ -45,7 +45,7 @@ Avatars komen uit de generator in `tools/avatars/` (avataaars; niet van library 
 1. Voeg in `tools/avatars/personas.js` een regel toe: `id` (bestandsnaam), `name` (seed - stabiel houden, bepaalt ogen/mond/kleding/baard/bril), `gender`, `skinColor`, `hairColor`, `top` en `nldd` (de Rijkskleur van de persona: cirkel wordt tint 150, kleding 600). Let op: `Tanned` rendert oranje; leeftijd suggereer je alleen via grijs haar.
 2. `npm install && npm run generate` in `tools/avatars/`.
 3. Kopieer `avatars/<id>.svg` naar `personas/images/<id>.svg`; pagina's verwijzen naar `images/<id>.svg`.
-   De SVG is **transparant** (geen achtergrond): de cirkel komt van de pagina zelf via `style="background: var(--primitives-color-<kleur>-150); border-radius: 50%;"` op de `nldd-image` (en in klantreizen via `.lane--<naam> .lane-avatar { background: ... }`). Zo volgt de cirkel automatisch light/dark mode.
+   De SVG is **transparant** (geen achtergrond): de cirkel komt van de pagina zelf via `style="background: var(--primitives-color-<kleur>-150); border-radius: 50%; overflow: hidden;"` op de `nldd-image` **zonder** `shape="circle"` (de interne circle-clip van het component geeft anders een 1px-rand van de hostachtergrond rond de figuur; eén clip op de host is naadloos) (en in klantreizen via `.lane--<naam> .lane-avatar { background: ... }`). Zo volgt de cirkel automatisch light/dark mode.
 4. Houd de set divers (huidskleur, gender, leeftijd, hoofdbedekking) over het geheel.
 
 ## Verder
