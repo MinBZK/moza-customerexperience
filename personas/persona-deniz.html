@@ -206,7 +206,7 @@
               <nldd-icon name="star" size="16"></nldd-icon>
               <h2>Ervaring &amp; vaardigheid</h2>
             </div>
-            <nldd-rich-text class="rt"><p>technisch specialist · ervaren met API’s, dashboards en incidentprocessen</p></nldd-rich-text>
+            <nldd-rich-text class="rt"><p>technisch specialist · ervaren met API’s, PKI, dashboards en incidentprocessen</p></nldd-rich-text>
           </div>
           <div class="ctx">
             <div class="sec-head">
@@ -232,7 +232,7 @@
             <nldd-icon name="flag" size="20"></nldd-icon>
             <h2>Doelen</h2>
           </div>
-          <nldd-rich-text class="rt"><ul><li>Een stabiele, goed presterende notificatiedienst op de Mijn KvK-site</li><li>Problemen zien aankomen voordat ondernemers er last van hebben</li><li>Snel kunnen schakelen bij incidenten</li></ul></nldd-rich-text>
+          <nldd-rich-text class="rt"><ul><li>Een stabiele, goed presterende notificatiedienst op de Mijn KvK-site</li><li>De dienst via een API koppelen met veilige, automatiseerbare authenticatie zonder gedeelde geheimen</li><li>Problemen zien aankomen voordat ondernemers er last van hebben</li></ul></nldd-rich-text>
         </nldd-container>
       </nldd-card>
       <nldd-card>
@@ -241,7 +241,7 @@
             <nldd-icon name="check-list" size="20"></nldd-icon>
             <h2>Taken &amp; verantwoordelijkheden</h2>
           </div>
-          <nldd-rich-text class="rt"><ul><li>Implementeert de dienst technisch op de Mijn KvK-site</li><li>Analyseert namens zijn techteam de dashboards bij meldingen, bijvoorbeeld notificaties die niet aankomen</li><li>Verhelpt problemen en monitort de nieuwe implementatie</li></ul></nldd-rich-text>
+          <nldd-rich-text class="rt"><ul><li>Koppelt de Mijn KvK-site via API’s aan de dienst en is verantwoordelijk voor veilige, automatiseerbare authenticatie</li><li>Analyseert namens zijn techteam de dashboards bij meldingen, bijvoorbeeld notificaties die niet aankomen</li><li>Verhelpt problemen en monitort de nieuwe implementatie</li></ul></nldd-rich-text>
         </nldd-container>
       </nldd-card>
       <nldd-card>
@@ -250,7 +250,7 @@
             <nldd-icon name="key" size="20"></nldd-icon>
             <h2>Benodigde rechten &amp; autorisatie</h2>
           </div>
-          <nldd-rich-text class="rt"><ul><li>Technische beheerrol: API-sleutels, koppelingen en dashboards</li><li>Toegang tot logging en statusinformatie van de dienst</li></ul></nldd-rich-text>
+          <nldd-rich-text class="rt"><ul><li>Technische beheerrol: koppelingen, certificaten, API-sleutels en dashboards</li><li>Self-service certificaten aanvragen, vernieuwen en intrekken, met zicht op de vervaldatum</li><li>Toegang tot logging en statusinformatie van de dienst</li></ul></nldd-rich-text>
         </nldd-container>
       </nldd-card>
       <nldd-card>
@@ -268,7 +268,7 @@
             <nldd-icon name="shield-check-mark" size="20"></nldd-icon>
             <h2>Authenticatie-context</h2>
           </div>
-          <nldd-rich-text class="rt"><ul><li>Logt in via het organisatieaccount van de KvK (SSO)</li><li>Hoog niveau voor productiekoppelingen en sleutelbeheer</li></ul></nldd-rich-text>
+          <nldd-rich-text class="rt"><ul><li>Logt in via het organisatieaccount van de KvK (SSO)</li><li>Machine-koppelingen met client-certificaten (mTLS) onder PKIoverheid: hij stuurt een CSR in, de private key blijft altijd bij hem</li><li>Kortlevende certificaten met automatische vernieuwing; hoog niveau voor productiekoppelingen</li></ul></nldd-rich-text>
         </nldd-container>
       </nldd-card>
       <nldd-card>
@@ -277,7 +277,7 @@
             <nldd-icon name="face-frowning" size="20"></nldd-icon>
             <h2>Frustraties &amp; pijnpunten</h2>
           </div>
-          <nldd-rich-text class="rt"><ul><li>Meldingen zonder bruikbare details in de dashboards</li><li>Afhankelijk van de aanbieder bij verstoringen buiten de eigen keten</li><li>Documentatie loopt achter op de dienst</li></ul></nldd-rich-text>
+          <nldd-rich-text class="rt"><ul><li>API keys zijn gedeelde geheimen: ze lekken makkelijk, zijn lastig te roteren en bewijzen geen sterke identiteit</li><li>Handmatig sleutelbeheer en wachten op security bij elke nieuwe koppeling</li><li>Meldingen zonder bruikbare details in de dashboards</li></ul></nldd-rich-text>
         </nldd-container>
       </nldd-card>
       </nldd-container>
