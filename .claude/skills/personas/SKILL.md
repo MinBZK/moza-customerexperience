@@ -16,7 +16,7 @@ Referentie-implementatie: de vier oorspronkelijke persona's (`personas/persona-y
 
 1. Sticky terug-balk (`.sticky-bar`, krimpt bij scrollen via het module-script).
 2. Print-banner (Rijksoverheid-logo, alleen zichtbaar op de afdruk) + print-CSS die de NLDD-shell platslaat via shadow-injectie.
-3. Profielkaart: avatar (`nldd-image` 176px, `shape="circle"`), `nldd-title` met overline **"Persona N · context · rol"** (2 of 3 delen, doorlopende nummering over alle persona's), `<h1>` naam, ondertitel, en een tag-row. De tag-row opent met de doelgroep-tag (`ondernemer` donkergroen / `dienstverlener` hemelblauw), gevolgd door 3-4 tags in de persona-kleur.
+3. Profielkaart: avatar (`nldd-image` 176px, `shape="circle"`), `nldd-title` met overline **"Persona N · context · rol"** (2 of 3 delen, doorlopende nummering over alle persona's), `<h1>` naam, ondertitel, en een tag-row. De tag-row opent met de doelgroep-tag (`ondernemer` groen / `dienstverlener` donkerblauw), gevolgd door 3-4 tags in de persona-kleur.
 4. Drie context-items in een 3-koloms grid, vaste koppen en iconen: **Organisatie & context** (apartment-building), **Ervaring & vaardigheid** (star), **Frequentie van gebruik** (clock). Inhoud als korte fragmenten gescheiden door " · ".
 5. Zes kaarten in een 2-koloms grid, vaste volgorde, koppen en iconen: **Doelen** (flag), **Taken & verantwoordelijkheden** (check-list), **Benodigde rechten & autorisatie** (key), **Machtigingen & mandaten** (handshake), **Authenticatie-context** (shield-check-mark), **Frustraties & pijnpunten** (face-frowning). Inhoud: `<ul>` met 2-3 beknopte punten.
 
@@ -24,11 +24,11 @@ Referentie-implementatie: de vier oorspronkelijke persona's (`personas/persona-y
 
 ## Overzichtstegel
 
-`nldd-card` in de `nldd-collection` (item-width 250px) met: avatar, naam (`nldd-title size="4"` met `<h2>`), en een `<div class="tile-tags">` (eigen flex-wrap-div; nldd-container wrapt niet en laat tags buiten de kaart lopen) met de rol-tag (persona-kleur) plus de **doelgroep-tag**: `ondernemer` (donkergroen) of `dienstverlener` (hemelblauw) - dezelfde kleuren als de doelgroep-tags op de klantreizen-index. `accessible-label="Naam - Rol"`. De tegel is een `<a class="tile">` naar de detailpagina, met `display: flex` en `width: 100%` op de kaart zodat alle kaarten in een rij dezelfde hoogte krijgen (de grid-tegel strekt, de kaart vult hem).
+`nldd-card` in de `nldd-collection` (item-width 250px) met: avatar, naam (`nldd-title size="4"` met `<h2>`), en een `<div class="tile-tags">` (eigen flex-wrap-div; nldd-container wrapt niet en laat tags buiten de kaart lopen) met de rol-tag (persona-kleur) plus de **doelgroep-tag**: `ondernemer` (groen) of `dienstverlener` (donkerblauw) - dezelfde kleuren als op de klantreizen-index, en bewust kleuren die geen enkele persona gebruikt zodat elke tag-kleur uniek blijft. `accessible-label="Naam - Rol"`. De tegel is een `<a class="tile">` naar de detailpagina, met `display: flex` en `width: 100%` op de kaart zodat alle kaarten in een rij dezelfde hoogte krijgen (de grid-tegel strekt, de kaart vult hem).
 
 ## Kleur per persona
 
-Elke persona heeft één vaste Rijkskleur voor alle tags (tegel én detailpagina): yassin hemelblauw, karin donkergroen, bilal paars, sherida oranje, annemieke donkergeel, ruben lintblauw, femke mintgroen, deniz robijnrood, marije violet, pieter bruin. Kies voor een nieuwe persona een nog ongebruikte kleur uit de nldd-tag Rijkskleuren.
+Elke persona heeft één vaste Rijkskleur voor alle tags (tegel én detailpagina): yassin hemelblauw, karin donkergroen, bilal paars, sherida oranje, annemieke donkergeel, ruben lintblauw, femke mintgroen, deniz robijnrood, marije violet, pieter bruin. Kies voor een nieuwe persona een nog ongebruikte kleur uit de nldd-tag Rijkskleuren. **Gereserveerde kleuren** (voor tags die op meerdere plekken voorkomen; elke kleur hoort bij precies eén tag-betekenis): `groen` = ondernemer, `donkerblauw` = dienstverlener, `geel` = KvK, `lichtblauw` = Logius, `roze` = eHerkenning, `neutral` = tellers op de startpagina. Komt een tag-tekst op meerdere persona's voor, geef hem dan zo'n eigen gereserveerde kleur in plaats van de persona-kleur.
 
 ## Draft-status
 
