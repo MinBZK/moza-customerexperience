@@ -24,7 +24,7 @@ Referentie-implementatie: de vier oorspronkelijke persona's (`personas/persona-y
 
 ## Overzichtstegel
 
-`nldd-card` in de `nldd-collection` (item-width 250px) met: avatar, naam (`nldd-title size="4"` met `<h2>`), en een `nldd-container layout="row"` met de rol-tag (persona-kleur) plus de **doelgroep-tag**: `ondernemer` (donkergroen) of `dienstverlener` (hemelblauw) - dezelfde kleuren als de doelgroep-tags op de klantreizen-index. `accessible-label="Naam - Rol"`. De tegel is een `<a class="tile">` naar de detailpagina.
+`nldd-card` in de `nldd-collection` (item-width 250px) met: avatar, naam (`nldd-title size="4"` met `<h2>`), en een `<div class="tile-tags">` (eigen flex-wrap-div; nldd-container wrapt niet en laat tags buiten de kaart lopen) met de rol-tag (persona-kleur) plus de **doelgroep-tag**: `ondernemer` (donkergroen) of `dienstverlener` (hemelblauw) - dezelfde kleuren als de doelgroep-tags op de klantreizen-index. `accessible-label="Naam - Rol"`. De tegel is een `<a class="tile">` naar de detailpagina.
 
 ## Kleur per persona
 
