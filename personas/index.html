@@ -36,6 +36,11 @@
     }
     .tile nldd-image { pointer-events: none; }
 
+    /* Gelijke kaarthoogte per rij: de kaart vult de (gestrekte) grid-tegel
+       en de inhoud mag doorgroeien, zodat de tegels in één rij uitlijnen. */
+    .tile { display: flex; }
+    .tile nldd-card { width: 100%; }
+
     /* Tags in de tegel: naast elkaar, en omslaan naar een tweede regel
        zodra ze niet passen (nooit afbreken of buiten de kaart lopen) */
     .tile-tags {
