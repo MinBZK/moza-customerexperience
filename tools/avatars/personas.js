@@ -31,7 +31,7 @@
 module.exports = [
   // ---- Ondernemers en intermediair ----
   { id: "yassin",  name: "Yassin Amrani", gender: "male",   skinColor: "Brown",     hairColor: "BrownDark", top: "ShortHairShortFlat" , nldd: "hemelblauw" },
-  { id: "karin",   name: "Karin Jansen",  gender: "female", skinColor: "Light",     hairColor: "Brown",     top: "LongHairStraight"   , nldd: "donkergroen" },
+  { id: "karin",   name: "Karin Jansen",  gender: "female", skinColor: "Light",     hairColor: "Brown",     top: "LongHairStraight"   , nldd: "rood" },
   { id: "bilal",   name: "Bilal Yilmaz",  gender: "male",   skinColor: "Brown",     hairColor: "Black",     top: "ShortHairShortCurly", nldd: "paars" },
   { id: "sherida", name: "Sherida Pinas", gender: "female", skinColor: "DarkBrown", hairColor: "Black",     top: "LongHairCurly"      , nldd: "oranje" },
 
