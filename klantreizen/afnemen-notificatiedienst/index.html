@@ -662,7 +662,7 @@
 
   <div class="goal">
     <p class="goal-label">Doel van deze klantreis</p>
-    <p class="goal-text">De Kamer van Koophandel neemt als dienstverlener de notificatiedienst af via het dienstverlenerportaal van Logius: van uitproberen in de demoversie, via goedkeuring door inkoop en implementatie op de Mijn KvK-site, tot inrichting en monitoring in productie.</p>
+    <p class="goal-text">De Kamer van Koophandel neemt als dienstverlener de notificatiedienst af via het dienstverlenerportaal van Logius: van uitproberen in de demoversie en goedkeuring door inkoop, via het aansluittraject in preproductie en livegang op de Mijn KvK-site, tot inrichting, incidentafhandeling en beheer in productie.</p>
   </div>
 
   <div class="legend" aria-hidden="true">
@@ -683,7 +683,7 @@
     <div class="journey-toolbar">
       <span class="journey-toolbar-title">Klantreis-canvas</span>
       <div class="journey-shortcuts" aria-hidden="true">
-        <span class="sc"><kbd>&larr;</kbd><kbd>&rarr;</kbd> stappen</span>
+        <span class="sc"><kbd>&larr;</kbd><kbd>→</kbd> stappen</span>
         <span class="sc"><kbd>&uarr;</kbd><kbd>&darr;</kbd> scrollen</span>
         <span class="sc"><kbd>+</kbd><kbd>&minus;</kbd> zoom</span>
         <span class="sc"><kbd>i</kbd> uitleg</span>
@@ -715,20 +715,28 @@
       <div class="phase-head">Opvolgen</div>
 
       <!-- Ruben - servicemanager -->
+
       <div class="lane-label lane--ruben">
         <img class="lane-avatar" src="../../personas/images/ruben.svg" alt="" width="52" height="52" loading="lazy">
         <span class="lane-name">Ruben</span>
         <span class="lane-role">Servicemanager KvK</span>
         <a class="lane-link" href="../../personas/persona-ruben.html" target="_blank" rel="noopener">Bekijk persona ↗</a>
       </div>
+
       <div class="phase-cell lane--ruben" aria-label="Ruben - Oriënteren">
         <div class="step-row">
           <div class="step-wrap">
-            <div class="step" data-milestone="1">Besluit om de notificatiedienst uit te proberen</div>
+            <div class="step" data-milestone="1">Besluit de notificatiedienst uit te proberen</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Logt in op het dienstverlenerportaal <button type="button" class="step-tag step-tag--info" data-persona="Ruben (KvK)" data-phase="Oriënteren" data-step="Logt in op het dienstverlenerportaal" data-panel-title="Inloggen: nu en in de toekomst" data-panel-body-ref="panelBodySso"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
+            <div class="step-verdieping">Hoort intern van de nieuwe federatieve notificatiedienst voor centraal verzenden van notificaties</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Verkent de notificatiedienst in de dienstcatalogus</div>
+            <div class="step-verdieping">Deelt de openbare documentatie intern met Deniz voor een eerste indruk</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Doet een eerste informele check met Annemieke (inkoop)</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Vraagt toegang tot het dienstverlenerportaal en logt in met SSO Rijk <button type="button" class="step-tag step-tag--info" data-persona="Ruben (KvK)" data-phase="Oriënteren" data-step="Vraagt toegang en logt in met SSO Rijk" data-panel-title="Inloggen: nu en in de toekomst" data-panel-body-ref="panelBodySso"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Vindt de notificatiedienst in de dienstcatalogus</div>
           </div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
@@ -741,123 +749,219 @@
             <div class="step-verdieping">Accepteert de demovoorwaarden <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Goedkeuren</span></div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Activeert de demoversie voor de KvK</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Nodigt Femke uit om de dienst met haar team te proberen <button type="button" class="step-tag step-tag--info" data-persona="Ruben (KvK)" data-phase="Oriënteren" data-step="Nodigt Femke uit voor de demo" data-panel-title="Wie mag wat?" data-panel-body-ref="panelBodyWmwDemoUitnodigen">Wie mag wat<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
           </div>
         </div>
       </div>
+
       <div class="phase-cell lane--ruben" aria-label="Ruben - Uitvoeren">
         <div class="step-row">
           <div class="step-wrap">
-            <div class="step" data-milestone="3">Raakt overtuigd van de dienst</div>
+            <div class="step" data-milestone="3">Raakt overtuigd en start het aansluittraject</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Test notificaties met het team in de demo-omgeving</div>
-          </div>
-          <div class="step-connector" aria-hidden="true">→</div>
-          <div class="step-wrap">
-            <div class="step" data-milestone="4">Vraagt de productieversie van de dienst aan</div>
+            <div class="step-verdieping">Evalueert de demo met het team en besluit tot afname</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Logt in op het dienstverlenerportaal <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen</span></div>
+            <div class="step-verdieping">Organiseert de intake met Logius over aanvraagformulier, aansluitvoorwaarden en planningsdocument</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Dient de aanvraag voor de productieversie in <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Goedkeuren</span> <button type="button" class="step-tag step-tag--info" data-persona="Ruben (KvK)" data-phase="Uitvoeren" data-step="Vraagt de productieversie van de dienst aan" data-panel-title="Wie mag wat?" data-panel-body-ref="panelBodyWmwAanvraag" data-vraagstukken-ref="vraagstukkenAanvraag">Wie mag wat<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
+            <div class="step-verdieping">Dient het aanvraagformulier in en geeft consent op de aansluitvoorwaarden <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Goedkeuren</span></div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Kent beheerrollen toe aan Femke en Deniz <button type="button" class="step-tag step-tag--info" data-persona="Ruben (KvK)" data-phase="Uitvoeren" data-step="Kent beheerrollen toe aan Femke en Deniz" data-panel-title="Wie mag wat?" data-panel-body-ref="panelBodyWmwRollen" data-vraagstukken-ref="vraagstukkenRollen">Wie mag wat<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
           </div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step" data-milestone="6">Implementeert de productieversie op de Mijn KvK-site</div>
+            <div class="step" data-milestone="6">Vraagt de productieversie aan en zet live</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Logt in op het dienstverlenerportaal <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen</span></div>
+            <div class="step-verdieping">Vraagt de productieversie aan <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen</span> <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Goedkeuren</span></div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Kent beheerrollen toe aan Femke en Deniz <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Goedkeuren</span> <button type="button" class="step-tag step-tag--info" data-persona="Ruben (KvK)" data-phase="Uitvoeren" data-step="Kent beheerrollen toe aan Femke en Deniz" data-panel-title="Wie mag wat?" data-panel-body-ref="panelBodyWmwRollen" data-vraagstukken-ref="vraagstukkenRollen">Wie mag wat<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
+            <div class="step-verdieping">Ontvangt het PKIoverheid-productiecertificaat: Deniz stuurt een CSR in, Logius geeft het client-certificaat uit, kortlevend met auto-renew</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Zet de productieversie live op de Mijn KvK-site</div>
+            <div class="step-verdieping">Verifieert de productiekoppeling en zet de dienst live op de Mijn KvK-site</div>
           </div>
         </div>
       </div>
+
       <div class="phase-cell lane--ruben" aria-label="Ruben - Opvolgen"></div>
 
       <!-- Annemieke - inkoop -->
+
       <div class="lane-label lane--annemieke">
         <img class="lane-avatar" src="../../personas/images/annemieke.svg" alt="" width="52" height="52" loading="lazy">
         <span class="lane-name">Annemieke</span>
         <span class="lane-role">Inkoopadviseur KvK</span>
         <a class="lane-link" href="../../personas/persona-annemieke.html" target="_blank" rel="noopener">Bekijk persona ↗</a>
       </div>
+
       <div class="phase-cell lane--annemieke" aria-label="Annemieke - Oriënteren"></div>
+
       <div class="phase-cell lane--annemieke" aria-label="Annemieke - Uitvoeren">
         <div class="step-row">
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step" data-milestone="5">Keurt de afname van de dienst goed</div>
+            <div class="step" data-milestone="4">Keurt de afname van de dienst goed</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Logt in op het dienstverlenerportaal <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen</span></div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Toetst de afname aan het inkoopbeleid</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Keurt de afname van de dienst goed <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Goedkeuren</span> <button type="button" class="step-tag step-tag--info" data-persona="Annemieke (KvK)" data-phase="Uitvoeren" data-step="Keurt de afname van de dienst goed" data-panel-title="Wie mag wat?" data-panel-body-ref="panelBodyWmwGoedkeuren">Wie mag wat<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
+            <div class="step-verdieping">Keurt de afname goed binnen haar inkoopmandaat <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Goedkeuren</span> <button type="button" class="step-tag step-tag--info" data-persona="Annemieke (KvK)" data-phase="Uitvoeren" data-step="Keurt de afname van de dienst goed" data-panel-title="Wie mag wat?" data-panel-body-ref="panelBodyWmwGoedkeuren">Wie mag wat<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
           </div>
         </div>
       </div>
+
       <div class="phase-cell lane--annemieke" aria-label="Annemieke - Opvolgen"></div>
 
       <!-- Femke - functioneel beheerder -->
+
       <div class="lane-label lane--femke">
         <img class="lane-avatar" src="../../personas/images/femke.svg" alt="" width="52" height="52" loading="lazy">
         <span class="lane-name">Femke</span>
         <span class="lane-role">Functioneel beheerder KvK</span>
         <a class="lane-link" href="../../personas/persona-femke.html" target="_blank" rel="noopener">Bekijk persona ↗</a>
       </div>
-      <div class="phase-cell lane--femke" aria-label="Femke - Oriënteren"></div>
-      <div class="phase-cell lane--femke" aria-label="Femke - Uitvoeren"></div>
-      <div class="phase-cell lane--femke" aria-label="Femke - Opvolgen">
+
+      <div class="phase-cell lane--femke" aria-label="Femke - Oriënteren">
         <div class="step-row">
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step" data-milestone="7">Richt de dienst in, maakt een custom template aan voor specifieke KvK-dienstverlening</div>
+            <div class="step">Probeert de dienst met haar team in de demo</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Logt in op het dienstverlenerportaal <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen</span></div>
+            <div class="step-verdieping">Leest de notificatie en logt in <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen</span></div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Maakt een custom template aan voor KvK-dienstverlening</div>
+            <div class="step-verdieping">Nodigt Deniz uit <button type="button" class="step-tag step-tag--info" data-persona="Femke (KvK)" data-phase="Oriënteren" data-step="Nodigt Deniz uit" data-panel-title="Wie mag wat?" data-panel-body-ref="panelBodyWmwTeamUitnodigen">Wie mag wat<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Publiceert de template naar productie <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Goedkeuren</span> <button type="button" class="step-tag step-tag--info" data-persona="Femke (KvK)" data-phase="Opvolgen" data-step="Publiceert de template naar productie" data-panel-title="Wie mag wat?" data-panel-body-ref="panelBodyWmwTemplate" data-vraagstukken-ref="vraagstukkenTemplate">Wie mag wat<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
+            <div class="step-verdieping">Test dummy-notificaties in de demo-omgeving</div>
           </div>
         </div>
       </div>
 
+      <div class="phase-cell lane--femke" aria-label="Femke - Uitvoeren">
+        <div class="step-row">
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap">
+            <div class="step">Voert de interne gebruikersacceptatietest uit</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Controleert of binnenkomende berichten correct worden verwerkt</div>
+          </div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap">
+            <div class="step" data-milestone="7">Richt de dienst in met een custom template</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Logt in op het dienstverlenerportaal <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen</span></div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Maakt een custom template voor specifieke KvK-dienstverlening</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Publiceert de template naar productie <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Goedkeuren</span> <button type="button" class="step-tag step-tag--info" data-persona="Femke (KvK)" data-phase="Uitvoeren" data-step="Publiceert de template naar productie" data-panel-title="Wie mag wat?" data-panel-body-ref="panelBodyWmwTemplate" data-vraagstukken-ref="vraagstukkenTemplate">Wie mag wat<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase-cell lane--femke" aria-label="Femke - Opvolgen"></div>
+
       <!-- Deniz - DevOps -->
+
       <div class="lane-label lane--deniz">
         <img class="lane-avatar" src="../../personas/images/deniz.svg" alt="" width="52" height="52" loading="lazy">
         <span class="lane-name">Deniz</span>
         <span class="lane-role">DevOps engineer KvK</span>
         <a class="lane-link" href="../../personas/persona-deniz.html" target="_blank" rel="noopener">Bekijk persona ↗</a>
       </div>
-      <div class="phase-cell lane--deniz" aria-label="Deniz - Oriënteren"></div>
-      <div class="phase-cell lane--deniz" aria-label="Deniz - Uitvoeren"></div>
+
+      <div class="phase-cell lane--deniz" aria-label="Deniz - Oriënteren">
+        <div class="step-row">
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap">
+            <div class="step">Integreert de dienst in de dev-omgeving</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Leest de notificatie en logt in <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen</span></div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Vraagt zelf een kortlevend, roulerend testcertificaat aan; stuurt een CSR in, de private key blijft bij hem <button type="button" class="step-tag step-tag--info" data-persona="Deniz (KvK)" data-phase="Oriënteren" data-step="Vraagt zelf een testcertificaat aan" data-panel-title="Wie mag wat?" data-panel-body-ref="panelBodyWmwTestcert">Wie mag wat<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Integreert de dienst in de dev-omgeving van Mijn KvK en test met dummy data</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase-cell lane--deniz" aria-label="Deniz - Uitvoeren">
+        <div class="step-row">
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap">
+            <div class="step" data-milestone="5">Sluit technisch aan in preproductie</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Richt het netwerk in en levert het netwerkdiagram aan</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Vraagt PKItrial-/testcertificaten aan en richt de certificate stores in</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Implementeert de services conform de koppelvlakspecificaties</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Levert het aansluitformulier technische gegevens aan</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Voert de connectiviteitstest tegen preproductie uit</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Voert de ketentest uit met representatieve testberichten; legt de resultaten vast, accordering door alle partijen</div>
+          </div>
+        </div>
+      </div>
+
       <div class="phase-cell lane--deniz" aria-label="Deniz - Opvolgen">
         <div class="step-row">
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer step-connector--gap" data-gap-label="na 3 maanden" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step" data-milestone="8">Analyseert de dashboards vanwege een melding over notificaties die niet meer aankomen</div>
+            <div class="step" data-milestone="8">Analyseert de dashboards bij een incident</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Logt in op het dienstverlenerportaal <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen</span></div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Analyseert logging en dashboards van de notificatiedienst</div>
-          </div>
-          <div class="step-connector" aria-hidden="true">→</div>
-          <div class="step-wrap">
-            <div class="step" data-milestone="9">Verhelpt het probleem</div>
+            <div class="step-verdieping">Monitort primair de integratie op het eigen platform</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Herstelt de koppeling tussen Mijn KvK en de notificatiedienst</div>
+            <div class="step-verdieping">Onderzoekt secundair of het probleem bij de aanbieder ligt</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Analyseert logging en dashboards en neemt contact op met Logius</div>
           </div>
           <div class="step-connector" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step" data-milestone="10">Monitort de nieuwe implementatie</div>
+            <div class="step" data-milestone="9">Verhelpt het incident</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Constateert dat het bij de certificaatvernieuwing zit, past de configuratie aan en test de koppeling opnieuw</div>
+          </div>
+          <div class="step-connector" aria-hidden="true">→</div>
+          <div class="step-wrap">
+            <div class="step" data-milestone="10">Monitort de nieuwe implementatie en het beheer</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Checkt de primaire en secundaire monitoring en bevestigt dat het incident is verholpen</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Stelt alerts in op afleverfouten</div>
           </div>
@@ -865,21 +969,28 @@
       </div>
 
       <!-- Pieter - Logius (aanbieder) -->
+
       <div class="lane-label lane--pieter">
         <img class="lane-avatar" src="../../personas/images/pieter.svg" alt="" width="52" height="52" loading="lazy">
         <span class="lane-name">Pieter</span>
         <span class="lane-role">Productmanager notificatiedienst (Logius)</span>
         <a class="lane-link" href="../../personas/persona-pieter.html" target="_blank" rel="noopener">Bekijk persona ↗</a>
       </div>
+
       <div class="phase-cell lane--pieter" aria-label="Pieter - Oriënteren">
         <div class="step-row">
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step">Stelt de demoversie beschikbaar via het dienstverlenerportaal</div>
+            <div class="step">Stelt de demoversie beschikbaar</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Keurt het toegangsverzoek goed <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Goedkeuren</span></div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Activeert de demo en denkt als tweede paar ogen mee (vraagbaak)</div>
           </div>
         </div>
       </div>
+
       <div class="phase-cell lane--pieter" aria-label="Pieter - Uitvoeren">
         <div class="step-row">
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
@@ -888,21 +999,28 @@
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step">Stelt de productieversie beschikbaar na goedkeuring</div>
+            <div class="step">Begeleidt het aansluittraject</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Geeft de productiesleutels uit aan de KvK</div>
+            <div class="step-verdieping">Verzorgt de intake en wijst een aansluitcoordinator toe</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Ondersteunt bij de connectiviteits- en ketentest</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Stelt de productieversie beschikbaar na goedkeuring en geeft de productiesleutels uit (CSR naar client-certificaat)</div>
           </div>
         </div>
       </div>
+
       <div class="phase-cell lane--pieter" aria-label="Pieter - Opvolgen">
         <div class="step-row">
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
-          <div class="step-connector step-connector--spacer step-connector--gap" data-gap-label="na 3 maanden" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step">Verstuurt een melding: notificaties komen niet meer aan</div>
+            <div class="step">Ondersteunt in beheer</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Signaleert afleverfouten in het dienstverlenerportaal</div>
+            <div class="step-verdieping">Signaleert afleverfouten en verstuurt de melding "notificaties komen niet meer aan"</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Neemt de aansluiting in beheer, met nazorgperiode en daarna SLA/SNO</div>
           </div>
         </div>
       </div>
@@ -1098,15 +1216,20 @@
       // (zichtbare connectors) worden automatisch getekend.
       var SVGNS = 'http://www.w3.org/2000/svg';
       var EDGES = [
+        // Oriënteren: Ruben[1] -> Pieter (demo) -> Ruben[2] -> Femke -> Deniz
         ['Ruben - Oriënteren', 0, 'Pieter - Oriënteren', 1],
         ['Pieter - Oriënteren', 1, 'Ruben - Oriënteren', 2],
-        ['Ruben - Oriënteren', 2, 'Ruben - Uitvoeren', 0],
-        ['Ruben - Uitvoeren', 1, 'Annemieke - Uitvoeren', 2],
-        ['Annemieke - Uitvoeren', 2, 'Pieter - Uitvoeren', 3],
-        ['Pieter - Uitvoeren', 3, 'Ruben - Uitvoeren', 4],
-        ['Ruben - Uitvoeren', 4, 'Femke - Opvolgen', 0],
-        ['Femke - Opvolgen', 0, 'Pieter - Opvolgen', 1],
-        ['Pieter - Opvolgen', 1, 'Deniz - Opvolgen', 2]
+        ['Ruben - Oriënteren', 2, 'Femke - Oriënteren', 3],
+        ['Femke - Oriënteren', 3, 'Deniz - Oriënteren', 4],
+        // Uitvoeren: Ruben[3] -> Annemieke[4] -> Deniz[5] -> Femke(UAT) -> Pieter -> Ruben[6] -> Femke[7]
+        ['Ruben - Uitvoeren', 0, 'Annemieke - Uitvoeren', 1],
+        ['Annemieke - Uitvoeren', 1, 'Deniz - Uitvoeren', 2],
+        ['Deniz - Uitvoeren', 2, 'Femke - Uitvoeren', 3],
+        ['Femke - Uitvoeren', 3, 'Pieter - Uitvoeren', 4],
+        ['Pieter - Uitvoeren', 4, 'Ruben - Uitvoeren', 5],
+        ['Ruben - Uitvoeren', 5, 'Femke - Uitvoeren', 6],
+        // Opvolgen: Pieter (melding) -> Deniz[8] (Deniz 8->9->10 binnen de baan)
+        ['Pieter - Opvolgen', 0, 'Deniz - Opvolgen', 1]
       ];
       var flowSvg = document.createElementNS(SVGNS, 'svg');
       flowSvg.setAttribute('id', 'flowArrows');
@@ -1282,16 +1405,16 @@
       // ---- Zoom / detailniveau ----
       // 1 = mijlpalen (losse strip), 2 = hoofdlijnen, 3 = alle details.
       var MILESTONES = [
-        { n: 1, phase: 'Oriënteren', text: 'Besluit om de notificatiedienst uit te proberen' },
+        { n: 1, phase: 'Oriënteren', text: 'Besluit de notificatiedienst uit te proberen' },
         { n: 2, phase: 'Oriënteren', text: 'Neemt de dienst af in de demoversie' },
-        { n: 3, phase: 'Uitvoeren', text: 'Raakt overtuigd van de dienst' },
-        { n: 4, phase: 'Uitvoeren', text: 'Vraagt de productieversie van de dienst aan' },
-        { n: 5, phase: 'Uitvoeren', text: 'Keurt de afname van de dienst goed' },
-        { n: 6, phase: 'Uitvoeren', text: 'Implementeert de productieversie op de Mijn KvK-site' },
-        { n: 7, phase: 'Opvolgen', text: 'Richt de dienst in, maakt een custom template aan' },
-        { n: 8, phase: 'Opvolgen', text: 'Analyseert de dashboards vanwege een melding' },
-        { n: 9, phase: 'Opvolgen', text: 'Verhelpt het probleem' },
-        { n: 10, phase: 'Opvolgen', text: 'Monitort de nieuwe implementatie' }
+        { n: 3, phase: 'Uitvoeren', text: 'Raakt overtuigd en start het aansluittraject' },
+        { n: 4, phase: 'Uitvoeren', text: 'Keurt de afname van de dienst goed' },
+        { n: 5, phase: 'Uitvoeren', text: 'Sluit technisch aan in preproductie' },
+        { n: 6, phase: 'Uitvoeren', text: 'Vraagt de productieversie aan en zet live' },
+        { n: 7, phase: 'Uitvoeren', text: 'Richt de dienst in met een custom template' },
+        { n: 8, phase: 'Opvolgen', text: 'Analyseert de dashboards bij een incident' },
+        { n: 9, phase: 'Opvolgen', text: 'Verhelpt het incident' },
+        { n: 10, phase: 'Opvolgen', text: 'Monitort de nieuwe implementatie en het beheer' }
       ];
       var ZOOM_LABELS = { 1: 'Mijlpalen', 2: 'Hoofdlijnen', 3: 'Alle details' };
       var zoomOutBtn = document.getElementById('zoomOut');
@@ -1307,10 +1430,10 @@
         phases.forEach(function (ph, pi) {
           var boxes = '';
           MILESTONES.filter(function (m) { return m.phase === ph; }).forEach(function (m, i) {
-            if (i > 0) boxes += '<span class="mstrip-arrow" aria-hidden="true">&rarr;</span>';
+            if (i > 0) boxes += '<span class="mstrip-arrow" aria-hidden="true">→</span>';
             boxes += '<div class="mstrip-box"><span class="mstrip-num">' + m.n + '</span><span>' + m.text + '</span></div>';
           });
-          if (pi < phases.length - 1) boxes += '<span class="mstrip-arrow" aria-hidden="true">&rarr;</span>';
+          if (pi < phases.length - 1) boxes += '<span class="mstrip-arrow" aria-hidden="true">→</span>';
           html += '<div class="mstrip-phase"><div class="mstrip-head">' + ph + '</div><div class="mstrip-track">' + boxes + '</div></div>';
         });
         strip.innerHTML = html;
@@ -1462,11 +1585,19 @@
     </div>
   </div>
 </template>
-<template id="panelBodyWmwAanvraag">
-  <div class="wmw-item"><span class="wmw-dot" style="background:var(--ruben)"></span><span><strong class="p-ruben">Ruben</strong>, servicemanager. Mag de productieversie aanvragen namens de KvK</span></div>
-  <div class="wmw-item"><span class="wmw-dot" style="background:var(--annemieke)"></span><span><strong class="p-annemieke">Annemieke</strong>, inkoop. Moet de afname goedkeuren voordat die definitief is</span></div>
-  <h3 class="side-panel-heading">Mag dit?</h3>
-  <p>Ruben mag de aanvraag indienen, maar de afname is pas definitief na goedkeuring door inkoop (vierogenprincipe). Zonder die goedkeuring stelt Logius geen productieversie beschikbaar.</p>
+<template id="panelBodyWmwDemoUitnodigen">
+  <div class="wmw-item"><span class="wmw-dot" style="background:var(--ruben)"></span><span><strong class="p-ruben">Ruben</strong>, servicemanager. Beheert de toegang van de KvK en nodigt teamleden uit voor de demo</span></div>
+  <div class="wmw-item"><span class="wmw-dot" style="background:var(--femke)"></span><span><strong class="p-femke">Femke</strong>, functioneel beheerder. Wordt uitgenodigd om de dienst met haar team te proberen</span></div>
+</template>
+<template id="panelBodyWmwTeamUitnodigen">
+  <div class="wmw-item"><span class="wmw-dot" style="background:var(--femke)"></span><span><strong class="p-femke">Femke</strong> mag binnen haar team collega's toevoegen aan de demo</span></div>
+  <div class="wmw-item"><span class="wmw-dot" style="background:var(--deniz)"></span><span><strong class="p-deniz">Deniz</strong>, DevOps. Wordt erbij gehaald voor de technische integratie in de dev-omgeving</span></div>
+</template>
+<template id="panelBodyWmwTestcert">
+  <div class="wmw-item"><span class="wmw-dot" style="background:var(--deniz)"></span><span><strong class="p-deniz">Deniz</strong>, DevOps. Vraagt zelf een kortlevend, roulerend testcertificaat aan</span></div>
+  <div class="wmw-item"><span class="wmw-dot" style="background:var(--pieter)"></span><span><strong class="p-pieter">Pieter</strong> (Logius) geeft het testcertificaat uit op basis van de ingestuurde CSR</span></div>
+  <h3 class="side-panel-heading">Hoe</h3>
+  <p>Deniz stuurt een certificate signing request (CSR) in; de private key blijft bij hem en verlaat de KvK-omgeving nooit.</p>
 </template>
 <template id="panelBodyWmwGoedkeuren">
   <div class="wmw-item"><span class="wmw-dot" style="background:var(--annemieke)"></span><span><strong class="p-annemieke">Annemieke</strong> keurt de afname goed binnen haar inkoopmandaat</span></div>
@@ -1484,7 +1615,6 @@
   <h3 class="side-panel-heading">Mag dit?</h3>
   <p>Femke publiceert zelfstandig naar productie. Of daar een tweede paar ogen bij nodig is, is een open vraagstuk.</p>
 </template>
-<template id="vraagstukkenAanvraag"><li>Hoe ziet de servicemanager de status van zijn aanvraag en de goedkeuring door inkoop?</li></template>
 <template id="vraagstukkenRollen"><li>Waar worden de beheerrollen vastgelegd en wie kan inzien wie wat heeft goedgekeurd (logboek)?</li></template>
 <template id="vraagstukkenTemplate"><li>Is er een goedkeuringsstap (vierogenprincipe) nodig voordat een template naar productie gaat?</li></template>
 <div class="side-scrim" id="sideScrim" hidden></div>
