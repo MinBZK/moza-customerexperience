@@ -860,6 +860,10 @@
           <div class="step-connector step-connector--spacer step-connector--gap" data-gap-label="na enkele weken" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
             <div class="step" data-milestone="7">Productie-implementatie geslaagd</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
@@ -1013,6 +1017,10 @@
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
             <div class="step" data-milestone="8">Richt de dienst in met een custom template</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
@@ -1121,6 +1129,16 @@
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Bevestigt dat de connectiviteits- en ketentest zijn geaccordeerd door alle partijen</div>
           </div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer step-connector--gap" data-gap-label="na enkele weken" aria-hidden="true">→</div>
+          <div class="step-wrap">
+            <div class="step">Vult het aansluitformulier aan met de technische gegevens voor productie</div>
+          </div>
+          <div class="step-connector" aria-hidden="true">→</div>
+          <div class="step-wrap">
+            <div class="step">Voert de connectiviteitstest, test services en ketentest uit</div>
+          </div>
         </div>
       </div>
 
@@ -1131,13 +1149,13 @@
           <div class="step-wrap">
             <div class="step" data-milestone="9">Analyseert de dashboards bij een incident</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Logt in op het dienstverlenerportaal <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen</span></div>
+            <div class="step-verdieping">Logt in op het portaal <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen</span></div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Monitort primair de integratie op het eigen platform</div>
+            <div class="step-verdieping">Primaire monitoring - analyseert de integratie op het eigen platform</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Onderzoekt secundair of het probleem bij de aanbieder ligt</div>
+            <div class="step-verdieping">Secundaire monitoring - analyseert of het incident gerelateerd is aan de dienstaanbieder</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Analyseert logging en dashboards en neemt contact op met Logius</div>
+            <div class="step-verdieping">Neemt contact op met Logius om de bevindingen door te nemen</div>
           </div>
           <div class="step-connector" aria-hidden="true">→</div>
           <div class="step-wrap">
@@ -1237,6 +1255,10 @@
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer step-connector--gap" data-gap-label="na enkele weken" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
             <div class="step">Stelt de productieversie beschikbaar en geeft de sleutels uit</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
@@ -1524,7 +1546,7 @@
         ['Ruben - Oriënteren', 16, 'Pieter - Oriënteren', 17],
         // Fase-overgang: de flow loopt door van Oriënteren naar Uitvoeren
         ['Pieter - Oriënteren', 17, 'Annemieke - Uitvoeren', 0],
-        // Uitvoeren: Annemieke[3] -> Ruben[4] -> intake(overspant banen) -> Ruben aanvraagformulier -> Pieter begeleidt -> Deniz[5] -> Femke(UAT) -> Deniz(preprod) -> Ruben[6] -> Pieter(prod beschikbaar) -> Ruben[7] -> Femke[8]
+        // Uitvoeren: Annemieke[3] -> Ruben[4] -> intake(overspant banen) -> Ruben aanvraagformulier -> Pieter begeleidt -> Deniz[5] -> Femke(UAT) -> Deniz(preprod geslaagd) -> Ruben[6] -> Deniz(formulier+testen) -> Pieter(prod beschikbaar) -> Ruben[7] -> Femke[8]
         ['Annemieke - Uitvoeren', 0, 'Ruben - Uitvoeren', 1],
         ['Ruben - Uitvoeren', 1, 'Intake', 0],
         ['Intake', 0, 'Ruben - Uitvoeren', 3],
@@ -1533,11 +1555,12 @@
         ['Deniz - Uitvoeren', 5, 'Femke - Uitvoeren', 6],
         ['Femke - Uitvoeren', 6, 'Deniz - Uitvoeren', 7],
         ['Deniz - Uitvoeren', 7, 'Ruben - Uitvoeren', 8],
-        ['Ruben - Uitvoeren', 8, 'Pieter - Uitvoeren', 9],
-        ['Pieter - Uitvoeren', 9, 'Ruben - Uitvoeren', 10],
-        ['Ruben - Uitvoeren', 10, 'Femke - Uitvoeren', 11],
+        ['Ruben - Uitvoeren', 8, 'Deniz - Uitvoeren', 9],
+        ['Deniz - Uitvoeren', 10, 'Pieter - Uitvoeren', 11],
+        ['Pieter - Uitvoeren', 11, 'Ruben - Uitvoeren', 12],
+        ['Ruben - Uitvoeren', 12, 'Femke - Uitvoeren', 13],
         // Fase-overgang: de flow loopt door van Uitvoeren naar Opvolgen
-        ['Femke - Uitvoeren', 11, 'Pieter - Opvolgen', 0],
+        ['Femke - Uitvoeren', 13, 'Pieter - Opvolgen', 0],
         // Opvolgen: Pieter -> Deniz[9] (Deniz 9->10->11 binnen de baan)
         ['Pieter - Opvolgen', 0, 'Deniz - Opvolgen', 1]
       ];
