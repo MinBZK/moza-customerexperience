@@ -368,9 +368,10 @@
     font-size: 13px; font-weight: 500; line-height: 1.35;
     color: var(--ink);
   }
-  /* Lange (samengestelde) woorden moeten altijd binnen de box passen:
-     eerst netjes afbreken met een koppelteken, anders hard afbreken. */
-  .step, .step-verdieping, .intake-box-inner { hyphens: auto; overflow-wrap: anywhere; }
+  /* Lange (samengestelde) woorden moeten altijd binnen de box passen.
+     Alleen afbreken als het echt niet anders kan (woord breder dan de
+     box); normale woorden nooit opknippen. */
+  .step, .step-verdieping, .intake-box-inner { overflow-wrap: break-word; }
   .lane--ruben .step { background: var(--ruben-tint); color: var(--ruben); }
   .lane--annemieke .step { background: var(--annemieke-tint); color: var(--annemieke); }
   .lane--marije .step { background: var(--marije-tint); color: var(--marije); }
