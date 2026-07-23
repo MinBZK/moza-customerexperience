@@ -822,7 +822,15 @@
         <a class="lane-link" href="../../personas/persona-annemieke.html" target="_blank" rel="noopener">Bekijk persona ↗</a>
       </div>
 
-      <div class="phase-cell lane--annemieke" aria-label="Annemieke - Oriënteren"></div>
+      <div class="phase-cell lane--annemieke" aria-label="Annemieke - Oriënteren">
+        <div class="step-row">
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap">
+            <div class="step">Doet een eerste informele check op de dienst, het portaal en de aanbieder</div>
+          </div>
+        </div>
+      </div>
 
       <div class="phase-cell lane--annemieke" aria-label="Annemieke - Uitvoeren">
         <div class="step-row">
@@ -1320,6 +1328,8 @@
       // (zichtbare connectors) worden automatisch getekend.
       var SVGNS = 'http://www.w3.org/2000/svg';
       var EDGES = [
+        // Aparte zijtak: Ruben doet een eerste informele check bij Annemieke (geen uitgaande lijn, staat los van de hoofdflow)
+        ['Ruben - Oriënteren', 0, 'Annemieke - Oriënteren', 1],
         // Oriënteren: toegangsverzoek (Systeem col1->col2) -> Ruben logt in -> demo -> uitnodigingen
         ['Ruben - Oriënteren', 0, 'Systeem - Oriënteren', 1],
         ['Systeem - Oriënteren', 2, 'Ruben - Oriënteren', 3],
