@@ -376,10 +376,10 @@
   .lane--pieter .step { background: var(--pieter-tint); color: var(--pieter); }
   .lane--systeem .step { background: var(--systeem-tint); color: var(--systeem); }
   .step.step--joint { background: var(--paper); color: var(--ink); border: 1px dashed var(--border); }
-  .intake-box { position: absolute; z-index: 1; display: none; align-items: center; justify-content: center;
+  .intake-box { position: absolute; z-index: 1; display: none; align-items: flex-start; justify-content: center;
     border-left: 1.5px dashed var(--border); border-right: 1.5px dashed var(--border);
     background: rgba(120, 120, 140, .045); border-radius: 10px; }
-  .intake-box-inner { width: calc(100% - 14px); background: var(--paper); color: var(--ink);
+  .intake-box-inner { width: calc(100% - 14px); margin-top: 14px; background: var(--paper); color: var(--ink);
     border: 1px dashed var(--border); border-radius: 10px; padding: 12px 13px; }
   .intake-title { font-size: 13px; font-weight: 600; line-height: 1.3; color: var(--ink); }
   .intake-sub { margin-top: 6px; font-size: 11px; color: var(--ink-soft); line-height: 1.35; }
@@ -1296,7 +1296,7 @@
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step">Verstuurt het toegangsverzoek naar Marije</div>
+            <div class="step">Notificatie voor het toegangsverzoek aan Marije</div>
           </div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
@@ -1304,7 +1304,7 @@
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step">Verstuurt de bevestiging van de toegang aan de KvK</div>
+            <div class="step">Notificatie voor de bevestiging van de toegang aan de KvK</div>
           </div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
@@ -1314,7 +1314,7 @@
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step">Verstuurt de uitnodiging aan Femke om toe te treden tot het dienstverlenerportaal</div>
+            <div class="step">Notificatie voor het uitnodigen van Femke voor het dienstverlenerportaal</div>
           </div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
@@ -1322,7 +1322,7 @@
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step">Verstuurt de uitnodiging aan Deniz om toe te treden tot het dienstverlenerportaal</div>
+            <div class="step">Notificatie voor het uitnodigen van Deniz voor het dienstverlenerportaal</div>
           </div>
         </div>
       </div>
@@ -1634,7 +1634,7 @@
       }
 
       function flowCard(label, col) {
-        if (label === 'Intake') { var ib = document.getElementById('intakeBox'); return (ib && ib.style.display !== 'none') ? ib : null; }
+        if (label === 'Intake') { var ib = document.getElementById('intakeBox'); return (ib && ib.style.display !== 'none') ? (ib.querySelector('.intake-box-inner') || ib) : null; }
         var cell = grid.querySelector('[aria-label="' + label + '"]');
         if (!cell) return null;
         var row = cell.querySelector('.step-row');
