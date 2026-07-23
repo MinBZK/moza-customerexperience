@@ -21,6 +21,8 @@
     'SSO':         { u: 'Single sign-on: eén keer inloggen geeft toegang tot meerdere systemen.', l: 'https://nl.wikipedia.org/wiki/Single_sign-on' },
     'API':         { u: 'Application programming interface: koppelvlak waarmee systemen met elkaar praten.', l: 'https://developer.overheid.nl/' },
     'mTLS':        { u: 'Mutual TLS: beveiligde verbinding waarbij beide kanten zich met een certificaat identificeren.', l: 'https://nl.wikipedia.org/wiki/Transport_Layer_Security' },
+    'SLA':         { u: 'Service level agreement: afspraken over de kwaliteit, beschikbaarheid en ondersteuning van een dienst.', l: 'https://nl.wikipedia.org/wiki/Service_level_agreement' },
+    'SNO':         { u: 'Serviceniveau-overeenkomst: de Logius-overeenkomst waarin de serviceafspraken over een dienst zijn vastgelegd (de Logius-variant van een SLA).', l: 'https://www.logius.nl/' },
     'CSR':         { u: 'Certificate signing request: aanvraagbestand voor een certificaat; de private key blijft bij de aanvrager.', l: 'https://nl.wikipedia.org/wiki/Certificate_signing_request' },
     'PKIoverheid': { u: 'Het Nederlandse stelsel voor digitale certificaten (public key infrastructure), beheerd door Logius.', l: 'https://www.logius.nl/domeinen/toegang/pkioverheid' },
     'PKI':         { u: 'Public key infrastructure: stelsel voor de uitgifte en het beheer van digitale certificaten.', l: 'https://www.logius.nl/domeinen/toegang/pkioverheid' },
