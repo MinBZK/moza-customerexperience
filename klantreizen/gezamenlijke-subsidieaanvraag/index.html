@@ -1681,16 +1681,28 @@
         // zichtbaar zijn ook als de details zijn ingeklapt.
         var own = {};
         step.querySelectorAll('.step-tag').forEach(function (t) { own[t.textContent.trim()] = true; });
-        var inherited = {};
+        var seen = {};
         subs.forEach(function (sub) {
-          sub.querySelectorAll('.step-tag').forEach(function (t) { inherited[t.textContent.trim()] = true; });
-        });
-        Object.keys(inherited).forEach(function (label) {
-          if (own[label]) return;
-          var span = document.createElement('span');
-          span.className = 'step-tag';
-          span.innerHTML = LOCK + label;
-          step.appendChild(span);
+          sub.querySelectorAll('.step-tag').forEach(function (source) {
+            var label = source.textContent.trim();
+            if (own[label] || seen[label]) return;
+            seen[label] = true;
+            // Kloon de échte tag (incl. de info-"i" én alle data-attributen), zodat
+            // de parent-stap exact dezelfde tag toont als de verdieping - ook de
+            // klikbare i die het uitleg-paneel opent.
+            var clone = source.cloneNode(true);
+            clone.classList.add('step-tag--inherited');
+            // De gekloonde i-knop doet NIET mee in de doorblader-reeks (infos);
+            // een klik verwijst door naar de originele tag in de verdieping, zodat
+            // hetzelfde paneel opent zonder dubbele stops in de i-carousel.
+            if (clone.classList.contains('step-tag--info')) {
+              clone.addEventListener('click', function (e) {
+                e.preventDefault(); e.stopPropagation();
+                source.click();
+              });
+            }
+            step.appendChild(clone);
+          });
         });
         if (step.querySelector('.step-tag')) step.classList.add('step--auth');
 
@@ -2320,7 +2332,7 @@
 
     // Alle info-knoppen (ⓘ) in documentvolgorde = ongeveer de volgorde in de
     // klantreis; hierdoor kun je met vorige/volgende door alle vraagstukken.
-    var infos = [].slice.call(document.querySelectorAll('#journeyGrid .step-tag--info'));
+    var infos = [].slice.call(document.querySelectorAll('#journeyGrid .step-tag--info:not(.step-tag--inherited)'));
     // Doorblader-volgorde volgt de canvas-orientatie: eerst links->rechts (tijd),
     // dan boven->onder (baan). We nemen de positie van de kolom (step-wrap).
     (function sortInfosByReadingOrder() {
