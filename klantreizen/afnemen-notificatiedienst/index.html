@@ -376,6 +376,13 @@
   .lane--pieter .step { background: var(--pieter-tint); color: var(--pieter); }
   .lane--systeem .step { background: var(--systeem-tint); color: var(--systeem); }
   .step.step--joint { background: var(--paper); color: var(--ink); border: 1px dashed var(--border); }
+  .intake-box { position: absolute; z-index: 1; display: none; align-items: center; justify-content: center;
+    border-left: 1.5px dashed var(--border); border-right: 1.5px dashed var(--border);
+    background: rgba(120, 120, 140, .045); border-radius: 10px; }
+  .intake-box-inner { width: calc(100% - 14px); background: var(--paper); color: var(--ink);
+    border: 1px dashed var(--border); border-radius: 10px; padding: 12px 13px; }
+  .intake-title { font-size: 13px; font-weight: 600; line-height: 1.3; color: var(--ink); }
+  .intake-sub { margin-top: 6px; font-size: 11px; color: var(--ink-soft); line-height: 1.35; }
   .joint-mark { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; margin-bottom: 7px; font-size: 10px; font-weight: 600; letter-spacing: .02em; color: var(--ink-soft); }
   .joint-mark .jm-dot { width: 9px; height: 9px; border-radius: 999px; display: inline-block; flex-shrink: 0; }
 
@@ -680,7 +687,7 @@
 
   <div class="goal">
     <p class="goal-label">Doel van deze klantreis</p>
-    <p class="goal-text">De Kamer van Koophandel neemt als dienstverlener de notificatiedienst af via het dienstverlenerportaal van Logius: van uitproberen in de demoversie en goedkeuring door inkoop, via het aansluittraject in preproductie en livegang op de Mijn KvK-site, tot inrichting, incidentafhandeling en beheer in productie.</p>
+    <p class="goal-text">De Kamer van Koophandel neemt als dienstverlener de notificatiedienst af via het dienstverlenerportaal van Logius: van uitproberen in de demoversie en goedkeuring door inkoop, via het aansluittraject in pre-productie en livegang op de Mijn KvK-site, tot inrichting, incidentafhandeling en beheer in productie.</p>
   </div>
 
   <div class="legend" aria-hidden="true">
@@ -821,24 +828,26 @@
 
       <div class="phase-cell lane--ruben" aria-label="Ruben - Uitvoeren">
         <div class="step-row">
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step" data-milestone="3">Raakt overtuigd en start het aansluittraject</div>
+            <div class="step" data-milestone="4">Raakt overtuigd en start het aansluittraject</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Organiseert de intake met Logius over aanvraagformulier, aansluitvoorwaarden en planningsdocument</div>
+            <div class="step-verdieping">Start het aansluittraject formeel op met Logius</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Dient het aanvraagformulier in en geeft consent op de aansluitvoorwaarden <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Goedkeuren</span></div>
-            <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Kent beheerrollen toe aan Femke en Deniz <button type="button" class="step-tag step-tag--info" data-persona="Ruben (KvK)" data-phase="Uitvoeren" data-step="Kent beheerrollen toe aan Femke en Deniz" data-panel-title="Wie mag wat?" data-panel-body-ref="panelBodyWmwRollen" data-vraagstukken-ref="vraagstukkenRollen">Wie mag wat<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
+            <div class="step-verdieping">Kent specifieke rollen toe aan Femke en Deniz <button type="button" class="step-tag step-tag--info" data-persona="Ruben (KvK)" data-phase="Uitvoeren" data-step="Kent specifieke rollen toe aan Femke en Deniz" data-panel-title="Wie mag wat?" data-panel-body-ref="panelBodyWmwRollen" data-vraagstukken-ref="vraagstukkenRollen">Wie mag wat<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
           </div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-wrap">
+            <div class="step">Dient het aanvraagformulier in en geeft consent op de aansluitvoorwaarden <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Goedkeuren</span></div>
+          </div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer step-connector--gap" data-gap-label="na enkele weken" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
@@ -849,6 +858,8 @@
             <div class="step-verdieping">Vraagt de productieversie aan <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen</span> <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Goedkeuren</span></div>
           </div>
           <div class="step-connector step-connector--spacer step-connector--gap" data-gap-label="na enkele weken" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
             <div class="step" data-milestone="7">Productie-implementatie geslaagd</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
@@ -882,10 +893,8 @@
 
       <div class="phase-cell lane--annemieke" aria-label="Annemieke - Uitvoeren">
         <div class="step-row">
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step" data-milestone="4">Keurt de afname van de dienst goed</div>
+            <div class="step" data-milestone="3">Keurt de afname van de dienst goed</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Toetst de afname aan het inkoopbeleid</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
@@ -988,6 +997,8 @@
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer step-connector--gap" data-gap-label="na enkele weken" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
             <div class="step">Voert de interne gebruikersacceptatietest uit</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
@@ -998,6 +1009,8 @@
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer step-connector--gap" data-gap-label="na enkele weken" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
@@ -1083,8 +1096,10 @@
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer step-connector--gap" data-gap-label="na enkele weken" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step" data-milestone="5">Sluit technisch aan in preproductie</div>
+            <div class="step" data-milestone="5">Sluit technisch aan in pre-productie</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Richt het netwerk in en levert het netwerkdiagram aan</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
@@ -1094,11 +1109,11 @@
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Levert het aansluitformulier technische gegevens aan</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Voert de connectiviteitstest tegen preproductie uit</div>
+            <div class="step-verdieping">Voert de connectiviteitstest tegen pre-productie uit</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Voert de ketentest uit met representatieve testberichten; legt de resultaten vast, accordering door alle partijen</div>
           </div>
-          <div class="step-connector step-connector--spacer step-connector--gap" data-gap-label="na enkele weken" aria-hidden="true">→</div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
@@ -1202,22 +1217,32 @@
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap">
-            <div class="step step--joint"><span class="joint-mark"><span class="jm-dot" style="background:var(--deniz)"></span><span class="jm-dot" style="background:var(--femke)"></span><span class="jm-dot" style="background:var(--pieter)"></span>Deniz, Femke &amp; Pieter</span>Gezamenlijke intake voor het aansluittraject</div>
-            <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Deniz, Femke en Pieter stemmen scope, planning en verantwoordelijkheden af</div>
-            <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Bespreken aanvraagformulier, aansluitvoorwaarden en planningsdocument</div>
-          </div>
-          <div class="step-connector" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
             <div class="step">Begeleidt het aansluittraject</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Wijst een aansluitcoordinator toe en begeleidt de KvK</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Ondersteunt bij de connectiviteits- en ketentest</div>
+          </div>
+          <div class="step-connector step-connector--spacer step-connector--gap" data-gap-label="na enkele weken" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer step-connector--gap" data-gap-label="na enkele weken" aria-hidden="true">→</div>
+          <div class="step-wrap">
+            <div class="step">Stelt de productieversie beschikbaar en geeft de sleutels uit</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Stelt de productieversie beschikbaar na goedkeuring en geeft de productiesleutels uit (CSR naar client-certificaat)</div>
+            <div class="step-verdieping">Stelt de productieversie beschikbaar na goedkeuring</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Geeft de productiesleutels uit (CSR naar client-certificaat)</div>
           </div>
         </div>
       </div>
@@ -1283,6 +1308,15 @@
       <div class="phase-cell lane--systeem" aria-label="Systeem - Uitvoeren"></div>
 
       <div class="phase-cell lane--systeem" aria-label="Systeem - Opvolgen"></div>
+
+      <!-- Gezamenlijke intake: overspant de persona-banen (positie via JS) -->
+      <div class="intake-box" id="intakeBox" aria-hidden="true">
+        <div class="intake-box-inner">
+          <span class="joint-mark"><span class="jm-dot" style="background:var(--ruben)"></span><span class="jm-dot" style="background:var(--femke)"></span><span class="jm-dot" style="background:var(--deniz)"></span><span class="jm-dot" style="background:var(--pieter)"></span>Ruben, Femke, Deniz &amp; Pieter</span>
+          <div class="intake-title">Gezamenlijke intake voor het aansluittraject</div>
+          <div class="intake-sub">Stemmen samen scope, planning, aanvraagformulier en aansluitvoorwaarden af</div>
+        </div>
+      </div>
 
     </div>
     </div>
@@ -1489,18 +1523,21 @@
         ['Deniz - Oriënteren', 15, 'Ruben - Oriënteren', 16],
         ['Ruben - Oriënteren', 16, 'Pieter - Oriënteren', 17],
         // Fase-overgang: de flow loopt door van Oriënteren naar Uitvoeren
-        ['Pieter - Oriënteren', 17, 'Ruben - Uitvoeren', 0],
-        // Uitvoeren: Ruben[3] -> Annemieke[4] -> intake(joint) -> Pieter begeleidt -> Deniz[5] -> Femke(UAT) -> Deniz(preprod) -> Ruben[6] -> Ruben[7] -> Femke[8]
-        ['Ruben - Uitvoeren', 0, 'Annemieke - Uitvoeren', 1],
-        ['Annemieke - Uitvoeren', 1, 'Pieter - Uitvoeren', 2],
-        ['Pieter - Uitvoeren', 3, 'Deniz - Uitvoeren', 4],
-        ['Deniz - Uitvoeren', 4, 'Femke - Uitvoeren', 5],
-        ['Femke - Uitvoeren', 5, 'Deniz - Uitvoeren', 6],
-        ['Deniz - Uitvoeren', 6, 'Ruben - Uitvoeren', 7],
-        ['Ruben - Uitvoeren', 7, 'Ruben - Uitvoeren', 8],
-        ['Ruben - Uitvoeren', 8, 'Femke - Uitvoeren', 9],
+        ['Pieter - Oriënteren', 17, 'Annemieke - Uitvoeren', 0],
+        // Uitvoeren: Annemieke[3] -> Ruben[4] -> intake(overspant banen) -> Ruben aanvraagformulier -> Pieter begeleidt -> Deniz[5] -> Femke(UAT) -> Deniz(preprod) -> Ruben[6] -> Pieter(prod beschikbaar) -> Ruben[7] -> Femke[8]
+        ['Annemieke - Uitvoeren', 0, 'Ruben - Uitvoeren', 1],
+        ['Ruben - Uitvoeren', 1, 'Intake', 0],
+        ['Intake', 0, 'Ruben - Uitvoeren', 3],
+        ['Ruben - Uitvoeren', 3, 'Pieter - Uitvoeren', 4],
+        ['Pieter - Uitvoeren', 4, 'Deniz - Uitvoeren', 5],
+        ['Deniz - Uitvoeren', 5, 'Femke - Uitvoeren', 6],
+        ['Femke - Uitvoeren', 6, 'Deniz - Uitvoeren', 7],
+        ['Deniz - Uitvoeren', 7, 'Ruben - Uitvoeren', 8],
+        ['Ruben - Uitvoeren', 8, 'Pieter - Uitvoeren', 9],
+        ['Pieter - Uitvoeren', 9, 'Ruben - Uitvoeren', 10],
+        ['Ruben - Uitvoeren', 10, 'Femke - Uitvoeren', 11],
         // Fase-overgang: de flow loopt door van Uitvoeren naar Opvolgen
-        ['Femke - Uitvoeren', 9, 'Pieter - Opvolgen', 0],
+        ['Femke - Uitvoeren', 11, 'Pieter - Opvolgen', 0],
         // Opvolgen: Pieter -> Deniz[9] (Deniz 9->10->11 binnen de baan)
         ['Pieter - Opvolgen', 0, 'Deniz - Opvolgen', 1]
       ];
@@ -1574,6 +1611,7 @@
       }
 
       function flowCard(label, col) {
+        if (label === 'Intake') { var ib = document.getElementById('intakeBox'); return (ib && ib.style.display !== 'none') ? ib : null; }
         var cell = grid.querySelector('[aria-label="' + label + '"]');
         if (!cell) return null;
         var row = cell.querySelector('.step-row');
@@ -1582,8 +1620,26 @@
         if (!slot || slot.classList.contains('step-wrap--spacer')) return null;
         return slot.querySelector('.step') || slot;
       }
+      function positionIntake() {
+        var box = document.getElementById('intakeBox');
+        if (!box) return;
+        var gRect = grid.getBoundingClientRect();
+        var fCell = grid.querySelector('[aria-label="Femke - Uitvoeren"]');
+        var rCell = grid.querySelector('[aria-label="Ruben - Uitvoeren"]');
+        var pCell = grid.querySelector('[aria-label="Pieter - Uitvoeren"]');
+        var row = fCell ? fCell.querySelector('.step-row') : null;
+        var slot = row ? row.children[4] : null;
+        if (!slot || !rCell || !pCell) { box.style.display = 'none'; return; }
+        var sr = slot.getBoundingClientRect(), rt = rCell.getBoundingClientRect(), pb = pCell.getBoundingClientRect();
+        box.style.display = 'flex';
+        box.style.left = (sr.left - gRect.left) + 'px';
+        box.style.width = sr.width + 'px';
+        box.style.top = (rt.top - gRect.top + 6) + 'px';
+        box.style.height = Math.max(60, (pb.bottom - rt.top - 12)) + 'px';
+      }
       function drawFlow() {
         if (!flowSvg) return;
+        positionIntake();
         var gRect = grid.getBoundingClientRect();
         var W = grid.scrollWidth, H = grid.scrollHeight;
         flowSvg.setAttribute('width', W);
@@ -1680,9 +1736,9 @@
       var MILESTONES = [
         { n: 1, phase: 'Oriënteren', text: 'Besluit de notificatiedienst uit te proberen' },
         { n: 2, phase: 'Oriënteren', text: 'Neemt de dienst af in de demoversie' },
-        { n: 3, phase: 'Uitvoeren', text: 'Raakt overtuigd en start het aansluittraject' },
-        { n: 4, phase: 'Uitvoeren', text: 'Keurt de afname van de dienst goed' },
-        { n: 5, phase: 'Uitvoeren', text: 'Sluit technisch aan in preproductie' },
+        { n: 3, phase: 'Uitvoeren', text: 'Keurt de afname van de dienst goed' },
+        { n: 4, phase: 'Uitvoeren', text: 'Raakt overtuigd en start het aansluittraject' },
+        { n: 5, phase: 'Uitvoeren', text: 'Sluit technisch aan in pre-productie' },
         { n: 6, phase: 'Uitvoeren', text: 'Vraagt de productieversie aan' },
         { n: 7, phase: 'Uitvoeren', text: 'Productie-implementatie geslaagd' },
         { n: 8, phase: 'Uitvoeren', text: 'Richt de dienst in met een custom template' },
