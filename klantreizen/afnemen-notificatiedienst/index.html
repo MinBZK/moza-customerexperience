@@ -30,6 +30,8 @@
     --ruben-tint: var(--primitives-color-lintblauw-150);
     --annemieke: var(--primitives-color-donkergeel-600);
     --annemieke-tint: var(--primitives-color-donkergeel-150);
+    --marije: var(--primitives-color-roze-650);
+    --marije-tint: var(--primitives-color-roze-150);
     --femke: var(--primitives-color-mintgroen-600);
     --femke-tint: var(--primitives-color-mintgroen-150);
     --deniz: var(--primitives-color-robijnrood-600);
@@ -319,6 +321,8 @@
   }
   .lane--ruben .lane-avatar { background: var(--primitives-color-lintblauw-150); }
   .lane--annemieke .lane-avatar { background: var(--primitives-color-donkergeel-150); }
+  .lane--marije .lane-avatar { background: var(--primitives-color-roze-150); }
+  .lane--marije .lane-avatar { color: var(--marije); }
   .lane--femke .lane-avatar { background: var(--primitives-color-mintgroen-150); }
   .lane--deniz .lane-avatar { background: var(--primitives-color-robijnrood-150); }
   .lane--pieter .lane-avatar { background: var(--primitives-color-bruin-150); }
@@ -366,6 +370,7 @@
   }
   .lane--ruben .step { background: var(--ruben-tint); color: var(--ruben); }
   .lane--annemieke .step { background: var(--annemieke-tint); color: var(--annemieke); }
+  .lane--marije .step { background: var(--marije-tint); color: var(--marije); }
   .lane--femke .step { background: var(--femke-tint); color: var(--femke); }
   .lane--deniz .step { background: var(--deniz-tint); color: var(--deniz); }
   .lane--pieter .step { background: var(--pieter-tint); color: var(--pieter); }
@@ -595,6 +600,7 @@
   .legend-dot { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
   .legend-dot--ruben { background: var(--ruben); }
   .legend-dot--annemieke { background: var(--annemieke); }
+  .legend-dot--marije { background: var(--marije); }
   .legend-dot--femke { background: var(--femke); }
   .legend-dot--deniz { background: var(--deniz); }
   .legend-dot--pieter { background: var(--pieter); }
@@ -677,6 +683,7 @@
   <div class="legend" aria-hidden="true">
     <span class="legend-item"><span class="legend-dot legend-dot--ruben"></span> Ruben - Servicemanager KvK</span>
     <span class="legend-item"><span class="legend-dot legend-dot--annemieke"></span> Annemieke - Inkoopadviseur KvK</span>
+    <span class="legend-item"><span class="legend-dot legend-dot--marije"></span> Marije - Toegangsbeheerder dienstverlenerportaal</span>
     <span class="legend-item"><span class="legend-dot legend-dot--femke"></span> Femke - Functioneel beheerder KvK</span>
     <span class="legend-item"><span class="legend-dot legend-dot--deniz"></span> Deniz - DevOps engineer KvK</span>
     <span class="legend-item"><span class="legend-dot legend-dot--pieter"></span> Pieter - Productmanager notificatiedienst (Logius)</span>
@@ -748,7 +755,7 @@
           <div class="step-wrap">
             <div class="step">Vraagt toegang tot het dienstverlenerportaal <button type="button" class="step-tag step-tag--info" data-persona="Ruben (KvK)" data-phase="Oriënteren" data-step="Vraagt toegang tot het dienstverlenerportaal" data-panel-title="Inloggen: nu en in de toekomst" data-panel-body-ref="panelBodySso"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Neemt contact op met Annemieke</div>
+            <div class="step-verdieping">Neemt contact op met Marije</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Doet het toegangsverzoek voor het portaal</div>
           </div>
@@ -814,8 +821,6 @@
           <div class="step-wrap">
             <div class="step" data-milestone="3">Raakt overtuigd en start het aansluittraject</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Evalueert de demo met Deniz en Femke en besluit tot afname</div>
-            <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Organiseert de intake met Logius over aanvraagformulier, aansluitvoorwaarden en planningsdocument</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Dient het aanvraagformulier in en geeft consent op de aansluitvoorwaarden <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Goedkeuren</span></div>
@@ -861,16 +866,6 @@
           <div class="step-wrap">
             <div class="step">Doet een eerste informele check op de dienst, het portaal en de aanbieder</div>
           </div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap">
-            <div class="step">Ontvangt het toegangsverzoek</div>
-          </div>
-          <div class="step-connector" aria-hidden="true">→</div>
-          <div class="step-wrap">
-            <div class="step">Verleent toegang tot het portaal</div>
-          </div>
         </div>
       </div>
 
@@ -891,6 +886,36 @@
       </div>
 
       <div class="phase-cell lane--annemieke" aria-label="Annemieke - Opvolgen"></div>
+
+      <!-- Marije - toegangsbeheerder dienstverlenerportaal -->
+
+      <div class="lane-label lane--marije">
+        <div class="lane-avatar" aria-hidden="true" style="display:flex; align-items:center; justify-content:center;"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="8" r="3.5" stroke="currentColor" stroke-width="1.6"/><path d="M5.5 19c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+        <span class="lane-name">Marije</span>
+        <span class="lane-role">Toegangsbeheerder dienstverlenerportaal</span>
+      </div>
+
+      <div class="phase-cell lane--marije" aria-label="Marije - Oriënteren">
+        <div class="step-row">
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap">
+            <div class="step">Ontvangt het toegangsverzoek</div>
+          </div>
+          <div class="step-connector" aria-hidden="true">→</div>
+          <div class="step-wrap">
+            <div class="step">Verleent toegang tot het portaal</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase-cell lane--marije" aria-label="Marije - Uitvoeren"></div>
+
+      <div class="phase-cell lane--marije" aria-label="Marije - Opvolgen"></div>
 
       <!-- Femke - functioneel beheerder -->
 
@@ -1190,7 +1215,7 @@
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step">Verstuurt het toegangsverzoek naar Annemieke</div>
+            <div class="step">Verstuurt het toegangsverzoek naar Marije</div>
           </div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
@@ -1420,8 +1445,8 @@
         ['Ruben - Oriënteren', 0, 'Annemieke - Oriënteren', 1],
         // Oriënteren: Systeem verstuurt notificaties, de personas ontvangen ze in hun eigen baan
         ['Ruben - Oriënteren', 1, 'Systeem - Oriënteren', 2],
-        ['Systeem - Oriënteren', 2, 'Annemieke - Oriënteren', 3],
-        ['Annemieke - Oriënteren', 4, 'Systeem - Oriënteren', 5],
+        ['Systeem - Oriënteren', 2, 'Marije - Oriënteren', 3],
+        ['Marije - Oriënteren', 4, 'Systeem - Oriënteren', 5],
         ['Systeem - Oriënteren', 5, 'Ruben - Oriënteren', 6],
         ['Ruben - Oriënteren', 8, 'Systeem - Oriënteren', 9],
         ['Systeem - Oriënteren', 9, 'Femke - Oriënteren', 10],
