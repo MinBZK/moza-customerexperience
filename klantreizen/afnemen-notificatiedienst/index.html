@@ -1238,9 +1238,13 @@
           <div class="step-wrap">
             <div class="step" data-milestone="10">Verhelpt de alert</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Constateert dat het bij de certificaatvernieuwing zit, past de configuratie aan en test de koppeling opnieuw</div>
+            <div class="step-verdieping">Het groepcertificaat moet vernieuwd worden omdat het binnen 30 dagen verloopt</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Vraagt het nieuwe groepcertificaat aan bij Logius</div>
           </div>
-          <div class="step-connector" aria-hidden="true">→</div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
             <div class="step" data-milestone="11">Monitort de nieuwe implementatie en het beheer</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
@@ -1366,6 +1370,14 @@
             <div class="step-verdieping">Neemt de aansluiting in beheer, met nazorgperiode en daarna SLA/SNO</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Signaleert afleverfouten en verstuurt de melding "notificaties komen niet meer aan"</div>
+          </div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap">
+            <div class="step">Keurt het groepcertificaat goed en tekent (FSC-RINIS) <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Goedkeuren</span></div>
           </div>
         </div>
       </div>
@@ -1653,8 +1665,10 @@
         ['Ruben - Uitvoeren', 17, 'Femke - Uitvoeren', 18],
         // Fase-overgang: de flow loopt door van Uitvoeren naar Opvolgen
         ['Femke - Uitvoeren', 19, 'Pieter - Opvolgen', 0],
-        // Opvolgen: Pieter -> Deniz[9] (Deniz 9->10->11 binnen de baan)
-        ['Pieter - Opvolgen', 0, 'Deniz - Opvolgen', 1]
+        // Opvolgen: Pieter -> Deniz[9] -> [10] -> Pieter keurt groepcertificaat -> Deniz[11]
+        ['Pieter - Opvolgen', 0, 'Deniz - Opvolgen', 1],
+        ['Deniz - Opvolgen', 2, 'Pieter - Opvolgen', 3],
+        ['Pieter - Opvolgen', 3, 'Deniz - Opvolgen', 4]
       ];
       var flowSvg = document.createElementNS(SVGNS, 'svg');
       flowSvg.setAttribute('id', 'flowArrows');
