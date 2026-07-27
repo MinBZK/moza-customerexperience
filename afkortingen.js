@@ -22,6 +22,8 @@
     'API':         { u: 'Application programming interface: koppelvlak waarmee systemen met elkaar praten.', l: 'https://developer.overheid.nl/' },
     'mTLS':        { u: 'Mutual TLS: beveiligde verbinding waarbij beide kanten zich met een certificaat identificeren.', l: 'https://nl.wikipedia.org/wiki/Transport_Layer_Security' },
     'SLA':         { u: 'Service level agreement: afspraken over de kwaliteit, beschikbaarheid en ondersteuning van een dienst.', l: 'https://nl.wikipedia.org/wiki/Service_level_agreement' },
+    'FSC':         { u: 'Federated Service Connectivity: standaard voor veilige, federatieve API-koppelingen tussen (overheids)organisaties.', l: 'https://fsc-standaard.nl/' },
+    'RINIS':       { u: 'Routeringsinstituut voor (inter)nationale informatiestromen: verzorgt veilige gegevensuitwisseling tussen (overheids)organisaties.', l: 'https://www.rinis.nl/' },
     'SNO':         { u: 'Serviceniveau-overeenkomst: de Logius-overeenkomst waarin de serviceafspraken over een dienst zijn vastgelegd (de Logius-variant van een SLA).', l: 'https://www.logius.nl/' },
     'CSR':         { u: 'Certificate signing request: aanvraagbestand voor een certificaat; de private key blijft bij de aanvrager.', l: 'https://nl.wikipedia.org/wiki/Certificate_signing_request' },
     'PKIoverheid': { u: 'Het Nederlandse stelsel voor digitale certificaten (public key infrastructure), beheerd door Logius.', l: 'https://www.logius.nl/domeinen/toegang/pkioverheid' },
