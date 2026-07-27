@@ -712,7 +712,7 @@
 
   <div class="goal">
     <p class="goal-label">Doel van deze klantreis</p>
-    <p class="goal-text">De Kamer van Koophandel neemt als dienstverlener de notificatiedienst af via het dienstverlenerportaal van Logius: van uitproberen in de demoversie en goedkeuring door inkoop, via het aansluittraject in acceptatie en livegang op de Mijn KvK-site, tot inrichting, incidentafhandeling en beheer in productie.</p>
+    <p class="goal-text">De Kamer van Koophandel neemt als dienstverlener de notificatiedienst af via het dienstverlenerportaal van Logius: van uitproberen in de demoversie en goedkeuring door inkoop, via het aansluittraject in acceptatie en livegang op de Mijn KvK-site, tot inrichting, alertafhandeling en beheer in productie.</p>
   </div>
 
   <div class="legend" aria-hidden="true">
@@ -1184,19 +1184,17 @@
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step" data-milestone="9">Analyseert de dashboards bij een incident</div>
-            <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Logt in op het portaal <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen</span></div>
+            <div class="step" data-milestone="9">Analyseert de dashboards bij een alert</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Primaire monitoring - analyseert de integratie op het eigen platform</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Secundaire monitoring - analyseert of het incident gerelateerd is aan de dienstaanbieder</div>
+            <div class="step-verdieping">Secundaire monitoring - analyseert of de alert gerelateerd is aan de dienstaanbieder <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen</span> <button type="button" class="step-tag step-tag--info" data-persona="Deniz (KvK)" data-phase="Opvolgen" data-step="Secundaire monitoring" data-panel-title="Wie mag wat?" data-panel-body-ref="panelBodyWmwSecundair">Wie mag wat<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Neemt contact op met Logius om de bevindingen door te nemen</div>
           </div>
           <div class="step-connector" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step" data-milestone="10">Verhelpt het incident</div>
+            <div class="step" data-milestone="10">Verhelpt de alert</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Constateert dat het bij de certificaatvernieuwing zit, past de configuratie aan en test de koppeling opnieuw</div>
           </div>
@@ -1204,7 +1202,7 @@
           <div class="step-wrap">
             <div class="step" data-milestone="11">Monitort de nieuwe implementatie en het beheer</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Checkt de primaire en secundaire monitoring en bevestigt dat het incident is verholpen</div>
+            <div class="step-verdieping">Checkt de primaire en secundaire monitoring en bevestigt dat de alert is verholpen</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Stelt alerts in op afleverfouten</div>
           </div>
@@ -1804,8 +1802,8 @@
         { n: 6, phase: 'Uitvoeren', text: 'Vraagt de productieversie aan' },
         { n: 7, phase: 'Uitvoeren', text: 'Productie-implementatie geslaagd' },
         { n: 8, phase: 'Uitvoeren', text: 'Richt de dienst in met een custom template' },
-        { n: 9, phase: 'Opvolgen', text: 'Analyseert de dashboards bij een incident' },
-        { n: 10, phase: 'Opvolgen', text: 'Verhelpt het incident' },
+        { n: 9, phase: 'Opvolgen', text: 'Analyseert de dashboards bij een alert' },
+        { n: 10, phase: 'Opvolgen', text: 'Verhelpt de alert' },
         { n: 11, phase: 'Opvolgen', text: 'Monitort de nieuwe implementatie en het beheer' }
       ];
       var ZOOM_LABELS = { 1: 'Mijlpalen', 2: 'Hoofdlijnen', 3: 'Alle details' };
@@ -1993,6 +1991,10 @@
   <div class="wmw-item"><span class="wmw-dot" style="background:var(--pieter)"></span><span><strong class="p-pieter">Pieter</strong> (Logius) geeft het testcertificaat uit op basis van de ingestuurde CSR</span></div>
   <h3 class="side-panel-heading">Hoe</h3>
   <p>Deniz stuurt een certificate signing request (CSR) in; de private key blijft bij hem en verlaat de KvK-omgeving nooit.</p>
+</template>
+
+<template id="panelBodyWmwSecundair">
+  <div class="wmw-item"><span class="wmw-dot" style="background:var(--deniz)"></span><span><strong class="p-deniz">Deniz</strong>, DevOps. Kan de logging inzien om een eerste analyse te doen of de alert gerelateerd is aan de dienst zelf</span></div>
 </template>
 <template id="panelBodyWmwGoedkeuren">
   <div class="wmw-item"><span class="wmw-dot" style="background:var(--annemieke)"></span><span><strong class="p-annemieke">Annemieke</strong> keurt de afname goed binnen haar inkoopmandaat</span></div>
