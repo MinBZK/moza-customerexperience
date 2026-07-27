@@ -678,6 +678,10 @@
   .side-panel-body.is-rich .wmw-dots { display: flex; gap: 3px; flex-shrink: 0; margin-top: 5px; }
   .side-panel-body.is-rich .wmw-dots .wmw-dot { margin-top: 0; }
   /* Persona-namen in hun eigen kleur (consistente kleurcodering). */
+  /* Het zijpaneel is vast donkerblauw in beide thema's: persona-namen moeten
+     daarom altijd de LICHTE tint gebruiken, ook als de pagina in dark mode
+     staat (anders donker-op-donker en onleesbaar). */
+  .side-panel-body.is-rich strong { color-scheme: light; }
   .side-panel-body.is-rich strong.p-sander { color: var(--sander-tint); }
   .side-panel-body.is-rich strong.p-wei { color: var(--wei-tint); }
   .side-panel-body.is-rich strong.p-ahmed { color: var(--ahmed-tint); }
