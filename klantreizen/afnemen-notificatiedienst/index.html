@@ -903,8 +903,6 @@
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
             <div class="step" data-milestone="7">Productie-implementatie geslaagd</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
@@ -1066,16 +1064,16 @@
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
             <div class="step">Commercieel live</div>
           </div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-connector" aria-hidden="true">→</div>
           <div class="step-wrap">
             <div class="step" data-milestone="8">Richt de dienst in met een custom template</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
@@ -1214,13 +1212,11 @@
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step">Technisch live</div>
-          </div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap">
             <div class="step">Voert de connectiviteitstest, test services en ketentest uit</div>
+          </div>
+          <div class="step-connector" aria-hidden="true">→</div>
+          <div class="step-wrap">
+            <div class="step">Technisch live</div>
           </div>
         </div>
       </div>
@@ -1349,8 +1345,6 @@
           <div class="step-wrap">
             <div class="step">Goedkeuring implementatie certificaten</div>
           </div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
@@ -1643,7 +1637,7 @@
         ['Ruben - Oriënteren', 16, 'Pieter - Oriënteren', 17],
         // Fase-overgang: de flow loopt door van Oriënteren naar Uitvoeren
         ['Pieter - Oriënteren', 17, 'Annemieke - Uitvoeren', 0],
-        // Uitvoeren: Annemieke[3] -> Ruben[4] -> intake -> aanvraagformulier -> Pieter begeleidt -> Deniz[5] -> certs vault (acc) -> aftekenen (joint) -> Femke(UAT) -> acc geslaagd -> Ruben[6] -> formulier -> certs vault (prod) -> goedkeuring Pieter -> technisch live -> commercieel live -> tests -> Pieter sleutels -> Ruben[7] -> Femke[8]
+        // Uitvoeren: Annemieke[3] -> Ruben[4] -> intake -> aanvraagformulier -> Pieter begeleidt -> Deniz[5] -> certs vault (acc) -> aftekenen -> Femke(UAT) -> acc geslaagd -> Ruben[6] -> formulier -> certs vault (prod) -> goedkeuring -> tests -> technisch live -> sleutels -> Ruben[7] -> commercieel live -> Femke[8]
         ['Annemieke - Uitvoeren', 0, 'Ruben - Uitvoeren', 1],
         ['Ruben - Uitvoeren', 1, 'Intake', 0],
         ['Intake', 0, 'Ruben - Uitvoeren', 3],
@@ -1656,11 +1650,9 @@
         ['Ruben - Uitvoeren', 10, 'Deniz - Uitvoeren', 11],
         ['Deniz - Uitvoeren', 12, 'Pieter - Uitvoeren', 13],
         ['Pieter - Uitvoeren', 13, 'Deniz - Uitvoeren', 14],
-        ['Deniz - Uitvoeren', 14, 'Femke - Uitvoeren', 15],
-        ['Femke - Uitvoeren', 15, 'Deniz - Uitvoeren', 16],
-        ['Deniz - Uitvoeren', 16, 'Pieter - Uitvoeren', 17],
-        ['Pieter - Uitvoeren', 17, 'Ruben - Uitvoeren', 18],
-        ['Ruben - Uitvoeren', 18, 'Femke - Uitvoeren', 19],
+        ['Deniz - Uitvoeren', 15, 'Pieter - Uitvoeren', 16],
+        ['Pieter - Uitvoeren', 16, 'Ruben - Uitvoeren', 17],
+        ['Ruben - Uitvoeren', 17, 'Femke - Uitvoeren', 18],
         // Fase-overgang: de flow loopt door van Uitvoeren naar Opvolgen
         ['Femke - Uitvoeren', 19, 'Pieter - Opvolgen', 0],
         // Opvolgen: Pieter -> Deniz[9] (Deniz 9->10->11 binnen de baan)
