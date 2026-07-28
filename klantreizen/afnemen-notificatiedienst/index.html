@@ -2096,41 +2096,78 @@
 </template>
 
 <template id="panelBodyCertAanvraagAcc">
-  <p>Het groepcertificaat wordt bij FSC/RINIS aangevraagd; het proces wordt gefaciliteerd in het dienstverlenerportaal.</p>
-  <h3 class="side-panel-heading">Groep</h3>
-  <p>Een groepcertificaat is zelf weer ingedeeld in groepen, en per omgeving - acceptatie en productie. Dit is de overeenkomst tussen organisaties.</p>
-  <h3 class="side-panel-heading">PKI</h3>
-  <p>Het aanvragen van een groepcertificaat gaat middels het OIN. Daarmee kan het PKI-certificaat worden aangevraagd bij Logius, via een CSR (kan met een OpenSSL-command). Het PKI-certificaat wordt geüpload voor de aanvraag van het groepcertificaat (CSR per omgeving, in dit geval voor acceptatie).</p>
-  <h3 class="side-panel-heading">Lokaal</h3>
-  <p>Het lokale certificaat is iets van de eigen organisatie en kan bestaan uit een inway, outway, manager, controller en logging. Dit wordt zelf aangevraagd, zonder wachttijd (vergelijkbaar met <a href="https://certportal.demo.open-fsc.nl/" target="_blank" rel="noopener">certportal.demo.open-fsc.nl</a>).</p>
-  <p>Nog uit te werken - per dienst-omgeving, grant hash, per verbinding?</p>
+  <p>Het groepcertificaat wordt aangevraagd bij FSC/RINIS. Het proces wordt gefaciliteerd in het dienstverlenerportaal.</p>
+  <h3 class="side-panel-heading">Stappen</h3>
+  <ol style="margin:8px 0; padding-left:20px;">
+    <li>PKI-certificaat aanvragen (RINIS voor demo en acceptatie, een vertrouwde uitgever zoals QuoVadis voor productie)</li>
+    <li>Groepcertificaat aanvragen</li>
+    <li>Lokaal certificaat aanmaken</li>
+  </ol>
+  <h3 class="side-panel-heading">1. PKI-certificaat</h3>
+  <p>De aanvraag verloopt via het OIN. Daarmee kan het PKI-certificaat worden aangevraagd bij Logius via een CSR (te genereren met een OpenSSL-command).</p>
+  <p>Per omgeving een aparte CSR - in dit geval voor acceptatie.</p>
+  <h3 class="side-panel-heading">2. Groepcertificaat</h3>
+  <p>Het PKI-certificaat wordt geüpload voor de aanvraag van het groepcertificaat.</p>
+  <p>Een groepcertificaat is zelf weer ingedeeld in groepen, en per omgeving (acceptatie en productie). Dit is de overeenkomst tussen organisaties.</p>
+  <h3 class="side-panel-heading">3. Lokaal certificaat</h3>
+  <p>Het lokale certificaat is van de eigen organisatie en kan bestaan uit: inway, outway, manager, controller en logging.</p>
+  <p>Dit vraag je zelf aan, zonder wachttijd (vergelijkbaar met <a href="https://certportal.demo.open-fsc.nl/" target="_blank" rel="noopener">certportal.demo.open-fsc.nl</a>).</p>
+  <h3 class="side-panel-heading">Nog uit te werken</h3>
+  <ul style="margin:8px 0; padding-left:20px;">
+    <li>Per dienst-omgeving?</li>
+    <li>Grant hash</li>
+    <li>Per verbinding?</li>
+  </ul>
 </template>
 
 <template id="panelBodyCertAanvraagProd">
-  <p>Het groepcertificaat wordt bij FSC/RINIS aangevraagd; het proces wordt gefaciliteerd in het dienstverlenerportaal.</p>
-  <h3 class="side-panel-heading">Groep</h3>
-  <p>Een groepcertificaat is zelf weer ingedeeld in groepen, en per omgeving - acceptatie en productie. Dit is de overeenkomst tussen organisaties.</p>
-  <h3 class="side-panel-heading">PKI</h3>
-  <p>Het aanvragen van een groepcertificaat gaat middels het OIN. Daarmee kan het PKI-certificaat worden aangevraagd bij Logius, via een CSR (kan met een OpenSSL-command). Het PKI-certificaat wordt geüpload voor de aanvraag van het groepcertificaat (CSR per omgeving, in dit geval voor productie).</p>
-  <h3 class="side-panel-heading">Lokaal</h3>
-  <p>Het lokale certificaat is iets van de eigen organisatie en kan bestaan uit een inway, outway, manager, controller en logging. Dit wordt zelf aangevraagd, zonder wachttijd (vergelijkbaar met <a href="https://certportal.demo.open-fsc.nl/" target="_blank" rel="noopener">certportal.demo.open-fsc.nl</a>).</p>
-  <p>Nog uit te werken - per dienst-omgeving, grant hash, per verbinding?</p>
+  <p>Het groepcertificaat wordt aangevraagd bij FSC/RINIS. Het proces wordt gefaciliteerd in het dienstverlenerportaal.</p>
+  <h3 class="side-panel-heading">Stappen</h3>
+  <ol style="margin:8px 0; padding-left:20px;">
+    <li>PKI-certificaat aanvragen (RINIS voor demo en acceptatie, een vertrouwde uitgever zoals QuoVadis voor productie)</li>
+    <li>Groepcertificaat aanvragen</li>
+    <li>Lokaal certificaat aanmaken</li>
+  </ol>
+  <h3 class="side-panel-heading">1. PKI-certificaat</h3>
+  <p>De aanvraag verloopt via het OIN. Daarmee kan het PKI-certificaat worden aangevraagd bij Logius via een CSR (te genereren met een OpenSSL-command).</p>
+  <p>Per omgeving een aparte CSR - in dit geval voor productie.</p>
+  <h3 class="side-panel-heading">2. Groepcertificaat</h3>
+  <p>Het PKI-certificaat wordt geüpload voor de aanvraag van het groepcertificaat.</p>
+  <p>Een groepcertificaat is zelf weer ingedeeld in groepen, en per omgeving (acceptatie en productie). Dit is de overeenkomst tussen organisaties.</p>
+  <h3 class="side-panel-heading">3. Lokaal certificaat</h3>
+  <p>Het lokale certificaat is van de eigen organisatie en kan bestaan uit: inway, outway, manager, controller en logging.</p>
+  <p>Dit vraag je zelf aan, zonder wachttijd (vergelijkbaar met <a href="https://certportal.demo.open-fsc.nl/" target="_blank" rel="noopener">certportal.demo.open-fsc.nl</a>).</p>
+  <h3 class="side-panel-heading">Nog uit te werken</h3>
+  <ul style="margin:8px 0; padding-left:20px;">
+    <li>Per dienst-omgeving?</li>
+    <li>Grant hash</li>
+    <li>Per verbinding?</li>
+  </ul>
 </template>
 
 <template id="panelBodyCertAanvraagDemo">
-  <p>Het groepcertificaat wordt bij FSC/RINIS aangevraagd; het proces wordt gefaciliteerd in het dienstverlenerportaal.</p>
+  <p>Het groepcertificaat wordt aangevraagd bij FSC/RINIS. Het proces wordt gefaciliteerd in het dienstverlenerportaal.</p>
+  <h3 class="side-panel-heading">Stappen</h3>
   <ol style="margin:8px 0; padding-left:20px;">
     <li>PKI-certificaat aanvragen (RINIS voor demo en acceptatie, een vertrouwde uitgever zoals QuoVadis voor productie)</li>
-    <li>Groepcertificaat</li>
-    <li>Lokale certificaat</li>
+    <li>Groepcertificaat aanvragen</li>
+    <li>Lokaal certificaat aanmaken</li>
   </ol>
-  <h3 class="side-panel-heading">Groep</h3>
-  <p>Een groepcertificaat is zelf weer ingedeeld in groepen, en per omgeving - acceptatie en productie. Dit is de overeenkomst tussen organisaties.</p>
-  <h3 class="side-panel-heading">PKI</h3>
-  <p>Het aanvragen van een groepcertificaat gaat middels het OIN. Daarmee kan het PKI-certificaat worden aangevraagd bij Logius, via een CSR (kan met een OpenSSL-command). Het PKI-certificaat wordt geüpload voor de aanvraag van het groepcertificaat (CSR per omgeving, in dit geval voor acceptatie).</p>
-  <h3 class="side-panel-heading">Lokaal</h3>
-  <p>Het lokale certificaat is iets van de eigen organisatie en kan bestaan uit een inway, outway, manager, controller en logging. Dit wordt zelf aangevraagd, zonder wachttijd (vergelijkbaar met <a href="https://certportal.demo.open-fsc.nl/" target="_blank" rel="noopener">certportal.demo.open-fsc.nl</a>).</p>
-  <p>Nog uit te werken - per dienst-omgeving, grant hash, per verbinding?</p>
+  <h3 class="side-panel-heading">1. PKI-certificaat</h3>
+  <p>De aanvraag verloopt via het OIN. Daarmee kan het PKI-certificaat worden aangevraagd bij Logius via een CSR (te genereren met een OpenSSL-command).</p>
+  <p>Per omgeving een aparte CSR - in dit geval voor acceptatie.</p>
+  <h3 class="side-panel-heading">2. Groepcertificaat</h3>
+  <p>Het PKI-certificaat wordt geüpload voor de aanvraag van het groepcertificaat.</p>
+  <p>Een groepcertificaat is zelf weer ingedeeld in groepen, en per omgeving (acceptatie en productie). Dit is de overeenkomst tussen organisaties.</p>
+  <h3 class="side-panel-heading">3. Lokaal certificaat</h3>
+  <p>Het lokale certificaat is van de eigen organisatie en kan bestaan uit: inway, outway, manager, controller en logging.</p>
+  <p>Dit vraag je zelf aan, zonder wachttijd (vergelijkbaar met <a href="https://certportal.demo.open-fsc.nl/" target="_blank" rel="noopener">certportal.demo.open-fsc.nl</a>).</p>
+  <h3 class="side-panel-heading">Nog uit te werken</h3>
+  <ul style="margin:8px 0; padding-left:20px;">
+    <li>Per dienst-omgeving?</li>
+    <li>Grant hash</li>
+    <li>Per verbinding?</li>
+  </ul>
 </template>
 
 <template id="panelBodyWmwInway">
