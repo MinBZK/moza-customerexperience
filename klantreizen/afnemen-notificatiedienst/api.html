@@ -1021,7 +1021,7 @@
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Logt in op het dienstverlenerportaal <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen</span></div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Nodigt Deniz uit <button type="button" class="step-tag step-tag--info" data-persona="Femke (KvK)" data-phase="Oriënteren" data-step="Nodigt Deniz uit" data-panel-title="Wie mag wat?" data-panel-body-ref="panelBodyWmwTeamUitnodigen">Wie mag wat<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
+            <div class="step-verdieping">Nodigt Deniz uit <button type="button" class="step-tag step-tag--info" data-persona="Femke (KvK)" data-phase="Oriënteren" data-step="Nodigt Deniz uit" data-panel-title="Wie mag wat?" data-panel-body-ref="panelBodyWmwTeamUitnodigen" data-vraagstukken-ref="vraagstukkenDemoOordeel">Wie mag wat<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Test dummy-notificaties in de demo-omgeving</div>
           </div>
@@ -1160,9 +1160,9 @@
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Richt het netwerk in en levert het netwerkdiagram aan</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Vraagt PKItrial-/testcertificaten aan en richt de certificate stores in</div>
+            <div class="step-verdieping">Vraagt PKI acceptatie certificaten aan en richt de certificate stores in</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Implementeert de services conform de koppelvlakspecificaties</div>
+            <div class="step-verdieping">Implementeert de services conform de API-specificaties</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Levert het aansluitformulier technische gegevens aan</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
@@ -2035,6 +2035,7 @@
 <template id="vraagstukkenRollen"><li>Waar worden de beheerrollen vastgelegd en wie kan inzien wie wat heeft goedgekeurd (logboek)?</li></template>
 <template id="vraagstukkenLandingspagina"><li>Is het technisch haalbaar om de beveiligde landingspagina (goedkeuren zonder inloggen) op een veilige manier aan te bieden?</li></template>
 <template id="vraagstukkenDemovoorwaarden"><li>Wat zijn de voorwaarden waaraan voldaan moet worden voor het afnemen van een dienst in demo-vorm?</li></template>
+<template id="vraagstukkenDemoOordeel"><li>Wat is er voor nodig om als KvK een goed oordeel te vellen over de demo-omgeving, gebaseerd op dummy data?</li><li>Het afnemen van een Logius-dienst - bijvoorbeeld de Digipoort - is nu gebaseerd op een pre-productie- en productiefase. Hoe kan een potentiele afnemer op dit moment goed testen en oordelen?</li></template>
 <template id="vraagstukkenTemplate"><li>Is er een goedkeuringsstap (vierogenprincipe) nodig voordat een template naar productie gaat?</li></template>
 <div class="side-scrim" id="sideScrim" hidden></div>
 <aside class="side-panel" id="sidePanel" role="dialog" aria-modal="true" aria-labelledby="sidePanelTitle" aria-hidden="true" hidden>
@@ -2053,7 +2054,7 @@
     </div>
     <div class="side-panel-vraagstukken">
       <h3 class="side-panel-vraagstukken-title">Vraagstukken</h3>
-      <ul>
+      <ul id="sidePanelVraagstukkenAlgemeen">
         <li>Hoe wordt dit nu opgelost en hoe kunnen we dit in de toekomst oplossen?</li>
         <li>Welke rol hebben de actoren hierin:
           <ul>
@@ -2151,8 +2152,9 @@
       if (vExtra) {
         var vref = btn.getAttribute('data-vraagstukken-ref');
         var vtpl = vref ? document.getElementById(vref) : null;
-        if (vtpl) { vExtra.innerHTML = vtpl.innerHTML; vExtra.hidden = false; }
-        else { vExtra.innerHTML = ''; vExtra.hidden = true; }
+        var vAlg = document.getElementById('sidePanelVraagstukkenAlgemeen');
+        if (vtpl) { vExtra.innerHTML = vtpl.innerHTML; vExtra.hidden = false; if (vAlg) vAlg.hidden = true; }
+        else { vExtra.innerHTML = ''; vExtra.hidden = true; if (vAlg) vAlg.hidden = false; }
       }
     }
     function render(i) {
