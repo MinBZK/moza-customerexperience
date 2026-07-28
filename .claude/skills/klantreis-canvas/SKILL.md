@@ -13,6 +13,7 @@ Referentie-implementatie: `klantreizen/gezamenlijke-subsidieaanvraag/index.html`
 - Tegel toevoegen in `klantreizen/index.html` met een doelgroep-tag: `ondernemer` (groen) of `dienstverlener` (donkerblauw); die kleuren zijn gereserveerd voor de doelgroep-tags en worden door geen enkele persona gebruikt. Concept-reizen krijgen daarnaast een `draft`-tag (warning) en een draft-banner op de pagina zelf.
 - Teller op de startpagina (`index.html`) telt alleen actieve klantreizen, niet het archief.
 - Persona-namen mogen niet botsen met bestaande persona's of alter-ego's (zie personas/). Zwembaan-labels linken naar de persona-pagina ("Bekijk persona ↗" of "Alter-ego van persona X ↗").
+- **Zwembaan-avatars gebruiken altijd exact dezelfde avatar als de persona-pagina waar de baan aan gekoppeld is**: `../../personas/images/<id>.svg` (de avataaars-svg's, transparant met cirkel via `background: var(--primitives-color-<kleur>-150)` op de baan). Nooit oude `avatar-*.png`'s of afwijkende afbeeldingen gebruiken; wijzigt een persona-avatar, dan volgen alle klantreizen automatisch mee via het gedeelde bestand.
 
 ## Head en stijl-laag
 
