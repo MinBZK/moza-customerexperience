@@ -910,14 +910,8 @@
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
             <div class="step" data-milestone="7">Productie-implementatie geslaagd</div>
-            <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Ontvangt het PKIoverheid-productiecertificaat: Deniz stuurt een CSR in, Logius geeft het client-certificaat uit, kortlevend met auto-renew</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Verifieert de productiekoppeling en zet de dienst live op de Mijn KvK-site</div>
           </div>
@@ -1081,10 +1075,6 @@
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
             <div class="step">Commercieel live</div>
           </div>
@@ -1183,7 +1173,11 @@
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Richt het netwerk in en levert het netwerkdiagram aan</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Vraagt PKI acceptatie certificaten aan en richt de certificate stores in</div>
+            <div class="step-verdieping">Zorgt voor een werkende FSC-omgeving die verbindt met dezelfde acceptatie-omgeving als die van de notificatiedienst <button type="button" class="step-tag step-tag--info" data-persona="Deniz (KvK)" data-phase="Uitvoeren" data-step="Zorgt voor een werkende FSC-omgeving (acceptatie)" data-panel-title="Groepcertificaat en lokaal certificaat aanvragen" data-panel-body-ref="panelBodyCertAanvraagAcc" data-vraagstukken-ref="vraagstukkenCertAanvraag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Certificaten<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Dienst aanvragen (KvK) en goedkeuren (Logius)</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Integreert de URL in de KvK-omgeving</div>
 
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Levert het aansluitformulier technische gegevens aan</div>
@@ -1210,17 +1204,15 @@
           </div>
           <div class="step-connector" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step">Implementeert de certificaten in de vault</div>
+            <div class="step">Sluit technisch aan in productie</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Meldt de KvK aan voor de productie FSC centrale directory <button type="button" class="step-tag step-tag--info" data-persona="Deniz (KvK)" data-phase="Uitvoeren" data-step="Aanmelden voor de productie FSC centrale directory" data-panel-title="Wie mag wat?" data-panel-body-ref="panelBodyWmwFsc">Wie mag wat<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
+            <div class="step-verdieping">Zorgt voor een werkende FSC-omgeving die verbindt met dezelfde productie-omgeving als die van de notificatiedienst <button type="button" class="step-tag step-tag--info" data-persona="Deniz (KvK)" data-phase="Uitvoeren" data-step="Zorgt voor een werkende FSC-omgeving (productie)" data-panel-title="Groepcertificaat en lokaal certificaat aanvragen" data-panel-body-ref="panelBodyCertAanvraagProd" data-vraagstukken-ref="vraagstukkenCertAanvraag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Certificaten<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Vraagt het productie groepcertificaat bij FSC/RINIS en het lokale certificaat zelf aan <button type="button" class="step-tag step-tag--info" data-persona="Deniz (KvK)" data-phase="Uitvoeren" data-step="Vraagt het productie groepcertificaat en het lokale certificaat aan" data-panel-title="Groepcertificaat en lokaal certificaat aanvragen" data-panel-body-ref="panelBodyCertAanvraagProd" data-vraagstukken-ref="vraagstukkenCertAanvraag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Certificaten<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button> <button type="button" class="step-tag step-tag--info" data-persona="Deniz (KvK)" data-phase="Uitvoeren" data-step="Aanvragen productie groepcertificaat en lokaal certificaat" data-panel-title="Wie mag wat?" data-panel-body-ref="panelBodyWmwGroepcert">Wie mag wat<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
+            <div class="step-verdieping">Dienst aanvragen (KvK) en goedkeuren (Logius)</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Checkt samen met Logius of de KvK aan de FSC-eisen voldoet</div>
+            <div class="step-verdieping">Integreert de URL in de KvK-omgeving</div>
           </div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-connector" aria-hidden="true">→</div>
           <div class="step-wrap">
             <div class="step">Voert de connectiviteitstest, test services en ketentest uit</div>
           </div>
@@ -1336,36 +1328,6 @@
             <div class="step-verdieping">Wijst een aansluitcoordinator toe en begeleidt de KvK</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Ondersteunt bij de connectiviteits- en ketentest</div>
-          </div>
-          <div class="step-connector step-connector--spacer step-connector--gap" data-gap-label="na enkele weken" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
-          <div class="step-connector step-connector--spacer step-connector--gap" data-gap-label="na enkele weken" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap">
-            <div class="step">Goedkeuring implementatie certificaten</div>
-          </div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
-          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
-          <div class="step-wrap">
-            <div class="step">Stelt de productieversie beschikbaar en geeft de sleutels uit</div>
-            <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Stelt de productieversie beschikbaar na goedkeuring</div>
-            <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Geeft de productiesleutels uit (CSR naar client-certificaat)</div>
           </div>
         </div>
       </div>
@@ -1656,7 +1618,7 @@
         ['Ruben - Oriënteren', 16, 'Pieter - Oriënteren', 17],
         // Fase-overgang: de flow loopt door van Oriënteren naar Uitvoeren
         ['Pieter - Oriënteren', 17, 'Ruben - Uitvoeren', 0],
-        // Uitvoeren: verstuurt goedkeuringsverzoek -> Annemieke[3] -> Ruben[4] -> intake -> aanvraagformulier -> Pieter begeleidt -> Deniz[5] -> Femke(UAT) -> acc geslaagd -> aftekenen -> Ruben[6] -> formulier -> certs vault (prod) -> goedkeuring -> tests -> technisch live -> sleutels -> Ruben[7] -> commercieel live -> Femke[8]
+        // Uitvoeren: verstuurt goedkeuringsverzoek -> Annemieke[3] -> Ruben[4] -> intake -> aanvraagformulier -> Pieter begeleidt -> Deniz[5] -> Femke(UAT) -> acc geslaagd -> aftekenen -> Ruben[6] -> formulier -> sluit technisch aan in productie -> tests -> technisch live -> Ruben[7] -> commercieel live -> Femke[8]
         ['Ruben - Uitvoeren', 0, 'Annemieke - Uitvoeren', 1],
         ['Annemieke - Uitvoeren', 1, 'Ruben - Uitvoeren', 2],
         ['Ruben - Uitvoeren', 2, 'Intake', 0],
@@ -1667,13 +1629,10 @@
         ['Femke - Uitvoeren', 7, 'Deniz - Uitvoeren', 8],
         ['Deniz - Uitvoeren', 8, 'Ruben - Uitvoeren', 9],
         ['Ruben - Uitvoeren', 10, 'Deniz - Uitvoeren', 11],
-        ['Deniz - Uitvoeren', 12, 'Pieter - Uitvoeren', 13],
-        ['Pieter - Uitvoeren', 13, 'Deniz - Uitvoeren', 14],
-        ['Deniz - Uitvoeren', 15, 'Pieter - Uitvoeren', 16],
-        ['Pieter - Uitvoeren', 16, 'Ruben - Uitvoeren', 17],
-        ['Ruben - Uitvoeren', 17, 'Femke - Uitvoeren', 18],
+        ['Deniz - Uitvoeren', 14, 'Ruben - Uitvoeren', 15],
+        ['Ruben - Uitvoeren', 15, 'Femke - Uitvoeren', 16],
         // Fase-overgang: de flow loopt door van Uitvoeren naar Opvolgen
-        ['Femke - Uitvoeren', 19, 'Pieter - Opvolgen', 0],
+        ['Femke - Uitvoeren', 17, 'Pieter - Opvolgen', 0],
         // Opvolgen: Pieter -> Deniz[9] -> [10] -> Pieter keurt groepcertificaat -> Deniz[11]
         ['Pieter - Opvolgen', 0, 'Deniz - Opvolgen', 1],
         ['Deniz - Opvolgen', 2, 'Pieter - Opvolgen', 3],
@@ -2068,18 +2027,6 @@
   <h3 class="side-panel-heading">Hoe</h3>
   <p>Deniz stuurt een certificate signing request (CSR) in; de private key blijft bij hem en verlaat de KvK-omgeving nooit.</p>
   <p>Om de demo-omgeving laagdrempelig te houden, wil je de aanvraag van (groep)certificaten vermijden en werk je met mock-data en -integraties.</p>
-</template>
-
-<template id="panelBodyWmwFsc">
-  <div class="wmw-item"><span class="wmw-dot" style="background:var(--deniz)"></span><span><strong class="p-deniz">Deniz</strong>, DevOps. Meldt de KvK aan voor de FSC centrale directory</span></div>
-  <h3 class="side-panel-heading">Voorwaarden</h3>
-  <p>De KvK moet FSC lokaal draaien voordat de aanmelding kan plaatsvinden.</p>
-  <p>De aanmelding voor de centrale directory is als peer, in de rol van consumer.</p>
-</template>
-
-<template id="panelBodyWmwGroepcert">
-  <div class="wmw-item"><span class="wmw-dot" style="background:var(--systeem)"></span><span><strong>FSC/RINIS</strong> geeft het groepcertificaat uit; het proces wordt gefaciliteerd in het dienstverlenerportaal</span></div>
-  <div class="wmw-item"><span class="wmw-dot" style="background:var(--deniz)"></span><span><strong class="p-deniz">Deniz</strong>, DevOps. Vraagt het lokale certificaat zelf aan</span></div>
 </template>
 
 <template id="panelBodyCertAanvraagAcc">
