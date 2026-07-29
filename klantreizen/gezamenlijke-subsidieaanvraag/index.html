@@ -606,7 +606,7 @@
     background: #154273; color: #fff;
     box-shadow: -8px 0 30px rgba(0,0,0,.28);
     padding: 28px 26px 24px;
-    overflow-y: auto;
+    display: flex; flex-direction: column;
     transform: translateX(100%);
     transition: transform .25s ease;
   }
@@ -614,16 +614,19 @@
   /* Het variabele deel krijgt via JS een vaste min-hoogte (= de langste content
      van alle items), zodat de Vraagstukken-box eronder altijd op dezelfde plek
      staat en niet verspringt tussen items. */
-  .side-panel-scroll { min-height: 0; }
-  .side-panel-footer { }
+  .side-panel-scroll { min-height: 0; flex: 1 1 auto; overflow-y: auto; }
+  /* Navigatie + Vraagstukken sticky aan de onderkant van de blauwe overlay. */
+  .side-panel-footer { flex-shrink: 0; }
   .side-panel-vraagstukken {
-    margin-top: 14px; padding: 12px 14px;
-    border: 1px solid rgba(255,255,255,.25); border-radius: 10px;
+    margin-top: 14px; padding: 14px 16px;
+    border: none; border-left: 4px solid #ffbf00; border-radius: 10px;
+    background: rgba(255,255,255,.1);
+    box-shadow: 0 2px 12px rgba(0,0,0,.22);
     font-size: 13px; line-height: 1.5;
   }
   .side-panel-vraagstukken-title {
     font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 600;
-    letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.72);
+    letter-spacing: .08em; text-transform: uppercase; color: #ffbf00;
     margin: 0 0 8px;
   }
   .side-panel-vraagstukken ul { margin: 0; padding-left: 18px; }
@@ -2437,16 +2440,8 @@
     // items, zodat de Vraagstukken-box eronder altijd op dezelfde plek staat.
     // Opnieuw meten na het laden van de webfonts (die veranderen de teksthoogte).
     function fixScrollMinHeight() {
-      var scrollEl = panel.querySelector('.side-panel-scroll');
-      if (!scrollEl || !infos.length) return;
-      var wasHidden = panel.hidden, savedIdx = current;
-      panel.hidden = false; // renderbaar maken (nog off-screen via de transform)
-      scrollEl.style.minHeight = '0px'; // reset: meet de echte content-hoogte
-      var maxH = 0;
-      infos.forEach(function (btn) { setContent(btn); if (scrollEl.scrollHeight > maxH) maxH = scrollEl.scrollHeight; });
-      scrollEl.style.minHeight = (maxH + 18) + 'px'; // kleine marge zodat alles er ruim in past
-      if (savedIdx >= 0) setContent(infos[savedIdx]); // huidige inhoud terugzetten
-      panel.hidden = wasHidden;
+      // Footer (navigatie + vraagstukken) staat sticky onderin het paneel;
+      // alleen .side-panel-scroll scrollt, dus geen min-height-hack meer nodig.
     }
     fixScrollMinHeight();
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(fixScrollMinHeight);
