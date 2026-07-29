@@ -383,6 +383,7 @@
   .phase-cell.lane--vraagstukken li:last-child { margin-bottom: 0; }
   .phase-cell.lane--vraagstukken .vr-steps { color: var(--ink-mute); }
   .phase-cell.lane--vraagstukken .vr-sticky { position: sticky; left: 256px; display: inline-block; max-width: 520px; }
+  .phase-cell.lane--vraagstukken .vr-item { position: absolute; width: 168px; }
   .lane-expand:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
   .lane-expand svg { transition: transform .15s ease; }
   .journey-grid.systeem-open .lane-expand svg { transform: rotate(180deg); }
@@ -2118,34 +2119,48 @@
           var fase = cell.getAttribute('data-vraagstukken-fase');
           var groups = {}, order = [];
           [].forEach.call(grid.querySelectorAll('.step-tag--info:not(.step-tag--inherited)[data-vraagstukken-ref][data-phase="' + fase + '"]'), function (btn) {
-            var ref = btn.getAttribute('data-vraagstukken-ref');
-            if (!groups[ref]) { groups[ref] = []; order.push(ref); }
             var wrap = btn.closest('.step-wrap');
+            var ref = btn.getAttribute('data-vraagstukken-ref');
+            if (!groups[ref]) { groups[ref] = { namen: [], wrap: wrap }; order.push(ref); }
             var stepEl = wrap ? wrap.querySelector('.step') : null;
             var naam = '';
             if (stepEl) {
               [].forEach.call(stepEl.childNodes, function (n) { if (n.nodeType === 3) naam += n.textContent; });
               naam = naam.trim();
             }
-            if (naam && groups[ref].indexOf(naam) === -1) groups[ref].push(naam);
+            if (naam && groups[ref].namen.indexOf(naam) === -1) groups[ref].namen.push(naam);
           });
-          var ul = document.createElement('ul');
+          if (!order.length) return;
+          // Elk vraagstuk als box op de x-positie van de stap waar het bij hoort.
+          cell.style.position = 'relative';
+          var cellRect = cell.getBoundingClientRect();
+          var stackTop = {}, maxBottom = 0;
           order.forEach(function (ref) {
             var tpl = document.getElementById(ref);
-            if (!tpl) return;
+            var g = groups[ref];
+            if (!tpl || !g.wrap) return;
+            var x = Math.round(g.wrap.getBoundingClientRect().left - cellRect.left);
+            var box = document.createElement('div');
+            box.className = 'vr-item';
+            box.style.left = x + 'px';
+            box.style.top = (stackTop[x] || 20) + 'px';
+            var ul = document.createElement('ul');
             var frag = document.createElement('div');
             frag.innerHTML = tpl.innerHTML;
-            var namen = groups[ref];
             [].forEach.call(frag.querySelectorAll('li'), function (li) {
-              if (namen.length > 1) {
-                var lbl = namen.length === 2 ? namen[0] + ' en ' + namen[1]
-                  : namen.slice(0, -1).join(', ') + ' en ' + namen[namen.length - 1];
+              if (g.namen.length > 1) {
+                var lbl = g.namen.length === 2 ? g.namen[0] + ' en ' + g.namen[1]
+                  : g.namen.slice(0, -1).join(', ') + ' en ' + g.namen[g.namen.length - 1];
                 li.innerHTML += ' <span class="vr-steps">- speelt bij: ' + lbl + '</span>';
               }
               ul.appendChild(li);
             });
+            box.appendChild(ul);
+            cell.appendChild(box);
+            stackTop[x] = (stackTop[x] || 20) + box.offsetHeight + 10;
+            maxBottom = Math.max(maxBottom, box.offsetTop + box.offsetHeight);
           });
-          if (ul.children.length) cell.appendChild(ul);
+          cell.style.minHeight = (maxBottom + 24) + 'px';
         });
         var alg = document.getElementById('sidePanelVraagstukkenAlgemeen');
         var algCel = document.getElementById('vraagstukkenAlgemeenCel');
