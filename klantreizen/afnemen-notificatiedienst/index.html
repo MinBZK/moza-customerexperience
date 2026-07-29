@@ -379,6 +379,7 @@
   }
   .phase-cell.lane--vraagstukken li { margin: 0 0 6px; }
   .phase-cell.lane--vraagstukken li:last-child { margin-bottom: 0; }
+  .phase-cell.lane--vraagstukken .vr-steps { color: var(--ink-mute); }
   .lane-expand:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
   .lane-expand svg { transition: transform .15s ease; }
   .journey-grid.systeem-open ~ * .lane-expand svg, .lane-expand[aria-expanded="true"] svg { transform: rotate(180deg); }
@@ -1934,14 +1935,34 @@
       document.addEventListener('DOMContentLoaded', function () {
         [].forEach.call(grid.querySelectorAll('.phase-cell.lane--vraagstukken[data-vraagstukken-fase]'), function (cell) {
           var fase = cell.getAttribute('data-vraagstukken-fase');
-          var seen = {};
-          var ul = document.createElement('ul');
+          var groups = {}, order = [];
           [].forEach.call(grid.querySelectorAll('.step-tag--info:not(.step-tag--inherited)[data-vraagstukken-ref][data-phase="' + fase + '"]'), function (btn) {
             var ref = btn.getAttribute('data-vraagstukken-ref');
-            if (seen[ref]) return;
-            seen[ref] = true;
+            if (!groups[ref]) { groups[ref] = []; order.push(ref); }
+            var wrap = btn.closest('.step-wrap');
+            var stepEl = wrap ? wrap.querySelector('.step') : null;
+            var naam = '';
+            if (stepEl) {
+              [].forEach.call(stepEl.childNodes, function (n) { if (n.nodeType === 3) naam += n.textContent; });
+              naam = naam.trim();
+            }
+            if (naam && groups[ref].indexOf(naam) === -1) groups[ref].push(naam);
+          });
+          var ul = document.createElement('ul');
+          order.forEach(function (ref) {
             var tpl = document.getElementById(ref);
-            if (tpl) ul.innerHTML += tpl.innerHTML;
+            if (!tpl) return;
+            var frag = document.createElement('div');
+            frag.innerHTML = tpl.innerHTML;
+            var namen = groups[ref];
+            [].forEach.call(frag.querySelectorAll('li'), function (li) {
+              if (namen.length > 1) {
+                var lbl = namen.length === 2 ? namen[0] + ' en ' + namen[1]
+                  : namen.slice(0, -1).join(', ') + ' en ' + namen[namen.length - 1];
+                li.innerHTML += ' <span class="vr-steps">- speelt bij: ' + lbl + '</span>';
+              }
+              ul.appendChild(li);
+            });
           });
           if (ul.children.length) cell.appendChild(ul);
         });
