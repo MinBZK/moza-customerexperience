@@ -374,9 +374,11 @@
   .phase-cell.lane--vraagstukken { contain: inline-size; }
   .phase-cell.lane--vraagstukken ul {
     margin: 0; padding-left: 18px; max-width: 520px;
+    list-style: disc outside;
     font-size: 12px; line-height: 1.5; color: var(--ink-soft);
     overflow-wrap: break-word;
   }
+  .phase-cell.lane--vraagstukken ul ul { list-style: circle outside; margin: 4px 0 0; }
   .phase-cell.lane--vraagstukken li { margin: 0 0 6px; }
   .phase-cell.lane--vraagstukken li:last-child { margin-bottom: 0; }
   .phase-cell.lane--vraagstukken .vr-steps { color: var(--ink-mute); }
