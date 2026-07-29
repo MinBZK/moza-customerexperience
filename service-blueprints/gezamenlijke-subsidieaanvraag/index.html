@@ -382,6 +382,7 @@
   .phase-cell.lane--vraagstukken li { margin: 0 0 6px; }
   .phase-cell.lane--vraagstukken li:last-child { margin-bottom: 0; }
   .phase-cell.lane--vraagstukken .vr-steps { color: var(--ink-mute); }
+  .phase-cell.lane--vraagstukken .vr-sticky { position: sticky; left: 256px; display: inline-block; max-width: 520px; }
   .lane-expand:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
   .lane-expand svg { transition: transform .15s ease; }
   .journey-grid.systeem-open .lane-expand svg { transform: rotate(180deg); }
@@ -1557,6 +1558,9 @@
       <div class="phase-cell lane--vraagstukken" data-vraagstukken-fase="Uitvoeren"></div>
       <div class="phase-cell lane--vraagstukken" data-vraagstukken-fase="Opvolgen"></div>
 
+      <div class="lane-label lane--vraagstukken"><span class="lane-sub-name">Algemeen</span></div>
+      <div class="phase-cell lane--vraagstukken" id="vraagstukkenAlgemeenCel" style="grid-column: 2 / -1;"></div>
+
     </div>
     </div>
 
@@ -2143,6 +2147,16 @@
           });
           if (ul.children.length) cell.appendChild(ul);
         });
+        var alg = document.getElementById('sidePanelVraagstukkenAlgemeen');
+        var algCel = document.getElementById('vraagstukkenAlgemeenCel');
+        if (alg && algCel) {
+          var wrap = document.createElement('div');
+          wrap.className = 'vr-sticky';
+          var algUl = document.createElement('ul');
+          algUl.innerHTML = alg.innerHTML;
+          wrap.appendChild(algUl);
+          algCel.appendChild(wrap);
+        }
         layout();
         buildClone();
       });
