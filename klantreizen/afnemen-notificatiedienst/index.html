@@ -1773,7 +1773,11 @@
           el.querySelector('.time-gap-label').textContent = gap.getAttribute('data-gap-label') || 'na 2 weken';
           el.style.left = (order[i] - GAP_HALF) + 'px';
           el.style.top = headH + 'px';
-          el.style.height = (grid.scrollHeight - headH) + 'px';
+          // De tijdband hoort bij de tijdlijn-rijen en stopt boven de
+          // Vraagstukken-rij (anders loopt hij dwars door die content).
+          var vrRow = grid.querySelector('.lane-label.lane--vraagstukken');
+          var bandBottom = vrRow ? (vrRow.getBoundingClientRect().top - gRect.top) : grid.scrollHeight;
+          el.style.height = (bandBottom - headH) + 'px';
         });
         centerTimeGaps();
       }
