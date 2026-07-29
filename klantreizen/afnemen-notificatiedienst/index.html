@@ -321,6 +321,68 @@
   /* Sluitende lijn onder de laatste (Systeem) rij van het canvas. */
   .lane-label.lane--systeem, .phase-cell.lane--systeem { border-bottom: 1px solid var(--border); }
 
+  /* Vanaf de Systeem-rij: visueel gedempt, met een duidelijke scheidslijn
+     ten opzichte van de persona-rijen erboven (themabewust via tokens). */
+  .lane-label.lane--systeem, .phase-cell.lane--systeem { border-top: 2px solid var(--ink-mute); }
+  .lane-label.lane--systeem, .phase-cell.lane--systeem,
+  .lane-label.lane--sub, .phase-cell.lane--sub { background: var(--primitives-color-neutral-100); }
+  .lane--systeem .step { opacity: .72; }
+  .lane-label.lane--systeem .lane-avatar--systeem,
+  .lane-label.lane--systeem .lane-name,
+  .lane-label.lane--systeem .lane-role { opacity: .78; }
+
+  /* Systeem-diensten (sublanen): standaard verborgen, zichtbaar wanneer de
+     Systeem-baan is uitgeklapt. Voorlopig lege rijen per dienst. */
+  .lane-label.lane--sub, .phase-cell.lane--sub { display: none; }
+  .journey-grid.systeem-open .phase-cell.lane--sub { display: block; }
+  .journey-grid.systeem-open .lane-label.lane--sub { display: flex; }
+  .lane-label.lane--sub {
+    position: sticky; left: 0; z-index: 1;
+    flex-direction: row; align-items: center; gap: 8px;
+    padding: 12px 20px 12px 44px;
+    border-top: 1px solid var(--border);
+  }
+  .lane-label.lane--sub::before {
+    content: ""; width: 7px; height: 7px; margin-top: -5px;
+    border-left: 1px solid var(--ink-mute); border-bottom: 1px solid var(--ink-mute);
+  }
+  .lane-sub-name { font-size: 13px; font-weight: 500; color: var(--ink-soft); }
+  .lane--sub-end.lane-label, .lane--sub-end.phase-cell { border-bottom: 1px solid var(--border); }
+
+  /* Uitklap-knop op het Systeem-label. */
+  .lane-expand {
+    margin-top: 8px; align-self: flex-start;
+    display: inline-flex; align-items: center; gap: 5px;
+    background: var(--white); border: 1px solid var(--border); border-radius: 8px;
+    padding: 4px 9px; cursor: pointer;
+    font-family: inherit; font-size: 12px; font-weight: 600; color: var(--ink-soft);
+  }
+  .lane-expand:hover { border-color: var(--ink-soft); }
+
+  /* Vraagstukken-rij onderaan: verzamelt per fase de vraagstukken uit de
+     zijpaneel-templates. Zelfde amber-accent als het blok in het paneel. */
+  .lane-label.lane--vraagstukken, .phase-cell.lane--vraagstukken {
+    background: var(--primitives-color-neutral-100);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .lane-label.lane--vraagstukken { position: sticky; left: 0; z-index: 1; }
+  .lane-vr-title {
+    font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 600;
+    letter-spacing: .08em; text-transform: uppercase;
+    color: light-dark(#8a6100, #ffbf00);
+    border-left: 4px solid #ffbf00; padding-left: 8px;
+  }
+  .phase-cell.lane--vraagstukken ul {
+    margin: 0; padding-left: 18px; max-width: 420px;
+    font-size: 12px; line-height: 1.5; color: var(--ink-soft);
+  }
+  .phase-cell.lane--vraagstukken li { margin: 0 0 6px; }
+  .phase-cell.lane--vraagstukken li:last-child { margin-bottom: 0; }
+  .lane-expand:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+  .lane-expand svg { transition: transform .15s ease; }
+  .journey-grid.systeem-open ~ * .lane-expand svg, .lane-expand[aria-expanded="true"] svg { transform: rotate(180deg); }
+
   /* Zwembaanlabel (persona) - blijft links staan bij horizontaal pannen. */
   .lane-label {
     position: sticky; left: 0; z-index: 3;
@@ -1405,6 +1467,24 @@
 
       <div class="phase-cell lane--systeem" aria-label="Systeem - Opvolgen"></div>
 
+      <!-- Systeem-diensten: sublanen, voorlopig leeg. Zichtbaar wanneer de
+           Systeem-baan wordt uitgeklapt (.journey-grid.systeem-open). -->
+      <div class="lane-label lane--sub"><span class="lane-sub-name">Notificatiedienst</span></div>
+      <div class="phase-cell lane--sub" aria-hidden="true"></div>
+      <div class="phase-cell lane--sub" aria-hidden="true"></div>
+      <div class="phase-cell lane--sub" aria-hidden="true"></div>
+
+      <div class="lane-label lane--sub lane--sub-end"><span class="lane-sub-name">FSC</span></div>
+      <div class="phase-cell lane--sub lane--sub-end" aria-hidden="true"></div>
+      <div class="phase-cell lane--sub lane--sub-end" aria-hidden="true"></div>
+      <div class="phase-cell lane--sub lane--sub-end" aria-hidden="true"></div>
+
+      <!-- Vraagstukken-rij: wordt per fase gevuld vanuit de zijpaneel-templates. -->
+      <div class="lane-label lane--vraagstukken"><span class="lane-vr-title">Vraagstukken</span></div>
+      <div class="phase-cell lane--vraagstukken" data-vraagstukken-fase="Oriënteren"></div>
+      <div class="phase-cell lane--vraagstukken" data-vraagstukken-fase="Uitvoeren"></div>
+      <div class="phase-cell lane--vraagstukken" data-vraagstukken-fase="Opvolgen"></div>
+
       <!-- Gezamenlijke intake: overspant de persona-banen (positie via JS) -->
       <div class="intake-box" id="intakeBox" aria-hidden="true">
         <div class="intake-box-inner">
@@ -1829,6 +1909,44 @@
         head.addEventListener('keydown', function (e) {
           if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); }
         });
+      });
+
+      // Systeem-baan uit-/inklappen naar de (voorlopig lege) dienst-sublanen.
+      (function () {
+        var sysLabel = grid.querySelector('.lane-label.lane--systeem');
+        if (!sysLabel) return;
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'lane-expand';
+        btn.setAttribute('aria-expanded', 'false');
+        btn.innerHTML = '<svg width="10" height="10" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Details</span>';
+        sysLabel.appendChild(btn);
+        btn.addEventListener('click', function () {
+          var open = grid.classList.toggle('systeem-open');
+          btn.setAttribute('aria-expanded', String(open));
+          layout();
+          buildClone();
+        });
+      })();
+
+      // Vraagstukken-rij: neemt per fase de vraagstukken over uit de
+      // zijpaneel-templates (data-vraagstukken-ref), gededupliceerd per fase.
+      document.addEventListener('DOMContentLoaded', function () {
+        [].forEach.call(grid.querySelectorAll('.phase-cell.lane--vraagstukken[data-vraagstukken-fase]'), function (cell) {
+          var fase = cell.getAttribute('data-vraagstukken-fase');
+          var seen = {};
+          var ul = document.createElement('ul');
+          [].forEach.call(grid.querySelectorAll('.step-tag--info:not(.step-tag--inherited)[data-vraagstukken-ref][data-phase="' + fase + '"]'), function (btn) {
+            var ref = btn.getAttribute('data-vraagstukken-ref');
+            if (seen[ref]) return;
+            seen[ref] = true;
+            var tpl = document.getElementById(ref);
+            if (tpl) ul.innerHTML += tpl.innerHTML;
+          });
+          if (ul.children.length) cell.appendChild(ul);
+        });
+        layout();
+        buildClone();
       });
 
       // ---- Zoom / detailniveau ----
