@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MOZa customer experience</title>
+  <title>Archief - Service blueprints - MOZa</title>
   <link rel="stylesheet" href="https://esm.sh/@nldd/design-system@0.8.59/dist/css/global.css">
   <script type="module" src="https://esm.sh/@nldd/design-system@0.8.59"></script>
   <style>
@@ -37,29 +37,19 @@
 <nldd-app-view background="tinted">
   <nldd-page background="tinted">
     <nldd-simple-section width="900px">
+      <nldd-link slot="header" href="../index.html" start-icon="arrow-left" size="sm">Terug naar service blueprints</nldd-link>
       <nldd-title slot="header" size="4">
-        <h1>MOZa customer experience</h1>
-        <p slot="subtitle">Persona's en service blueprints voor MijnOverheid Zakelijk.</p>
+        <h1>Archief</h1>
+        <p slot="subtitle">Gearchiveerde service blueprints binnen MijnOverheid Zakelijk.</p>
       </nldd-title>
 
       <nldd-collection layout="grid" item-width="380px">
-        <a class="tile" href="personas/index.html">
-          <nldd-card accessible-label="Persona's - wie zijn de gebruikers van MOZa?">
-            <nldd-container padding="24" layout="stack" gap="12" horizontal-alignment="center">
-              <nldd-icon name="person-2" size="32"></nldd-icon>
-              <nldd-title size="4"><h2>Persona's</h2></nldd-title>
-              <nldd-rich-text><p>Ondernemers, intermediair en ambtenaren - wie zijn de gebruikers van MOZa?</p></nldd-rich-text>
-              <nldd-tag color="neutral" text="10 persona's"></nldd-tag>
-            </nldd-container>
-          </nldd-card>
-        </a>
-        <a class="tile" href="service-blueprints/index.html">
-          <nldd-card accessible-label="Service blueprints">
+        <a class="tile" href="../subsidieaanvraag/index.html">
+          <nldd-card accessible-label="Subsidieaanvraag">
             <nldd-container padding="24" layout="stack" gap="12" horizontal-alignment="center">
               <nldd-icon name="check-list" size="32"></nldd-icon>
-              <nldd-title size="4"><h2>Service blueprints</h2></nldd-title>
+              <nldd-title size="4"><h2>Subsidieaanvraag</h2></nldd-title>
               <nldd-rich-text><p>Oriënteren, uitvoeren en opvolgen: de service blueprint per persona.</p></nldd-rich-text>
-              <nldd-tag color="neutral" text="2 service blueprints"></nldd-tag>
             </nldd-container>
           </nldd-card>
         </a>
@@ -69,6 +59,6 @@
     </nldd-simple-section>
   </nldd-page>
 </nldd-app-view>
-<script defer src="afkortingen.js"></script>
+<script defer src="../../afkortingen.js"></script>
 </body>
 </html>

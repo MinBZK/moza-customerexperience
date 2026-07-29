@@ -1,19 +1,19 @@
 ---
-name: klantreis-canvas
-description: Bouw of wijzig een MOZa-klantreis (zwembanen-canvas) volgens de vaste conventies van deze repo. Gebruik bij het aanmaken van een nieuwe klantreis, het toevoegen van stappen/mijlpalen/tags aan een bestaande klantreis, of vragen over het canvas (zoom, minimap, flow-pijlen, verdiepingen, zijpaneel).
+name: service-blueprint-canvas
+description: Bouw of wijzig een MOZa-service blueprint (zwembanen-canvas) volgens de vaste conventies van deze repo. Gebruik bij het aanmaken van een nieuwe service blueprint, het toevoegen van stappen/mijlpalen/tags aan een bestaande service blueprint, of vragen over het canvas (zoom, minimap, flow-pijlen, verdiepingen, zijpaneel).
 ---
 
-# MOZa klantreis-canvas
+# MOZa service-blueprint-canvas
 
-Referentie-implementatie: `klantreizen/gezamenlijke-subsidieaanvraag/index.html`. Een nieuwe klantreis bouw je door die pagina als basis te nemen, de reis-specifieke onderdelen te vervangen en de generieke machinerie intact te laten. Lees de referentie er altijd bij; dit document beschrijft wat vast ligt en wat je per reis invult.
+Referentie-implementatie: `service-blueprints/gezamenlijke-subsidieaanvraag/index.html`. Een nieuwe service blueprint bouw je door die pagina als basis te nemen, de reis-specifieke onderdelen te vervangen en de generieke machinerie intact te laten. Lees de referentie er altijd bij; dit document beschrijft wat vast ligt en wat je per reis invult.
 
 ## Bestandsstructuur en vindbaarheid
 
-- Elke klantreis: `klantreizen/<slug>/index.html` (slug in kebab-case, Nederlands).
-- Tegel toevoegen in `klantreizen/index.html` met een doelgroep-tag: `ondernemer` (groen) of `dienstverlener` (donkerblauw); die kleuren zijn gereserveerd voor de doelgroep-tags en worden door geen enkele persona gebruikt. Concept-reizen krijgen daarnaast een `draft`-tag (warning) en een draft-banner op de pagina zelf.
-- Teller op de startpagina (`index.html`) telt alleen actieve klantreizen, niet het archief.
+- Elke service blueprint: `service-blueprints/<slug>/index.html` (slug in kebab-case, Nederlands).
+- Tegel toevoegen in `service-blueprints/index.html` met een doelgroep-tag: `ondernemer` (groen) of `dienstverlener` (donkerblauw); die kleuren zijn gereserveerd voor de doelgroep-tags en worden door geen enkele persona gebruikt. Concept-reizen krijgen daarnaast een `draft`-tag (warning) en een draft-banner op de pagina zelf.
+- Teller op de startpagina (`index.html`) telt alleen actieve service blueprints, niet het archief.
 - Persona-namen mogen niet botsen met bestaande persona's of alter-ego's (zie personas/). Zwembaan-labels linken naar de persona-pagina ("Bekijk persona ↗" of "Alter-ego van persona X ↗").
-- **Zwembaan-avatars gebruiken altijd exact dezelfde avatar als de persona-pagina waar de baan aan gekoppeld is**: `../../personas/images/<id>.svg` (de avataaars-svg's, transparant met cirkel via `background: var(--primitives-color-<kleur>-150)` op de baan). Nooit oude `avatar-*.png`'s of afwijkende afbeeldingen gebruiken; wijzigt een persona-avatar, dan volgen alle klantreizen automatisch mee via het gedeelde bestand.
+- **Zwembaan-avatars gebruiken altijd exact dezelfde avatar als de persona-pagina waar de baan aan gekoppeld is**: `../../personas/images/<id>.svg` (de avataaars-svg's, transparant met cirkel via `background: var(--primitives-color-<kleur>-150)` op de baan). Nooit oude `avatar-*.png`'s of afwijkende afbeeldingen gebruiken; wijzigt een persona-avatar, dan volgen alle service blueprints automatisch mee via het gedeelde bestand.
 
 ## Head en stijl-laag
 
