@@ -10,7 +10,8 @@
   'use strict';
 
   var AFKORTINGEN = {
-    'MOZa':        { u: 'MijnOverheid Zakelijk: de plek waar ondernemers en organisaties hun zaken met de overheid regelen (prototype-omgeving).', l: '/index.html', lt: 'Naar de startpagina' },
+    'MOZa':        { u: 'MijnOverheid Zakelijk: de plek waar ondernemers en organisaties hun zaken met de overheid regelen.' },
+    'NDS':         { u: 'Nederlandse Digitaliseringsstrategie: zes prioriteiten voor 1 overheid.', l: 'https://www.digitaleoverheid.nl/nederlandse-digitaliseringsstrategie-nds/6-prioriteiten-voor-een-overheid/', lt: 'De 6 prioriteiten voor 1 overheid' },
     'KvK':         { u: 'Kamer van Koophandel: registreert bedrijven in het Handelsregister en ondersteunt ondernemers.', l: 'https://www.kvk.nl/' },
     'RVO':         { u: 'Rijksdienst voor Ondernemend Nederland: voert subsidieregelingen voor ondernemers uit.', l: 'https://www.rvo.nl/' },
     'MKB':         { u: 'Midden- en kleinbedrijf.', l: 'https://nl.wikipedia.org/wiki/Midden-_en_kleinbedrijf' },
@@ -114,7 +115,7 @@
     btn.setAttribute('aria-expanded', 'true');
     btn.setAttribute('aria-describedby', 'afk-tip');
     tip.innerHTML = '<strong>' + btn.dataset.afk + '</strong> · ' + d.u +
-      '<br><a href="' + d.l + '" target="_blank" rel="noopener">' + (d.lt || 'Meer informatie') + ' ↗</a>';
+      (d.l ? '<br><a href="' + d.l + '" target="_blank" rel="noopener">' + (d.lt || 'Meer informatie') + ' ↗</a>' : '');
     tip.hidden = false;
     var r = btn.getBoundingClientRect();
     var tw = tip.offsetWidth, th = tip.offsetHeight;
