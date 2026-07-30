@@ -772,7 +772,7 @@
 <script>
   // In een iframe geladen als fullscreen-variantswitch: toon alleen het
   // canvas, schermvullend (zie de variant-toggle-code onderaan).
-  if (location.hash === '#embedfs') document.documentElement.className += ' embedfs';
+  if (location.hash.indexOf('embedfs') !== -1) document.documentElement.className += ' embedfs';
 </script>
 
 <a href="#main-content" class="skip-link">Ga naar hoofdinhoud</a>
@@ -971,6 +971,8 @@
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
             <div class="step" data-milestone="7">Productie-implementatie geslaagd</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
@@ -1136,6 +1138,8 @@
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
             <div class="step">Commercieel live</div>
           </div>
@@ -1200,9 +1204,11 @@
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Logt in op het dienstverlenerportaal <span class="step-tag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen</span></div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Probeert de log- en certificaatfunctionaliteit uit</div>
+            <div class="step-verdieping">Afstemming met Logius over de specificaties</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Vraagt zelf een kortlevend, roulerend testcertificaat aan; stuurt een CSR in <button type="button" class="step-tag step-tag--info" data-persona="Deniz (KvK)" data-phase="Oriënteren" data-step="Vraagt zelf een testcertificaat aan" data-panel-title="Wie mag wat?" data-panel-body-ref="panelBodyWmwTestcert">Wie mag wat<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
+            <div class="step-verdieping">Maakt API key aan voor specifieke omgeving met de juiste rechten</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Voegt API key secret toe aan de vault</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Integreert daarna de dienst in de demo-omgeving van Mijn KvK op basis van dummy data</div>
           </div>
@@ -1232,9 +1238,11 @@
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Richt het netwerk in en levert het netwerkdiagram aan</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Vraagt PKI acceptatie certificaten aan en richt de certificate stores in</div>
+            <div class="step-verdieping">Afstemming met Logius over de specificaties</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Implementeert de services conform de API-specificaties</div>
+            <div class="step-verdieping">Maakt API key aan voor specifieke omgeving met de juiste rechten</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Voegt API key secret toe aan de vault</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Levert het aansluitformulier technische gegevens aan</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
@@ -1255,6 +1263,18 @@
           <div class="step-connector step-connector--spacer step-connector--gap" data-gap-label="na enkele weken" aria-hidden="true">→</div>
           <div class="step-wrap">
             <div class="step">Vult het aansluitformulier aan met de technische gegevens voor productie</div>
+          </div>
+          <div class="step-connector" aria-hidden="true">→</div>
+          <div class="step-wrap">
+            <div class="step">Sluit technisch aan in productie</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Afstemming met Logius over de specificaties</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Maakt API key aan voor specifieke omgeving met de juiste rechten</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Voegt API key secret toe aan de vault</div>
+            <div class="step-verdieping-connector" aria-hidden="true"></div>
+            <div class="step-verdieping">Rond integratie af</div>
           </div>
           <div class="step-connector" aria-hidden="true">→</div>
           <div class="step-wrap">
@@ -1380,6 +1400,8 @@
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer step-connector--gap" data-gap-label="na enkele weken" aria-hidden="true">→</div>
+          <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
+          <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
@@ -1700,11 +1722,11 @@
         ['Femke - Uitvoeren', 7, 'Deniz - Uitvoeren', 8],
         ['Deniz - Uitvoeren', 8, 'Ruben - Uitvoeren', 9],
         ['Ruben - Uitvoeren', 9, 'Deniz - Uitvoeren', 10],
-        ['Deniz - Uitvoeren', 12, 'Pieter - Uitvoeren', 13],
-        ['Pieter - Uitvoeren', 13, 'Ruben - Uitvoeren', 14],
-        ['Ruben - Uitvoeren', 14, 'Femke - Uitvoeren', 15],
+        ['Deniz - Uitvoeren', 13, 'Pieter - Uitvoeren', 14],
+        ['Pieter - Uitvoeren', 14, 'Ruben - Uitvoeren', 15],
+        ['Ruben - Uitvoeren', 15, 'Femke - Uitvoeren', 16],
         // Fase-overgang: de flow loopt door van Uitvoeren naar Opvolgen
-        ['Femke - Uitvoeren', 16, 'Pieter - Opvolgen', 0],
+        ['Femke - Uitvoeren', 17, 'Pieter - Opvolgen', 0],
         // Opvolgen: Pieter -> Deniz[9] (Deniz 9->10->11 binnen de baan)
         ['Pieter - Opvolgen', 0, 'Deniz - Opvolgen', 1]
       ];
@@ -1907,22 +1929,63 @@
           layout();
         });
 
-        // Variant-toggle in volledig scherm: navigeren zou het volledig
-        // scherm verbreken. Laad de andere variant daarom in een iframe
-        // dat het fullscreen-element vult (#embedfs); pas bij het sluiten
-        // van volledig scherm navigeren we echt naar die variant.
+        // Variant-toggle: bepaal welke hoofdstap (mijlpaal) in beeld is en
+        // geef die als #stap=<n> mee, zodat de andere variant op dezelfde
+        // stap opent en je je op de verschillen kunt oriënteren (de
+        // mijlpaalnummers corresponderen tussen de varianten).
+        var vpEl = document.getElementById('journeyViewport');
+        function huidigeMijlpaal() {
+          var beste = null, kleinste = Infinity;
+          var gRectM = grid.getBoundingClientRect();
+          [].forEach.call(grid.querySelectorAll('.step[data-milestone]'), function (st) {
+            var w = st.closest('.step-wrap');
+            if (!w) return;
+            var r = w.getBoundingClientRect();
+            var afstand = Math.abs((r.left - gRectM.left + r.width / 2) - (vpEl.scrollLeft + vpEl.clientWidth / 2));
+            if (afstand < kleinste) { kleinste = afstand; beste = st.getAttribute('data-milestone'); }
+          });
+          return beste;
+        }
+        // In volledig scherm zou navigeren het fullscreen verbreken: laad
+        // de andere variant dan in een iframe dat het fullscreen-element
+        // vult (#embedfs); pas bij het sluiten navigeren we echt.
         [].forEach.call(document.querySelectorAll('.variant-toggle a'), function (a) {
           a.addEventListener('click', function (e) {
-            if (!document.fullscreenElement) return;
-            e.preventDefault();
-            if (a.getAttribute('aria-current') === 'true') return;
-            var fr = document.createElement('iframe');
-            fr.className = 'variant-frame';
-            fr.setAttribute('title', 'Andere variant van deze service blueprint');
-            fr.src = a.getAttribute('href').split('#')[0] + '#embedfs';
-            journeyEl.appendChild(fr);
+            var stap = huidigeMijlpaal();
+            var basis = a.getAttribute('href').split('#')[0];
+            if (document.fullscreenElement) {
+              e.preventDefault();
+              if (a.getAttribute('aria-current') === 'true') return;
+              var fr = document.createElement('iframe');
+              fr.className = 'variant-frame';
+              fr.setAttribute('title', 'Andere variant van deze service blueprint');
+              fr.src = basis + '#embedfs' + (stap ? ';stap=' + stap : '');
+              journeyEl.appendChild(fr);
+              return;
+            }
+            var vlaggen = [];
+            if (inEmbed) vlaggen.push('embedfs');
+            if (stap) vlaggen.push('stap=' + stap);
+            if (vlaggen.length) a.setAttribute('href', basis + '#' + vlaggen.join(';'));
           });
         });
+        // #stap=<n> bij binnenkomst: zet de viewport op diezelfde hoofdstap.
+        var stapMatch = location.hash.match(/stap=(\d+)/);
+        if (stapMatch) {
+          history.replaceState(null, '', location.pathname + (inEmbed ? '#embedfs' : ''));
+          var richtStap = function () {
+            var st = grid.querySelector('.step[data-milestone="' + stapMatch[1] + '"]');
+            if (!st) return;
+            var w = st.closest('.step-wrap');
+            var gRectS = grid.getBoundingClientRect();
+            var r = w.getBoundingClientRect();
+            vpEl.scrollLeft = Math.max(0, (r.left - gRectS.left) + r.width / 2 - vpEl.clientWidth / 2);
+            vpEl.scrollTop = Math.max(0, (r.top - gRectS.top) - vpEl.clientHeight / 3);
+          };
+          richtStap();
+          window.addEventListener('load', richtStap);
+          if (!inEmbed) journeyEl.scrollIntoView();
+        }
       } else if (fsBtn) {
         fsBtn.style.display = 'none';
       }
@@ -2227,13 +2290,6 @@
   <div class="wmw-item"><span class="wmw-dot" style="background:var(--femke)"></span><span><strong class="p-femke">Femke</strong> mag binnen haar team collega's toevoegen aan de demo</span></div>
   <div class="wmw-item"><span class="wmw-dot" style="background:var(--deniz)"></span><span><strong class="p-deniz">Deniz</strong>, DevOps. Wordt erbij gehaald voor de technische integratie in de demo-omgeving</span></div>
 </template>
-<template id="panelBodyWmwTestcert">
-  <div class="wmw-item"><span class="wmw-dot" style="background:var(--deniz)"></span><span><strong class="p-deniz">Deniz</strong>, DevOps. Vraagt zelf een kortlevend, roulerend testcertificaat aan</span></div>
-  <div class="wmw-item"><span class="wmw-dot" style="background:var(--pieter)"></span><span><strong class="p-pieter">Pieter</strong> (Logius) geeft het testcertificaat uit op basis van de ingestuurde CSR</span></div>
-  <h3 class="side-panel-heading">Hoe</h3>
-  <p>Deniz stuurt een certificate signing request (CSR) in; de private key blijft bij hem en verlaat de KvK-omgeving nooit.</p>
-</template>
-
 <template id="panelBodyWmwSecundair">
   <div class="wmw-item"><span class="wmw-dot" style="background:var(--deniz)"></span><span><strong class="p-deniz">Deniz</strong>, DevOps. Kan de logging inzien om een eerste analyse te doen of de alert gerelateerd is aan de dienst zelf</span></div>
 </template>
