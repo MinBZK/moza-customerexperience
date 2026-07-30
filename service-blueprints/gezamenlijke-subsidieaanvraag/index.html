@@ -760,6 +760,9 @@
   /* Het zijpaneel is vast donkerblauw in beide thema's: persona-namen moeten
      daarom altijd de LICHTE tint gebruiken, ook als de pagina in dark mode
      staat (anders donker-op-donker en onleesbaar). */
+  /* De dots in het vaste donkerblauwe paneel moeten altijd hun lichte
+     (dark-mode) variant gebruiken, anders vallen ze in licht thema weg. */
+  .side-panel-body .wmw-dot { color-scheme: dark; }
   .side-panel-body.is-rich strong { color-scheme: light; }
   .side-panel-body.is-rich strong.p-sander { color: var(--sander-tint); }
   .side-panel-body.is-rich strong.p-wei { color: var(--wei-tint); }
