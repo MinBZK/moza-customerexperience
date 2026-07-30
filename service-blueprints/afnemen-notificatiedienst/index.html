@@ -389,9 +389,16 @@
     font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 700;
     background: #ffbf00; color: #1a1a2e; border-radius: 999px; padding: 1px 7px;
   }
-  .vr-footer-indicator { position: absolute; left: 0; right: 0; bottom: 5px; height: 4px; pointer-events: none; }
+  .vr-footer-indicator { position: absolute; left: 0; right: 0; bottom: 4px; height: 15px; pointer-events: none; }
   .vr-footer-indicator[hidden] { display: none; }
-  .vr-ind { position: absolute; top: 0; height: 4px; width: 168px; border-radius: 999px; background: #ffbf00; opacity: .8; }
+  .vr-ind {
+    position: absolute; bottom: 0;
+    min-width: 18px; height: 15px; padding: 0 5px; box-sizing: border-box;
+    display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 999px; background: #ffbf00; color: #1a1a2e;
+    font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 700;
+    pointer-events: auto;
+  }
   .vr-footer-body { position: relative; padding: 2px 0 14px; max-height: 45vh; overflow-y: auto; }
   .vr-footer-body[hidden] { display: none; }
   .vr-items { position: relative; }
@@ -1945,6 +1952,31 @@
           if (sPanel) host.appendChild(sPanel);
           layout();
         });
+
+        // Variant-toggle in volledig scherm: geef de bestemming een
+        // #fullscreen-vlag mee en herstel volledig scherm daar meteen
+        // (of anders bij de eerste klik/toets - een browser staat
+        // fullscreen zonder gebruikersgebaar niet toe).
+        [].forEach.call(document.querySelectorAll('.variant-toggle a'), function (a) {
+          a.addEventListener('click', function () {
+            if (document.fullscreenElement) {
+              a.setAttribute('href', a.getAttribute('href').split('#')[0] + '#fullscreen');
+            }
+          });
+        });
+        if (location.hash === '#fullscreen') {
+          history.replaceState(null, '', location.pathname);
+          journeyEl.scrollIntoView();
+          var fsOnce = function () {
+            document.removeEventListener('pointerdown', fsOnce, true);
+            document.removeEventListener('keydown', fsOnce, true);
+            if (!document.fullscreenElement) journeyEl.requestFullscreen().catch(function () {});
+          };
+          journeyEl.requestFullscreen().catch(function () {
+            document.addEventListener('pointerdown', fsOnce, true);
+            document.addEventListener('keydown', fsOnce, true);
+          });
+        }
       } else if (fsBtn) {
         fsBtn.style.display = 'none';
       }
@@ -2033,16 +2065,20 @@
             itemsLayer.appendChild(box);
             stackTop[x] = (stackTop[x] || 8) + box.offsetHeight + 10;
             maxBottom = Math.max(maxBottom, box.offsetTop + box.offsetHeight);
-            if (!indX[x]) {
-              indX[x] = true;
-              var seg = document.createElement('div');
-              seg.className = 'vr-ind';
-              seg.style.left = x + 'px';
-              indicator.appendChild(seg);
-            }
+            indX[x] = (indX[x] || 0) + box.querySelectorAll('li').length;
           });
         });
         itemsLayer.style.height = maxBottom + 'px';
+        // Teller-badge per kolom: maakt duidelijk dat er bij díe stap
+        // vraagstukken zitten, en hoeveel.
+        Object.keys(indX).forEach(function (x) {
+          var seg = document.createElement('div');
+          seg.className = 'vr-ind';
+          seg.style.left = x + 'px';
+          seg.textContent = indX[x];
+          seg.title = indX[x] + (indX[x] === 1 ? ' vraagstuk' : ' vraagstukken') + ' bij deze stap';
+          indicator.appendChild(seg);
+        });
         var alg = document.getElementById('sidePanelVraagstukkenAlgemeen');
         var algCel = document.getElementById('vraagstukkenAlgemeenCel');
         if (alg && algCel) {
