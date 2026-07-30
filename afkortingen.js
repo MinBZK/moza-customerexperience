@@ -39,6 +39,10 @@
     'EUDI':        { u: 'European Digital Identity: de Europese digitale identiteit (wallet) voor burgers en bedrijven.', l: 'https://en.wikipedia.org/wiki/European_Digital_Identity' },
     'EUBW':        { u: 'EU Business Wallet: de Europese bedrijvenwallet voor bevoegdheden en attestaties van organisaties.', l: 'https://en.wikipedia.org/wiki/European_Digital_Identity' },
     'DEI+':        { u: 'Demonstratie Energie- en Klimaatinnovatie: subsidieregeling van RVO.', l: 'https://www.rvo.nl/subsidies-financiering' },
+    'Service blueprints': { u: 'Een visualisatie van een dienst over de tijd: de stappen van de klant en de acties voor en achter de schermen van de dienstverleners.', l: 'https://www.nngroup.com/articles/service-blueprints-definition/', lt: 'Uitleg bij Nielsen Norman Group' },
+    'service blueprints': { u: 'Een visualisatie van een dienst over de tijd: de stappen van de klant en de acties voor en achter de schermen van de dienstverleners.', l: 'https://www.nngroup.com/articles/service-blueprints-definition/', lt: 'Uitleg bij Nielsen Norman Group' },
+    'Service blueprint': { u: 'Een visualisatie van een dienst over de tijd: de stappen van de klant en de acties voor en achter de schermen van de dienstverleners.', l: 'https://www.nngroup.com/articles/service-blueprints-definition/', lt: 'Uitleg bij Nielsen Norman Group' },
+    'service blueprint': { u: 'Een visualisatie van een dienst over de tijd: de stappen van de klant en de acties voor en achter de schermen van de dienstverleners.', l: 'https://www.nngroup.com/articles/service-blueprints-definition/', lt: 'Uitleg bij Nielsen Norman Group' },
     'CX':          { u: 'Customer experience: klantbeleving.', l: 'https://en.wikipedia.org/wiki/Customer_experience' },
   };
 
@@ -48,7 +52,7 @@
 
   // In deze context geen tooltips: interactieve elementen, tags/badges,
   // de print-banner, de minimap-kloon en al gewrapte afkortingen.
-  var SKIP = 'a, button, script, style, kbd, .afk, .print-banner, .minimap, nldd-tag, nldd-badge';
+  var SKIP = 'a, button, script, style, kbd, .afk, .afk-skip, .print-banner, .minimap, nldd-tag, nldd-badge';
 
   function wrap(root) {
     var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {

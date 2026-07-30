@@ -148,7 +148,7 @@
   .goal-aanleiding:hover { text-decoration: underline; }
   .goal-aanleiding svg { flex-shrink: 0; }
 
-  /* NDS-prioriteiten uit de aanleiding, toegepast op deze blueprint;
+  /* NDS-prioriteiten uit de aanleiding, toegepast op deze service blueprint;
      de boxen zijn de kleine variant van de boxen op de aanleiding-pagina
      (zelfde iconen en titels als visueel herkenningspunt). */
   .nds-prio { margin-bottom: var(--primitives-space-40, 40px); }
@@ -534,8 +534,6 @@
   .lane-extra { display: none; }
   body.show-extra-lanes .lane-label.lane-extra { display: flex; }
   body.show-extra-lanes .phase-cell.lane-extra { display: block; }
-  .legend-extra { display: none; }
-  body.show-extra-lanes .legend-extra { display: flex; }
 
   /* horizontale connector tussen opeenvolgende stappen - hoogte wordt via JS
      gelijkgezet aan de laagste stap-box in de rij, zodat de pijl altijd op
@@ -861,31 +859,6 @@
     border-radius: 6px; padding: 7px 9px;
   }
 
-  /* Legenda */
-  .legend {
-    display: flex; flex-wrap: wrap; gap: 20px;
-    margin-top: 16px; margin-bottom: 40px;
-    font-size: 13px; color: var(--ink-soft);
-  }
-  .legend-item { display: flex; align-items: center; gap: 8px; }
-  .legend-dot { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
-  .legend-dot--sander { background: var(--sander); }
-  .legend-dot--wei { background: var(--wei); }
-  .legend-dot--ahmed { background: var(--ahmed); }
-  .legend-dot--lotte { background: var(--lotte); }
-  .legend-dot--systeem { background: var(--systeem); }
-  .legend-dot--rvo { background: var(--rvo); }
-  .legend-dot--placeholder { border: 1.5px dashed var(--ink-mute); }
-  .legend-dot--alt { background: var(--alt); }
-  .legend-dot--authenticatie { background: var(--authenticatie); }
-  .legend-dot--autorisatie { background: var(--auth); }
-  .legend-dot--goedkeuren { background: #0f766e; }
-  .legend-verdieping-sample {
-    width: 26px; height: 15px; border-radius: 5px;
-    background: var(--alt-tint); border: 1px solid var(--alt);
-    flex-shrink: 0;
-  }
-  .legend-item .step-tag { margin-top: 0; }
 
   /* Toggle: gezamenlijke aanvraag */
   .toggle-row {
@@ -987,11 +960,11 @@
   </div>
 
   <section class="nds-prio" aria-labelledby="nds-prio-heading">
-    <h2 class="nds-prio-title" id="nds-prio-heading">NDS-prioriteiten in deze blueprint</h2>
-    <p class="nds-prio-sub">De drie prioriteiten uit de <a href="../../aanleiding/index.html">aanleiding voor MijnOverheid Zakelijk</a>, toegepast op de gezamenlijke subsidieaanvraag: wat gaat er nu mis, en hoe lossen we dat op?</p>
+    <h2 class="nds-prio-title" id="nds-prio-heading">NDS-prioriteiten in deze service blueprint</h2>
+    <p class="nds-prio-sub">Wat is de aanleiding van deze service blueprint, uiteengezet tegen de <a href="../../aanleiding/index.html">3 prioriteiten als aanleiding voor MOZa</a>.</p>
     <div class="nds-prio-boxen">
       <div class="nds-prio-box">
-        <div class="nds-prio-kop"><nldd-icon name="person" size="20"></nldd-icon><h3>Burger en ondernemer centraal</h3></div>
+        <div class="nds-prio-kop"><nldd-icon name="person" size="20"></nldd-icon><h3>Ondernemer centraal</h3></div>
         <p><strong>Wat gaat er mis:</strong> het collectief moet zichzelf organiseren langs de regels van de regeling. Rollen, machtigingen en formulieren staan centraal, niet het gezamenlijke innovatieproject van Sander, Wei en Ahmed.</p>
         <p><strong>Hoe we dit oplossen:</strong> MOZa neemt de samenwerking als vertrekpunt: één plek waar het collectief en intermediair Lotte de aanvraag samen voorbereiden, rollen beleggen en de voortgang volgen.</p>
       </div>
@@ -1008,24 +981,12 @@
     </div>
   </section>
 
-  <div class="legend" aria-hidden="true">
-    <span class="legend-item"><span class="legend-dot legend-dot--sander"></span> Sander - GreenFlow BV (ondernemer)</span>
-    <span class="legend-item"><span class="legend-dot legend-dot--wei"></span> Wei - Polar Components BV (ondernemer)</span>
-    <span class="legend-item"><span class="legend-dot legend-dot--ahmed"></span> Ahmed - MetaalbouwZuid BV (ondernemer)</span>
-    <span class="legend-item"><span class="legend-dot legend-dot--lotte"></span> Lotte - Bureau Subsidiekracht (intermediair)</span>
-    <span class="legend-item"><span class="legend-dot legend-dot--systeem"></span> Systeem - automatische acties (MOZa)</span>
-    <span class="legend-item"><span class="legend-dot legend-dot--rvo"></span> RVO - Rijksdienst voor Ondernemend Nederland</span>
-    <span class="legend-item"><span class="legend-verdieping-sample"></span> Onderliggende stap of detail (stippellijn)</span>
-    <span class="legend-item"><span class="step-tag is-inloggen"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Inloggen</span></span>
-    <span class="legend-item"><span class="step-tag is-goedkeuren"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Goedkeuren</span></span>
-    <span class="legend-item"><span class="step-tag is-wmw">Wie mag wat<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></span></span>
-  </div>
 
   <section class="journey" aria-labelledby="journey-heading">
-    <h2 id="journey-heading" class="eyebrow" style="position:absolute; left:-9999px;">Service blueprint-grid: fasen × persona's</h2>
+    <h2 id="journey-heading" class="eyebrow afk-skip" style="position:absolute; left:-9999px;">Service blueprint-grid: fasen × persona's</h2>
 
     <div class="journey-toolbar">
-      <span class="journey-toolbar-title">Service blueprint-canvas</span>
+      <span class="journey-toolbar-title afk-skip">Service blueprint-canvas</span>
       <div class="journey-shortcuts" aria-hidden="true">
         <span class="sc"><kbd>&larr;</kbd><kbd>&rarr;</kbd> stappen</span>
         <span class="sc"><kbd>&uarr;</kbd><kbd>&darr;</kbd> scrollen</span>
