@@ -138,6 +138,15 @@
     color: var(--accent); margin-bottom: 4px;
   }
   .goal-text { font-size: 15px; color: var(--ink); line-height: 1.6; }
+  .goal-aanleiding {
+    display: inline-flex; align-items: center; gap: 4px;
+    margin-top: 8px;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 13px; font-weight: 500;
+    color: var(--accent); text-decoration: none;
+  }
+  .goal-aanleiding:hover { text-decoration: underline; }
+  .goal-aanleiding svg { flex-shrink: 0; }
   .goal-text--placeholder {
     color: var(--ink-mute); font-style: italic;
   }
@@ -957,6 +966,9 @@
   <div class="goal">
     <p class="goal-label">Doel van deze service blueprint</p>
     <p class="goal-text">Een collectief van drie bedrijven doet samen een innovatieproject en vraagt daarvoor een subsidie aan bij RVO. Het collectief machtigt samen één externe adviseur (intermediair) om de aanvraag in te dienen.</p>
+    <a class="goal-aanleiding" href="../../aanleiding/index.html">Lees de aanleiding voor MijnOverheid Zakelijk
+      <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+
   </div>
 
   <div class="legend" aria-hidden="true">
