@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aanleiding - MOZa</title>
+  <link rel="stylesheet" href="https://esm.sh/@nldd/design-system@0.8.59/dist/css/global.css">
+  <script type="module" src="https://esm.sh/@nldd/design-system@0.8.59"></script>
+  <style>
+    :root { color-scheme: light dark; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: var(--primitives-font-family-body, RijksSans, system-ui, sans-serif);
+    }
+  </style>
+</head>
+<body>
+<nldd-app-view background="tinted">
+  <nldd-page background="tinted">
+    <nldd-simple-section width="900px">
+      <nldd-link slot="header" href="../index.html" start-icon="arrow-left" size="sm">Terug naar overzicht</nldd-link>
+      <nldd-title slot="header" size="4">
+        <h1>Aanleiding</h1>
+        <p slot="subtitle">Waarom MijnOverheid Zakelijk: van versnipperde loketten naar één-overheid online.</p>
+      </nldd-title>
+
+      <nldd-rich-text>
+        <p>Een ondernemer heeft te maken met tientallen dienstverleners: Belastingdienst, KVK, RVO, UWV, gemeente. Elk met een eigen portaal, eigen inlog en eigen manier van berichten sturen. De indeling volgt de organisatiestructuur van de overheid, niet de vraag van de ondernemer. Informatie ligt versnipperd over al die loketten: geen plek die vertelt wat er openstaat en wat er nu moet gebeuren, en dezelfde gegevens moeten telkens opnieuw worden aangeleverd. En wie niet weet waar hij moet beginnen, zoekt zelf zijn weg door regels en formulieren, of belt. Het gevolg is gemiste deadlines, onnodige administratieve last en tijd die niet naar het bedrijf gaat maar naar het aan elkaar knopen van een versnipperde overheid.</p>
+        <p>De overheid werkt daarom toe naar één-overheid online: eenvoudig, betrouwbaar en samenhangend digitaal zaken doen. Bestaande portalen komen samen, aangevuld met een overheidsbrede wegwijzer en een digitale assistent. Interactieservices standaardiseren notificaties, stand van zaken en taken.</p>
+        <p>MOZa is hierin de ondernemerskant en maakt dat concreet: gestandaardiseerde berichten, inzicht in taken en stand van zaken, en één ingang die past bij hoe ondernemers werken.</p>
+      </nldd-rich-text>
+
+      <nldd-spacer size="32"></nldd-spacer>
+
+      <nldd-title size="5">
+        <h2>Drie NDS-prioriteiten als uitgangspunt</h2>
+        <p slot="subtitle">Om bij te dragen aan die één-overheidservaring neemt MOZa drie van de zes NDS-prioriteiten als uitgangspunt.</p>
+      </nldd-title>
+
+      <nldd-spacer size="16"></nldd-spacer>
+
+      <nldd-collection layout="grid" item-width="280px">
+        <nldd-card accessible-label="Prioriteit: burger en ondernemer centraal">
+          <nldd-container padding="24" layout="stack" gap="12">
+            <nldd-icon name="person" size="32"></nldd-icon>
+            <nldd-title size="4"><h3>Burger en ondernemer centraal</h3></nldd-title>
+            <nldd-rich-text><p>De ondernemer als vertrekpunt, niet de organisatiestructuur van de overheid.</p></nldd-rich-text>
+          </nldd-container>
+        </nldd-card>
+        <nldd-card accessible-label="Prioriteit: data delen">
+          <nldd-container padding="24" layout="stack" gap="12">
+            <nldd-icon name="centralized-network" size="32"></nldd-icon>
+            <nldd-title size="4"><h3>Data delen</h3></nldd-title>
+            <nldd-rich-text><p>Gestandaardiseerde berichten, taken en stand van zaken, zodat informatie van verschillende dienstverleners op één plek samenkomt.</p></nldd-rich-text>
+          </nldd-container>
+        </nldd-card>
+        <nldd-card accessible-label="Prioriteit: artificiële intelligentie">
+          <nldd-container padding="24" layout="stack" gap="12">
+            <nldd-icon name="sparkles" size="32"></nldd-icon>
+            <nldd-title size="4"><h3>Artificiële Intelligentie</h3></nldd-title>
+            <nldd-rich-text><p>Een digitale assistent die ondernemers helpt hun weg te vinden.</p></nldd-rich-text>
+          </nldd-container>
+        </nldd-card>
+      </nldd-collection>
+
+      <nldd-spacer size="32"></nldd-spacer>
+    </nldd-simple-section>
+  </nldd-page>
+</nldd-app-view>
+<script defer src="../afkortingen.js"></script>
+</body>
+</html>
