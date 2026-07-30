@@ -8,3 +8,13 @@ source = "**/*.html"
 
 [advanced.headers.headers]
 Cache-Control = "public, max-age=60, must-revalidate"
+
+# Deze review-site mag niet vindbaar zijn voor zoekmachines: noindex op
+# alle responses. Bewust geen robots.txt met Disallow ernaast - dan zou
+# een crawler deze header nooit te zien krijgen en kan de URL alsnog
+# (zonder inhoud) in de index belanden.
+[[advanced.headers]]
+source = "**/*"
+
+[advanced.headers.headers]
+X-Robots-Tag = "noindex, nofollow"
