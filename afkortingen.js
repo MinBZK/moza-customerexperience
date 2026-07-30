@@ -65,11 +65,23 @@
     });
     var nodes = [];
     while (walker.nextNode()) nodes.push(walker.currentNode);
+    // Eén definitie per begrip per context (pagina of zijpaneel-template):
+    // alleen het eerste voorkomen krijgt een tooltip. Hoofdletter- en
+    // meervoudsvarianten (KvK/KVK, service blueprint(s)) tellen als
+    // hetzelfde begrip.
+    var gezien = {};
+    function sleutel(k) { return k.toLowerCase().replace(/s$/, ''); }
     nodes.forEach(function (node) {
       var frag = document.createDocumentFragment();
       var rest = node.nodeValue;
       var m;
       while ((m = RE.exec(rest))) {
+        if (gezien[sleutel(m[1])]) {
+          frag.appendChild(document.createTextNode(rest.slice(0, m.index + m[1].length)));
+          rest = rest.slice(m.index + m[1].length);
+          continue;
+        }
+        gezien[sleutel(m[1])] = true;
         if (m.index > 0) frag.appendChild(document.createTextNode(rest.slice(0, m.index)));
         var b = document.createElement('button');
         b.type = 'button';
@@ -166,4 +178,18 @@
   // Lopende tekst op de pagina + inhoud van templates (zijpanelen).
   wrap(document.body);
   document.querySelectorAll('template').forEach(function (t) { wrap(t.content); });
+
+  // Pagina-scripts kopiëren soms template-inhoud de pagina in (zoals de
+  // vraagstukken-footer): dat kan een tweede definitie opleveren. Ruim na
+  // DOMContentLoaded dubbelen op - het eerste voorkomen in documentvolgorde
+  // houdt de tooltip. De minimap-kloon is decoratief en telt niet mee.
+  document.addEventListener('DOMContentLoaded', function () {
+    var gezien = {};
+    [].forEach.call(document.querySelectorAll('button.afk'), function (b) {
+      if (b.closest('.minimap')) return;
+      var k = b.dataset.afk.toLowerCase().replace(/s$/, '');
+      if (gezien[k]) b.parentNode.replaceChild(document.createTextNode(b.textContent), b);
+      else gezien[k] = true;
+    });
+  });
 })();
