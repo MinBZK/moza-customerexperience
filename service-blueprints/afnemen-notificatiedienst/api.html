@@ -415,6 +415,72 @@
   /* Bredere tussenruimte waar een tijdmarker doorheen loopt. */
   .step-connector.step-connector--gap { min-width: 210px; }
 
+  /* Vraagstukken als in-/uitklapbare sticky footer onderin het canvas.
+     Ingeklapt tonen amber markers op welke kolommen vraagstukken zitten. */
+  .vr-footer {
+    position: sticky; bottom: 0; z-index: 4;
+    background: var(--primitives-color-neutral-100);
+    border-top: 1px solid var(--border);
+  }
+  .vr-footer.meten { visibility: hidden; }
+  .vr-footer-toggle {
+    position: sticky; left: 0; z-index: 2;
+    display: inline-flex; align-items: center; gap: 8px;
+    background: none; border: none; cursor: pointer;
+    padding: 10px 20px 10px 16px;
+    box-shadow: inset 4px 0 0 #ffbf00;
+    font-family: inherit;
+  }
+  .vr-footer-toggle:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
+  .vr-footer-toggle svg { color: light-dark(#8a6100, #ffbf00); transition: transform .15s ease; }
+  .vr-footer-toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
+  .lane-vr-title {
+    font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 600;
+    letter-spacing: .08em; text-transform: uppercase;
+    color: light-dark(#8a6100, #ffbf00);
+  }
+  .vr-count {
+    font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 700;
+    background: #ffbf00; color: #1a1a2e; border-radius: 999px; padding: 1px 7px;
+  }
+  .vr-footer-indicator { position: absolute; left: 0; right: 0; bottom: 4px; height: 15px; pointer-events: none; }
+  .vr-footer-indicator[hidden] { display: none; }
+  .vr-ind {
+    position: absolute; bottom: 0;
+    min-width: 18px; height: 15px; padding: 0 5px; box-sizing: border-box;
+    display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 999px; background: #ffbf00; color: #1a1a2e;
+    font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 700;
+    pointer-events: auto;
+  }
+  .vr-footer-body { position: relative; padding: 2px 0 14px; max-height: 45vh; overflow-y: auto; }
+  .vr-footer-body[hidden] { display: none; }
+  .vr-items { position: relative; }
+  .vr-item { position: absolute; width: 168px; }
+  .vr-footer ul {
+    margin: 0; padding-left: 18px; list-style: disc outside;
+    font-size: 12px; line-height: 1.5; color: var(--ink-soft);
+    overflow-wrap: break-word;
+  }
+  .vr-footer ul ul { list-style: circle outside; margin: 4px 0 0; }
+  .vr-footer li { margin: 0 0 6px; }
+  .vr-footer li:last-child { margin-bottom: 0; }
+  .vr-steps { color: var(--ink-mute); }
+  .lane--vr-algemeen { padding: 12px 16px 0; }
+  .lane--vr-algemeen .vr-sticky { position: sticky; left: 16px; display: inline-block; max-width: 520px; }
+  .lane--vr-algemeen .lane-sub-name {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 600;
+    letter-spacing: .08em; text-transform: uppercase;
+    color: light-dark(#8a6100, #ffbf00); opacity: .8;
+  }
+  .lane--vr-algemeen .lane-sub-name::before {
+    content: ""; width: 7px; height: 7px; margin-top: -5px;
+    border-left: 1px solid light-dark(#8a6100, #ffbf00);
+    border-bottom: 1px solid light-dark(#8a6100, #ffbf00);
+  }
+  .lane--vr-algemeen ul { margin-top: 6px; }
+
   /* Verticale tijdmarker die door alle rijen van het canvas loopt. */
   .time-gap {
     position: absolute; z-index: 0; pointer-events: none;
@@ -1400,6 +1466,20 @@
       </div>
 
     </div>
+
+      <!-- Vraagstukken: in-/uitklapbare sticky footer; wordt gevuld vanuit de zijpaneel-templates. -->
+      <div class="vr-footer" id="vrFooter">
+        <button type="button" class="vr-footer-toggle" id="vrFooterToggle" aria-expanded="false">
+          <svg width="10" height="10" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 10l4-4 4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="lane-vr-title">Vraagstukken</span>
+          <span class="vr-count" id="vrFooterCount" hidden></span>
+        </button>
+        <div class="vr-footer-indicator" id="vrFooterIndicator"></div>
+        <div class="vr-footer-body" id="vrFooterBody" hidden>
+          <div class="vr-items" id="vrItems"></div>
+          <div class="lane--vr-algemeen" id="vraagstukkenAlgemeenCel"><div class="vr-sticky"><span class="lane-sub-name">Algemeen</span></div></div>
+        </div>
+      </div>
     </div>
 
     <div class="minimap" id="minimap" aria-hidden="true">
@@ -1801,6 +1881,31 @@
           if (sPanel) host.appendChild(sPanel);
           layout();
         });
+
+        // Variant-toggle in volledig scherm: geef de bestemming een
+        // #fullscreen-vlag mee en herstel volledig scherm daar meteen
+        // (of anders bij de eerste klik/toets - een browser staat
+        // fullscreen zonder gebruikersgebaar niet toe).
+        [].forEach.call(document.querySelectorAll('.variant-toggle a'), function (a) {
+          a.addEventListener('click', function () {
+            if (document.fullscreenElement) {
+              a.setAttribute('href', a.getAttribute('href').split('#')[0] + '#fullscreen');
+            }
+          });
+        });
+        if (location.hash === '#fullscreen') {
+          history.replaceState(null, '', location.pathname);
+          journeyEl.scrollIntoView();
+          var fsOnce = function () {
+            document.removeEventListener('pointerdown', fsOnce, true);
+            document.removeEventListener('keydown', fsOnce, true);
+            if (!document.fullscreenElement) journeyEl.requestFullscreen().catch(function () {});
+          };
+          journeyEl.requestFullscreen().catch(function () {
+            document.addEventListener('pointerdown', fsOnce, true);
+            document.addEventListener('keydown', fsOnce, true);
+          });
+        }
       } else if (fsBtn) {
         fsBtn.style.display = 'none';
       }
@@ -1816,6 +1921,98 @@
         head.addEventListener('keydown', function (e) {
           if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); }
         });
+      });
+
+      // Vraagstukken: in-/uitklapbare sticky footer, gevuld vanuit de
+      // zijpaneel-templates; ingeklapt tonen markers waar vraagstukken zitten.
+      document.addEventListener('DOMContentLoaded', function () {
+        var footer = document.getElementById('vrFooter');
+        if (!footer) return;
+        var itemsLayer = document.getElementById('vrItems');
+        var indicator = document.getElementById('vrFooterIndicator');
+        var body = document.getElementById('vrFooterBody');
+        var btn = document.getElementById('vrFooterToggle');
+        var gRect = grid.getBoundingClientRect();
+        // tijdelijk uitgeklapt (onzichtbaar) zodat hoogtes meetbaar zijn
+        footer.classList.add('meten');
+        body.hidden = false;
+        var stackTop = {}, maxBottom = 0, totaal = 0, indX = {};
+        ['Oriënteren', 'Uitvoeren', 'Opvolgen'].forEach(function (fase) {
+          var groups = {}, order = [];
+          [].forEach.call(grid.querySelectorAll('.step-tag--info:not(.step-tag--inherited)[data-vraagstukken-ref][data-phase="' + fase + '"]'), function (b) {
+            var wrap = b.closest('.step-wrap');
+            var ref = b.getAttribute('data-vraagstukken-ref');
+            if (!groups[ref]) { groups[ref] = { namen: [], wrap: wrap }; order.push(ref); }
+            var stepEl = wrap ? wrap.querySelector('.step') : null;
+            var naam = '';
+            if (stepEl) {
+              [].forEach.call(stepEl.childNodes, function (n) { if (n.nodeType === 3) naam += n.textContent; });
+              naam = naam.trim();
+            }
+            if (naam && groups[ref].namen.indexOf(naam) === -1) groups[ref].namen.push(naam);
+          });
+          order.forEach(function (ref) {
+            var tpl = document.getElementById(ref);
+            var g = groups[ref];
+            if (!tpl || !g.wrap) return;
+            var x = Math.round(g.wrap.getBoundingClientRect().left - gRect.left);
+            var box = document.createElement('div');
+            box.className = 'vr-item';
+            box.style.left = x + 'px';
+            box.style.top = (stackTop[x] || 8) + 'px';
+            var ul = document.createElement('ul');
+            var frag = document.createElement('div');
+            frag.innerHTML = tpl.innerHTML;
+            [].forEach.call(frag.querySelectorAll(':scope > li'), function (li) {
+              if (g.namen.length > 1) {
+                var lbl = g.namen.length === 2 ? g.namen[0] + ' en ' + g.namen[1]
+                  : g.namen.slice(0, -1).join(', ') + ' en ' + g.namen[g.namen.length - 1];
+                li.innerHTML += ' <span class="vr-steps">- speelt bij: ' + lbl + '</span>';
+              }
+              ul.appendChild(li);
+              totaal++;
+            });
+            box.appendChild(ul);
+            itemsLayer.appendChild(box);
+            stackTop[x] = (stackTop[x] || 8) + box.offsetHeight + 10;
+            maxBottom = Math.max(maxBottom, box.offsetTop + box.offsetHeight);
+            indX[x] = (indX[x] || 0) + box.querySelectorAll('li').length;
+          });
+        });
+        itemsLayer.style.height = maxBottom + 'px';
+        // Teller-badge per kolom: maakt duidelijk dat er bij díe stap
+        // vraagstukken zitten, en hoeveel.
+        Object.keys(indX).forEach(function (x) {
+          var seg = document.createElement('div');
+          seg.className = 'vr-ind';
+          seg.style.left = x + 'px';
+          seg.textContent = indX[x];
+          seg.title = indX[x] + (indX[x] === 1 ? ' vraagstuk' : ' vraagstukken') + ' bij deze stap';
+          indicator.appendChild(seg);
+        });
+        var alg = document.getElementById('sidePanelVraagstukkenAlgemeen');
+        var algCel = document.getElementById('vraagstukkenAlgemeenCel');
+        if (alg && algCel) {
+          var algUl = document.createElement('ul');
+          algUl.innerHTML = alg.innerHTML;
+          algCel.querySelector('.vr-sticky').appendChild(algUl);
+          totaal += algUl.children.length;
+        }
+        body.hidden = true;
+        footer.classList.remove('meten');
+        var countEl = document.getElementById('vrFooterCount');
+        if (countEl && totaal) { countEl.textContent = totaal; countEl.hidden = false; }
+        btn.addEventListener('click', function () {
+          var open = body.hidden;
+          body.hidden = !open;
+          indicator.hidden = open;
+          btn.setAttribute('aria-expanded', String(open));
+        });
+        function sizeFooter() { footer.style.width = grid.scrollWidth + 'px'; }
+        sizeFooter();
+        window.addEventListener('load', sizeFooter);
+        layout();
+        buildClone();
       });
 
       // ---- Zoom / detailniveau ----
