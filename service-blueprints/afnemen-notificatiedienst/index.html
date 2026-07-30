@@ -230,6 +230,8 @@
   .step--flash { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 12px; }
 
   .journey-tools { display: inline-flex; align-items: center; gap: 12px; }
+  .journey-tools .variant-toggle { margin: 0; padding: 3px; }
+  .journey-tools .variant-toggle a { padding: 4px 12px; font-size: 11px; }
   .journey-zoom { display: inline-flex; align-items: center; gap: 6px; }
   .journey-zoom-btn {
     width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center;
@@ -359,23 +361,52 @@
   }
   .lane-expand:hover { border-color: var(--ink-soft); }
 
-  /* Vraagstukken-rij onderaan: verzamelt per fase de vraagstukken uit de
-     zijpaneel-templates. Zelfde amber-accent als het blok in het paneel. */
-  .lane-label.lane--vraagstukken, .phase-cell.lane--vraagstukken {
+  /* Vraagstukken als in-/uitklapbare sticky footer onderin het canvas.
+     Ingeklapt tonen amber markers op welke kolommen vraagstukken zitten. */
+  .vr-footer {
+    position: sticky; bottom: 0; z-index: 4;
     background: var(--primitives-color-neutral-100);
     border-top: 1px solid var(--border);
   }
-  /* De Algemeen-rij hoort visueel bij de Vraagstukken-rij: geen scheidslijn
-     ertussen, minder tussenruimte en een doorlopende amberbalk links. */
-  .lane--vr-algemeen.lane-label, .lane--vr-algemeen.phase-cell {
-    border-top: none; border-bottom: 1px solid var(--border); padding-top: 0;
+  .vr-footer.meten { visibility: hidden; }
+  .vr-footer-toggle {
+    position: sticky; left: 0; z-index: 2;
+    display: inline-flex; align-items: center; gap: 8px;
+    background: none; border: none; cursor: pointer;
+    padding: 10px 20px 10px 16px;
+    box-shadow: inset 4px 0 0 #ffbf00;
+    font-family: inherit;
   }
-  .lane-label.lane--vraagstukken { position: sticky; left: 0; z-index: 1; box-shadow: inset 4px 0 0 #ffbf00; }
+  .vr-footer-toggle:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
+  .vr-footer-toggle svg { color: light-dark(#8a6100, #ffbf00); transition: transform .15s ease; }
+  .vr-footer-toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
   .lane-vr-title {
     font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 600;
     letter-spacing: .08em; text-transform: uppercase;
     color: light-dark(#8a6100, #ffbf00);
   }
+  .vr-count {
+    font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 700;
+    background: #ffbf00; color: #1a1a2e; border-radius: 999px; padding: 1px 7px;
+  }
+  .vr-footer-indicator { position: absolute; left: 0; right: 0; bottom: 5px; height: 4px; pointer-events: none; }
+  .vr-footer-indicator[hidden] { display: none; }
+  .vr-ind { position: absolute; top: 0; height: 4px; width: 168px; border-radius: 999px; background: #ffbf00; opacity: .8; }
+  .vr-footer-body { position: relative; padding: 2px 0 14px; max-height: 45vh; overflow-y: auto; }
+  .vr-footer-body[hidden] { display: none; }
+  .vr-items { position: relative; }
+  .vr-item { position: absolute; width: 168px; }
+  .vr-footer ul {
+    margin: 0; padding-left: 18px; list-style: disc outside;
+    font-size: 12px; line-height: 1.5; color: var(--ink-soft);
+    overflow-wrap: break-word;
+  }
+  .vr-footer ul ul { list-style: circle outside; margin: 4px 0 0; }
+  .vr-footer li { margin: 0 0 6px; }
+  .vr-footer li:last-child { margin-bottom: 0; }
+  .vr-steps { color: var(--ink-mute); }
+  .lane--vr-algemeen { padding: 12px 16px 0; }
+  .lane--vr-algemeen .vr-sticky { position: sticky; left: 16px; display: inline-block; max-width: 520px; }
   .lane--vr-algemeen .lane-sub-name {
     display: inline-flex; align-items: center; gap: 8px;
     font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 600;
@@ -387,22 +418,7 @@
     border-left: 1px solid light-dark(#8a6100, #ffbf00);
     border-bottom: 1px solid light-dark(#8a6100, #ffbf00);
   }
-  /* De vraagstukken-content telt niet mee voor de kolombreedte (de stappen
-     bepalen de kolom); de lijst vult de beschikbare breedte tot een leesbaar
-     maximum en breekt altijd binnen de kolom. */
-  .phase-cell.lane--vraagstukken { contain: inline-size; }
-  .phase-cell.lane--vraagstukken ul {
-    margin: 0; padding-left: 18px; max-width: 520px;
-    list-style: disc outside;
-    font-size: 12px; line-height: 1.5; color: var(--ink-soft);
-    overflow-wrap: break-word;
-  }
-  .phase-cell.lane--vraagstukken ul ul { list-style: circle outside; margin: 4px 0 0; }
-  .phase-cell.lane--vraagstukken li { margin: 0 0 6px; }
-  .phase-cell.lane--vraagstukken li:last-child { margin-bottom: 0; }
-  .phase-cell.lane--vraagstukken .vr-steps { color: var(--ink-mute); }
-  .phase-cell.lane--vraagstukken .vr-sticky { position: sticky; left: 256px; display: inline-block; max-width: 520px; }
-  .phase-cell.lane--vraagstukken .vr-item { position: absolute; width: 168px; }
+  .lane--vr-algemeen ul { margin-top: 6px; }
   .lane-expand:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
   .lane-expand svg { transition: transform .15s ease; }
   .journey-grid.systeem-open ~ * .lane-expand svg, .lane-expand[aria-expanded="true"] svg { transform: rotate(180deg); }
@@ -796,11 +812,6 @@
   <p class="eyebrow">Service blueprint · MOZa · Dienstverlener</p>
   <h1>Afnemen van de notificatiedienst</h1>
 
-  <nav class="variant-toggle" aria-label="Variant van deze service blueprint">
-    <a href="index.html" aria-current="true">Federatief</a>
-    <a href="api.html" aria-current="false">API-integratie</a>
-  </nav>
-
   <div class="draft-banner" role="note">
     <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1.8 15 14H1L8 1.8z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 6.2v3.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="11.9" r=".7" fill="currentColor"/></svg>
     <p><strong>Draft</strong>Deze service blueprint is een concept en nog niet vastgesteld.</p>
@@ -839,6 +850,10 @@
         <span class="sc"><kbd>F</kbd> volledig scherm</span>
       </div>
       <div class="journey-tools">
+        <nav class="variant-toggle" aria-label="Variant van deze service blueprint">
+          <a href="index.html" aria-current="true">Federatief</a>
+          <a href="api.html" aria-current="false">API-integratie</a>
+        </nav>
         <div class="journey-zoom" role="group" aria-label="Detailniveau">
           <button type="button" class="journey-zoom-btn" id="zoomOut" aria-label="Uitzoomen (minder detail)">&minus;</button>
           <span class="journey-zoom-label" id="zoomLabel">Hoofdlijnen</span>
@@ -1329,7 +1344,7 @@
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Het groepcertificaat moet vernieuwd worden omdat het binnen 30 dagen verloopt</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Vraagt het nieuwe groepcertificaat aan bij RINIS; deze wordt goedgekeurd door RINIS</div>
+            <div class="step-verdieping">Vraagt het nieuwe groepcertificaat aan bij RINIS; deze wordt goedgekeurd door RINIS <button type="button" class="step-tag step-tag--info" data-persona="Deniz (KvK)" data-phase="Opvolgen" data-step="Vraagt het nieuwe groepcertificaat aan bij RINIS" data-panel-title="Goedkeuren door RINIS" data-panel-body-ref="panelBodyRinisGoedkeuren" data-vraagstukken-ref="vraagstukkenRinisGoedkeuren"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Goedkeuren<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
           </div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
@@ -1503,15 +1518,6 @@
       <div class="phase-cell lane--sub lane--sub-end" aria-hidden="true"></div>
       <div class="phase-cell lane--sub lane--sub-end" aria-hidden="true"></div>
 
-      <!-- Vraagstukken-rij: wordt per fase gevuld vanuit de zijpaneel-templates. -->
-      <div class="lane-label lane--vraagstukken"><span class="lane-vr-title">Vraagstukken</span></div>
-      <div class="phase-cell lane--vraagstukken" data-vraagstukken-fase="Oriënteren"></div>
-      <div class="phase-cell lane--vraagstukken" data-vraagstukken-fase="Uitvoeren"></div>
-      <div class="phase-cell lane--vraagstukken" data-vraagstukken-fase="Opvolgen"></div>
-
-      <div class="lane-label lane--vraagstukken lane--vr-algemeen"><span class="lane-sub-name">Algemeen</span></div>
-      <div class="phase-cell lane--vraagstukken lane--vr-algemeen" id="vraagstukkenAlgemeenCel" style="grid-column: 2 / -1;"></div>
-
       <!-- Gezamenlijke intake: overspant de persona-banen (positie via JS) -->
       <div class="intake-box" id="intakeBox" aria-hidden="true">
         <div class="intake-box-inner">
@@ -1522,6 +1528,20 @@
       </div>
 
     </div>
+
+      <!-- Vraagstukken: in-/uitklapbare sticky footer; wordt gevuld vanuit de zijpaneel-templates. -->
+      <div class="vr-footer" id="vrFooter">
+        <button type="button" class="vr-footer-toggle" id="vrFooterToggle" aria-expanded="false">
+          <svg width="10" height="10" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 10l4-4 4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="lane-vr-title">Vraagstukken</span>
+          <span class="vr-count" id="vrFooterCount" hidden></span>
+        </button>
+        <div class="vr-footer-indicator" id="vrFooterIndicator"></div>
+        <div class="vr-footer-body" id="vrFooterBody" hidden>
+          <div class="vr-items" id="vrItems"></div>
+          <div class="lane--vr-algemeen" id="vraagstukkenAlgemeenCel"><div class="vr-sticky"><span class="lane-sub-name">Algemeen</span></div></div>
+        </div>
+      </div>
     </div>
 
     <div class="minimap" id="minimap" aria-hidden="true">
@@ -1960,15 +1980,25 @@
         });
       })();
 
-      // Vraagstukken-rij: neemt per fase de vraagstukken over uit de
-      // zijpaneel-templates (data-vraagstukken-ref), gededupliceerd per fase.
+      // Vraagstukken: in-/uitklapbare sticky footer, gevuld vanuit de
+      // zijpaneel-templates; ingeklapt tonen markers waar vraagstukken zitten.
       document.addEventListener('DOMContentLoaded', function () {
-        [].forEach.call(grid.querySelectorAll('.phase-cell.lane--vraagstukken[data-vraagstukken-fase]'), function (cell) {
-          var fase = cell.getAttribute('data-vraagstukken-fase');
+        var footer = document.getElementById('vrFooter');
+        if (!footer) return;
+        var itemsLayer = document.getElementById('vrItems');
+        var indicator = document.getElementById('vrFooterIndicator');
+        var body = document.getElementById('vrFooterBody');
+        var btn = document.getElementById('vrFooterToggle');
+        var gRect = grid.getBoundingClientRect();
+        // tijdelijk uitgeklapt (onzichtbaar) zodat hoogtes meetbaar zijn
+        footer.classList.add('meten');
+        body.hidden = false;
+        var stackTop = {}, maxBottom = 0, totaal = 0, indX = {};
+        ['Oriënteren', 'Uitvoeren', 'Opvolgen'].forEach(function (fase) {
           var groups = {}, order = [];
-          [].forEach.call(grid.querySelectorAll('.step-tag--info:not(.step-tag--inherited)[data-vraagstukken-ref][data-phase="' + fase + '"]'), function (btn) {
-            var wrap = btn.closest('.step-wrap');
-            var ref = btn.getAttribute('data-vraagstukken-ref');
+          [].forEach.call(grid.querySelectorAll('.step-tag--info:not(.step-tag--inherited)[data-vraagstukken-ref][data-phase="' + fase + '"]'), function (b) {
+            var wrap = b.closest('.step-wrap');
+            var ref = b.getAttribute('data-vraagstukken-ref');
             if (!groups[ref]) { groups[ref] = { namen: [], wrap: wrap }; order.push(ref); }
             var stepEl = wrap ? wrap.querySelector('.step') : null;
             var naam = '';
@@ -1978,48 +2008,62 @@
             }
             if (naam && groups[ref].namen.indexOf(naam) === -1) groups[ref].namen.push(naam);
           });
-          if (!order.length) return;
-          // Elk vraagstuk als box op de x-positie van de stap waar het bij hoort.
-          cell.style.position = 'relative';
-          var cellRect = cell.getBoundingClientRect();
-          var stackTop = {}, maxBottom = 0;
           order.forEach(function (ref) {
             var tpl = document.getElementById(ref);
             var g = groups[ref];
             if (!tpl || !g.wrap) return;
-            var x = Math.round(g.wrap.getBoundingClientRect().left - cellRect.left);
+            var x = Math.round(g.wrap.getBoundingClientRect().left - gRect.left);
             var box = document.createElement('div');
             box.className = 'vr-item';
             box.style.left = x + 'px';
-            box.style.top = (stackTop[x] || 20) + 'px';
+            box.style.top = (stackTop[x] || 8) + 'px';
             var ul = document.createElement('ul');
             var frag = document.createElement('div');
             frag.innerHTML = tpl.innerHTML;
-            [].forEach.call(frag.querySelectorAll('li'), function (li) {
+            [].forEach.call(frag.querySelectorAll(':scope > li'), function (li) {
               if (g.namen.length > 1) {
                 var lbl = g.namen.length === 2 ? g.namen[0] + ' en ' + g.namen[1]
                   : g.namen.slice(0, -1).join(', ') + ' en ' + g.namen[g.namen.length - 1];
                 li.innerHTML += ' <span class="vr-steps">- speelt bij: ' + lbl + '</span>';
               }
               ul.appendChild(li);
+              totaal++;
             });
             box.appendChild(ul);
-            cell.appendChild(box);
-            stackTop[x] = (stackTop[x] || 20) + box.offsetHeight + 10;
+            itemsLayer.appendChild(box);
+            stackTop[x] = (stackTop[x] || 8) + box.offsetHeight + 10;
             maxBottom = Math.max(maxBottom, box.offsetTop + box.offsetHeight);
+            if (!indX[x]) {
+              indX[x] = true;
+              var seg = document.createElement('div');
+              seg.className = 'vr-ind';
+              seg.style.left = x + 'px';
+              indicator.appendChild(seg);
+            }
           });
-          cell.style.minHeight = (maxBottom + 24) + 'px';
         });
+        itemsLayer.style.height = maxBottom + 'px';
         var alg = document.getElementById('sidePanelVraagstukkenAlgemeen');
         var algCel = document.getElementById('vraagstukkenAlgemeenCel');
         if (alg && algCel) {
-          var wrap = document.createElement('div');
-          wrap.className = 'vr-sticky';
           var algUl = document.createElement('ul');
           algUl.innerHTML = alg.innerHTML;
-          wrap.appendChild(algUl);
-          algCel.appendChild(wrap);
+          algCel.querySelector('.vr-sticky').appendChild(algUl);
+          totaal += algUl.children.length;
         }
+        body.hidden = true;
+        footer.classList.remove('meten');
+        var countEl = document.getElementById('vrFooterCount');
+        if (countEl && totaal) { countEl.textContent = totaal; countEl.hidden = false; }
+        btn.addEventListener('click', function () {
+          var open = body.hidden;
+          body.hidden = !open;
+          indicator.hidden = open;
+          btn.setAttribute('aria-expanded', String(open));
+        });
+        function sizeFooter() { footer.style.width = grid.scrollWidth + 'px'; }
+        sizeFooter();
+        window.addEventListener('load', sizeFooter);
         layout();
         buildClone();
       });
@@ -2277,6 +2321,10 @@
 <template id="panelBodyDemovoorwaarden">
   <p>Wat zijn de voorwaarden waaraan voldaan moet worden voor het afnemen van een dienst in demo-vorm?</p>
 </template>
+
+<template id="panelBodyRinisGoedkeuren">
+  <p>RINIS beheert de groepcertificatendienst voor FSC: het geeft groepcertificaten uit en keurt aanvragen en vernieuwingen goed, als vertrouwde partij tussen de deelnemende organisaties.</p>
+</template>
 <template id="panelBodyWmwRollen">
   <div class="wmw-item"><span class="wmw-dot" style="background:var(--ruben)"></span><span><strong class="p-ruben">Ruben</strong>, servicemanager. Kent de beheerrollen toe binnen de KvK</span></div>
   <div class="wmw-item"><span class="wmw-dot" style="background:var(--femke)"></span><span><strong class="p-femke">Femke</strong> krijgt de rol functioneel beheer: inrichting en templates</span></div>
@@ -2291,6 +2339,7 @@
 </template>
 <template id="vraagstukkenRollen"><li>Waar worden de beheerrollen vastgelegd en wie kan inzien wie wat heeft goedgekeurd (logboek)?</li></template>
 <template id="vraagstukkenDemovoorwaarden"><li>Wat zijn de voorwaarden waaraan voldaan moet worden voor het afnemen van een dienst in demo-vorm?</li></template>
+<template id="vraagstukkenRinisGoedkeuren"><li>Hoe verloopt het proces van goedkeuren door RINIS, en wat is de rol van het dienstverlenerportaal hierin?</li></template>
 <template id="vraagstukkenDemoOordeel"><li>Wat is er voor nodig om als KvK een goed oordeel te vellen over de demo-omgeving, gebaseerd op dummy data?</li><li>Het afnemen van een Logius-dienst - bijvoorbeeld de Digipoort - is nu gebaseerd op een pre-productie- en productiefase. Hoe kan een potentiele afnemer op dit moment goed testen en oordelen?</li></template>
 <template id="vraagstukkenCertAanvraag"><li>Is FSC onboarding in scope voor het dienstverlenerportaal?</li></template>
 <template id="vraagstukkenTemplate"><li>Of er bij het zelfstandig publiceren naar productie een tweede paar ogen (vierogenprincipe) nodig is, is een open vraagstuk.</li></template>
