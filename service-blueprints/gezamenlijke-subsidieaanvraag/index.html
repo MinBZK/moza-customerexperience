@@ -147,6 +147,21 @@
   }
   .goal-aanleiding:hover { text-decoration: underline; }
   .goal-aanleiding svg { flex-shrink: 0; }
+
+  /* NDS-prioriteiten uit de aanleiding, toegepast op deze blueprint;
+     de boxen zijn de kleine variant van de boxen op de aanleiding-pagina
+     (zelfde iconen en titels als visueel herkenningspunt). */
+  .nds-prio { margin-bottom: var(--primitives-space-40, 40px); }
+  .nds-prio-title { font-size: 18px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+  .nds-prio-sub { font-size: 14px; color: var(--ink-soft); line-height: 1.5; margin-bottom: 14px; max-width: var(--primitives-area-640, 640px); }
+  .nds-prio-sub a { color: var(--accent); }
+  .nds-prio-boxen { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; max-width: 1100px; }
+  .nds-prio-box { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }
+  .nds-prio-kop { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; color: var(--ink); }
+  .nds-prio-kop h3 { font-size: 14px; font-weight: 600; color: var(--ink); }
+  .nds-prio-box p { font-size: 13px; line-height: 1.55; color: var(--ink-soft); }
+  .nds-prio-box p + p { margin-top: 6px; }
+  .nds-prio-box strong { color: var(--ink); font-weight: 600; }
   .goal-text--placeholder {
     color: var(--ink-mute); font-style: italic;
   }
@@ -970,6 +985,28 @@
       <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 
   </div>
+
+  <section class="nds-prio" aria-labelledby="nds-prio-heading">
+    <h2 class="nds-prio-title" id="nds-prio-heading">NDS-prioriteiten in deze blueprint</h2>
+    <p class="nds-prio-sub">De drie prioriteiten uit de <a href="../../aanleiding/index.html">aanleiding voor MijnOverheid Zakelijk</a>, toegepast op de gezamenlijke subsidieaanvraag: wat gaat er nu mis, en hoe lossen we dat op?</p>
+    <div class="nds-prio-boxen">
+      <div class="nds-prio-box">
+        <div class="nds-prio-kop"><nldd-icon name="person" size="20"></nldd-icon><h3>Burger en ondernemer centraal</h3></div>
+        <p><strong>Wat gaat er mis:</strong> het collectief moet zichzelf organiseren langs de regels van de regeling. Rollen, machtigingen en formulieren staan centraal, niet het gezamenlijke innovatieproject van Sander, Wei en Ahmed.</p>
+        <p><strong>Hoe we dit oplossen:</strong> MOZa neemt de samenwerking als vertrekpunt: één plek waar het collectief en intermediair Lotte de aanvraag samen voorbereiden, rollen beleggen en de voortgang volgen.</p>
+      </div>
+      <div class="nds-prio-box">
+        <div class="nds-prio-kop"><nldd-icon name="centralized-network" size="20"></nldd-icon><h3>Data delen</h3></div>
+        <p><strong>Wat gaat er mis:</strong> elke ondernemer levert zijn gegevens apart en soms dubbel aan, en de stand van zaken leeft in losse mails en portalen. Niemand ziet hetzelfde, actuele beeld van de aanvraag.</p>
+        <p><strong>Hoe we dit oplossen:</strong> gestandaardiseerde notificaties, taken en stand van zaken van RVO komen voor alle deelnemers op één plek samen, en gegevens worden maar 1x uitgevraagd.</p>
+      </div>
+      <div class="nds-prio-box">
+        <div class="nds-prio-kop"><nldd-icon name="sparkles" size="20"></nldd-icon><h3>Artificiële Intelligentie</h3></div>
+        <p><strong>Wat gaat er mis:</strong> uitzoeken welke regeling past, wie welke rol moet accepteren en wat er nog ontbreekt is nu uitzoekwerk voor de ondernemers of de intermediair.</p>
+        <p><strong>Hoe we dit oplossen:</strong> een digitale assistent wijst de weg en combineert bronnen om het collectief proactief te helpen: van het vinden van de regeling tot wat er nog moet gebeuren om de aanvraag compleet te maken.</p>
+      </div>
+    </div>
+  </section>
 
   <div class="legend" aria-hidden="true">
     <span class="legend-item"><span class="legend-dot legend-dot--sander"></span> Sander - GreenFlow BV (ondernemer)</span>
