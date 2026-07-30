@@ -359,14 +359,28 @@
   .lane-label.lane--vraagstukken, .phase-cell.lane--vraagstukken {
     background: var(--primitives-color-neutral-100);
     border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
   }
-  .lane-label.lane--vraagstukken { position: sticky; left: 0; z-index: 1; }
+  /* De Algemeen-rij hoort visueel bij de Vraagstukken-rij: geen scheidslijn
+     ertussen, minder tussenruimte en een doorlopende amberbalk links. */
+  .lane--vr-algemeen.lane-label, .lane--vr-algemeen.phase-cell {
+    border-top: none; border-bottom: 1px solid var(--border); padding-top: 0;
+  }
+  .lane-label.lane--vraagstukken { position: sticky; left: 0; z-index: 1; box-shadow: inset 4px 0 0 #ffbf00; }
   .lane-vr-title {
     font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 600;
     letter-spacing: .08em; text-transform: uppercase;
     color: light-dark(#8a6100, #ffbf00);
-    border-left: 4px solid #ffbf00; padding-left: 8px;
+  }
+  .lane--vr-algemeen .lane-sub-name {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 600;
+    letter-spacing: .08em; text-transform: uppercase;
+    color: light-dark(#8a6100, #ffbf00); opacity: .8;
+  }
+  .lane--vr-algemeen .lane-sub-name::before {
+    content: ""; width: 7px; height: 7px; margin-top: -5px;
+    border-left: 1px solid light-dark(#8a6100, #ffbf00);
+    border-bottom: 1px solid light-dark(#8a6100, #ffbf00);
   }
   /* De vraagstukken-content telt niet mee voor de kolombreedte (de stappen
      bepalen de kolom); de lijst vult de beschikbare breedte tot een leesbaar
@@ -1559,8 +1573,8 @@
       <div class="phase-cell lane--vraagstukken" data-vraagstukken-fase="Uitvoeren"></div>
       <div class="phase-cell lane--vraagstukken" data-vraagstukken-fase="Opvolgen"></div>
 
-      <div class="lane-label lane--vraagstukken"><span class="lane-sub-name">Algemeen</span></div>
-      <div class="phase-cell lane--vraagstukken" id="vraagstukkenAlgemeenCel" style="grid-column: 2 / -1;"></div>
+      <div class="lane-label lane--vraagstukken lane--vr-algemeen"><span class="lane-sub-name">Algemeen</span></div>
+      <div class="phase-cell lane--vraagstukken lane--vr-algemeen" id="vraagstukkenAlgemeenCel" style="grid-column: 2 / -1;"></div>
 
     </div>
     </div>
