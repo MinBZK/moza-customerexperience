@@ -363,12 +363,17 @@
   }
   .vr-footer.meten { visibility: hidden; }
   .vr-footer-toggle {
-    position: sticky; left: 0; z-index: 2;
-    display: inline-flex; align-items: center; gap: 8px;
+    position: relative; display: block; width: 100%; text-align: left;
     background: none; border: none; cursor: pointer;
-    padding: 10px 20px 10px 16px;
+    padding: 10px 0;
     box-shadow: inset 4px 0 0 #ffbf00;
     font-family: inherit;
+  }
+  .vr-footer-toggle:hover { background: light-dark(rgba(0, 0, 0, .04), rgba(255, 255, 255, .06)); }
+  .vr-footer-head {
+    position: sticky; left: 0; z-index: 2;
+    display: flex; width: max-content; align-items: center; gap: 8px;
+    padding: 0 20px 0 16px;
   }
   .vr-footer-toggle:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
   .vr-footer-toggle svg { color: light-dark(#8a6100, #ffbf00); transition: transform .15s ease; }
@@ -382,10 +387,10 @@
     font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 700;
     background: #ffbf00; color: #1a1a2e; border-radius: 999px; padding: 1px 7px;
   }
-  .vr-footer-indicator { position: absolute; left: 0; right: 0; bottom: 4px; height: 15px; pointer-events: none; }
+  .vr-footer-indicator { position: absolute; inset: 0; pointer-events: none; }
   .vr-footer-indicator[hidden] { display: none; }
   .vr-ind {
-    position: absolute; bottom: 0;
+    position: absolute; top: 50%; transform: translateY(-50%);
     min-width: 18px; height: 15px; padding: 0 5px; box-sizing: border-box;
     display: inline-flex; align-items: center; justify-content: center;
     border-radius: 999px; background: #ffbf00; color: #1a1a2e;
@@ -419,6 +424,10 @@
     border-bottom: 1px solid light-dark(#8a6100, #ffbf00);
   }
   .lane--vr-algemeen ul { margin-top: 6px; }
+  /* Als de labelkolom (eerste 240px) vrij is, staat Algemeen daar direct
+     onder de titel, naast de vraagstuk-boxen. */
+  .lane--vr-algemeen--col { position: absolute; left: 0; top: 8px; width: 240px; padding: 0 16px; box-sizing: border-box; }
+  .lane--vr-algemeen--col .vr-sticky { position: static; display: block; max-width: none; }
   .lane-expand:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
   .lane-expand svg { transition: transform .15s ease; }
   .journey-grid.systeem-open .lane-expand svg { transform: rotate(180deg); }
@@ -1596,11 +1605,13 @@
       <!-- Vraagstukken: in-/uitklapbare sticky footer; wordt gevuld vanuit de zijpaneel-templates. -->
       <div class="vr-footer" id="vrFooter">
         <button type="button" class="vr-footer-toggle" id="vrFooterToggle" aria-expanded="false">
-          <svg width="10" height="10" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 10l4-4 4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <span class="lane-vr-title">Vraagstukken</span>
-          <span class="vr-count" id="vrFooterCount" hidden></span>
+          <span class="vr-footer-head">
+            <svg width="10" height="10" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 10l4-4 4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="lane-vr-title">Vraagstukken</span>
+            <span class="vr-count" id="vrFooterCount" hidden></span>
+          </span>
+          <span class="vr-footer-indicator" id="vrFooterIndicator"></span>
         </button>
-        <div class="vr-footer-indicator" id="vrFooterIndicator"></div>
         <div class="vr-footer-body" id="vrFooterBody" hidden>
           <div class="vr-items" id="vrItems"></div>
           <div class="lane--vr-algemeen" id="vraagstukkenAlgemeenCel"><div class="vr-sticky"><span class="lane-sub-name">Algemeen</span></div></div>
@@ -2211,7 +2222,6 @@
             indX[x] = (indX[x] || 0) + box.querySelectorAll('li').length;
           });
         });
-        itemsLayer.style.height = maxBottom + 'px';
         // Teller-badge per kolom: maakt duidelijk dat er bij díe stap
         // vraagstukken zitten, en hoeveel.
         Object.keys(indX).forEach(function (x) {
@@ -2229,7 +2239,17 @@
           algUl.innerHTML = alg.innerHTML;
           algCel.querySelector('.vr-sticky').appendChild(algUl);
           totaal += algUl.children.length;
+          // Labelkolom vrij (geen box vóór x=244)? Zet Algemeen dan direct
+          // onder de titel; anders blijft het onder de boxen staan.
+          var minX = Infinity;
+          Object.keys(stackTop).forEach(function (x) { minX = Math.min(minX, +x); });
+          if (minX >= 244) {
+            algCel.classList.add('lane--vr-algemeen--col');
+            itemsLayer.appendChild(algCel);
+            maxBottom = Math.max(maxBottom, 8 + algCel.offsetHeight);
+          }
         }
+        itemsLayer.style.height = maxBottom + 'px';
         body.hidden = true;
         footer.classList.remove('meten');
         var countEl = document.getElementById('vrFooterCount');
