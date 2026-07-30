@@ -816,7 +816,7 @@
 <script>
   // In een iframe geladen als fullscreen-variantswitch: toon alleen het
   // canvas, schermvullend (zie de variant-toggle-code onderaan).
-  if (location.hash === '#embedfs') document.documentElement.className += ' embedfs';
+  if (location.hash.indexOf('embedfs') !== -1) document.documentElement.className += ' embedfs';
 </script>
 
 <a href="#main-content" class="skip-link">Ga naar hoofdinhoud</a>
@@ -1978,22 +1978,63 @@
           layout();
         });
 
-        // Variant-toggle in volledig scherm: navigeren zou het volledig
-        // scherm verbreken. Laad de andere variant daarom in een iframe
-        // dat het fullscreen-element vult (#embedfs); pas bij het sluiten
-        // van volledig scherm navigeren we echt naar die variant.
+        // Variant-toggle: bepaal welke hoofdstap (mijlpaal) in beeld is en
+        // geef die als #stap=<n> mee, zodat de andere variant op dezelfde
+        // stap opent en je je op de verschillen kunt oriënteren (de
+        // mijlpaalnummers corresponderen tussen de varianten).
+        var vpEl = document.getElementById('journeyViewport');
+        function huidigeMijlpaal() {
+          var beste = null, kleinste = Infinity;
+          var gRectM = grid.getBoundingClientRect();
+          [].forEach.call(grid.querySelectorAll('.step[data-milestone]'), function (st) {
+            var w = st.closest('.step-wrap');
+            if (!w) return;
+            var r = w.getBoundingClientRect();
+            var afstand = Math.abs((r.left - gRectM.left + r.width / 2) - (vpEl.scrollLeft + vpEl.clientWidth / 2));
+            if (afstand < kleinste) { kleinste = afstand; beste = st.getAttribute('data-milestone'); }
+          });
+          return beste;
+        }
+        // In volledig scherm zou navigeren het fullscreen verbreken: laad
+        // de andere variant dan in een iframe dat het fullscreen-element
+        // vult (#embedfs); pas bij het sluiten navigeren we echt.
         [].forEach.call(document.querySelectorAll('.variant-toggle a'), function (a) {
           a.addEventListener('click', function (e) {
-            if (!document.fullscreenElement) return;
-            e.preventDefault();
-            if (a.getAttribute('aria-current') === 'true') return;
-            var fr = document.createElement('iframe');
-            fr.className = 'variant-frame';
-            fr.setAttribute('title', 'Andere variant van deze service blueprint');
-            fr.src = a.getAttribute('href').split('#')[0] + '#embedfs';
-            journeyEl.appendChild(fr);
+            var stap = huidigeMijlpaal();
+            var basis = a.getAttribute('href').split('#')[0];
+            if (document.fullscreenElement) {
+              e.preventDefault();
+              if (a.getAttribute('aria-current') === 'true') return;
+              var fr = document.createElement('iframe');
+              fr.className = 'variant-frame';
+              fr.setAttribute('title', 'Andere variant van deze service blueprint');
+              fr.src = basis + '#embedfs' + (stap ? ';stap=' + stap : '');
+              journeyEl.appendChild(fr);
+              return;
+            }
+            var vlaggen = [];
+            if (inEmbed) vlaggen.push('embedfs');
+            if (stap) vlaggen.push('stap=' + stap);
+            if (vlaggen.length) a.setAttribute('href', basis + '#' + vlaggen.join(';'));
           });
         });
+        // #stap=<n> bij binnenkomst: zet de viewport op diezelfde hoofdstap.
+        var stapMatch = location.hash.match(/stap=(\d+)/);
+        if (stapMatch) {
+          history.replaceState(null, '', location.pathname + (inEmbed ? '#embedfs' : ''));
+          var richtStap = function () {
+            var st = grid.querySelector('.step[data-milestone="' + stapMatch[1] + '"]');
+            if (!st) return;
+            var w = st.closest('.step-wrap');
+            var gRectS = grid.getBoundingClientRect();
+            var r = w.getBoundingClientRect();
+            vpEl.scrollLeft = Math.max(0, (r.left - gRectS.left) + r.width / 2 - vpEl.clientWidth / 2);
+            vpEl.scrollTop = Math.max(0, (r.top - gRectS.top) - vpEl.clientHeight / 3);
+          };
+          richtStap();
+          window.addEventListener('load', richtStap);
+          if (!inEmbed) journeyEl.scrollIntoView();
+        }
       } else if (fsBtn) {
         fsBtn.style.display = 'none';
       }
