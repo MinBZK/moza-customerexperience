@@ -226,6 +226,13 @@
   .journey-fs svg { display: block; }
   .journey:fullscreen { width: 100vw; margin: 0; background: var(--white); }
   .journey:fullscreen .journey-viewport { height: calc(100vh - 44px); }
+  /* Variantswitch in volledig scherm: de andere variant laadt in een
+     iframe dat het fullscreen-element vult; met #embedfs gedraagt de
+     geladen pagina zich alsof haar canvas zelf schermvullend is. */
+  .variant-frame { position: fixed; inset: 0; width: 100%; height: 100%; border: 0; background: var(--white); z-index: 120; }
+  html.embedfs body { overflow: hidden; }
+  html.embedfs .journey { position: fixed; inset: 0; width: auto; margin: 0; background: var(--white); z-index: 100; }
+  html.embedfs .journey .journey-viewport { height: calc(100vh - 44px); max-height: none; }
 
   .step--flash { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 12px; }
 
@@ -424,12 +431,17 @@
   }
   .vr-footer.meten { visibility: hidden; }
   .vr-footer-toggle {
-    position: sticky; left: 0; z-index: 2;
-    display: inline-flex; align-items: center; gap: 8px;
+    position: relative; display: block; width: 100%; text-align: left;
     background: none; border: none; cursor: pointer;
-    padding: 10px 20px 10px 16px;
+    padding: 10px 0;
     box-shadow: inset 4px 0 0 #ffbf00;
     font-family: inherit;
+  }
+  .vr-footer-toggle:hover { background: light-dark(rgba(0, 0, 0, .04), rgba(255, 255, 255, .06)); }
+  .vr-footer-head {
+    position: sticky; left: 0; z-index: 2;
+    display: flex; width: max-content; align-items: center; gap: 8px;
+    padding: 0 20px 0 16px;
   }
   .vr-footer-toggle:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
   .vr-footer-toggle svg { color: light-dark(#8a6100, #ffbf00); transition: transform .15s ease; }
@@ -443,10 +455,10 @@
     font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 700;
     background: #ffbf00; color: #1a1a2e; border-radius: 999px; padding: 1px 7px;
   }
-  .vr-footer-indicator { position: absolute; left: 0; right: 0; bottom: 4px; height: 15px; pointer-events: none; }
+  .vr-footer-indicator { position: absolute; inset: 0; pointer-events: none; }
   .vr-footer-indicator[hidden] { display: none; }
   .vr-ind {
-    position: absolute; bottom: 0;
+    position: absolute; top: 50%; transform: translateY(-50%);
     min-width: 18px; height: 15px; padding: 0 5px; box-sizing: border-box;
     display: inline-flex; align-items: center; justify-content: center;
     border-radius: 999px; background: #ffbf00; color: #1a1a2e;
@@ -480,6 +492,10 @@
     border-bottom: 1px solid light-dark(#8a6100, #ffbf00);
   }
   .lane--vr-algemeen ul { margin-top: 6px; }
+  /* Als de labelkolom (eerste 240px) vrij is, staat Algemeen daar direct
+     onder de titel, naast de vraagstuk-boxen. */
+  .lane--vr-algemeen--col { position: absolute; left: 0; top: 8px; width: 240px; padding: 0 16px; box-sizing: border-box; }
+  .lane--vr-algemeen--col .vr-sticky { position: static; display: block; max-width: none; }
 
   /* Verticale tijdmarker die door alle rijen van het canvas loopt. */
   .time-gap {
@@ -765,6 +781,11 @@
 </style>
 </head>
 <body>
+<script>
+  // In een iframe geladen als fullscreen-variantswitch: toon alleen het
+  // canvas, schermvullend (zie de variant-toggle-code onderaan).
+  if (location.hash === '#embedfs') document.documentElement.className += ' embedfs';
+</script>
 
 <a href="#main-content" class="skip-link">Ga naar hoofdinhoud</a>
 
@@ -1473,11 +1494,13 @@
       <!-- Vraagstukken: in-/uitklapbare sticky footer; wordt gevuld vanuit de zijpaneel-templates. -->
       <div class="vr-footer" id="vrFooter">
         <button type="button" class="vr-footer-toggle" id="vrFooterToggle" aria-expanded="false">
-          <svg width="10" height="10" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 10l4-4 4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <span class="lane-vr-title">Vraagstukken</span>
-          <span class="vr-count" id="vrFooterCount" hidden></span>
+          <span class="vr-footer-head">
+            <svg width="10" height="10" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 10l4-4 4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="lane-vr-title">Vraagstukken</span>
+            <span class="vr-count" id="vrFooterCount" hidden></span>
+          </span>
+          <span class="vr-footer-indicator" id="vrFooterIndicator"></span>
         </button>
-        <div class="vr-footer-indicator" id="vrFooterIndicator"></div>
         <div class="vr-footer-body" id="vrFooterBody" hidden>
           <div class="vr-items" id="vrItems"></div>
           <div class="lane--vr-algemeen" id="vraagstukkenAlgemeenCel"><div class="vr-sticky"><span class="lane-sub-name">Algemeen</span></div></div>
@@ -1870,12 +1893,33 @@
       var journeyEl = document.querySelector('.journey');
       var fsLabel = document.getElementById('journeyFsLabel');
       if (fsBtn && journeyEl && journeyEl.requestFullscreen) {
+        var inEmbed = document.documentElement.classList.contains('embedfs');
         fsBtn.addEventListener('click', function () {
+          if (inEmbed) { try { parent.document.exitFullscreen(); } catch (err) {} return; }
           if (document.fullscreenElement) document.exitFullscreen();
           else journeyEl.requestFullscreen();
         });
+        if (inEmbed) {
+          // Deze pagina staat al schermvullend binnen de andere variant:
+          // de knop sluit dat volledig scherm, en de toggle-links houden
+          // de embedfs-stand vast bij het wisselen.
+          fsBtn.setAttribute('aria-pressed', 'true');
+          fsLabel.textContent = 'Sluit volledig scherm';
+          [].forEach.call(document.querySelectorAll('.variant-toggle a'), function (a) {
+            a.setAttribute('href', a.getAttribute('href').split('#')[0] + '#embedfs');
+          });
+        }
         document.addEventListener('fullscreenchange', function () {
           var on = document.fullscreenElement === journeyEl;
+          var vFrame = journeyEl.querySelector('.variant-frame');
+          if (!on && vFrame) {
+            // Volledig scherm gesloten terwijl de andere variant in beeld
+            // stond: ga daar dan ook echt naartoe.
+            var vUrl = vFrame.src;
+            try { vUrl = vFrame.contentWindow.location.pathname; } catch (err) {}
+            location.replace(vUrl.split('#')[0]);
+            return;
+          }
           fsBtn.setAttribute('aria-pressed', String(on));
           fsLabel.textContent = on ? 'Sluit volledig scherm' : 'Volledig scherm';
           var sPanel = document.getElementById('sidePanel'), sScrim = document.getElementById('sideScrim');
@@ -1885,30 +1929,22 @@
           layout();
         });
 
-        // Variant-toggle in volledig scherm: geef de bestemming een
-        // #fullscreen-vlag mee en herstel volledig scherm daar meteen
-        // (of anders bij de eerste klik/toets - een browser staat
-        // fullscreen zonder gebruikersgebaar niet toe).
+        // Variant-toggle in volledig scherm: navigeren zou het volledig
+        // scherm verbreken. Laad de andere variant daarom in een iframe
+        // dat het fullscreen-element vult (#embedfs); pas bij het sluiten
+        // van volledig scherm navigeren we echt naar die variant.
         [].forEach.call(document.querySelectorAll('.variant-toggle a'), function (a) {
-          a.addEventListener('click', function () {
-            if (document.fullscreenElement) {
-              a.setAttribute('href', a.getAttribute('href').split('#')[0] + '#fullscreen');
-            }
+          a.addEventListener('click', function (e) {
+            if (!document.fullscreenElement) return;
+            e.preventDefault();
+            if (a.getAttribute('aria-current') === 'true') return;
+            var fr = document.createElement('iframe');
+            fr.className = 'variant-frame';
+            fr.setAttribute('title', 'Andere variant van deze service blueprint');
+            fr.src = a.getAttribute('href').split('#')[0] + '#embedfs';
+            journeyEl.appendChild(fr);
           });
         });
-        if (location.hash === '#fullscreen') {
-          history.replaceState(null, '', location.pathname);
-          journeyEl.scrollIntoView();
-          var fsOnce = function () {
-            document.removeEventListener('pointerdown', fsOnce, true);
-            document.removeEventListener('keydown', fsOnce, true);
-            if (!document.fullscreenElement) journeyEl.requestFullscreen().catch(function () {});
-          };
-          journeyEl.requestFullscreen().catch(function () {
-            document.addEventListener('pointerdown', fsOnce, true);
-            document.addEventListener('keydown', fsOnce, true);
-          });
-        }
       } else if (fsBtn) {
         fsBtn.style.display = 'none';
       }
@@ -1982,7 +2018,6 @@
             indX[x] = (indX[x] || 0) + box.querySelectorAll('li').length;
           });
         });
-        itemsLayer.style.height = maxBottom + 'px';
         // Teller-badge per kolom: maakt duidelijk dat er bij díe stap
         // vraagstukken zitten, en hoeveel.
         Object.keys(indX).forEach(function (x) {
@@ -2000,7 +2035,17 @@
           algUl.innerHTML = alg.innerHTML;
           algCel.querySelector('.vr-sticky').appendChild(algUl);
           totaal += algUl.children.length;
+          // Labelkolom vrij (geen box vóór x=244)? Zet Algemeen dan direct
+          // onder de titel; anders blijft het onder de boxen staan.
+          var minX = Infinity;
+          Object.keys(stackTop).forEach(function (x) { minX = Math.min(minX, +x); });
+          if (minX >= 244) {
+            algCel.classList.add('lane--vr-algemeen--col');
+            itemsLayer.appendChild(algCel);
+            maxBottom = Math.max(maxBottom, 8 + algCel.offsetHeight);
+          }
         }
+        itemsLayer.style.height = maxBottom + 'px';
         body.hidden = true;
         footer.classList.remove('meten');
         var countEl = document.getElementById('vrFooterCount');
