@@ -230,6 +230,8 @@
   .step--flash { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 12px; }
 
   .journey-tools { display: inline-flex; align-items: center; gap: 12px; }
+  .journey-tools .variant-toggle { margin: 0; padding: 3px; }
+  .journey-tools .variant-toggle a { padding: 4px 12px; font-size: 11px; }
   .journey-zoom { display: inline-flex; align-items: center; gap: 6px; }
   .journey-zoom-btn {
     width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center;
@@ -707,11 +709,6 @@
   <p class="eyebrow">Service blueprint · MOZa · Dienstverlener</p>
   <h1>Afnemen van de notificatiedienst</h1>
 
-  <nav class="variant-toggle" aria-label="Variant van deze service blueprint">
-    <a href="index.html" aria-current="false">Federatief</a>
-    <a href="api.html" aria-current="true">API-integratie</a>
-  </nav>
-
   <div class="draft-banner" role="note">
     <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1.8 15 14H1L8 1.8z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 6.2v3.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="11.9" r=".7" fill="currentColor"/></svg>
     <p><strong>Draft</strong>Deze service blueprint is een concept en nog niet vastgesteld.</p>
@@ -750,6 +747,10 @@
         <span class="sc"><kbd>F</kbd> volledig scherm</span>
       </div>
       <div class="journey-tools">
+        <nav class="variant-toggle" aria-label="Variant van deze service blueprint">
+          <a href="index.html" aria-current="false">Federatief</a>
+          <a href="api.html" aria-current="true">API-integratie</a>
+        </nav>
         <div class="journey-zoom" role="group" aria-label="Detailniveau">
           <button type="button" class="journey-zoom-btn" id="zoomOut" aria-label="Uitzoomen (minder detail)">&minus;</button>
           <span class="journey-zoom-label" id="zoomLabel">Hoofdlijnen</span>
