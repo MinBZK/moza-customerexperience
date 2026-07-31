@@ -617,6 +617,11 @@
      min-width overschrijft). Ruim genoeg zodat de 76px-band met marge aan
      beide kanten vrij blijft van de aangrenzende boxen. */
   .step-connector.step-connector--gap { min-width: 124px; }
+  /* Langere wachttijd = bredere marker: de kolom en de band groeien mee
+     met de duur, zodat het tijdsverschil ook visueel voelbaar is. */
+  .step-connector--gap[data-gap-label="na 1 jaar"] { min-width: 210px; }
+  .step-connector--gap[data-gap-label="na 2 jaar"] { min-width: 300px; }
+  .time-gap--lang { background: rgba(120, 120, 140, .07); }
 
   /* Verticale tijdmarker ("na 2 weken") die door alle rijen van het canvas
      loopt (onder de fasekoppen), op de plek waar de tijd verstrijkt voordat
@@ -2045,7 +2050,10 @@
           var gap = seen[order[i]];
           el.style.display = 'block';
           el.querySelector('.time-gap-label').textContent = gap.getAttribute('data-gap-label') || 'na 2 weken';
-          el.style.left = (order[i] - GAP_HALF) + 'px';
+          var gw = Math.max(76, gap.getBoundingClientRect().width - 48);
+          el.style.width = gw + 'px';
+          el.style.left = (order[i] - gw / 2) + 'px';
+          el.classList.toggle('time-gap--lang', /jaar/.test(el.querySelector('.time-gap-label').textContent));
           var jobCel = grid.querySelector('.job-band-cel');
           var bandTop = jobCel ? (jobCel.getBoundingClientRect().bottom - gRect.top) : headH;
           el.style.top = bandTop + 'px';
