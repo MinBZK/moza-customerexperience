@@ -169,6 +169,69 @@
   }
   .goal-text { font-size: 15px; color: var(--ink); line-height: 1.6; }
 
+  /* JTBD/Hassenzahl-laag (zelfde conventies als de subsidie-blueprint). */
+  .lane-be { font-size: 12px; font-style: italic; color: var(--ink-mute); line-height: 1.4; }
+  .lane-jobs { margin-top: 8px; align-self: flex-start; }
+  .side-panel-body .jtbd-item { margin: 0 0 12px; }
+  .side-panel-body .jtbd-item:last-child { margin-bottom: 0; }
+  .side-panel-body .jtbd-label { background: rgba(255,255,255,.14); color: #fff; border-color: rgba(255,255,255,.45); }
+  .jtbd-label {
+    display: inline-block; margin-right: 4px; padding: 1px 7px; border-radius: 999px;
+    font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 600;
+    letter-spacing: .04em; text-transform: uppercase;
+    background: var(--primitives-color-neutral-100); color: var(--ink-mute);
+    border: 1px solid var(--border);
+  }
+  .job-band-label {
+    position: sticky; left: 0; z-index: 3;
+    background: var(--primitives-color-neutral-100);
+    border-top: 1px solid var(--border);
+    padding: 8px 16px;
+    display: flex; align-items: center;
+  }
+  .job-band-label .step-tag { margin-top: 0; }
+  .job-band-cel {
+    background: var(--primitives-color-neutral-100);
+    border-top: 1px solid var(--border);
+    box-shadow: inset 3px 0 0 #ffbf00;
+    padding: 10px 24px;
+    display: flex; flex-direction: column; justify-content: center; gap: 2px;
+  }
+  .job-band-behoefte { font-size: 13px; font-weight: 600; color: var(--ink); }
+  .job-band-job { font-size: 13px; font-style: italic; color: var(--ink-soft); }
+  /* Dubbele klasse voor hogere specificiteit: de basisregels .step-verdieping
+     en .step-tag staan verderop en zouden deze varianten anders overschrijven. */
+  .step-verdieping.step-verdieping--angst {
+    border: 1px solid var(--primitives-color-rood-600);
+    background: var(--primitives-color-rood-100);
+    color: var(--ink);
+  }
+  .step-tag.step-tag--angst {
+    background: var(--primitives-color-rood-100);
+    color: var(--primitives-color-rood-600);
+    border: 1px solid var(--primitives-color-rood-600);
+  }
+  .uitkomsten { margin-top: var(--primitives-space-40, 40px); }
+  .uitkomsten-title { font-size: 18px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+  .uitkomsten-sub { font-size: 14px; color: var(--ink-soft); line-height: 1.5; margin-bottom: 14px; max-width: var(--primitives-area-640, 640px); }
+  .uitkomsten-boxen { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; max-width: 1100px; }
+  .uitkomsten-box { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }
+  .uitkomsten-box h3 {
+    font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 600;
+    letter-spacing: .08em; text-transform: uppercase; color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .uitkomsten-box ul { margin: 0; padding-left: 18px; list-style: disc outside; }
+  .uitkomsten-box li { font-size: 13px; line-height: 1.55; color: var(--ink-soft); margin: 0 0 6px; }
+  .uitkomsten-box li:last-child { margin-bottom: 0; }
+  .bstrip-box {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 0 0 8px 8px; border-top: none;
+    padding: 16px 18px; max-width: 440px;
+  }
+  .bstrip-behoefte { display: block; font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+  .bstrip-job { display: block; font-size: 13px; font-style: italic; color: var(--ink-soft); line-height: 1.5; }
+
   /* Service blueprint-grid: zwembanen-opzet, eigen laag boven op de NLDD-tokens. */
   .journey {
     position: relative;
@@ -265,10 +328,13 @@
     box-shadow: 0 0 0 2px var(--white);
   }
 
-  /* Niveau 1 (mijlpalen): losse strip i.p.v. de volledige zwembanen. */
-  body.zoom-1 .journey-viewport, body.zoom-1 .minimap { display: none; }
+  /* Niveau 1 (Behoeften) en 2 (Mijlpalen): losse strips i.p.v. de
+     volledige zwembanen (waarom > wat > hoe). */
+  body.zoom-1 .journey-viewport, body.zoom-1 .minimap,
+  body.zoom-2 .journey-viewport, body.zoom-2 .minimap { display: none; }
   .milestone-strip { display: none; }
-  body.zoom-1 .milestone-strip {
+  body.zoom-2 .milestone-strip:not(.behoefte-strip),
+  body.zoom-1 .behoefte-strip {
     display: flex; align-items: flex-start; gap: 12px;
     padding: 40px 28px; overflow: auto; cursor: grab;
     scrollbar-width: none; -ms-overflow-style: none;
@@ -612,6 +678,7 @@
   .step-tag.is-certificaten { background: var(--primitives-color-donkergeel-600); }
   .step-tag.is-wmw { background: var(--primitives-color-paars-600); }
   .step-tag.is-goedkeuren { background: var(--primitives-color-mintgroen-650); }
+  .step-tag.is-jobs { background: var(--primitives-color-neutral-600); }
 
   /* klikbare tag die een zijvenster met uitleg opent */
   .step-tag--info { border: none; cursor: pointer; }
@@ -672,6 +739,8 @@
   .side-panel-tag.is-wmw { background: var(--primitives-color-paars-600); }
   .side-panel-tag.is-goedkeuren { background: var(--primitives-color-mintgroen-650); }
   .side-panel-tag.is-inloggen { background: var(--authenticatie); }
+  .side-panel-tag.is-jobs { background: var(--primitives-color-neutral-600); }
+  .side-panel-tag.is-angst { background: var(--primitives-color-rood-600); }
   .side-panel-tag.is-certificaten { background: var(--primitives-color-donkergeel-600); }
   .side-panel-title { font-size: 22px; font-weight: 600; line-height: 1.25; margin-bottom: 12px; }
   .side-panel-body { font-size: 15px; line-height: 1.65; color: rgba(255,255,255,.92); white-space: pre-line; }
@@ -864,6 +933,7 @@
     </div>
 
     <div class="milestone-strip" id="milestoneStrip"></div>
+    <div class="milestone-strip behoefte-strip" id="behoefteStrip"><div class="mstrip-phase"><div class="mstrip-head">Oriënteren</div><div class="bstrip-box"><strong class="bstrip-behoefte">Stimulatie en zekerheid</strong><span class="bstrip-job">Uitvinden of de notificatiedienst waarde toevoegt, zonder er al aan vast te zitten</span></div></div><div class="mstrip-phase"><div class="mstrip-head">Uitvoeren</div><div class="bstrip-box"><strong class="bstrip-behoefte">Competentie en vertrouwen</strong><span class="bstrip-job">Zonder verrassingen van goedkeuring naar een werkende dienst in productie</span></div></div><div class="mstrip-phase"><div class="mstrip-head">Opvolgen</div><div class="bstrip-box"><strong class="bstrip-behoefte">Zekerheid en grip</strong><span class="bstrip-job">Erop kunnen vertrouwen dat de dienst draait en snel kunnen handelen bij een alert</span></div></div></div>
 
     <div class="journey-viewport" id="journeyViewport" tabindex="0" role="region" aria-label="Service blueprint-canvas - sleep, scroll of gebruik de minimap rechtsonder">
     <div class="journey-grid" id="journeyGrid">
@@ -874,13 +944,21 @@
       <div class="phase-head">Uitvoeren</div>
       <div class="phase-head">Opvolgen</div>
 
+      <!-- JTBD-band: dominante behoefte + job per fase -->
+      <div class="job-band-label"><button type="button" class="step-tag step-tag--info lane-jobs" data-persona="KvK als dienstverlener" data-phase="Alle fasen" data-step="Ruben, Annemieke, Femke en Deniz" data-panel-title="Jobs to be Done" data-panel-body-ref="panelBodyJobsCollectief">Jobs<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
+      <div class="job-band-cel"><strong class="job-band-behoefte">Stimulatie en zekerheid</strong><span class="job-band-job">Uitvinden of de notificatiedienst waarde toevoegt, zonder er al aan vast te zitten</span></div>
+      <div class="job-band-cel"><strong class="job-band-behoefte">Competentie en vertrouwen</strong><span class="job-band-job">Zonder verrassingen van goedkeuring naar een werkende dienst in productie</span></div>
+      <div class="job-band-cel"><strong class="job-band-behoefte">Zekerheid en grip</strong><span class="job-band-job">Erop kunnen vertrouwen dat de dienst draait en snel kunnen handelen bij een alert</span></div>
+
       <!-- Ruben - servicemanager -->
 
       <div class="lane-label lane--ruben">
         <img class="lane-avatar" src="../../personas/images/ruben.svg" alt="" width="52" height="52" loading="lazy">
         <span class="lane-name">Ruben</span>
         <span class="lane-role">Servicemanager KvK</span>
+        <span class="lane-be">wil het traject laten lopen zonder overal achteraan te moeten</span>
         <a class="lane-link" href="../../personas/persona-ruben.html" target="_blank" rel="noopener">Bekijk persona ↗</a>
+        <button type="button" class="step-tag step-tag--info lane-jobs" data-persona="Ruben (KvK)" data-phase="Alle fasen" data-step="Trekker van de afname" data-panel-title="Jobs to be Done" data-panel-body-ref="panelBodyJobsRuben">Jobs<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button>
       </div>
 
       <div class="phase-cell lane--ruben" aria-label="Ruben - Oriënteren">
@@ -990,7 +1068,7 @@
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step step--joint"><span class="joint-mark"><span class="jm-dot" style="background:var(--ruben)"></span><span class="jm-dot" style="background:var(--pieter)"></span><span class="jm-dot" style="background:var(--systeem)"></span>Ruben, Pieter &amp; RINIS</span>Alle betrokken partijen tekenen de acceptatie af</div>
+            <div class="step step--joint"><span class="joint-mark"><span class="jm-dot" style="background:var(--ruben)"></span><span class="jm-dot" style="background:var(--pieter)"></span><span class="jm-dot" style="background:var(--systeem)"></span>Ruben, Pieter &amp; RINIS</span>Alle betrokken partijen tekenen de acceptatie af <button type="button" class="step-tag step-tag--info step-tag--angst" data-persona="Ruben" data-phase="Uitvoeren" data-step="Ruben, Pieter &amp; RINISAlle betrokken partijen tekenen de acceptatie af" data-panel-title="Aftekenen van de acceptatie" data-panel-body-ref="panelBodyAngstAftekenen" data-vraagstukken-ref="vraagstukkenAngstAftekenen"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1.8 15 14H1L8 1.8z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 6.2v3.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="11.9" r=".7" fill="currentColor"/></svg>Spannend moment<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Bewijslast van logging</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
@@ -1027,7 +1105,9 @@
         <img class="lane-avatar" src="../../personas/images/annemieke.svg" alt="" width="52" height="52" loading="lazy">
         <span class="lane-name">Annemieke</span>
         <span class="lane-role">Inkoopadviseur KvK</span>
+        <span class="lane-be">wil verantwoord beslissen zonder de vertraging te zijn</span>
         <a class="lane-link" href="../../personas/persona-annemieke.html" target="_blank" rel="noopener">Bekijk persona ↗</a>
+        <button type="button" class="step-tag step-tag--info lane-jobs" data-persona="Annemieke (KvK)" data-phase="Alle fasen" data-step="Inkoop" data-panel-title="Jobs to be Done" data-panel-body-ref="panelBodyJobsAnnemieke">Jobs<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button>
       </div>
 
       <div class="phase-cell lane--annemieke" aria-label="Annemieke - Oriënteren">
@@ -1045,7 +1125,7 @@
           <div class="step-wrap step-wrap--spacer" aria-hidden="true"></div>
           <div class="step-connector step-connector--spacer" aria-hidden="true">→</div>
           <div class="step-wrap">
-            <div class="step" data-milestone="3">Keurt de afname van de dienst goed</div>
+            <div class="step" data-milestone="3">Keurt de afname van de dienst goed <button type="button" class="step-tag step-tag--info step-tag--angst" data-persona="Annemieke" data-phase="Uitvoeren" data-step="Keurt de afname van de dienst goed" data-panel-title="Vastleggen op een externe dienst" data-panel-body-ref="panelBodyAngstAfname" data-vraagstukken-ref="vraagstukkenAngstAfname"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1.8 15 14H1L8 1.8z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 6.2v3.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="11.9" r=".7" fill="currentColor"/></svg>Spannend moment<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Toetst de afname aan het inkoopbeleid</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
@@ -1066,7 +1146,9 @@
         <img class="lane-avatar" src="../../personas/images/marije.svg" alt="" width="52" height="52" loading="lazy">
         <span class="lane-name">Marije</span>
         <span class="lane-role">Portfoliomanager Logius</span>
+        <span class="lane-be">wil toegang in één keer goed geregeld hebben</span>
         <a class="lane-link" href="../../personas/persona-marije.html" target="_blank" rel="noopener">Bekijk persona ↗</a>
+        <button type="button" class="step-tag step-tag--info lane-jobs" data-persona="Marije (Logius)" data-phase="Alle fasen" data-step="Regelt portaaltoegang" data-panel-title="Jobs to be Done" data-panel-body-ref="panelBodyJobsMarije">Jobs<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button>
       </div>
 
       <div class="phase-cell lane--marije" aria-label="Marije - Oriënteren">
@@ -1097,7 +1179,9 @@
         <img class="lane-avatar" src="../../personas/images/femke.svg" alt="" width="52" height="52" loading="lazy">
         <span class="lane-name">Femke</span>
         <span class="lane-role">Functioneel beheerder KvK</span>
+        <span class="lane-be">wil vertrouwen op wat getest en vastgelegd is</span>
         <a class="lane-link" href="../../personas/persona-femke.html" target="_blank" rel="noopener">Bekijk persona ↗</a>
+        <button type="button" class="step-tag step-tag--info lane-jobs" data-persona="Femke (KvK)" data-phase="Alle fasen" data-step="Test, richt in en beheert" data-panel-title="Jobs to be Done" data-panel-body-ref="panelBodyJobsFemke">Jobs<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button>
       </div>
 
       <div class="phase-cell lane--femke" aria-label="Femke - Oriënteren">
@@ -1200,7 +1284,9 @@
         <img class="lane-avatar" src="../../personas/images/deniz.svg" alt="" width="52" height="52" loading="lazy">
         <span class="lane-name">Deniz</span>
         <span class="lane-role">DevOps engineer KvK</span>
+        <span class="lane-be">wil aansluiten zonder gissen en zonder losse geheimen</span>
         <a class="lane-link" href="../../personas/persona-deniz.html" target="_blank" rel="noopener">Bekijk persona ↗</a>
+        <button type="button" class="step-tag step-tag--info lane-jobs" data-persona="Deniz (KvK)" data-phase="Alle fasen" data-step="Sluit technisch aan" data-panel-title="Jobs to be Done" data-panel-body-ref="panelBodyJobsDeniz">Jobs<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button>
       </div>
 
       <div class="phase-cell lane--deniz" aria-label="Deniz - Oriënteren">
@@ -1242,7 +1328,7 @@
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Checkt de notificatiedienst- en FSC-onboarding documentatie</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Zorgt voor een werkende FSC-omgeving die verbindt met dezelfde demo-omgeving als die van de notificatiedienst <button type="button" class="step-tag step-tag--info" data-persona="Deniz (KvK)" data-phase="Oriënteren" data-step="Zorgt voor een werkende FSC-omgeving" data-panel-title="Groepcertificaat en lokaal certificaat aanvragen" data-panel-body-ref="panelBodyCertAanvraagDemo" data-vraagstukken-ref="vraagstukkenCertAanvraag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Certificaten<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
+            <div class="step-verdieping step-verdieping--angst">Zorgt voor een werkende FSC-omgeving die verbindt met dezelfde demo-omgeving als die van de notificatiedienst <button type="button" class="step-tag step-tag--info" data-persona="Deniz (KvK)" data-phase="Oriënteren" data-step="Zorgt voor een werkende FSC-omgeving" data-panel-title="Groepcertificaat en lokaal certificaat aanvragen" data-panel-body-ref="panelBodyCertAanvraagDemo" data-vraagstukken-ref="vraagstukkenCertAanvraag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Certificaten<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button> <button type="button" class="step-tag step-tag--info step-tag--angst" data-persona="Deniz" data-phase="Oriënteren" data-step="Zorgt voor een werkende FSC-omgeving die verbindt met dezelfde demo-omgeving als" data-panel-title="Omgaan met certificaten en sleutels" data-panel-body-ref="panelBodyAngstGeheimen" data-vraagstukken-ref="vraagstukkenAngstGeheimen"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1.8 15 14H1L8 1.8z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 6.2v3.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="11.9" r=".7" fill="currentColor"/></svg>Spannend moment<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Vraagt notificatiedienst aan binnen FSC (Logius moet die goedkeuren)</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
@@ -1274,7 +1360,7 @@
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Richt het netwerk in en levert het netwerkdiagram aan</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Zorgt voor een werkende FSC-omgeving die verbindt met dezelfde acceptatie-omgeving als die van de notificatiedienst <button type="button" class="step-tag step-tag--info" data-persona="Deniz (KvK)" data-phase="Uitvoeren" data-step="Zorgt voor een werkende FSC-omgeving (acceptatie)" data-panel-title="Groepcertificaat en lokaal certificaat aanvragen" data-panel-body-ref="panelBodyCertAanvraagAcc" data-vraagstukken-ref="vraagstukkenCertAanvraag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Certificaten<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
+            <div class="step-verdieping step-verdieping--angst">Zorgt voor een werkende FSC-omgeving die verbindt met dezelfde acceptatie-omgeving als die van de notificatiedienst <button type="button" class="step-tag step-tag--info" data-persona="Deniz (KvK)" data-phase="Uitvoeren" data-step="Zorgt voor een werkende FSC-omgeving (acceptatie)" data-panel-title="Groepcertificaat en lokaal certificaat aanvragen" data-panel-body-ref="panelBodyCertAanvraagAcc" data-vraagstukken-ref="vraagstukkenCertAanvraag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Certificaten<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button> <button type="button" class="step-tag step-tag--info step-tag--angst" data-persona="Deniz" data-phase="Uitvoeren" data-step="Zorgt voor een werkende FSC-omgeving die verbindt met dezelfde acceptatie-omgevi" data-panel-title="Omgaan met certificaten en sleutels" data-panel-body-ref="panelBodyAngstGeheimen" data-vraagstukken-ref="vraagstukkenAngstGeheimen"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1.8 15 14H1L8 1.8z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 6.2v3.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="11.9" r=".7" fill="currentColor"/></svg>Spannend moment<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Vraagt notificatiedienst aan binnen FSC (Logius moet die goedkeuren)</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
@@ -1307,7 +1393,7 @@
           <div class="step-wrap">
             <div class="step">Sluit technisch aan in productie</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
-            <div class="step-verdieping">Zorgt voor een werkende FSC-omgeving die verbindt met dezelfde productie-omgeving als die van de notificatiedienst <button type="button" class="step-tag step-tag--info" data-persona="Deniz (KvK)" data-phase="Uitvoeren" data-step="Zorgt voor een werkende FSC-omgeving (productie)" data-panel-title="Groepcertificaat en lokaal certificaat aanvragen" data-panel-body-ref="panelBodyCertAanvraagProd" data-vraagstukken-ref="vraagstukkenCertAanvraag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Certificaten<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
+            <div class="step-verdieping step-verdieping--angst">Zorgt voor een werkende FSC-omgeving die verbindt met dezelfde productie-omgeving als die van de notificatiedienst <button type="button" class="step-tag step-tag--info" data-persona="Deniz (KvK)" data-phase="Uitvoeren" data-step="Zorgt voor een werkende FSC-omgeving (productie)" data-panel-title="Groepcertificaat en lokaal certificaat aanvragen" data-panel-body-ref="panelBodyCertAanvraagProd" data-vraagstukken-ref="vraagstukkenCertAanvraag"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Certificaten<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button> <button type="button" class="step-tag step-tag--info step-tag--angst" data-persona="Deniz" data-phase="Uitvoeren" data-step="Zorgt voor een werkende FSC-omgeving die verbindt met dezelfde productie-omgevin" data-panel-title="Omgaan met certificaten en sleutels" data-panel-body-ref="panelBodyAngstGeheimen" data-vraagstukken-ref="vraagstukkenAngstGeheimen"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1.8 15 14H1L8 1.8z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 6.2v3.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="11.9" r=".7" fill="currentColor"/></svg>Spannend moment<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button></div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
             <div class="step-verdieping">Vraagt notificatiedienst aan binnen FSC (Logius moet die goedkeuren)</div>
             <div class="step-verdieping-connector" aria-hidden="true"></div>
@@ -1362,7 +1448,9 @@
         <img class="lane-avatar" src="../../personas/images/pieter.svg" alt="" width="52" height="52" loading="lazy">
         <span class="lane-name">Pieter</span>
         <span class="lane-role">Productmanager notificatiedienst (Logius)</span>
+        <span class="lane-be">wil aansluiters vertrouwen geven in de dienst</span>
         <a class="lane-link" href="../../personas/persona-pieter.html" target="_blank" rel="noopener">Bekijk persona ↗</a>
+        <button type="button" class="step-tag step-tag--info lane-jobs" data-persona="Pieter (Logius)" data-phase="Alle fasen" data-step="Begeleidt de afname" data-panel-title="Jobs to be Done" data-panel-body-ref="panelBodyJobsPieter">Jobs<svg class="step-tag-info-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".55" fill="currentColor"/></svg></button>
       </div>
 
       <div class="phase-cell lane--pieter" aria-label="Pieter - Oriënteren">
@@ -1552,6 +1640,36 @@
     </div>
   </section>
 
+  <section class="uitkomsten" aria-labelledby="uitkomsten-heading">
+    <h2 class="uitkomsten-title" id="uitkomsten-heading">Meetbare uitkomsten</h2>
+    <p class="uitkomsten-sub">Waaraan zien we dat de jobs geklaard worden? Per fase meetbare uitkomsten plus een perceptievraag.</p>
+    <div class="uitkomsten-boxen">
+      <div class="uitkomsten-box">
+        <h3>Oriënteren</h3>
+        <ul>
+          <li>Tijd van eerste kennismaking tot het besluit om de demo te proberen.</li>
+          <li>Aandeel demo-verkenningen dat doorzet naar een aanvraag.</li>
+          <li>Aandeel betrokkenen dat zegt vooraf te hebben begrepen wat afname betekent.</li>
+        </ul>
+      </div>
+      <div class="uitkomsten-box">
+        <h3>Uitvoeren</h3>
+        <ul>
+          <li>Doorlooptijd van goedkeuring tot technisch live.</li>
+          <li>Aantal afstemrondes over de specificaties (doel: 1).</li>
+          <li>Aandeel betrokkenen dat zich zeker voelde bij het aftekenen van de acceptatie.</li>
+        </ul>
+      </div>
+      <div class="uitkomsten-box">
+        <h3>Opvolgen</h3>
+        <ul>
+          <li>Tijd van alert tot duiding via de dashboards.</li>
+          <li>Aandeel beheerders dat erop vertrouwt dat een storing hen actief bereikt.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   <script>
     (function () {
       var viewport = document.getElementById('journeyViewport');
@@ -1671,7 +1789,7 @@
       var CHEVRON = '<svg width="10" height="10" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
       var moreButtons = [];
       function toggleAllDetails() {
-        setZoom(document.body.classList.contains('show-details') ? 2 : 3);
+        setZoom(document.body.classList.contains('show-details') ? 3 : 4);
       }
       document.querySelectorAll('.step-wrap').forEach(function (wrap) {
         var subs = wrap.querySelectorAll(':scope > .step-verdieping');
@@ -1725,6 +1843,7 @@
         else if (label.indexOf('certificaten') !== -1) t.classList.add('is-certificaten');
         else if (label.indexOf('authenticatie') !== -1) t.classList.add('is-authenticatie');
         else if (label.indexOf('autorisatie') !== -1) t.classList.add('is-autorisatie');
+        else if (label.indexOf('jobs') !== -1) t.classList.add('is-jobs');
       });
 
       // ---- Flow-pijlen tussen de banen ----
@@ -2174,11 +2293,11 @@
         { n: 10, phase: 'Opvolgen', text: 'Verhelpt de alert' },
         { n: 11, phase: 'Opvolgen', text: 'Monitort de nieuwe implementatie' }
       ];
-      var ZOOM_LABELS = { 1: 'Mijlpalen', 2: 'Hoofdlijnen', 3: 'Alle details' };
+      var ZOOM_LABELS = { 1: 'Behoeften', 2: 'Mijlpalen', 3: 'Hoofdlijnen', 4: 'Alle details' };
       var zoomOutBtn = document.getElementById('zoomOut');
       var zoomInBtn = document.getElementById('zoomIn');
       var zoomLabelEl = document.getElementById('zoomLabel');
-      var zoom = 2;
+      var zoom = 3;
 
       (function buildStrip() {
         var strip = document.getElementById('milestoneStrip');
@@ -2197,9 +2316,9 @@
         strip.innerHTML = html;
       })();
 
-      // Slepen (pannen) in de mijlpalen-strip, net als op het canvas.
-      (function () {
-        var strip = document.getElementById('milestoneStrip');
+      // Slepen (pannen) in de strips (behoeften en mijlpalen), net als op het canvas.
+      ['behoefteStrip', 'milestoneStrip'].forEach(function (stripId) {
+        var strip = document.getElementById(stripId);
         if (!strip) return;
         var down = false, sx = 0, sy = 0, sl = 0, st = 0;
         strip.addEventListener('pointerdown', function (e) {
@@ -2220,18 +2339,19 @@
         }
         strip.addEventListener('pointerup', end);
         strip.addEventListener('pointercancel', end);
-      })();
+      });
 
       function setZoom(level) {
-        zoom = Math.max(1, Math.min(3, level));
+        zoom = Math.max(1, Math.min(4, level));
         document.body.classList.toggle('zoom-1', zoom === 1);
-        var details = (zoom === 3);
+        document.body.classList.toggle('zoom-2', zoom === 2);
+        var details = (zoom === 4);
         document.body.classList.toggle('show-details', details);
         moreButtons.forEach(function (b) { b.setAttribute('aria-expanded', String(details)); });
         if (zoomLabelEl) zoomLabelEl.textContent = ZOOM_LABELS[zoom];
         if (zoomOutBtn) zoomOutBtn.disabled = (zoom <= 1);
-        if (zoomInBtn) zoomInBtn.disabled = (zoom >= 3);
-        if (zoom !== 1) { layout(); buildClone(); }
+        if (zoomInBtn) zoomInBtn.disabled = (zoom >= 4);
+        if (zoom >= 3) { layout(); buildClone(); }
       }
       if (zoomOutBtn) zoomOutBtn.addEventListener('click', function () { setZoom(zoom - 1); });
       if (zoomInBtn) zoomInBtn.addEventListener('click', function () { setZoom(zoom + 1); });
@@ -2296,8 +2416,8 @@
         var d = dirs[e.key];
         if (!d) return;
         e.preventDefault();
-        if (document.body.classList.contains('zoom-1')) {
-          var strip = document.getElementById('milestoneStrip');
+        if (zoom <= 2) {
+          var strip = document.getElementById(zoom === 1 ? 'behoefteStrip' : 'milestoneStrip');
           if (strip) { strip.scrollLeft += d[0] * (e.shiftKey ? 420 : 150); strip.scrollTop += d[1] * (e.shiftKey ? 420 : 150); }
           return;
         }
@@ -2307,7 +2427,7 @@
 
       layout();
       buildClone();
-      setZoom(2);
+      setZoom(3);
       if (window.ResizeObserver) {
         new ResizeObserver(layout).observe(grid);
       }
@@ -2435,6 +2555,58 @@
 <template id="vraagstukkenCertAanvraag"><li>Is FSC onboarding in scope voor het dienstverlenerportaal?</li></template>
 <template id="vraagstukkenTemplate"><li>Of er bij het zelfstandig publiceren naar productie een tweede paar ogen (vierogenprincipe) nodig is, is een open vraagstuk.</li></template>
 <div class="side-scrim" id="sideScrim" hidden></div>
+<template id="panelBodyJobsCollectief">
+  <p class="jtbd-item">Wanneer wij als KvK onze klanten proactief willen informeren, willen we de notificatiedienst afnemen zonder dat het aansluittraject meer aandacht vraagt dan de dienst zelf, zodat onze klanten er snel iets aan hebben.</p>
+  <p class="jtbd-item">In het canvas: onder de fasekoppen staat per fase de dominante behoefte en job, en de rood gemarkeerde stappen met "Spannend moment" zijn de momenten met de grootste kans op afhaken.</p>
+</template>
+<template id="panelBodyJobsRuben">
+  <p class="jtbd-item"><span class="jtbd-label">Functioneel</span> Wanneer ik de afname trek, wil ik zien welke stap aan zet is en bij wie die ligt, zodat het traject niet stilvalt zonder dat ik het merk.</p>
+  <p class="jtbd-item"><span class="jtbd-label">Sociaal</span> Wanneer ik collega's meevraag in het traject, wil ik dat zij erop kunnen vertrouwen dat hun tijd goed besteed is, zodat ik ze een volgende keer weer meekrijg.</p>
+</template>
+<template id="panelBodyJobsAnnemieke">
+  <p class="jtbd-item"><span class="jtbd-label">Functioneel</span> Wanneer ik een afname goedkeur, wil ik kosten, voorwaarden en opzegbaarheid in één keer compleet zien, zodat ik snel en verantwoord kan beslissen.</p>
+  <p class="jtbd-item"><span class="jtbd-label">Emotioneel</span> Wanneer ik mijn goedkeuring geef, wil ik er zeker van zijn dat er geen verplichtingen buiten beeld blijven, zodat de afname later niet op inkoop terugslaat.</p>
+</template>
+<template id="panelBodyJobsMarije">
+  <p class="jtbd-item"><span class="jtbd-label">Functioneel</span> Wanneer een nieuwe organisatie toegang nodig heeft, wil ik dat de juiste mensen de juiste rechten krijgen en houden, zodat er geen toegang blijft rondslingeren.</p>
+</template>
+<template id="panelBodyJobsFemke">
+  <p class="jtbd-item"><span class="jtbd-label">Functioneel</span> Wanneer de dienst wordt ingericht, wil ik hem zelf kunnen proberen en testen, zodat ik hem daarna met vertrouwen beheer.</p>
+  <p class="jtbd-item"><span class="jtbd-label">Emotioneel</span> Wanneer ik meeteken voor acceptatie, wil ik kunnen steunen op vastgelegde testresultaten, zodat ik in productie niet voor verrassingen sta.</p>
+</template>
+<template id="panelBodyJobsDeniz">
+  <p class="jtbd-item"><span class="jtbd-label">Functioneel</span> Wanneer ik technisch aansluit, wil ik per omgeving precies weten wat er van onze kant nodig is, zodat ik niet hoef te gissen naar specificaties.</p>
+  <p class="jtbd-item"><span class="jtbd-label">Emotioneel</span> Wanneer ik met certificaten of sleutels werk, wil ik zeker weten dat geheimen veilig staan en op tijd vernieuwd worden, zodat een verlopen sleutel niet op mij terugslaat.</p>
+</template>
+<template id="panelBodyJobsPieter">
+  <p class="jtbd-item"><span class="jtbd-label">Functioneel</span> Wanneer een dienstverlener wil aansluiten, wil ik dat hij in de demo zelf kan ontdekken en daarna gecontroleerd live gaat, zodat de dienst voor iedereen betrouwbaar blijft.</p>
+  <p class="jtbd-item"><span class="jtbd-label">Sociaal</span> Wanneer ik de afname begeleid, wil ik dat de dienstverlener zich geholpen voelt, zodat de dienst een goede naam houdt bij volgende aansluiters.</p>
+</template>
+<template id="panelBodyAngstAfname">
+  <p>De organisatie legt zich vast op een externe dienst.</p>
+  <h3 class="side-panel-heading">Behoefte op het spel</h3>
+  <p>Zekerheid: weten waar de organisatie aan vastzit.</p>
+</template>
+<template id="vraagstukkenAngstAfname">
+  <li>Is bij het goedkeuren in één keer duidelijk waar de organisatie aan vastzit: kosten, looptijd en opzegbaarheid?</li>
+</template>
+<template id="panelBodyAngstAftekenen">
+  <p>Verantwoordelijkheid nemen voor de acceptatie.</p>
+  <h3 class="side-panel-heading">Behoefte op het spel</h3>
+  <p>Competentie: kunnen steunen op wat getest en vastgelegd is.</p>
+</template>
+<template id="vraagstukkenAngstAftekenen">
+  <li>Is zichtbaar op basis van welke resultaten wordt afgetekend, en wie waarvoor tekent?</li>
+</template>
+<template id="panelBodyAngstGeheimen">
+  <p>Sleutels en certificaten zijn de toegang tot de dienst.</p>
+  <h3 class="side-panel-heading">Behoefte op het spel</h3>
+  <p>Zekerheid: geheimen veilig opgeslagen en op tijd vernieuwd.</p>
+</template>
+<template id="vraagstukkenAngstGeheimen">
+  <li>Is duidelijk wie bij de geheimen kan en hoe vernieuwing geregeld is?</li>
+</template>
+
 <aside class="side-panel" id="sidePanel" role="dialog" aria-modal="true" aria-labelledby="sidePanelTitle" aria-hidden="true" hidden>
   <button type="button" class="side-panel-close" id="sidePanelClose" aria-label="Sluiten">&times;</button>
   <div class="side-panel-scroll">
@@ -2479,7 +2651,7 @@
     var lastFocus = null;
 
     // Alle info-knoppen (ⓘ); geërfde klonen doen niet mee (die verwijzen door).
-    var infos = [].slice.call(document.querySelectorAll('#journeyGrid .step-tag--info:not(.step-tag--inherited)'));
+    var infos = [].slice.call(document.querySelectorAll('#journeyGrid .step-tag--info:not(.step-tag--inherited):not(.lane-jobs)'));
     // Doorblader-volgorde volgt de canvas-orientatie: eerst links->rechts, dan boven->onder.
     (function sortInfosByReadingOrder() {
       var g = document.getElementById('journeyGrid');
@@ -2533,6 +2705,8 @@
         tagEl.className = 'side-panel-tag';
         if (low.indexOf('goedkeuren') !== -1) tagEl.classList.add('is-goedkeuren');
         else if (low.indexOf('inloggen') !== -1) tagEl.classList.add('is-inloggen');
+        else if (low.indexOf('jobs') !== -1) tagEl.classList.add('is-jobs');
+        else if (low.indexOf('spannend') !== -1) tagEl.classList.add('is-angst');
         else if (low.indexOf('certificaten') !== -1) tagEl.classList.add('is-certificaten');
         tagEl.hidden = false;
       } else { tagEl.hidden = true; }
@@ -2593,6 +2767,24 @@
       btn.addEventListener('click', function (e) {
         e.preventDefault(); e.stopPropagation();
         openAt(i, btn);
+      });
+    });
+    // Jobs-knoppen (zwembaanlabels + job-band) staan buiten de doorblader-
+    // reeks: ze openen hun paneel los, zonder vorige/volgende en teller.
+    [].forEach.call(document.querySelectorAll('#journeyGrid .step-tag--info.lane-jobs'), function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault(); e.stopPropagation();
+        lastFocus = btn;
+        current = -1;
+        setContent(btn);
+        counterEl.textContent = '';
+        prevBtn.disabled = true; nextBtn.disabled = true;
+        panToTag(btn);
+        panel.hidden = false; scrim.hidden = false;
+        panel.offsetWidth;
+        panel.classList.add('is-open'); scrim.classList.add('is-open');
+        panel.setAttribute('aria-hidden', 'false');
+        document.getElementById('sidePanelClose').focus();
       });
     });
     prevBtn.addEventListener('click', function () { if (current > 0) render(current - 1); });
