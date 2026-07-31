@@ -208,6 +208,7 @@
     background: var(--primitives-color-rood-100);
     color: var(--primitives-color-rood-600);
     border: 1px solid var(--primitives-color-rood-600);
+    white-space: nowrap;
   }
   /* 4) Meetbare uitkomsten per fase, onder de grid. */
   .uitkomsten { margin-top: var(--primitives-space-40, 40px); }
@@ -377,7 +378,6 @@
     display: grid;
     grid-template-columns: 240px repeat(3, minmax(280px, max-content));
     width: max-content;
-    padding-right: 96px; /* ruimte na het laatste element op het canvas */
   }
 
   /* Flow-pijlen: een SVG-overlay die de volgorde tussen de banen (persona's
@@ -2046,12 +2046,14 @@
           el.style.display = 'block';
           el.querySelector('.time-gap-label').textContent = gap.getAttribute('data-gap-label') || 'na 2 weken';
           el.style.left = (order[i] - GAP_HALF) + 'px';
-          el.style.top = headH + 'px';
+          var jobCel = grid.querySelector('.job-band-cel');
+          var bandTop = jobCel ? (jobCel.getBoundingClientRect().bottom - gRect.top) : headH;
+          el.style.top = bandTop + 'px';
           // De tijdband hoort bij de tijdlijn-rijen en stopt boven de
           // Vraagstukken-rij (anders loopt hij dwars door die content).
           var vrRow = grid.querySelector('.lane-label.lane--vraagstukken');
           var bandBottom = vrRow ? (vrRow.getBoundingClientRect().top - gRect.top) : grid.scrollHeight;
-          el.style.height = (bandBottom - headH) + 'px';
+          el.style.height = (bandBottom - bandTop) + 'px';
         });
         centerTimeGaps();
       }
@@ -2067,7 +2069,8 @@
           if (el.style.display === 'none') return;
           var inner = el.querySelector('.time-gap-inner');
           if (!inner) return;
-          var bandTop = headH;
+          var jobCel = grid.querySelector('.job-band-cel');
+          var bandTop = jobCel ? (jobCel.getBoundingClientRect().bottom - grid.getBoundingClientRect().top) : headH;
           var bandH = el.offsetHeight;
           var innerH = inner.offsetHeight;
           var t = visTop + visH / 2 - bandTop - innerH / 2;
