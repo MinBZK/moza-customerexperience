@@ -442,6 +442,10 @@
     border-top: 1px solid var(--border);
     border-left: 1px solid var(--border);
   }
+  /* Na de laatste stap loopt het canvas nog 100px horizontaal door voordat
+     de pagina eindigt: de cellen van de laatste fase maken hun kolom breder,
+     zodat de fasekop-band en baanlijnen tot het einde beschilderd blijven. */
+  .phase-cell[aria-label$="Opvolgen"] { padding-right: 116px; }
 
   .step-row {
     display: flex; align-items: flex-start; gap: 8px;
