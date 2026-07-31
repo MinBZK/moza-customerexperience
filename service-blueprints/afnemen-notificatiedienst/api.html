@@ -169,6 +169,22 @@
   }
   .goal-text { font-size: 15px; color: var(--ink); line-height: 1.6; }
 
+  /* NDS-prioriteiten uit de aanleiding, toegepast op deze service blueprint;
+     de boxen zijn de kleine variant van de boxen op de aanleiding-pagina. */
+  .nds-prio { margin-bottom: var(--primitives-space-40, 40px); }
+  .nds-prio-title { font-size: 18px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+  .nds-prio-sub { font-size: 14px; color: var(--ink-soft); line-height: 1.5; margin-bottom: 14px; max-width: var(--primitives-area-640, 640px); }
+  .nds-prio-sub a { color: var(--accent); }
+  .nds-prio-boxen { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; max-width: 1100px; }
+  .nds-prio-box { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }
+  .nds-prio-kop { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; color: var(--ink); }
+  .nds-prio-kop h3 { font-size: 14px; font-weight: 600; color: var(--ink); }
+  .nds-prio-box p { font-size: 13px; line-height: 1.55; color: var(--ink-soft); }
+  .nds-prio-box p + p { margin-top: 6px; }
+  .nds-prio-box strong { font-weight: 600; }
+  .nds-prio-mis strong { color: var(--primitives-color-rood-600); }
+  .nds-prio-fix strong { color: var(--primitives-color-groen-600); }
+
   /* JTBD/Hassenzahl-laag (zelfde conventies als de subsidie-blueprint). */
   .lane-be { font-size: 12px; font-style: italic; color: var(--ink-mute); line-height: 1.4; }
   .lane-jobs { margin-top: 8px; align-self: flex-start; }
@@ -863,6 +879,28 @@
     <p class="goal-label">Doel van deze service blueprint</p>
     <p class="goal-text">De Kamer van Koophandel neemt als dienstverlener de notificatiedienst af via het dienstverlenerportaal van Logius: van uitproberen in de demoversie en goedkeuring door inkoop, via het aansluittraject in acceptatie en livegang op de Mijn KvK-site, tot inrichting, alertafhandeling en beheer in productie.</p>
   </div>
+
+  <section class="nds-prio" aria-labelledby="nds-prio-heading">
+    <h2 class="nds-prio-title" id="nds-prio-heading">NDS-prioriteiten in deze service blueprint</h2>
+    <p class="nds-prio-sub">Wat is de aanleiding van deze service blueprint, uiteengezet tegen de <a href="../../aanleiding/index.html">3 prioriteiten als aanleiding voor MOZa</a>.</p>
+    <div class="nds-prio-boxen">
+      <div class="nds-prio-box">
+        <div class="nds-prio-kop"><nldd-icon name="person" size="20"></nldd-icon><h3>Ondernemer centraal</h3></div>
+        <p class="nds-prio-mis"><strong>Wat gaat er mis:</strong> elke dienstverlener regelt zijn eigen berichten, per kanaal en per dienst. De ondernemer merkt de versnippering: meldingen op verschillende plekken, of helemaal niet.</p>
+        <p class="nds-prio-fix"><strong>Hoe we dit oplossen:</strong> via de notificatiedienst komen berichten van dienstverleners kanaalonafhankelijk op één plek bij de ondernemer samen, ongeacht wie ze stuurt.</p>
+      </div>
+      <div class="nds-prio-box">
+        <div class="nds-prio-kop"><nldd-icon name="centralized-network" size="20"></nldd-icon><h3>Data delen</h3></div>
+        <p class="nds-prio-mis"><strong>Wat gaat er mis:</strong> elke dienstverlener bouwt eigen notificatie-oplossingen; specificaties en aansluitingen verschillen per partij en per omgeving.</p>
+        <p class="nds-prio-fix"><strong>Hoe we dit oplossen:</strong> gestandaardiseerde notificaties via één afspraak (federatief of API-integratie), zodat elke dienstverlener op dezelfde manier aansluit en berichten uniform zijn.</p>
+      </div>
+      <div class="nds-prio-box">
+        <div class="nds-prio-kop"><nldd-icon name="sparkles" size="20"></nldd-icon><h3>Artificiële Intelligentie</h3></div>
+        <p class="nds-prio-mis"><strong>Wat gaat er mis:</strong> aansluiten en beheren vraagt uitzoekwerk: specificaties, certificaten en sleutels, omgevingen en de duiding van alerts.</p>
+        <p class="nds-prio-fix"><strong>Hoe we dit oplossen:</strong> AI wijst de weg en combineert bronnen om de dienstverlener proactief te helpen, van het aansluittraject tot het duiden van een alert.</p>
+      </div>
+    </div>
+  </section>
 
 
   <section class="journey" aria-labelledby="journey-heading">
@@ -2236,7 +2274,7 @@
         { n: 10, phase: 'Opvolgen', text: 'Verhelpt de alert' },
         { n: 11, phase: 'Opvolgen', text: 'Monitort de nieuwe implementatie en het beheer' }
       ];
-      var ZOOM_LABELS = { 1: 'Behoeften', 2: 'Mijlpalen', 3: 'Hoofdlijnen', 4: 'Alle details' };
+      var ZOOM_LABELS = { 1: 'Behoeften', 2: 'Mijlpalen', 3: 'Hoofdlijnen', 4: 'Details' };
       var zoomOutBtn = document.getElementById('zoomOut');
       var zoomInBtn = document.getElementById('zoomIn');
       var zoomLabelEl = document.getElementById('zoomLabel');
